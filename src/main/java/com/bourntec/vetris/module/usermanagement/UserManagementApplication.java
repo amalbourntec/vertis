@@ -2,6 +2,7 @@ package com.bourntec.vetris.module.usermanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 
+@EntityScan("com.bourntec.vetris.entity")
 @SpringBootApplication
 public class UserManagementApplication {
 	
