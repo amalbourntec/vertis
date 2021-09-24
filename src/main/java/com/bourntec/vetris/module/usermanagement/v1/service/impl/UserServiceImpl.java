@@ -3,11 +3,13 @@ package com.bourntec.vetris.module.usermanagement.v1.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.vetris.entity.User;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
+import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.repository.UserRepository;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
 
@@ -76,10 +78,18 @@ public class UserServiceImpl implements UserService{
 	 *Adding a user using request DTO
 	 */
 	@Override
-	public User addUser(UserRequestDTO userDto) {
-		User resultUser = userDto.toModel(userDto);
-		userRepository.save(resultUser);
-		return resultUser;
+	public UserResponseDTO addUser(UserRequestDTO userDto) {
+		UserResponseDTO userRespDTO=new UserResponseDTO();
+		try {
+			User resultUser = userDto.toModel(userDto);
+			userRepository.save(resultUser);
+			BeanUtils.copyProperties(resultUser, userRespDTO);
+			userRespDTO.setResponseMessage("Saved User successfully");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userRespDTO;
 	}
 	
 

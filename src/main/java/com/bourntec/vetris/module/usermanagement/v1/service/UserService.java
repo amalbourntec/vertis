@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.bourntec.vetris.entity.User;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
+import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 
 
 /**
@@ -16,7 +17,7 @@ import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
 
 public interface UserService {
 
-	public User addUser(UserRequestDTO user);
+	public UserResponseDTO addUser(UserRequestDTO user);
 
 	public List<User> getAllUsers();
 
