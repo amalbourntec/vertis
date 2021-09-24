@@ -1,5 +1,9 @@
 package com.bourntec.vetris.module.usermanagement.v1.dto.request;
 
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
 import com.bourntec.vetris.entity.User;
 import com.sun.istack.NotNull;
 
@@ -13,9 +17,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Validated
 public class UserRequestDTO {
 	
 	@NotNull
+	@Size(min = 1, max = 15, message = "First Name  must be atmost 15 characters")
 	private String firstName;
 	
 	@NotNull
