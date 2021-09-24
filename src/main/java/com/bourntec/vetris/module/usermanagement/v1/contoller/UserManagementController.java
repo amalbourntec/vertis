@@ -39,8 +39,10 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("{id}")
-	public Optional<User> fetchUserById(@PathVariable("id")  Integer id) throws Exception {
-		return this.userService.getUserById(id);	
+	public ResponseEntity<UserResponseDTO> fetchUserById(@PathVariable("id")  Integer id) throws Exception {
+		UserResponseDTO userrespDto= userService.getUserById(id);
+		System.out.println(userrespDto);
+		return ResponseEntity.ok(userrespDto);	
 	}
 	
 	/**
@@ -72,8 +74,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public User updateUser(@RequestBody User user , @PathVariable("id")Integer id)throws Exception{
-		return this.userService.updateUser(user, id);
+	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")Integer id)throws Exception{
+		UserResponseDTO userrespDto= userService.updateUser(user, id);
+		return ResponseEntity.ok(userrespDto);	
 	}
 	
 	/**
@@ -82,8 +85,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public String deleteUser(@PathVariable("id")Integer id)throws Exception{
-		return this.userService.deleteUser(id);
+	public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable("id")Integer id)throws Exception{
+		UserResponseDTO userrespDto= userService.deleteUser( id);
+		return ResponseEntity.ok(userrespDto);	
 	}
 	
 	

@@ -37,41 +37,62 @@ public class UserServiceImpl implements UserService{
 	 *Getting user by id
 	 */
 	@Override
-	public Optional<User> getUserById(Integer id) {
-		User existingUser = userRepository.findById(id).orElse(null);
-		if (existingUser!=null) {
-			return this.userRepository.findById(id);
+	public UserResponseDTO getUserById(Integer id) {
+		UserResponseDTO userRespDTO=new UserResponseDTO();
+		try {	
+			if (userRepository.existsById(id)) {
+				User existingUser = userRepository.findById(id).orElse(null);
+				BeanUtils.copyProperties(existingUser, userRespDTO);
+				userRespDTO.setResponseMessage("Fetched User Successfully");
+			}else {
+				userRespDTO.setResponseMessage("No User found");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return null;
+		return userRespDTO;
 	}
 
 	/**
 	 *updating the existing user
 	 */
 	@Override
-	public User updateUser(User user, Integer id) {
-		User existingUser = userRepository.findById(id).orElse(null);
-		existingUser.setAge(user.getAge());
-		existingUser.setCity(user.getCity());
-		existingUser.setCountry(user.getCountry());
-		existingUser.setEmailId(user.getEmailId());
-		existingUser.setFirstName(user.getFirstName());
-		existingUser.setLastName(user.getLastName());
-		existingUser.setPhoneNumber(user.getPhoneNumber());
-		userRepository.save(existingUser);
-		return existingUser;
+	public UserResponseDTO updateUser(UserRequestDTO userDto, Integer id) {
+		UserResponseDTO userRespDTO=new UserResponseDTO();
+		try {
+			if (userRepository.existsById(id)) {
+				User resultUser = userDto.toModel(userDto);
+				resultUser.setId(id);
+				userRepository.save(resultUser);
+				BeanUtils.copyProperties(resultUser, userRespDTO);
+				userRespDTO.setResponseMessage("Updated User Successfully");
+			}else {
+				userRespDTO.setResponseMessage("No User found");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userRespDTO;
 	}
 
 	/**
 	 *Deleting the user by id
 	 */
 	@Override
-	public String deleteUser(Integer id) {
-		User existingUser = userRepository.findById(id).orElse(null);
-		if (existingUser!=null) {
-			userRepository.deleteById(id);
+	public UserResponseDTO deleteUser(Integer id) {
+		UserResponseDTO userRespDTO=new UserResponseDTO();
+		try {
+			Optional<User> existingUser = userRepository.findById(id);
+			if (existingUser.isPresent()) {
+				userRepository.deleteById(id);
+				userRespDTO.setResponseMessage("Deleted User Successfully");
+			}else{
+				userRespDTO.setResponseMessage("No user found");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		return "User Deleted";
+		return userRespDTO;
 	}
 
 	/**
@@ -86,7 +107,6 @@ public class UserServiceImpl implements UserService{
 			BeanUtils.copyProperties(resultUser, userRespDTO);
 			userRespDTO.setResponseMessage("Saved User successfully");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return userRespDTO;

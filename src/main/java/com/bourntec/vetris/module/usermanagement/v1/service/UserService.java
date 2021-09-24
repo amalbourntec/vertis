@@ -21,10 +21,10 @@ public interface UserService {
 
 	public List<User> getAllUsers();
 
-	public Optional<User> getUserById(Integer id);
+	public UserResponseDTO getUserById(Integer id);
 
-	public User updateUser(User user, Integer id);
+	public UserResponseDTO updateUser(UserRequestDTO user, Integer id);
 
-	public String deleteUser(Integer id);
+	public UserResponseDTO deleteUser(Integer id);
 	
 }
