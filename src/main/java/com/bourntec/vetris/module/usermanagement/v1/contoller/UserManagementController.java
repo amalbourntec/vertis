@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 
-@RestController(value="UserManagementController")
+@RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/usermanagement/v1/user")
 public class UserManagementController {
