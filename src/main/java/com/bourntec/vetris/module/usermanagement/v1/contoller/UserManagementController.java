@@ -22,8 +22,8 @@ public class UserManagementController {
 	@GetMapping("")
 	public String fetchUser() throws Exception {
 
-		System.out.println("hiiiii");
-		return "hiiiii";
+		System.out.println("hi");
+		return "hi";
 		
 	}
 
