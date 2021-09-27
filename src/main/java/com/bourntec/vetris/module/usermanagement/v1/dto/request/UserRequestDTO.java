@@ -48,7 +48,7 @@ public class UserRequestDTO {
 	public User toModel(UserRequestDTO request) {
 		User user= new User();
 		try {
-			if (request.getAge()!=null) {
+			if (request.getAge()!=0) {
 				user.setAge(request.getAge());
 			}
 			if (request.getFirstName()!=null) {
@@ -64,7 +64,7 @@ public class UserRequestDTO {
 				user.setCountry(request.getCountry());
 			}
 			if (request.getEmailId()!=null) {
-				user.setCountry(request.getEmailId());
+				user.setEmailId(request.getEmailId());
 			}
 			if (request.getPhoneNumber()!=0) {
 				user.setPhoneNumber(request.getPhoneNumber());
