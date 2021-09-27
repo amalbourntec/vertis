@@ -64,7 +64,7 @@ public class UserRequestDTO {
 				user.setCountry(request.getCountry());
 			}
 			if (request.getEmailId()!=null) {
-				user.setCountry(request.getEmailId());
+				user.setEmailId(request.getEmailId());
 			}
 			if (request.getPhoneNumber()!=0) {
 				user.setPhoneNumber(request.getPhoneNumber());
