@@ -35,53 +35,53 @@ public class UserRequestDTO {
 	private String password;
 
 	@Size( max = 100, message = "email id  must be atmost 100 characters")
-	private String email_id;
+	private String emailId;
 
 	@Size( max = 20, message = "contact no  must be atmost 20 characters")
-	private String contact_no;
+	private String contactNo;
 	
 	@NotNull
-	private Integer user_role_id;
+	private Integer userRoleId;
 	
-	private String first_login;
+	private String firstLogin;
 	
 	@Size( max = 50, message = "pacs_user_id  must be atmost 50 characters")
-	private String pacs_user_id;
+	private String pacsUserId;
 
 	@Size( max = 200, message = "pacs_password  must be atmost 200 characters")
 	@NotNull
-	private String pacs_password;
+	private String pacsPassword;
 	
 	@Size( max = 200, message = "created by  must be atmost 200 characters")
-	private String created_by;
+	private String createdBy;
 
 	@NotNull
-	private Date date_created;
+	private Date dateCreated;
 	
-	private String update_by;
+	private String updateBy;
 
-	private Date date_updated;
+	private Date dateUpdated;
 
 	@Size( max = 1, message = "is active  must be atmost 1 characters")
-	private String is_active;
+	private String isActive;
 	
 	@Size( max = 1, message = "is visible  must be atmost 1 characters")
-	private String is_visible;
+	private String isVisible;
 
 	@Size( max = 50, message = "login id  must be atmost 50 characters")
-	private String login_id;
+	private String loginId;
 	
 	@Size( max = 1, message = "notfication_pref  must be atmost 1 characters")
-	private String notification_pref;
+	private String notificationPref;
 
 	@Size( max = 1, message = "allow_manual_submission  must be atmost 1 characters")
-	private String allow_manual_submission;
+	private String allowManualSubmission;
 	
 	@Size( max = 1, message = "allow_dashboard_view  must be atmost 1 characters")
-	private String allow_dashboard_view;
+	private String allowDashboardView;
 	
 	@Size( max = 10, message = "theme_pref  must be atmost 10 characters")
-	private String theme_pref;
+	private String themePref;
 
 	
 	
@@ -95,23 +95,23 @@ public class UserRequestDTO {
 			if (request.getCode()!=null) {user.setCode(request.getCode());}
 			if (request.getName()!=null) {user.setName(request.getName());}
 			if (request.getPassword()!=null ) {user.setPassword(request.getPassword());}
-			if (request.getEmail_id()!=null) {user.setEmail_id(request.getEmail_id());}
-			if (request.getContact_no()!=null) {user.setContact_no(request.getContact_no());}
-			if (request.getUser_role_id()!=null) {user.setUser_role_id(request.getUser_role_id());}
-			if (request.getFirst_login()!=null) {user.setFirst_login(request.getFirst_login());}
-			if (request.getPacs_user_id()!=null) {user.setPacs_user_id(request.getPacs_user_id());}
-			if (request.getPacs_password()!=null) {user.setPacs_password(request.getPacs_password());}
-			if (request.getCreated_by()!=null) {user.setCreated_by(request.getCreated_by());}
-			if (request.getDate_created()!=null) {user.setDate_created(request.getDate_created());}
-			if (request.getUpdate_by()!=null) {user.setUpdate_by(request.getUpdate_by());}
-			if (request.getDate_created()!=null) {user.setDate_updated(request.getDate_created());}
-			if (request.getIs_active()!=null) {user.setIs_active(request.getIs_active());}
-			if (request.getIs_visible()!=null) {user.setIs_visible(request.getIs_visible());}
-			if (request.getLogin_id()!=null) {user.setLogin_id(request.getLogin_id());}
-			if (request.getNotification_pref()!=null) {user.setNotification_pref(request.getNotification_pref());}
-			if (request.getAllow_manual_submission()!=null) {user.setAllow_manual_submission(request.getAllow_manual_submission());}
-			if (request.getAllow_dashboard_view()!=null) {user.setAllow_dashboard_view(request.getAllow_dashboard_view());}
-			if (request.getTheme_pref()!=null) {user.setTheme_pref(request.getTheme_pref());}
+			if (request.getEmailId()!=null) {user.setEmailId(request.getEmailId());}
+			if (request.getContactNo()!=null) {user.setContactNo(request.getContactNo());}
+			if (request.getUserRoleId()!=null) {user.setUserRoleId(request.getUserRoleId());}
+			if (request.getFirstLogin()!=null) {user.setFirstLogin(request.getFirstLogin());}
+			if (request.getPacsUserId()!=null) {user.setPacsUserId(request.getPacsUserId());}
+			if (request.getPacsPassword()!=null) {user.setPacsPassword(request.getPacsPassword());}
+			if (request.getCreatedBy()!=null) {user.setCreatedBy(request.getCreatedBy());}
+			if (request.getDateCreated()!=null) {user.setDateCreated(request.getDateCreated());}
+			if (request.getUpdateBy()!=null) {user.setUpdateBy(request.getUpdateBy());}
+			if (request.getDateCreated()!=null) {user.setDateCreated(request.getDateCreated());}
+			if (request.getIsActive()!=null) {user.setIsActive(request.getIsActive());}
+			if (request.getIsVisible()!=null) {user.setIsVisible(request.getIsVisible());}
+			if (request.getLoginId()!=null) {user.setLoginId(request.getLoginId());}
+			if (request.getNotificationPref()!=null) {user.setNotificationPref(request.getNotificationPref());}
+			if (request.getAllowManualSubmission()!=null) {user.setAllowManualSubmission(request.getAllowManualSubmission());}
+			if (request.getAllowDashboardView()!=null) {user.setAllowDashboardView(request.getAllowDashboardView());}
+			if (request.getThemePref()!=null) {user.setThemePref(request.getThemePref());}
 				
 		} catch (Exception e) {
 			e.printStackTrace();
