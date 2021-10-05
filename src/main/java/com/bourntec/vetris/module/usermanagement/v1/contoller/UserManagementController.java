@@ -39,7 +39,7 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<UserResponseDTO> fetchUserById(@PathVariable("id")  Integer id) throws Exception {
+	public ResponseEntity<UserResponseDTO> fetchUserById(@PathVariable("id")  String id) throws Exception {
 		UserResponseDTO userrespDto= userService.getUserById(id);
 		System.out.println(userrespDto);
 		return ResponseEntity.ok(userrespDto);	
@@ -74,7 +74,7 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")Integer id)throws Exception{
+	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
 		UserResponseDTO userrespDto= userService.updateUser(user, id);
 		return ResponseEntity.ok(userrespDto);	
 	}
@@ -85,7 +85,7 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable("id")Integer id)throws Exception{
+	public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable("id")String id)throws Exception{
 		UserResponseDTO userrespDto= userService.deleteUser( id);
 		return ResponseEntity.ok(userrespDto);	
 	}

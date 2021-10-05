@@ -17,14 +17,14 @@ import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO
 
 public interface UserService {
 
-	public UserResponseDTO addUser(UserRequestDTO user);
+	public UserResponseDTO addUser(UserRequestDTO user) throws Exception;
 
-	public List<User> getAllUsers();
+	public List<User> getAllUsers() throws Exception;
 
-	public UserResponseDTO getUserById(Integer id);
+	public UserResponseDTO getUserById(String id) throws Exception;
 
-	public UserResponseDTO updateUser(UserRequestDTO user, Integer id);
+	public UserResponseDTO updateUser(UserRequestDTO user, String id) throws Exception;
 
-	public UserResponseDTO deleteUser(Integer id);
+	public UserResponseDTO deleteUser(String id) throws Exception;
 	
 }

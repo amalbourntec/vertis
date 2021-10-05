@@ -27,9 +27,8 @@ import lombok.Setter;
 public class User {
 	
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@Column(name = "id",length=200)
+	private String id;
 	
 	@Column(name = "code",length = 40,nullable=true)
 	private String code;
