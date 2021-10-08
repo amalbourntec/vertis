@@ -1,5 +1,7 @@
 package com.bourntec.vetris.module.usermanagement.v1.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -96,11 +98,43 @@ public class UserServiceImpl implements UserService {
 		UUID uuid = UUID.randomUUID();
 		User resultUser = userDto.toModel(userDto);
 		resultUser.setId(uuid.toString());
+		resultUser.setPacsPassword(encodePassword(userDto.getPacsPassword()));
+		resultUser.setPassword(encodePassword(userDto.getPassword()));
 		userRepository.save(resultUser);
 		BeanUtils.copyProperties(resultUser, userRespDTO);
 		userRespDTO.setResponseMessage("Saved User successfully");
 		
 		return userRespDTO;
+	}
+	
+	private String encodePassword(String password) {
+		  String encryptedpassword = null;  
+	        try   
+	        {  
+	            /* MessageDigest instance for MD5. */  
+	            MessageDigest m = MessageDigest.getInstance("MD5");  
+	              
+	            /* Add plain-text password bytes to digest using MD5 update() method. */  
+	            m.update(password.getBytes());  
+	              
+	            /* Convert the hash value into bytes */   
+	            byte[] bytes = m.digest();  
+	              
+	            /* The bytes array has bytes in decimal form. Converting it into hexadecimal format. */  
+	            StringBuilder s = new StringBuilder();  
+	            for(int i=0; i< bytes.length ;i++)  
+	            {  
+	                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));  
+	            }  
+	              
+	            /* Complete hashed password in hexadecimal format */  
+	            encryptedpassword = s.toString();  
+	        }   
+	        catch (NoSuchAlgorithmException e)   
+	        {  
+	            e.printStackTrace();  
+	        }  
+	        return encryptedpassword;
 	}
 
 }
