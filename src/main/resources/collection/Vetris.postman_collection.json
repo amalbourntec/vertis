@@ -12,7 +12,7 @@
 				"header": [
 					{
 						"key": "AUTHORIZATION",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxNDQ4MTQsImlhdCI6MTYzNDEyNjgxNH0.dnCt9T7h6RfJaJCTkbYPM8GmqD2UVZ45291kYQM-KaAa3OgbWjaPFzfFli_Q_w4NNPXXbhvSnjZUqCubPk11kg",
 						"type": "text"
 					}
 				],
@@ -27,26 +27,26 @@
 				"header": [
 					{
 						"key": "AUTHORIZATION",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxNDQ4MTQsImlhdCI6MTYzNDEyNjgxNH0.dnCt9T7h6RfJaJCTkbYPM8GmqD2UVZ45291kYQM-KaAa3OgbWjaPFzfFli_Q_w4NNPXXbhvSnjZUqCubPk11kg",
 						"type": "text"
 					}
 				],
-				"url": "localhost:8080/usermanagement/v1/user/"
+				"url": "localhost:8080/usermanagement/v1/user/085578a6-be20-4690-8656-08be2a229c7d"
 			},
 			"response": []
 		},
 		{
 			"name": "Delete user by id",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [
 					{
 						"key": "AUTHORIZATION",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxNDQ4MTQsImlhdCI6MTYzNDEyNjgxNH0.dnCt9T7h6RfJaJCTkbYPM8GmqD2UVZ45291kYQM-KaAa3OgbWjaPFzfFli_Q_w4NNPXXbhvSnjZUqCubPk11kg",
 						"type": "text"
 					}
 				],
-				"url": "localhost:8080/usermanagement/v1/user/"
+				"url": "localhost:8080//usermanagement/v1/user/085578a6-be20-4690-8656-08be2a229c7d"
 			},
 			"response": []
 		},
@@ -57,13 +57,13 @@
 				"header": [
 					{
 						"key": "AUTHORIZATION",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjVhOGMwOWM0LTk0MDktNGM1NC1iNThmLWYxMzUzMGJjNDY2NSIsImV4cCI6MTYzNDEyODU0NSwiaWF0IjoxNjM0MTEwNTQ1fQ.zc8MVcHIaorjehb3Or5zL8aSOvDO7cFHJkMOEHQSkmO0NMA8btWiaU8eTLRx95pIhJD0vVJFXWFyl_kSjOUvrw",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxNDQ4MTQsImlhdCI6MTYzNDEyNjgxNH0.dnCt9T7h6RfJaJCTkbYPM8GmqD2UVZ45291kYQM-KaAa3OgbWjaPFzfFli_Q_w4NNPXXbhvSnjZUqCubPk11kg",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"code\": \"newCode\",\r\n  \"name\": \"sruthi\",\r\n  \"password\": \"test123\",\r\n  \"emailId\": \"sruthi@test.com\",\r\n  \"contactNo\": \"999595\",\r\n  \"userRoleId\": 0,\r\n  \"firstLogin\": \"N\",\r\n  \"pacsUserId\": \"sruthi\",\r\n  \"pacsPassword\": \"test123\",\r\n  \"createdBy\": \"dontusethis\",\r\n  \"dateCreated\": \"2021-10-13T05:46:22.488Z\",\r\n  \"updateBy\": \"dontusethis\",\r\n  \"dateUpdated\": \"2021-10-13T05:46:22.488Z\",\r\n  \"isActive\": \"Y\",\r\n  \"isVisible\": \"Y\",\r\n  \"loginId\": \"sruthi\",\r\n  \"notificationPref\": \"B\",\r\n  \"allowManualSubmission\": \"N\",\r\n  \"allowDashboardView\": \"N\",\r\n  \"themePref\": \"DEFAULT\"\r\n}",
+					"raw": "{\r\n  \"code\": \"newCode\",\r\n  \"name\": \"sruthi\",\r\n  \"password\": \"test123\",\r\n  \"emailId\": \"sruthi@test.com\",\r\n  \"contactNo\": \"999595\",\r\n  \"userRoleId\": 0,\r\n  \"firstLogin\": \"N\",\r\n  \"pacsUserId\": \"sruthi\",\r\n  \"pacsPassword\": \"test123\",\r\n  \"isActive\": \"Y\",\r\n  \"isVisible\": \"Y\",\r\n  \"loginId\": \"sruthi\",\r\n  \"notificationPref\": \"B\",\r\n  \"allowManualSubmission\": \"N\",\r\n  \"allowDashboardView\": \"N\",\r\n  \"themePref\": \"DEFAULT\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
