@@ -2,8 +2,6 @@ package com.bourntec.vetris.module.usermanagement.v1.service;
 
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseDTO;
-import com.bourntec.vetris.utils.ResponseUtil;
-
 
 /**
  * Service for UserManagement

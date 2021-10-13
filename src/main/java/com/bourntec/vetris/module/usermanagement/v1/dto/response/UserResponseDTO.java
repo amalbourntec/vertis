@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class UserResponseDTO extends CommonResponseDTO {
+public class UserResponseDTO{
   
 	private String code;
 	private String name;
@@ -34,6 +34,4 @@ public class UserResponseDTO extends CommonResponseDTO {
 	private String allowManualSubmission;
 	private String allowDashboardView;
 	private String themePref;
-	private String responseMessage;
-	
 }

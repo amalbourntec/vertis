@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRolesRequestDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseDTO;
-import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserRolesResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserRolesService;
 
 /**

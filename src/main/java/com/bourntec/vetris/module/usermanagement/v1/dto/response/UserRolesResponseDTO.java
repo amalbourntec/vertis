@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserRolesResponseDTO extends CommonResponseDTO {
+public class UserRolesResponseDTO{
 
 	private Integer id;
 	private String code;
@@ -24,6 +24,4 @@ public class UserRolesResponseDTO extends CommonResponseDTO {
 	private Date   dateUpdated;
 	private Date   dateCreated;
 	private String sysDefined;
-	private String responseMessage;
-	
 }

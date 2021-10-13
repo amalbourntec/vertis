@@ -2,7 +2,9 @@ package com.bourntec.vetris.module.usermanagement.v1.service.impl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,9 +19,11 @@ import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseD
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.repository.UserRepository;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
+import com.bourntec.vetris.utils.JWTSecurityContextUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Service Impementation for UserManagement
+ * Service Implementation for UserManagement
  * 
  * @author Anandu
  *
@@ -31,15 +35,25 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	private JWTSecurityContextUtil jwtSecurityContextUtil;
+
+	@Autowired
+	ObjectMapper objectMapper;
+
 	/**
 	 * Get all users
 	 */
 	@Override
 	public CommonResponseDTO getAllUsers() {
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		List<User> users= userRepository.findAll();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<User> users = userRepository.findAll();
+		List<UserResponseDTO> resultresponseDto= new ArrayList<>();
+		users.stream().forEach(userItem->{
+			resultresponseDto.add(objectMapper.convertValue(userItem,UserResponseDTO.class));
+		});
 		resultDto.setStatus(StatusType.Success.toString());
-		resultDto.setPayload(users);
+		resultDto.setPayload(resultresponseDto);
 		resultDto.setMessage("Fetched user successfully");
 		return resultDto;
 	}
@@ -49,12 +63,10 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public CommonResponseDTO getUserById(String id) throws Exception {
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		UserResponseDTO userRespDTO = new UserResponseDTO();
-		Optional<User> user=userRepository.findById(id);
-		if (user.isPresent()) {
-			User existingUser =user.get();
-			BeanUtils.copyProperties(existingUser, userRespDTO);
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		User existingUser = userRepository.findById(id).orElse(null);
+		if (Objects.nonNull(existingUser) && id.equals(existingUser.getId())) {
+			UserResponseDTO userRespDTO = objectMapper.convertValue(existingUser, UserResponseDTO.class);
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
@@ -70,18 +82,19 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public CommonResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		UserResponseDTO userRespDTO = new UserResponseDTO();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
 		if (userRepository.existsById(id)) {
-			User resultUser = userDto.toModel(userDto);
+			User resultUser = objectMapper.convertValue(userDto, User.class);
 			resultUser.setId(id);
+			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
+			resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
 			userRepository.save(resultUser);
-			BeanUtils.copyProperties(resultUser, userRespDTO);
-			
+			UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
+
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
-			
+
 		} else {
 			resultDto.setStatus(StatusType.Failure.toString());
 			resultDto.setMessage("Unable to fetch user details");
@@ -94,12 +107,12 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public CommonResponseDTO deleteUser(String id) throws Exception {
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		UserResponseDTO userRespDTO = new UserResponseDTO();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
 		Optional<User> existingUser = userRepository.findById(id);
 		if (existingUser.isPresent()) {
 			userRepository.deleteById(id);
-			
+			UserResponseDTO userRespDTO = objectMapper.convertValue(existingUser, UserResponseDTO.class);
+
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Deleted user successfully");
@@ -115,27 +128,32 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public CommonResponseDTO addUser(UserRequestDTO userDto) throws Exception {
-		
+
 		UserResponseDTO userRespDTO = new UserResponseDTO();
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+
 		UUID uuid = UUID.randomUUID();
-		User resultUser = userDto.toModel(userDto);
+		User resultUser = objectMapper.convertValue(userDto, User.class);
+		// Set User details
 		resultUser.setId(uuid.toString());
-		resultUser.setPacsPassword(encodePassword(userDto.getPacsPassword()));
 		resultUser.setPassword(encodePassword(userDto.getPassword()));
+		resultUser.setPacsPassword(encodePassword(userDto.getPacsPassword()));
+		resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
+		resultUser.setDateCreated(jwtSecurityContextUtil.getCurrentDate());
+		
 		userRepository.save(resultUser);
 		BeanUtils.copyProperties(resultUser, userRespDTO);
 		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(userRespDTO);
 		resultDto.setMessage("Saved user successfully");
-		
+
 		return resultDto;
 	}
-	
+
 	/**
-	 * This method used to encode password 
-	 * TODO needs to be changed according real application
+	 * This method used to encode password TODO needs to be changed according real
+	 * application
+	 * 
 	 * @param password
 	 * @return
 	 * @throws NoSuchAlgorithmException

@@ -1,11 +1,7 @@
 package com.bourntec.vetris.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -29,7 +25,7 @@ import lombok.Setter;
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class User {
+public class User extends AuditEntityModel{
 	
 	@Id
 	@Column(name = "id",length=200)
@@ -61,18 +57,6 @@ public class User {
 
 	@Column(name = "pacs_password",length = 200,nullable=false)
 	private String pacsPassword;
-	
-	@Column(name = "created_by",length = 200,nullable=false)
-	private String createdBy;
-
-	@Column(name = "date_created",nullable=false)
-	private Date dateCreated;
-	
-	@Column(name = "update_by",nullable=true)
-	private String updateBy;
-	
-	@Column(name = "date_updated",nullable=true)
-	private Date dateUpdated;
 
 	@Column(name = "is_active",length = 1,nullable=true)
 	private String isActive;
@@ -98,4 +82,55 @@ public class User {
 	@Column(name="deleted")
 	private boolean deleted = Boolean.FALSE;
 
+	//Default constructor
+	public User() {
+		
+	}
+
+	/**
+	 * @param id
+	 * @param code
+	 * @param name
+	 * @param password
+	 * @param emailId
+	 * @param contactNo
+	 * @param userRoleId
+	 * @param firstLogin
+	 * @param pacsUserId
+	 * @param pacsPassword
+	 * @param isActive
+	 * @param isVisible
+	 * @param loginId
+	 * @param notificationPref
+	 * @param allowManualSubmission
+	 * @param allowDashboardView
+	 * @param themePref
+	 * @param deleted
+	 */
+	public User(String id, String code, String name, String password, String emailId, String contactNo,
+			Integer userRoleId, String firstLogin, String pacsUserId, String pacsPassword, String isActive,
+			String isVisible, String loginId, String notificationPref, String allowManualSubmission,
+			String allowDashboardView, String themePref, boolean deleted) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.password = password;
+		this.emailId = emailId;
+		this.contactNo = contactNo;
+		this.userRoleId = userRoleId;
+		this.firstLogin = firstLogin;
+		this.pacsUserId = pacsUserId;
+		this.pacsPassword = pacsPassword;
+		this.isActive = isActive;
+		this.isVisible = isVisible;
+		this.loginId = loginId;
+		this.notificationPref = notificationPref;
+		this.allowManualSubmission = allowManualSubmission;
+		this.allowDashboardView = allowDashboardView;
+		this.themePref = themePref;
+		this.deleted = deleted;
+	}
+	
+	
 }

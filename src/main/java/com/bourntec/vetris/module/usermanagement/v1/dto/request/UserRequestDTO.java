@@ -1,12 +1,10 @@
 package com.bourntec.vetris.module.usermanagement.v1.dto.request;
 
-import java.util.Date;
 
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
-import com.bourntec.vetris.entity.User;
 import com.sun.istack.NotNull;
 
 import lombok.Getter;
@@ -51,16 +49,6 @@ public class UserRequestDTO {
 	@Size( max = 200, message = "pacs_password  must be atmost 200 characters")
 	@NotNull
 	private String pacsPassword;
-	
-	@Size( max = 200, message = "created by  must be atmost 200 characters")
-	private String createdBy;
-
-	@NotNull
-	private Date dateCreated;
-	
-	private String updateBy;
-
-	private Date dateUpdated;
 
 	@Size( max = 1, message = "is active  must be atmost 1 characters")
 	private String isActive;
@@ -82,42 +70,5 @@ public class UserRequestDTO {
 	
 	@Size( max = 10, message = "theme_pref  must be atmost 10 characters")
 	private String themePref;
-
-	
-	
-	/**
-	 * @param requestDTO
-	 * @return user
-	 */
-	public User toModel(UserRequestDTO request) {
-		User user= new User();
-		try {
-			if (request.getCode()!=null) {user.setCode(request.getCode());}
-			if (request.getName()!=null) {user.setName(request.getName());}
-			if (request.getPassword()!=null ) {user.setPassword(request.getPassword());}
-			if (request.getEmailId()!=null) {user.setEmailId(request.getEmailId());}
-			if (request.getContactNo()!=null) {user.setContactNo(request.getContactNo());}
-			if (request.getUserRoleId()!=null) {user.setUserRoleId(request.getUserRoleId());}
-			if (request.getFirstLogin()!=null) {user.setFirstLogin(request.getFirstLogin());}
-			if (request.getPacsUserId()!=null) {user.setPacsUserId(request.getPacsUserId());}
-			if (request.getPacsPassword()!=null) {user.setPacsPassword(request.getPacsPassword());}
-			if (request.getCreatedBy()!=null) {user.setCreatedBy(request.getCreatedBy());}
-			if (request.getDateCreated()!=null) {user.setDateCreated(request.getDateCreated());}
-			if (request.getUpdateBy()!=null) {user.setUpdateBy(request.getUpdateBy());}
-			if (request.getDateCreated()!=null) {user.setDateCreated(request.getDateCreated());}
-			if (request.getIsActive()!=null) {user.setIsActive(request.getIsActive());}
-			if (request.getIsVisible()!=null) {user.setIsVisible(request.getIsVisible());}
-			if (request.getLoginId()!=null) {user.setLoginId(request.getLoginId());}
-			if (request.getNotificationPref()!=null) {user.setNotificationPref(request.getNotificationPref());}
-			if (request.getAllowManualSubmission()!=null) {user.setAllowManualSubmission(request.getAllowManualSubmission());}
-			if (request.getAllowDashboardView()!=null) {user.setAllowDashboardView(request.getAllowDashboardView());}
-			if (request.getThemePref()!=null) {user.setThemePref(request.getThemePref());}
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return user;
-		
-	}
 
 }

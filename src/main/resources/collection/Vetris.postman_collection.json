@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "0309559f-1e98-42c5-8b36-c185c50bc13d",
+		"name": "Vetris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"type": "text"
+					}
+				],
+				"url": "localhost:8080/usermanagement/v1/user/"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"type": "text"
+					}
+				],
+				"url": "localhost:8080/usermanagement/v1/user/"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiaWQiOiJhMmU2MDMxOS02MzMwLTRkOTMtODgzNy1hYzlhZTI0MTg2OTIiLCJleHAiOjE2MzQxMjQxNTEsImlhdCI6MTYzNDEwNjE1MX0.-kOcdFqIKZtA5Lg44wvRcu9e59kAe0qP0HzviltFXr7J-5EHSgHDPgXZWFySKpWhmSxRowHFePnaxTYY3Btb1A",
+						"type": "text"
+					}
+				],
+				"url": "localhost:8080/usermanagement/v1/user/"
+			},
+			"response": []
+		},
+		{
+			"name": "Save user Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjVhOGMwOWM0LTk0MDktNGM1NC1iNThmLWYxMzUzMGJjNDY2NSIsImV4cCI6MTYzNDEyODU0NSwiaWF0IjoxNjM0MTEwNTQ1fQ.zc8MVcHIaorjehb3Or5zL8aSOvDO7cFHJkMOEHQSkmO0NMA8btWiaU8eTLRx95pIhJD0vVJFXWFyl_kSjOUvrw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": \"newCode\",\r\n  \"name\": \"sruthi\",\r\n  \"password\": \"test123\",\r\n  \"emailId\": \"sruthi@test.com\",\r\n  \"contactNo\": \"999595\",\r\n  \"userRoleId\": 0,\r\n  \"firstLogin\": \"N\",\r\n  \"pacsUserId\": \"sruthi\",\r\n  \"pacsPassword\": \"test123\",\r\n  \"createdBy\": \"dontusethis\",\r\n  \"dateCreated\": \"2021-10-13T05:46:22.488Z\",\r\n  \"updateBy\": \"dontusethis\",\r\n  \"dateUpdated\": \"2021-10-13T05:46:22.488Z\",\r\n  \"isActive\": \"Y\",\r\n  \"isVisible\": \"Y\",\r\n  \"loginId\": \"sruthi\",\r\n  \"notificationPref\": \"B\",\r\n  \"allowManualSubmission\": \"N\",\r\n  \"allowDashboardView\": \"N\",\r\n  \"themePref\": \"DEFAULT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/usermanagement/v1/user"
+			},
+			"response": []
+		}
+	]
+}
