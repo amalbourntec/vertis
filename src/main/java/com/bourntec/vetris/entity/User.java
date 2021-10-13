@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +27,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class User {
 	
 	@Id
@@ -57,13 +62,13 @@ public class User {
 	@Column(name = "pacs_password",length = 200,nullable=false)
 	private String pacsPassword;
 	
-	@Column(name = "created_by",length = 200,nullable=false,unique = true)
+	@Column(name = "created_by",length = 200,nullable=false)
 	private String createdBy;
 
 	@Column(name = "date_created",nullable=false)
 	private Date dateCreated;
 	
-	@Column(name = "update_by",nullable=true, unique = true)
+	@Column(name = "update_by",nullable=true)
 	private String updateBy;
 	
 	@Column(name = "date_updated",nullable=true)
@@ -89,5 +94,8 @@ public class User {
 	
 	@Column(name = "theme_pref",length = 10,nullable=true)
 	private String themePref;
+	
+	@Column(name="deleted")
+	private boolean deleted = Boolean.FALSE;
 
 }

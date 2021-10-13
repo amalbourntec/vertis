@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bourntec.vetris.StatusType;
 import com.bourntec.vetris.entity.User;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 	public ResponseUtil getAllUsers() {
 		ResponseUtil resultDto= new ResponseUtil();
 		List<User> users= userRepository.findAll();
-		resultDto.setStatus("success");
+		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(users);
 		resultDto.setMessage("Fetched user successfully");
 		return resultDto;
@@ -50,14 +51,15 @@ public class UserServiceImpl implements UserService {
 	public ResponseUtil getUserById(String id) throws Exception {
 		ResponseUtil resultDto= new ResponseUtil();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
-		if (userRepository.existsById(id)) {
-			User existingUser = userRepository.findById(id).orElse(null);
+		Optional<User> user=userRepository.findById(id);
+		if (user.isPresent()) {
+			User existingUser =user.get();
 			BeanUtils.copyProperties(existingUser, userRespDTO);
-			resultDto.setStatus("success");
+			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
 		} else {
-			resultDto.setStatus("Error");
+			resultDto.setStatus(StatusType.Failure.toString());
 			resultDto.setMessage("Unable to fetch user details");
 		}
 		return resultDto;
@@ -76,12 +78,12 @@ public class UserServiceImpl implements UserService {
 			userRepository.save(resultUser);
 			BeanUtils.copyProperties(resultUser, userRespDTO);
 			
-			resultDto.setStatus("Success");
+			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
 			
 		} else {
-			resultDto.setStatus("Error");
+			resultDto.setStatus(StatusType.Failure.toString());
 			resultDto.setMessage("Unable to fetch user details");
 		}
 		return resultDto;
@@ -98,11 +100,11 @@ public class UserServiceImpl implements UserService {
 		if (existingUser.isPresent()) {
 			userRepository.deleteById(id);
 			
-			resultDto.setStatus("Success");
+			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Deleted user successfully");
 		} else {
-			resultDto.setStatus("Error");
+			resultDto.setStatus(StatusType.Failure.toString());
 			resultDto.setMessage("Unable to fetch user details");
 		}
 		return resultDto;
@@ -124,7 +126,7 @@ public class UserServiceImpl implements UserService {
 		resultUser.setPassword(encodePassword(userDto.getPassword()));
 		userRepository.save(resultUser);
 		BeanUtils.copyProperties(resultUser, userRespDTO);
-		resultDto.setStatus("Success");
+		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(userRespDTO);
 		resultDto.setMessage("Saved user successfully");
 		
