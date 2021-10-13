@@ -45,13 +45,13 @@ public class UserRoles {
 	@Column(name="is_active", length=1,nullable = true)
 	private String isActive;
 	
-	@Column(name="createdby", length=200,nullable = false,unique = true)
+	@Column(name="createdby", length=200,nullable = false)
 	private String createdBy;
 	
 	@Column(name="date_created",nullable = false)
 	private Date dateCreated;
 	
-	@Column(name="updateby", length=200,nullable = true,unique = true)
+	@Column(name="updateby", length=200,nullable = true)
 	private String updateBy;
 	
 	@Column(name="date_updated",nullable = true)

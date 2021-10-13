@@ -10,13 +10,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bourntec.vetris.StatusType;
 import com.bourntec.vetris.entity.User;
+import com.bourntec.vetris.enums.StatusType;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
+import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.repository.UserRepository;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
-import com.bourntec.vetris.utils.ResponseUtil;
 
 /**
  * Service Impementation for UserManagement
@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 	 * Get all users
 	 */
 	@Override
-	public ResponseUtil getAllUsers() {
-		ResponseUtil resultDto= new ResponseUtil();
+	public CommonResponseDTO getAllUsers() {
+		CommonResponseDTO resultDto= new CommonResponseDTO();
 		List<User> users= userRepository.findAll();
 		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(users);
@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
 	 * Getting user by id
 	 */
 	@Override
-	public ResponseUtil getUserById(String id) throws Exception {
-		ResponseUtil resultDto= new ResponseUtil();
+	public CommonResponseDTO getUserById(String id) throws Exception {
+		CommonResponseDTO resultDto= new CommonResponseDTO();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		Optional<User> user=userRepository.findById(id);
 		if (user.isPresent()) {
@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService {
 	 * updating the existing user
 	 */
 	@Override
-	public ResponseUtil updateUser(UserRequestDTO userDto, String id) throws Exception {
-		ResponseUtil resultDto= new ResponseUtil();
+	public CommonResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
+		CommonResponseDTO resultDto= new CommonResponseDTO();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		if (userRepository.existsById(id)) {
 			User resultUser = userDto.toModel(userDto);
@@ -93,8 +93,8 @@ public class UserServiceImpl implements UserService {
 	 * Deleting the user by id
 	 */
 	@Override
-	public ResponseUtil deleteUser(String id) throws Exception {
-		ResponseUtil resultDto= new ResponseUtil();
+	public CommonResponseDTO deleteUser(String id) throws Exception {
+		CommonResponseDTO resultDto= new CommonResponseDTO();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		Optional<User> existingUser = userRepository.findById(id);
 		if (existingUser.isPresent()) {
@@ -114,10 +114,10 @@ public class UserServiceImpl implements UserService {
 	 * Adding a user using request DTO
 	 */
 	@Override
-	public ResponseUtil addUser(UserRequestDTO userDto) throws Exception {
+	public CommonResponseDTO addUser(UserRequestDTO userDto) throws Exception {
 		
 		UserResponseDTO userRespDTO = new UserResponseDTO();
-		ResponseUtil resultDto= new ResponseUtil();
+		CommonResponseDTO resultDto= new CommonResponseDTO();
 		
 		UUID uuid = UUID.randomUUID();
 		User resultUser = userDto.toModel(userDto);

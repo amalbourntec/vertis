@@ -1,7 +1,7 @@
 package com.bourntec.vetris.module.usermanagement.v1.service;
 
-import java.util.List;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRolesRequestDTO;
+import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserRolesResponseDTO;
 
 /**
@@ -12,14 +12,14 @@ import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserRolesRespon
 
 public interface UserRolesService {
 
-	public UserRolesResponseDTO getUserRolesById(int id) throws Exception;
+	public CommonResponseDTO getUserRolesById(int id) throws Exception;
 
-	public List<UserRolesResponseDTO> getAllUserRoles() throws Exception;
+	public CommonResponseDTO getAllUserRoles() throws Exception;
 
-	public UserRolesResponseDTO addUserRoles(UserRolesRequestDTO data) throws Exception;
+	public CommonResponseDTO addUserRoles(UserRolesRequestDTO data) throws Exception;
 
-	public UserRolesResponseDTO updateUserRoles(UserRolesRequestDTO data, int id) throws Exception;
+	public CommonResponseDTO updateUserRoles(UserRolesRequestDTO data, int id) throws Exception;
 
-	public UserRolesResponseDTO deleteUserRoles(int id) throws Exception;
+	public CommonResponseDTO deleteUserRoles(int id) throws Exception;
 
 }

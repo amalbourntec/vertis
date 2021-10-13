@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class UserResponseDTO {
+public class UserResponseDTO extends CommonResponseDTO {
   
 	private String code;
 	private String name;

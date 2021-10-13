@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
+import com.bourntec.vetris.module.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
-import com.bourntec.vetris.utils.ResponseUtil;
 
 
 /**
@@ -37,8 +37,8 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<ResponseUtil> fetchUserById(@PathVariable("id")  String id) throws Exception {
-		ResponseUtil resultDto= userService.getUserById(id);
+	public ResponseEntity<CommonResponseDTO> fetchUserById(@PathVariable("id")  String id) throws Exception {
+		CommonResponseDTO resultDto= userService.getUserById(id);
 		return ResponseEntity.ok(resultDto);	
 	}
 	
@@ -48,7 +48,7 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public ResponseUtil fetchAllUsers() throws Exception {
+	public CommonResponseDTO fetchAllUsers() throws Exception {
 		return this.userService.getAllUsers();	
 	}
 	
@@ -58,8 +58,8 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<ResponseUtil> createUser(@RequestBody UserRequestDTO userRequest)throws Exception{
-		ResponseUtil resultDto= userService.addUser(userRequest);
+	public ResponseEntity<CommonResponseDTO> createUser(@RequestBody UserRequestDTO userRequest)throws Exception{
+		CommonResponseDTO resultDto= userService.addUser(userRequest);
 		return ResponseEntity.ok(resultDto);
 	}
 	
@@ -71,8 +71,8 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<ResponseUtil> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
-		ResponseUtil resultDto = userService.updateUser(user, id);
+	public ResponseEntity<CommonResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
+		CommonResponseDTO resultDto = userService.updateUser(user, id);
 		return ResponseEntity.ok(resultDto);	
 	}
 	
@@ -82,8 +82,8 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseUtil> deleteUser(@PathVariable("id")String id)throws Exception{
-		ResponseUtil resultDto = userService.deleteUser( id);
+	public ResponseEntity<CommonResponseDTO> deleteUser(@PathVariable("id")String id)throws Exception{
+		CommonResponseDTO resultDto = userService.deleteUser( id);
 		return ResponseEntity.ok(resultDto);	
 	}
 	

@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserRolesResponseDTO {
+public class UserRolesResponseDTO extends CommonResponseDTO {
 
 	private Integer id;
 	private String code;
