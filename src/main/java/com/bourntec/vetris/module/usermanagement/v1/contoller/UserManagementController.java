@@ -1,8 +1,5 @@
 package com.bourntec.vetris.module.usermanagement.v1.contoller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bourntec.vetris.entity.User;
 import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
-import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
+import com.bourntec.vetris.utils.ResponseUtil;
 
 
 /**
@@ -41,10 +37,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<UserResponseDTO> fetchUserById(@PathVariable("id")  String id) throws Exception {
-		UserResponseDTO userrespDto= userService.getUserById(id);
-		System.out.println(userrespDto);
-		return ResponseEntity.ok(userrespDto);	
+	public ResponseEntity<ResponseUtil> fetchUserById(@PathVariable("id")  String id) throws Exception {
+		ResponseUtil resultDto= userService.getUserById(id);
+		return ResponseEntity.ok(resultDto);	
 	}
 	
 	/**
@@ -53,7 +48,7 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public List<User> fetchAllUsers() throws Exception {
+	public ResponseUtil fetchAllUsers() throws Exception {
 		return this.userService.getAllUsers();	
 	}
 	
@@ -63,9 +58,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequest)throws Exception{
-		UserResponseDTO userrespDto= userService.addUser(userRequest);
-		return ResponseEntity.ok(userrespDto);
+	public ResponseEntity<ResponseUtil> createUser(@RequestBody UserRequestDTO userRequest)throws Exception{
+		ResponseUtil resultDto= userService.addUser(userRequest);
+		return ResponseEntity.ok(resultDto);
 	}
 	
 	
@@ -76,9 +71,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
-		UserResponseDTO userrespDto= userService.updateUser(user, id);
-		return ResponseEntity.ok(userrespDto);	
+	public ResponseEntity<ResponseUtil> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
+		ResponseUtil resultDto = userService.updateUser(user, id);
+		return ResponseEntity.ok(resultDto);	
 	}
 	
 	/**
@@ -87,9 +82,9 @@ public class UserManagementController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable("id")String id)throws Exception{
-		UserResponseDTO userrespDto= userService.deleteUser( id);
-		return ResponseEntity.ok(userrespDto);	
+	public ResponseEntity<ResponseUtil> deleteUser(@PathVariable("id")String id)throws Exception{
+		ResponseUtil resultDto = userService.deleteUser( id);
+		return ResponseEntity.ok(resultDto);	
 	}
 	
 	

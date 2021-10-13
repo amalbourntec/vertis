@@ -15,6 +15,7 @@ import com.bourntec.vetris.module.usermanagement.v1.dto.request.UserRequestDTO;
 import com.bourntec.vetris.module.usermanagement.v1.dto.response.UserResponseDTO;
 import com.bourntec.vetris.module.usermanagement.v1.repository.UserRepository;
 import com.bourntec.vetris.module.usermanagement.v1.service.UserService;
+import com.bourntec.vetris.utils.ResponseUtil;
 
 /**
  * Service Impementation for UserManagement
@@ -33,67 +34,88 @@ public class UserServiceImpl implements UserService {
 	 * Get all users
 	 */
 	@Override
-	public List<User> getAllUsers() {
-		return this.userRepository.findAll();
+	public ResponseUtil getAllUsers() {
+		ResponseUtil resultDto= new ResponseUtil();
+		List<User> users= userRepository.findAll();
+		resultDto.setStatus("success");
+		resultDto.setPayload(users);
+		resultDto.setMessage("Fetched user successfully");
+		return resultDto;
 	}
 
 	/**
 	 * Getting user by id
 	 */
 	@Override
-	public UserResponseDTO getUserById(String id) throws Exception {
+	public ResponseUtil getUserById(String id) throws Exception {
+		ResponseUtil resultDto= new ResponseUtil();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		if (userRepository.existsById(id)) {
 			User existingUser = userRepository.findById(id).orElse(null);
 			BeanUtils.copyProperties(existingUser, userRespDTO);
-			userRespDTO.setResponseMessage("Fetched User Successfully");
+			resultDto.setStatus("success");
+			resultDto.setPayload(userRespDTO);
+			resultDto.setMessage("Fetched user successfully");
 		} else {
-			userRespDTO.setResponseMessage("No User found");
+			resultDto.setStatus("Error");
+			resultDto.setMessage("Unable to fetch user details");
 		}
-		return userRespDTO;
+		return resultDto;
 	}
 
 	/**
 	 * updating the existing user
 	 */
 	@Override
-	public UserResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
+	public ResponseUtil updateUser(UserRequestDTO userDto, String id) throws Exception {
+		ResponseUtil resultDto= new ResponseUtil();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		if (userRepository.existsById(id)) {
 			User resultUser = userDto.toModel(userDto);
 			resultUser.setId(id);
 			userRepository.save(resultUser);
 			BeanUtils.copyProperties(resultUser, userRespDTO);
-			userRespDTO.setResponseMessage("Updated User Successfully");
+			
+			resultDto.setStatus("Success");
+			resultDto.setPayload(userRespDTO);
+			resultDto.setMessage("Fetched user successfully");
+			
 		} else {
-			userRespDTO.setResponseMessage("No User found");
+			resultDto.setStatus("Error");
+			resultDto.setMessage("Unable to fetch user details");
 		}
-		return userRespDTO;
+		return resultDto;
 	}
 
 	/**
 	 * Deleting the user by id
 	 */
 	@Override
-	public UserResponseDTO deleteUser(String id) throws Exception {
+	public ResponseUtil deleteUser(String id) throws Exception {
+		ResponseUtil resultDto= new ResponseUtil();
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		Optional<User> existingUser = userRepository.findById(id);
 		if (existingUser.isPresent()) {
 			userRepository.deleteById(id);
-			userRespDTO.setResponseMessage("Deleted User Successfully");
+			
+			resultDto.setStatus("Success");
+			resultDto.setPayload(userRespDTO);
+			resultDto.setMessage("Deleted user successfully");
 		} else {
-			userRespDTO.setResponseMessage("No user found");
+			resultDto.setStatus("Error");
+			resultDto.setMessage("Unable to fetch user details");
 		}
-		return userRespDTO;
+		return resultDto;
 	}
 
 	/**
 	 * Adding a user using request DTO
 	 */
 	@Override
-	public UserResponseDTO addUser(UserRequestDTO userDto) throws Exception {
+	public ResponseUtil addUser(UserRequestDTO userDto) throws Exception {
 		
 		UserResponseDTO userRespDTO = new UserResponseDTO();
+		ResponseUtil resultDto= new ResponseUtil();
 		
 		UUID uuid = UUID.randomUUID();
 		User resultUser = userDto.toModel(userDto);
@@ -102,9 +124,11 @@ public class UserServiceImpl implements UserService {
 		resultUser.setPassword(encodePassword(userDto.getPassword()));
 		userRepository.save(resultUser);
 		BeanUtils.copyProperties(resultUser, userRespDTO);
-		userRespDTO.setResponseMessage("Saved User successfully");
+		resultDto.setStatus("Success");
+		resultDto.setPayload(userRespDTO);
+		resultDto.setMessage("Saved user successfully");
 		
-		return userRespDTO;
+		return resultDto;
 	}
 	
 	/**
