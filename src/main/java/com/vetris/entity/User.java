@@ -24,7 +24,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET is_active = 'N' WHERE id=?")
-@Where(clause = "is_active='Y'")
 public class User extends AuditEntityModel{
 	
 	@Id
@@ -56,7 +55,7 @@ public class User extends AuditEntityModel{
 	@Column(name = "pacs_user_id",length = 50,nullable=true)
 	private String pacsUserId;
 
-	@Column(name = "pacs_password",length = 200,nullable=false)
+	@Column(name = "pacs_password",length = 200,nullable=true)
 	private String pacsPassword;
 
 	@Column(name = "is_active",length = 1,nullable=true)

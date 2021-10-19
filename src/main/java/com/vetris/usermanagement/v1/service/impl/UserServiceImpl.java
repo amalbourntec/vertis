@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 		// Set User details
 		resultUser.setId(uuid.toString());
 		resultUser.setPassword(encodePassword(userDto.getPassword()));
-		resultUser.setPacsPassword(encodePassword(userDto.getPacsPassword()));
+		resultUser.setPacsPassword(userDto.getUserRoleId().equals("5")?encodePassword(userDto.getPacsPassword()):" ");
 		resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultUser.setDateCreated(jwtSecurityContextUtil.getCurrentDate());
 		

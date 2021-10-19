@@ -1,7 +1,10 @@
 package com.vetris.usermanagement.v1.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
@@ -13,6 +16,8 @@ import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.UserRolesRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.UserRolesResponseDTO;
+import com.vetris.usermanagement.v1.exception.ErrorCodes;
+import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.usermanagement.v1.repository.UserRolesRepostitory;
 import com.vetris.usermanagement.v1.service.UserRolesService;
 
@@ -30,26 +35,21 @@ public class UserRolesServiceImpl implements UserRolesService {
 
 	/**
 	 * Getting user roles by id
+	 * @throws ResourceNotFoundException 
 	 */
 	@Override
 	public CommonResponseDTO getUserRolesById(int id) throws Exception {
 		UserRolesResponseDTO userRoleRespDTO = new UserRolesResponseDTO();
 		CommonResponseDTO resultDto= new CommonResponseDTO();
-		Optional<UserRoles> userroles=userRoleRepository.findById(id);
+		UserRoles userroles=userRoleRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		try {
-			if (userroles.isPresent()) {
-				UserRoles existingUser = userroles.get();
-				BeanUtils.copyProperties(existingUser, userRoleRespDTO);
+			BeanUtils.copyProperties(userroles, userRoleRespDTO);
 				resultDto.setStatus(StatusType.Success.toString());
 				resultDto.setPayload(userRoleRespDTO);
 				resultDto.setMessage("Fetched user role successfully");
-			} else {
-				resultDto.setStatus(StatusType.Failure.toString());
-				resultDto.setMessage("Unable to fetch user role details");
-			}
-		} catch (BeansException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			throw new Exception();
+		} 
 		return resultDto;
 	}
 	
@@ -92,8 +92,9 @@ public class UserRolesServiceImpl implements UserRolesService {
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRoleRespDto);
 			resultDto.setMessage("Saved User Role successfully");
-		} catch (BeansException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
+			throw new Exception();
 		}
 
 		return resultDto;
@@ -106,9 +107,8 @@ public class UserRolesServiceImpl implements UserRolesService {
 	public CommonResponseDTO updateUserRoles(UserRolesRequestDTO userRoleDto, int id) throws Exception {
 		UserRolesResponseDTO userRoleRespDto = new UserRolesResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Optional<UserRoles> existingUserRole = userRoleRepository.findById(id);
+		userRoleRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		try {
-			if (existingUserRole.isPresent()) {
 				UserRoles resultUserRole = userRoleDto.toUserRolesRequestModel(userRoleDto);
 				resultUserRole.setId(id);
 				userRoleRepository.save(resultUserRole);
@@ -116,12 +116,8 @@ public class UserRolesServiceImpl implements UserRolesService {
 				resultDto.setStatus(StatusType.Success.toString());
 				resultDto.setPayload(userRoleRespDto);
 				resultDto.setMessage("Updated  User Role Succesfully");
-			} else {
-				resultDto.setStatus(StatusType.Failure.toString());
-				resultDto.setMessage("Unable to update use role");
-			}
-		} catch (BeansException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new Exception();
 		}
 
 		return resultDto;
@@ -134,19 +130,14 @@ public class UserRolesServiceImpl implements UserRolesService {
 	public CommonResponseDTO deleteUserRoles(int id) throws Exception {
 		UserRolesResponseDTO userRoleRespDto = new UserRolesResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Optional<UserRoles> existingUserRole = userRoleRepository.findById(id);
+		userRoleRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		try {
-			if (existingUserRole.isPresent()) {
 				userRoleRepository.deleteById(id);
 				resultDto.setStatus(StatusType.Success.toString());
 				resultDto.setPayload(userRoleRespDto);
 				resultDto.setMessage("Deleted user role successfully");
-			} else {
-				resultDto.setStatus(StatusType.Failure.toString());
-				resultDto.setMessage("Unable to delete user role");
-			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new Exception();
 		}
 
 		return resultDto;

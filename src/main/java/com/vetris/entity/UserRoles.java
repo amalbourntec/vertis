@@ -25,15 +25,15 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="user_roles")
-@SQLDelete(sql = "UPDATE userroles SET is_active = 'N' WHERE id=?")
-@Where(clause = "deleted='Y'")
+@SQLDelete(sql = "UPDATE user_roles SET is_active = 'N' WHERE id=?")
+@Where(clause = "is_active='Y'")
 public class UserRoles extends AuditEntityModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id", length=200)
 	private Integer id;
 	
-	@Column(name="code", length=10,nullable = false)
+	@Column(name="code", length=10,nullable = false, unique=true)
 	private String code;
 	
 	@Column(name="name", length=30, nullable=false)

@@ -26,7 +26,7 @@ import com.vetris.usermanagement.v1.service.UserService;
 @RestController(value="UserManagementController")
 @RequestMapping("/usermanagement/v1/user")
 @CrossOrigin(origins = "*")
-public class UserManagementController {
+public class UserController {
 	
 	@Autowired
 	UserService userService;
