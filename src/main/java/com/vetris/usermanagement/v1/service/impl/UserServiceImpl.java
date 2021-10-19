@@ -144,7 +144,6 @@ public class UserServiceImpl implements UserService {
 		resultUser.setPassword(encodePassword(userDto.getPassword()));
 		resultUser.setPacsPassword(userDto.getUserRoleId().equals("5")?encodePassword(userDto.getPacsPassword()):" ");
 		resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
-		resultUser.setDateCreated(jwtSecurityContextUtil.getCurrentDate());
 		
 		userRepository.save(resultUser);
 		BeanUtils.copyProperties(resultUser, userRespDTO);
