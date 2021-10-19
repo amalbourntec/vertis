@@ -18,6 +18,9 @@ import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.UserRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.UserResponseDTO;
+import com.vetris.usermanagement.v1.exception.ErrorCodes;
+import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.usermanagement.v1.exception.UserNotFoundException;
 import com.vetris.usermanagement.v1.repository.UserRepository;
 import com.vetris.usermanagement.v1.service.UserService;
 import com.vetris.utils.JWTSecurityContextUtil;
@@ -72,16 +75,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO getUserById(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		User existingUser = userRepository.findById(id).orElse(null);
-		if (Objects.nonNull(existingUser) && id.equals(existingUser.getId())) {
+		User existingUser = userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		
 			UserResponseDTO userRespDTO = objectMapper.convertValue(existingUser, UserResponseDTO.class);
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
-		} else {
-			resultDto.setStatus(StatusType.Failure.toString());
-			resultDto.setMessage("Unable to fetch user details");
-		}
+		
 		return resultDto;
 	}
 
@@ -91,22 +91,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		if (userRepository.existsById(id)) {
-			User resultUser = objectMapper.convertValue(userDto, User.class);
-			resultUser.setId(id);
-			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
-			resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
-			userRepository.save(resultUser);
-			UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
+		 userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		
+			try {
+				User resultUser = objectMapper.convertValue(userDto, User.class);
+				resultUser.setId(id);
+				resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
+				resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
+				userRepository.save(resultUser);
+				UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
+				resultDto.setStatus(StatusType.Success.toString());
+				resultDto.setPayload(userRespDTO);
+				resultDto.setMessage("Fetched user successfully");
+			} catch (Exception e) {
+				
+				throw new Exception(e);
+			}
 
-			resultDto.setStatus(StatusType.Success.toString());
-			resultDto.setPayload(userRespDTO);
-			resultDto.setMessage("Fetched user successfully");
-
-		} else {
-			resultDto.setStatus(StatusType.Failure.toString());
-			resultDto.setMessage("Unable to fetch user details");
-		}
+		
 		return resultDto;
 	}
 

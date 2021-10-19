@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,9 +60,13 @@ public class JwtFilter implements Filter{
 			headers.set("AUTHORIZATION", httpServletRequest.getHeader("AUTHORIZATION"));
 			
 			HttpEntity<String> entity = new HttpEntity<>(null,headers);
-			
-			ResponseEntity<String> decodeResponse=restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-			
+			ResponseEntity<String> decodeResponse = null;
+			try {
+			 decodeResponse=restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+			} catch(RestClientException exc) {
+				httpServletResponse.sendError(401, exc.getMessage());
+				return;
+			}
 			if(Objects.nonNull(decodeResponse)) {
 				Map<String,String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
 				jwtSecurityContextUtil.setId(filterResult.get("id"));
