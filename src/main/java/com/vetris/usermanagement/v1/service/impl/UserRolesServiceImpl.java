@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vetris.entity.UserRoles;
+import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.UserRolesRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.UserRolesResponseDTO;
-import com.vetris.usermanagement.v1.exception.ErrorCodes;
 import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.usermanagement.v1.repository.UserRolesRepostitory;
 import com.vetris.usermanagement.v1.service.UserRolesService;
@@ -41,7 +41,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 	public CommonResponseDTO getUserRolesById(int id) throws Exception {
 		UserRolesResponseDTO userRoleRespDTO = new UserRolesResponseDTO();
 		CommonResponseDTO resultDto= new CommonResponseDTO();
-		UserRoles userroles=userRoleRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		UserRoles userroles=userRoleRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User"+ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		try {
 			BeanUtils.copyProperties(userroles, userRoleRespDTO);
 				resultDto.setStatus(StatusType.Success.toString());
@@ -86,16 +86,16 @@ public class UserRolesServiceImpl implements UserRolesService {
 		UserRolesResponseDTO userRoleRespDto = new UserRolesResponseDTO();
 		UserRoles resultUserRoles = userRoleDto.toUserRolesRequestModel(userRoleDto);
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		try {
+	//	try {
 			userRoleRepository.save(resultUserRoles);
 			BeanUtils.copyProperties(resultUserRoles, userRoleRespDto);
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRoleRespDto);
 			resultDto.setMessage("Saved User Role successfully");
-		} catch (Exception e) {
-			//e.printStackTrace();
-			throw new Exception();
-		}
+//		} catch (Exception e) {
+//			//e.printStackTrace();
+//			throw new Exception();
+//		}
 
 		return resultDto;
 	}

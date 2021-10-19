@@ -14,13 +14,12 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.entity.User;
+import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.UserRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.UserResponseDTO;
-import com.vetris.usermanagement.v1.exception.ErrorCodes;
 import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
-import com.vetris.usermanagement.v1.exception.UserNotFoundException;
 import com.vetris.usermanagement.v1.repository.UserRepository;
 import com.vetris.usermanagement.v1.service.UserService;
 import com.vetris.utils.JWTSecurityContextUtil;

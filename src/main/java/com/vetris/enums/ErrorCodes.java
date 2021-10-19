@@ -1,4 +1,4 @@
-package com.vetris.usermanagement.v1.exception;
+package com.vetris.enums;
 
 /**
  *  Enum class for creating custom error codes.
@@ -6,7 +6,7 @@ package com.vetris.usermanagement.v1.exception;
  *
  */
 public enum ErrorCodes {
-	DATA_NOT_FOUND("Data not found"),
+	DATA_NOT_FOUND(" not found"),
 	UN_AUTH_USER("UnAuthorized User"),
 	ACCESS_DENIED("Access Denied");
 	

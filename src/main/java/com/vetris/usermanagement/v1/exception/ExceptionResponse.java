@@ -1,5 +1,7 @@
 package com.vetris.usermanagement.v1.exception;
 
+import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -20,4 +22,6 @@ public class ExceptionResponse {
 	private String requestURL;
 		
 	private HttpStatus httpStatus;
+	private Date timestamp;
+	private int status;
 }
