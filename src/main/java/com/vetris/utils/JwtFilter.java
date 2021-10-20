@@ -25,6 +25,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vetris.enums.ErrorCodes;
 
 @Component
 public class JwtFilter implements Filter{
@@ -64,10 +65,10 @@ public class JwtFilter implements Filter{
 			try {
 			 decodeResponse=restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 			} catch(RestClientException exc) {
-				httpServletResponse.sendError(401, exc.getMessage());
+				httpServletResponse.sendError(401, ErrorCodes.TOKEN_EXPIRED.getMessage());
 				return;
 			}
-			if(Objects.nonNull(decodeResponse)) {
+			if(Objects.nonNull(decodeResponse) && decodeResponse.getStatusCodeValue() == 200) {
 				Map<String,String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
 				jwtSecurityContextUtil.setId(filterResult.get("id"));
 				httpServletResponse.setStatus(200);

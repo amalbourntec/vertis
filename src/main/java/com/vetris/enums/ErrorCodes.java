@@ -8,7 +8,8 @@ package com.vetris.enums;
 public enum ErrorCodes {
 	DATA_NOT_FOUND(" not found"),
 	UN_AUTH_USER("UnAuthorized User"),
-	ACCESS_DENIED("Access Denied");
+	ACCESS_DENIED("Access Denied"),
+	TOKEN_EXPIRED("Token expired");
 	
 	private String message;
 
