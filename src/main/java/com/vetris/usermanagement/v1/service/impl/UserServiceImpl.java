@@ -2,12 +2,14 @@ package com.vetris.usermanagement.v1.service.impl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,21 +52,21 @@ public class UserServiceImpl implements UserService {
 	public CommonResponseDTO getAllUsers() {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<User> users = userRepository.findAll();
-		List<UserResponseDTO> resultresponseDto= new ArrayList<>();
+		List<UserResponseDTO> resultresponseDto = new ArrayList<>();
 		if (users.isEmpty()) {
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload("");
 			resultDto.setMessage("No user found");
 		} else {
-			users.stream().forEach(userItem->{
-				resultresponseDto.add(objectMapper.convertValue(userItem,UserResponseDTO.class));
+			users.stream().forEach(userItem -> {
+				resultresponseDto.add(objectMapper.convertValue(userItem, UserResponseDTO.class));
 			});
-			
+
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(resultresponseDto);
 			resultDto.setMessage("Fetched user successfully");
 		}
-		
+
 		return resultDto;
 	}
 
@@ -74,13 +76,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO getUserById(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		User existingUser = userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			UserResponseDTO userRespDTO = objectMapper.convertValue(existingUser, UserResponseDTO.class);
-			resultDto.setStatus(StatusType.Success.toString());
-			resultDto.setPayload(userRespDTO);
-			resultDto.setMessage("Fetched user successfully");
-		
+		User existingUser = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
+		UserResponseDTO userRespDTO = objectMapper.convertValue(existingUser, UserResponseDTO.class);
+		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setPayload(userRespDTO);
+		resultDto.setMessage("Fetched user successfully");
+
 		return resultDto;
 	}
 
@@ -90,24 +93,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		 userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			try {
-				User resultUser = objectMapper.convertValue(userDto, User.class);
-				resultUser.setId(id);
-				resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
-				resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
-				userRepository.save(resultUser);
-				UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
-				resultDto.setStatus(StatusType.Success.toString());
-				resultDto.setPayload(userRespDTO);
-				resultDto.setMessage("Fetched user successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
+		userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		
+		try {
+			User resultUser = objectMapper.convertValue(userDto, User.class);
+			resultUser.setId(id);
+			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
+			resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
+			userRepository.save(resultUser);
+			UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
+			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setPayload(userRespDTO);
+			resultDto.setMessage("Fetched user successfully");
+		} catch (Exception e) {
+
+			throw new Exception(e);
+		}
+
 		return resultDto;
 	}
 
@@ -137,21 +140,24 @@ public class UserServiceImpl implements UserService {
 
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
+		try {
+			UUID uuid = UUID.randomUUID();
+			User resultUser = objectMapper.convertValue(userDto, User.class);
+			// Set User details
+			resultUser.setId(uuid.toString());
+			resultUser.setPassword(encodePassword(userDto.getPassword()));
+			resultUser.setPacsPassword(
+					userDto.getUserRoleId().equals("5") ? encodePassword(userDto.getPacsPassword()) : " ");
+			resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
+			userRepository.save(resultUser);
+			BeanUtils.copyProperties(resultUser, userRespDTO);
+			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setPayload(userRespDTO);
+			resultDto.setMessage("Saved user successfully");
+		} catch (Exception e) {
 
-		UUID uuid = UUID.randomUUID();
-		User resultUser = objectMapper.convertValue(userDto, User.class);
-		// Set User details
-		resultUser.setId(uuid.toString());
-		resultUser.setPassword(encodePassword(userDto.getPassword()));
-		resultUser.setPacsPassword(userDto.getUserRoleId().equals("5")?encodePassword(userDto.getPacsPassword()):" ");
-		resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
-		
-		userRepository.save(resultUser);
-		BeanUtils.copyProperties(resultUser, userRespDTO);
-		resultDto.setStatus(StatusType.Success.toString());
-		resultDto.setPayload(userRespDTO);
-		resultDto.setMessage("Saved user successfully");
-
+			throw new ConstraintViolationException("User " + ErrorCodes.Data_Exception, new SQLException(), "");
+		}
 		return resultDto;
 	}
 
