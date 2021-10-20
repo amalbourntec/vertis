@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
 			resultDto.setMessage("Saved user successfully");
 		} catch (Exception e) {
 
-			throw new ConstraintViolationException("User " + ErrorCodes.Data_Exception, new SQLException(), "");
+			throw new ConstraintViolationException("User " + ErrorCodes.DATA_EXCEPTION, new SQLException(), "");
 		}
 		return resultDto;
 	}
