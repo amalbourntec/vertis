@@ -12,7 +12,7 @@ public enum ErrorCodes {
 	UN_AUTH_USER("UnAuthorized User"),
 	ACCESS_DENIED("Access Denied"),
 	TOKEN_EXPIRED("Token expired"),
-	Data_Exception("Data Exception");
+	DATA_EXCEPTION("Data Exception");
 	
 	private String message;
 
