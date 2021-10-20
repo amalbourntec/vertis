@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
 
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		try {
+		
 			UUID uuid = UUID.randomUUID();
 			User resultUser = objectMapper.convertValue(userDto, User.class);
 			resultUser.setId(uuid.toString());
@@ -149,11 +149,7 @@ public class UserServiceImpl implements UserService {
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Saved user successfully");
-		} catch (Exception e) {
-
-			throw new ConstraintViolationException("User " + ErrorCodes.DATA_EXCEPTION.getMessage(), new SQLException(),
-					"");
-		}
+		
 		return resultDto;
 	}
 

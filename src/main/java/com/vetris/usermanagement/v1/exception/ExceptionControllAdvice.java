@@ -3,6 +3,7 @@ package com.vetris.usermanagement.v1.exception;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -58,6 +59,15 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 		response.setRequestURL(request.getRequestURI());
 		response.setHttpStatus(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(response, response.getHttpStatus());
+	}	
+    // to handle Data integrity violation exception returns exception response
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<?> dataIntegrityViolationException(Exception ex, final HttpServletRequest request) {
+		ExceptionResponse response = new ExceptionResponse();
+		response.setResponseMessage(ex.getMessage());
+		response.setRequestURL(request.getRequestURI());
+		response.setHttpStatus(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(response, response.getHttpStatus());
 	}
-
 }
