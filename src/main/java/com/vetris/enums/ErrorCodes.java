@@ -11,6 +11,7 @@ public enum ErrorCodes {
 	DATA_NOT_FOUND(" not found"),
 	UN_AUTH_USER("UnAuthorized User"),
 	ACCESS_DENIED("Access Denied"),
+	TOKEN_EXPIRED("Token expired"),
 	Data_Exception("Data Exception");
 	
 	private String message;
