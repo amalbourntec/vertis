@@ -120,15 +120,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO deleteUser(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Optional<User> existingUser = userRepository.findById(id);
-		if (existingUser.isPresent()) {
-			userRepository.deleteById(id);
-			resultDto.setStatus(StatusType.Success.toString());
-			resultDto.setMessage("Deleted user successfully");
-		} else {
-			resultDto.setStatus(StatusType.Failure.toString());
-			resultDto.setMessage("Unable to fetch user details");
-		}
+		userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		userRepository.deleteById(id);
+		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setMessage("Deleted user successfully");
 		return resultDto;
 	}
 
@@ -143,7 +139,6 @@ public class UserServiceImpl implements UserService {
 		try {
 			UUID uuid = UUID.randomUUID();
 			User resultUser = objectMapper.convertValue(userDto, User.class);
-			// Set User details
 			resultUser.setId(uuid.toString());
 			resultUser.setPassword(encodePassword(userDto.getPassword()));
 			resultUser.setPacsPassword(
@@ -156,7 +151,8 @@ public class UserServiceImpl implements UserService {
 			resultDto.setMessage("Saved user successfully");
 		} catch (Exception e) {
 
-			throw new ConstraintViolationException("User " + ErrorCodes.DATA_EXCEPTION.getMessage(), new SQLException(), "");
+			throw new ConstraintViolationException("User " + ErrorCodes.DATA_EXCEPTION.getMessage(), new SQLException(),
+					"");
 		}
 		return resultDto;
 	}
