@@ -18,6 +18,7 @@ import com.vetris.usermanagement.v1.dto.response.UserRolesResponseDTO;
 import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.usermanagement.v1.repository.UserRolesRepostitory;
 import com.vetris.usermanagement.v1.service.UserRolesService;
+import com.vetris.utils.JWTSecurityContextUtil;
 
 /**
  * Service Impementation for UserRoles
@@ -34,6 +35,9 @@ public class UserRolesServiceImpl implements UserRolesService {
 	@Autowired
 	ObjectMapper objectMapper;
 
+	@Autowired
+	private JWTSecurityContextUtil jwtSecurityContextUtil;
+	
 	/**
 	 * Getting user roles by id
 	 *
@@ -87,6 +91,8 @@ public class UserRolesServiceImpl implements UserRolesService {
 	public CommonResponseDTO addUserRoles(UserRolesRequestDTO userRoleDto) throws Exception {
 		UserRoles resultUserRoles = userRoleDto.toUserRolesRequestModel(userRoleDto);
 		CommonResponseDTO resultDto = new CommonResponseDTO();
+		resultUserRoles.setCreatedBy(jwtSecurityContextUtil.getId());
+		resultUserRoles.setUpdateBy(jwtSecurityContextUtil.getId());
 		userRoleRepository.save(resultUserRoles);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRoles, UserRolesResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
@@ -105,6 +111,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		UserRoles resultUserRole = userRoleDto.toUserRolesRequestModel(userRoleDto);
 		resultUserRole.setId(id);
+		resultUserRole.setUpdateBy(jwtSecurityContextUtil.getId());
 		userRoleRepository.save(resultUserRole);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRole, UserRolesResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
