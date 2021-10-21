@@ -93,7 +93,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		resultUserRoles.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultUserRoles.setUpdateBy(jwtSecurityContextUtil.getId());
-		userRoleRepository.save(resultUserRoles);
+		resultUserRoles = userRoleRepository.save(resultUserRoles);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRoles, UserRolesResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(userRoleRespDto);
@@ -112,7 +112,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 		UserRoles resultUserRole = userRoleDto.toUserRolesRequestModel(userRoleDto);
 		resultUserRole.setId(id);
 		resultUserRole.setUpdateBy(jwtSecurityContextUtil.getId());
-		userRoleRepository.save(resultUserRole);
+		resultUserRole = userRoleRepository.save(resultUserRole);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRole, UserRolesResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
 		resultDto.setPayload(userRoleRespDto);
