@@ -1,5 +1,7 @@
 package com.vetris.enums;
 
+import org.hibernate.exception.DataException;
+
 /**
  *  Enum class for creating custom error codes.
  * @author AMAL
@@ -9,7 +11,8 @@ public enum ErrorCodes {
 	DATA_NOT_FOUND(" not found"),
 	UN_AUTH_USER("UnAuthorized User"),
 	ACCESS_DENIED("Access Denied"),
-	TOKEN_EXPIRED("Token expired");
+	TOKEN_EXPIRED("Token expired"),
+	DATA_EXCEPTION("Data Exception");
 	
 	private String message;
 

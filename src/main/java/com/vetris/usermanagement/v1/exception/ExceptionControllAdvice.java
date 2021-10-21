@@ -1,7 +1,5 @@
 package com.vetris.usermanagement.v1.exception;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -26,9 +24,8 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 	public ResponseEntity<?> handleRunTimeException(Exception ex, final HttpServletRequest request) {
 		ExceptionResponse response = new ExceptionResponse(); //
 		response.setResponseMessage(ex.getMessage());
+		response.setResponseMessage("Exception 1");
 		response.setRequestURL(request.getRequestURI());
-		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		response.setTimestamp(new Date());
 		response.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 		return new ResponseEntity<>(response, response.getHttpStatus());
 	}
@@ -37,13 +34,11 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 	public @ResponseBody ExceptionResponse handleResourceNotFound(final ResourceNotFoundException exception,
 			final HttpServletRequest request) {
 
-		ExceptionResponse response = new ExceptionResponse();
-		response.setRequestURL(request.getRequestURI());
-		response.setResponseMessage(exception.getMessage());
-		response.setStatus(HttpStatus.NOT_FOUND.value());
-		response.setTimestamp(new Date());
-		response.setHttpStatus(HttpStatus.NOT_FOUND);
-		return response;
+		ExceptionResponse error = new ExceptionResponse();
+		error.setRequestURL(request.getRequestURI());
+		error.setResponseMessage(exception.getMessage());
+		error.setHttpStatus(HttpStatus.NOT_FOUND);
+		return error;
 	}
 
 	// to handle unauthorized exception returns exception response
@@ -52,8 +47,6 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 		ExceptionResponse response = new ExceptionResponse();
 		response.setResponseMessage(ex.getMessage());
 		response.setRequestURL(request.getRequestURI());
-		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		response.setTimestamp(new Date());
 		response.setHttpStatus(HttpStatus.UNAUTHORIZED);
 		return new ResponseEntity<>(response, response.getHttpStatus());
 	}
@@ -64,31 +57,16 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 		ExceptionResponse response = new ExceptionResponse();
 		response.setResponseMessage(ex.getMessage());
 		response.setRequestURL(request.getRequestURI());
-		response.setStatus(HttpStatus.BAD_REQUEST.value());
-		response.setTimestamp(new Date());
 		response.setHttpStatus(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(response, response.getHttpStatus());
-	}
-	// to handle vetris business exception returns exception response
-
-	@ExceptionHandler(VetrisBusinessException.class)
-	public ResponseEntity<?> vetrisBusinessException(Exception ex, final HttpServletRequest request) {
-		ExceptionResponse response = new ExceptionResponse();
-		response.setResponseMessage(ex.getMessage());
-		response.setRequestURL(request.getRequestURI());
-		response.setStatus(HttpStatus.BAD_REQUEST.value());
-		response.setTimestamp(new Date());
-		response.setHttpStatus(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<>(response, response.getHttpStatus());
-	}
-
+	}	
+    // to handle Data integrity violation exception returns exception response
+	
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<?> dataIntegrityViolationException(Exception ex, final HttpServletRequest request) {
 		ExceptionResponse response = new ExceptionResponse();
 		response.setResponseMessage(ex.getMessage());
 		response.setRequestURL(request.getRequestURI());
-		response.setStatus(HttpStatus.BAD_REQUEST.value());
-		response.setTimestamp(new Date());
 		response.setHttpStatus(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(response, response.getHttpStatus());
 	}

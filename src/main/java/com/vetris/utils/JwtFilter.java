@@ -30,6 +30,9 @@ import com.vetris.enums.ErrorCodes;
 @Component
 public class JwtFilter implements Filter{
 	
+	private static final String AUTHORIZATION = "AUTHORIZATION";
+	private static final String USERUUID = "id";
+	
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 	
@@ -48,7 +51,7 @@ public class JwtFilter implements Filter{
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse =(HttpServletResponse) response;
 		
-		if(httpServletRequest.getHeader("AUTHORIZATION") != null) {
+		if(httpServletRequest.getHeader(AUTHORIZATION) != null) {
 			URI uri=null;
 			try {
 				uri=new URI(decodeUrl);
@@ -58,19 +61,19 @@ public class JwtFilter implements Filter{
 			}
 			
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("AUTHORIZATION", httpServletRequest.getHeader("AUTHORIZATION"));
+			headers.set(AUTHORIZATION, httpServletRequest.getHeader(AUTHORIZATION));
 			
 			HttpEntity<String> entity = new HttpEntity<>(null,headers);
 			ResponseEntity<String> decodeResponse = null;
 			try {
 			 decodeResponse=restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 			} catch(RestClientException exc) {
-				httpServletResponse.sendError(401, ErrorCodes.TOKEN_EXPIRED.getMessage());
+				httpServletResponse.sendError(401,ErrorCodes.TOKEN_EXPIRED.getMessage());
 				return;
 			}
-			if(Objects.nonNull(decodeResponse) && decodeResponse.getStatusCodeValue() == 200) {
+			if(Objects.nonNull(decodeResponse)) {
 				Map<String,String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
-				jwtSecurityContextUtil.setId(filterResult.get("id"));
+				jwtSecurityContextUtil.setId(filterResult.get(USERUUID));
 				httpServletResponse.setStatus(200);
 			}else
 			{
