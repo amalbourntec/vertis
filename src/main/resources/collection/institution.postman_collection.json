@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "fb1ee536-c528-4e8a-8ce7-fe94339216d2",
+		"name": "institution",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Institution Device",
+			"item": [
+				{
+					"name": "device",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"device"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "device by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/device/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"device",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"deviceId\": 6,\r\n        \"institutionId\": 333,\r\n        \"manufacturer\": \"Zurich\",\r\n        \"model\": \"asd\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"device"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "device",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"deviceId\": 6,\r\n        \"institutionId\": 333,\r\n        \"manufacturer\": \"Zurich123\",\r\n        \"model\": \"asd\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/device/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"device",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "device",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/device/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"device",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institution Alternate Name",
+			"item": [
+				{
+					"name": "alternate name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/alternate_name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"alternate_name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alternate name by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/alternate_name/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"alternate_name",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alternate name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": 189,\r\n        \"alternateName\": \"Bosh4566\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/alternate_name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"alternate_name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": 199,\r\n        \"alternateName\": \"Bosh45606\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/alternate_name/17",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"alternate_name",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/alternate_name/17",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"alternate_name",
+								"17"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
