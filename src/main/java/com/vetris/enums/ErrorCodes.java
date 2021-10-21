@@ -1,7 +1,5 @@
 package com.vetris.enums;
 
-import org.hibernate.exception.DataException;
-
 /**
  *  Enum class for creating custom error codes.
  * @author AMAL

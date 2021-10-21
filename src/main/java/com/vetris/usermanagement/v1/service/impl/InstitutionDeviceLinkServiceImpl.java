@@ -45,7 +45,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		InstitutionDeviceLink existingDevice=institutionDeviceLinkRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
 		    InstitutionDeviceLinkResponseDTO deviceRespDTO=objectMapper.convertValue(existingDevice, InstitutionDeviceLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(deviceRespDTO);
 			resultDto.setMessage("Fetched device successfully");
 		
@@ -61,7 +61,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		List<InstitutionDeviceLink> institutionDeviceLinkList=institutionDeviceLinkRepository.findAll();
 		List<InstitutionDeviceLinkResponseDTO> deviceRespDTO=new ArrayList<>();
 		if(institutionDeviceLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.Failure.toString());
+			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setMessage("No device found");
 		}else {
 			institutionDeviceLinkList.stream()
@@ -69,7 +69,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 				.add(objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class));
 		});
 		}
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(deviceRespDTO);
 		resultDto.setMessage("Fetched list of device successfully");
 		return resultDto;
@@ -86,7 +86,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		device=institutionDeviceLinkRepository.save(device);
 		
 		InstitutionDeviceLinkResponseDTO deviceRespDTO=objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(deviceRespDTO);
 		resultDto.setMessage("Device added successfully");
 		return resultDto;
@@ -106,7 +106,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 				device = institutionDeviceLinkRepository.save(device);
 				
 				InstitutionDeviceLinkResponseDTO deviceRespDTO=objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class);
-				resultDto.setStatus(StatusType.Success.toString());
+				resultDto.setStatus(StatusType.SUCCESS.getMessage());
 				resultDto.setPayload(deviceRespDTO);
 				resultDto.setMessage("Device updated successfully");
 			
@@ -122,7 +122,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		institutionDeviceLinkRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
 			institutionDeviceLinkRepository.deleteById(id);
-			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setMessage("Device deleated successfully");
 		
 		return resultDto;

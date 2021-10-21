@@ -33,7 +33,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 		List<Species> species = speciesRepository.findAll();
 		List<SpeciesResponseDTO> resultresponseDto = new ArrayList<>();
 		if (species.isEmpty()) {
-			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload("");
 			resultDto.setMessage("No Species found");
 		} else {
@@ -41,7 +41,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 				resultresponseDto.add(objectMapper.convertValue(speciesItem, SpeciesResponseDTO.class));
 			});
 
-			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(resultresponseDto);
 			resultDto.setMessage("Fetched species successfully");
 		}
@@ -58,7 +58,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 		resultSpecies.setCreatedBy("fygbh");
 		resultSpecies = speciesRepository.save(resultSpecies);
 		BeanUtils.copyProperties(resultSpecies, speciesRespDTO);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(speciesRespDTO);
 		resultDto.setMessage("Saved species successfully");
 		
@@ -77,7 +77,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 		speciesRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Species" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		speciesRepository.deleteById(id);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setMessage("Deleted Species successfully");
 		return resultDto;
 	}

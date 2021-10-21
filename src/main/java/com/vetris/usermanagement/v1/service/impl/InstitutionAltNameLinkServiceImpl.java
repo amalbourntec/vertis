@@ -45,7 +45,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		InstitutionAltNameLink existingAltName=institutionAltNameLinkRepo.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
 		    InstitutionAltNameLinkResponseDTO altNameRespDTO=objectMapper.convertValue(existingAltName, InstitutionAltNameLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.Success.toString());
+			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(altNameRespDTO);
 			resultDto.setMessage("Fetched institution alternate name successfully");
 		
@@ -63,7 +63,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		List<InstitutionAltNameLink> institutionAltNameLinkList=institutionAltNameLinkRepo.findAll();
 		List<InstitutionAltNameLinkResponseDTO> altNameRespDTO=new ArrayList<>();
 		if(institutionAltNameLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.Failure.toString());
+			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setMessage("Institution alternate name not found");
 		}else {
 			institutionAltNameLinkList.stream()
@@ -71,7 +71,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 				.add(objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class));
 		});
 		}
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(altNameRespDTO);
 		resultDto.setMessage("Fetched list of institution alternate name successfully");
 		return resultDto;
@@ -88,7 +88,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		altName = institutionAltNameLinkRepo.save(altName);
 		
 		InstitutionAltNameLinkResponseDTO altNameRespDTO=objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(altNameRespDTO);
 		resultDto.setMessage("institution alternate name added successfully");
 		return resultDto;
@@ -109,7 +109,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 				altName= institutionAltNameLinkRepo.save(altName);
 				
 				InstitutionAltNameLinkResponseDTO altNameRespDTO=objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class);
-				resultDto.setStatus(StatusType.Success.toString());
+				resultDto.setStatus(StatusType.SUCCESS.getMessage());
 				resultDto.setPayload(altNameRespDTO);
 				resultDto.setMessage("Institution alternate name updated successfully");
 			
@@ -125,7 +125,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		institutionAltNameLinkRepo.findById(id).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
 		institutionAltNameLinkRepo.deleteById(id);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Institution alternate name deleated successfully");
 		
 		return resultDto;

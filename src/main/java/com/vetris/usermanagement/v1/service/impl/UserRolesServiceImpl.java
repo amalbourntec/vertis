@@ -51,7 +51,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 
 		UserRolesResponseDTO userRoleRespDTO = objectMapper.convertValue(userroles, UserRolesResponseDTO.class);
 		BeanUtils.copyProperties(userroles, userRoleRespDTO);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDTO);
 		resultDto.setMessage("Fetched user role successfully");
 		return resultDto;
@@ -67,14 +67,14 @@ public class UserRolesServiceImpl implements UserRolesService {
 		List<UserRolesResponseDTO> resultresponseDto = new ArrayList<>();
 		try {
 			if (userRolesList.isEmpty()) {
-				resultDto.setStatus(StatusType.Failure.toString());
+				resultDto.setStatus(StatusType.FAILURE.getMessage());
 				resultDto.setPayload("");
 				resultDto.setMessage("No user role found");
 			} else {
 				userRolesList.stream().forEach(userItem -> {
 					resultresponseDto.add(objectMapper.convertValue(userItem, UserRolesResponseDTO.class));
 				});
-				resultDto.setStatus(StatusType.Success.toString());
+				resultDto.setStatus(StatusType.SUCCESS.getMessage());
 				resultDto.setPayload(resultresponseDto);
 				resultDto.setMessage("Fetched user roles successfully");
 			}
@@ -95,7 +95,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 		resultUserRoles.setUpdateBy(jwtSecurityContextUtil.getId());
 		resultUserRoles = userRoleRepository.save(resultUserRoles);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRoles, UserRolesResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDto);
 		resultDto.setMessage("Saved User Role successfully");
 		return resultDto;
@@ -114,7 +114,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 		resultUserRole.setUpdateBy(jwtSecurityContextUtil.getId());
 		resultUserRole = userRoleRepository.save(resultUserRole);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRole, UserRolesResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDto);
 		resultDto.setMessage("Updated User Role Succesfully");
 
@@ -131,7 +131,7 @@ public class UserRolesServiceImpl implements UserRolesService {
 		userRoleRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		userRoleRepository.deleteById(id);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDto);
 		resultDto.setMessage("Deleted user role successfully");
 		return resultDto;

@@ -6,8 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
 import lombok.Getter;
 import lombok.Setter;
 

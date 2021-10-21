@@ -50,7 +50,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 
 		InstitutionRegModalityLinkResponseDTO regModalityRespDTO = objectMapper.convertValue(regModality,
 				InstitutionRegModalityLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(regModalityRespDTO);
 		resultDto.setMessage("Registration modality added successfully");
 		return resultDto;
@@ -65,7 +65,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 		List<InstitutionRegModalityLink> institutionRegModalityList = institutionRegModalityLinkRepository.findAll();
 		List<InstitutionRegModalityLinkResponseDTO> regModalityRespDTO = new ArrayList<>();
 		if (institutionRegModalityList.isEmpty()) {
-			resultDto.setStatus(StatusType.Failure.toString());
+			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setMessage("Institution reg modality not found");
 		} else {
 			institutionRegModalityList.stream().forEach(regModality -> {
@@ -73,7 +73,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 						.add(objectMapper.convertValue(regModality, InstitutionRegModalityLinkResponseDTO.class));
 			});
 		}
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(regModalityRespDTO);
 		resultDto.setMessage("Fetched list of institution reg modality successfully");
 		return resultDto;
@@ -90,7 +90,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 
 		InstitutionRegModalityLinkResponseDTO regModalityRespDTO = objectMapper.convertValue(existingRegModality,
 				InstitutionRegModalityLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(regModalityRespDTO);
 		resultDto.setMessage("Fetched institution reg modality successfully");
 
@@ -115,7 +115,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 
 		InstitutionRegModalityLinkResponseDTO regModalityRespDTO = objectMapper.convertValue(regModality,
 				InstitutionRegModalityLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(regModalityRespDTO);
 		resultDto.setMessage("Institution reg modality updated successfully");
 
@@ -131,7 +131,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 		institutionRegModalityLinkRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		institutionRegModalityLinkRepository.deleteById(id);
-		resultDto.setStatus(StatusType.Success.toString());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Institution reg modality deleated successfully");
 
 		return resultDto;
