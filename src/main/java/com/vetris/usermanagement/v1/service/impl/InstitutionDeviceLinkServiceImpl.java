@@ -83,7 +83,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionDeviceLink device=objectMapper.convertValue(data, InstitutionDeviceLink.class);
 		device.setCreatedBy(jwtSecurityContextUtil.getId());
-		institutionDeviceLinkRepository.save(device);
+		device=institutionDeviceLinkRepository.save(device);
 		
 		InstitutionDeviceLinkResponseDTO deviceRespDTO=objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
@@ -103,7 +103,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 				InstitutionDeviceLink device=objectMapper.convertValue(data, InstitutionDeviceLink.class);
 				device.setDeviceId(id);
 				device.setUpdateBy(jwtSecurityContextUtil.getId());
-				institutionDeviceLinkRepository.save(device);
+				device = institutionDeviceLinkRepository.save(device);
 				
 				InstitutionDeviceLinkResponseDTO deviceRespDTO=objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class);
 				resultDto.setStatus(StatusType.Success.toString());

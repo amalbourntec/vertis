@@ -85,7 +85,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionAltNameLink altName=objectMapper.convertValue(data, InstitutionAltNameLink.class);
 		altName.setCreatedBy(jwtSecurityContextUtil.getId());
-		institutionAltNameLinkRepo.save(altName);
+		altName = institutionAltNameLinkRepo.save(altName);
 		
 		InstitutionAltNameLinkResponseDTO altNameRespDTO=objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.Success.toString());
@@ -106,7 +106,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 			    InstitutionAltNameLink altName=objectMapper.convertValue(data, InstitutionAltNameLink.class);
 				altName.setId(id);
 				altName.setUpdateBy(jwtSecurityContextUtil.getId());
-				institutionAltNameLinkRepo.save(altName);
+				altName= institutionAltNameLinkRepo.save(altName);
 				
 				InstitutionAltNameLinkResponseDTO altNameRespDTO=objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class);
 				resultDto.setStatus(StatusType.Success.toString());

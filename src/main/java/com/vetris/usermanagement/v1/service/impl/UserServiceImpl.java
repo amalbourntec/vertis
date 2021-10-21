@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 			resultUser.setId(id);
 			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultUser.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
-			userRepository.save(resultUser);
+			resultUser = userRepository.save(resultUser);
 			UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
 			resultUser.setPacsPassword(
 					userDto.getUserRoleId().equals("5") ? encodePassword(userDto.getPacsPassword()) : " ");
 			resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
-			userRepository.save(resultUser);
+			resultUser = userRepository.save(resultUser);
 			BeanUtils.copyProperties(resultUser, userRespDTO);
 			resultDto.setStatus(StatusType.Success.toString());
 			resultDto.setPayload(userRespDTO);
