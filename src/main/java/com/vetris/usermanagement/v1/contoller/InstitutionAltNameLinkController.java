@@ -18,48 +18,51 @@ import com.vetris.usermanagement.v1.service.InstitutionAltNameLinkService;
 
 /**
  * Controller for InstitutionAltNameLink
+ * 
  * @author Aldrin
  *
  */
-@RestController(value="InstitutionAltNameLinkController")
-@RequestMapping("/v1/alternate_name")
+@RestController(value = "InstitutionAltNameLinkController")
+@RequestMapping("/usermanagement/v1/alternate_name")
 @CrossOrigin(origins = "*")
 public class InstitutionAltNameLinkController {
 
 	@Autowired
 	InstitutionAltNameLinkService institutionAltNameLinkService;
-	
+
 	/**
 	 * @param id
 	 * @return institution alternate name
 	 * @throws Exception
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchAlternateNameById(@PathVariable("id") Integer id) throws Exception{	
-		CommonResponseDTO alternateNameRespDTO=institutionAltNameLinkService.getInstitutionAltNameById(id);
-		return ResponseEntity.ok(alternateNameRespDTO); 
+	public ResponseEntity<CommonResponseDTO> fetchAlternateNameById(@PathVariable("id") String id) throws Exception {
+		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService.getInstitutionAltNameById(id);
+		return ResponseEntity.ok(alternateNameRespDTO);
 	}
-	
+
 	/**
 	 * @return all institution alternate name
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public CommonResponseDTO fetchAllAlternateName() throws Exception{
+	public CommonResponseDTO fetchAllAlternateName() throws Exception {
 		return institutionAltNameLinkService.getAllInstitutionAltName();
 	}
-	
+
 	/**
 	 * @param alternateNameRequest
 	 * @return String institutionAltName
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createAlternateName(@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest) throws Exception{
-		CommonResponseDTO alternateNameRespDTO=institutionAltNameLinkService.addInstitutionAltName(alternateNameRequest);
+	public ResponseEntity<CommonResponseDTO> createAlternateName(
+			@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest) throws Exception {
+		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService
+				.addInstitutionAltName(alternateNameRequest);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
-	
+
 	/**
 	 * @param alternateNameRequest
 	 * @param id
@@ -67,19 +70,22 @@ public class InstitutionAltNameLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateAlternateName(@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest, @PathVariable("id") Integer id) throws Exception{
-		CommonResponseDTO alternateNameRespDTO=institutionAltNameLinkService.updateInstitutionAltName(alternateNameRequest, id);
+	public ResponseEntity<CommonResponseDTO> updateAlternateName(
+			@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest, @PathVariable("id") String id)
+			throws Exception {
+		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService
+				.updateInstitutionAltName(alternateNameRequest, id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
-	
+
 	/**
 	 * @param id
-	 * @return string 
+	 * @return string
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deleteAlternateName(@PathVariable("id") Integer id)throws Exception {
-		CommonResponseDTO alternateNameRespDTO=institutionAltNameLinkService.deleteInstitutionAltName(id);
+	public ResponseEntity<CommonResponseDTO> deleteAlternateName(@PathVariable("id") String id) throws Exception {
+		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService.deleteInstitutionAltName(id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
 

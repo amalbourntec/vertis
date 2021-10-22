@@ -7,10 +7,11 @@ import com.vetris.entity.InstitutionDeviceLink;
 
 /**
  * Repository for InstitutionDeviceLink
+ * 
  * @author Aldrin
  *
  */
 @Repository
-public interface InstitutionDeviceLinkRepository extends JpaRepository<InstitutionDeviceLink, Integer>{
+public interface InstitutionDeviceLinkRepository extends JpaRepository<InstitutionDeviceLink, String> {
 
 }

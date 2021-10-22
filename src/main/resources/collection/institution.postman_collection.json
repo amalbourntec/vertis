@@ -15,17 +15,18 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/v1/device",
+							"raw": "localhost:8080/usermanagement/v1/device",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"device"
 							]
@@ -40,20 +41,21 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/v1/device/1",
+							"raw": "localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"device",
-								"1"
+								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},
@@ -66,13 +68,13 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"deviceId\": 6,\r\n        \"institutionId\": 333,\r\n        \"manufacturer\": \"Zurich\",\r\n        \"model\": \"asd\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
+							"raw": "{\r\n        \"institutionId\": \"fgtr87\",\r\n        \"manufacturer\": \"Stockholme1236\",\r\n        \"model\": \"asd\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,12 +82,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/device",
+							"raw": "localhost:8080/usermanagement/v1/device",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"device"
 							]
@@ -100,13 +103,13 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"deviceId\": 6,\r\n        \"institutionId\": 333,\r\n        \"manufacturer\": \"Zurich123\",\r\n        \"model\": \"asd\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
+							"raw": "{\r\n        \"institutionId\": \"hgtr87\",\r\n        \"manufacturer\": \"Stockholme\",\r\n        \"model\": \"asd45\",\r\n        \"serialNo\": \"qw12\",\r\n        \"modalityAeTitle\": \"Radiology\",\r\n        \"modality\": \"ert\",\r\n        \"weightUom\": \"25\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,16 +117,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/device/6",
+							"raw": "http://localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"device",
-								"6"
+								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},
@@ -136,21 +140,22 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc2NTIyOCwiaWF0IjoxNjM0NzQ3MjI4fQ.DSklbQ1g0EWhZ-YNyhjgUNyC1fa0WJTIujMBZFM0iy94WoFoM5Iy-MwWGyVeMa1udbgwo_bqjOH4cdhVkH0ErQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/v1/device/6",
+							"raw": "http://localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"device",
-								"6"
+								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},
@@ -168,17 +173,18 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/v1/alternate_name",
+							"raw": "localhost:8080/usermanagement/v1/alternate_name",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"alternate_name"
 							]
@@ -193,20 +199,21 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/v1/alternate_name/7",
+							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"alternate_name",
-								"7"
+								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},
@@ -219,13 +226,13 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"institutionId\": 189,\r\n        \"alternateName\": \"Bosh4566\"\r\n}",
+							"raw": "{\r\n        \"institutionId\": \"25b862c1-2dd7-4eaa-ba44-6dba109494e\",\r\n        \"alternateName\": \"Walterone\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -233,12 +240,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/alternate_name",
+							"raw": "localhost:8080/usermanagement/v1/alternate_name",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"alternate_name"
 							]
@@ -247,19 +255,19 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "alternate name",
 					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"institutionId\": 199,\r\n        \"alternateName\": \"Bosh45606\"\r\n}",
+							"raw": "{\r\n        \"institutionId\": \"25b862c1-2dd7-4eaa-ba44-6dba109494ea\",\r\n        \"alternateName\": \"Telecome\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -267,41 +275,43 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/alternate_name/17",
+							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"alternate_name",
-								"17"
+								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "alternate name",
 					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDc3MjI3NywiaWF0IjoxNjM0NzU0Mjc3fQ.mTsSq3wjaPbnCfHy5SVjA0rf4hXBWwVY9guEIpzJAe4Bm0JqDImh2tzfrGE543khdhSON3V8xYrB5C8XAQ8R9A",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/v1/alternate_name/17",
+							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"usermanagement",
 								"v1",
 								"alternate_name",
-								"17"
+								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
 							]
 						}
 					},

@@ -18,49 +18,51 @@ import com.vetris.usermanagement.v1.service.InstitutionDeviceLinkService;
 
 /**
  * Controller for InstitutionDeviceLink
+ * 
  * @author Aldrin
  *
  */
 
-@RestController(value="InstitutionDeviceLinkController")
-@RequestMapping("/v1/device")
-@CrossOrigin(origins="*")
+@RestController(value = "InstitutionDeviceLinkController")
+@RequestMapping("/usermanagement/v1/device")
+@CrossOrigin(origins = "*")
 public class InstitutionDeviceLinkController {
-	
+
 	@Autowired
 	InstitutionDeviceLinkService institutionDeviceLinkService;
-	
+
 	/**
 	 * @param id
 	 * @return institution device link
 	 * @throws Exception
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchDeviceById(@PathVariable("id") Integer id) throws Exception{	
-		CommonResponseDTO deviceRespDTO=institutionDeviceLinkService.getDeviceById(id);
-		return ResponseEntity.ok(deviceRespDTO); 
+	public ResponseEntity<CommonResponseDTO> fetchDeviceById(@PathVariable("id") String id) throws Exception {
+		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.getDeviceById(id);
+		return ResponseEntity.ok(deviceRespDTO);
 	}
-	
+
 	/**
 	 * @return all institution device link
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public CommonResponseDTO fetchAllDevice() throws Exception{
+	public CommonResponseDTO fetchAllDevice() throws Exception {
 		return institutionDeviceLinkService.getAllDevice();
 	}
-	
+
 	/**
 	 * @param deviceRequest
 	 * @return String institution device link
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest) throws Exception{
-		CommonResponseDTO deviceRespDTO=institutionDeviceLinkService.addDevice(deviceRequest);
+	public ResponseEntity<CommonResponseDTO> createDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest)
+			throws Exception {
+		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.addDevice(deviceRequest);
 		return ResponseEntity.ok(deviceRespDTO);
 	}
-	
+
 	/**
 	 * @param deviceRequest
 	 * @param id
@@ -68,19 +70,20 @@ public class InstitutionDeviceLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest, @PathVariable("id") Integer id) throws Exception{
-		CommonResponseDTO deviceRespDTO=institutionDeviceLinkService.updateDevice(deviceRequest, id);
+	public ResponseEntity<CommonResponseDTO> updateDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest,
+			@PathVariable("id") String id) throws Exception {
+		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.updateDevice(deviceRequest, id);
 		return ResponseEntity.ok(deviceRespDTO);
 	}
-	
+
 	/**
 	 * @param id
-	 * @return string 
+	 * @return string
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deleteDevice(@PathVariable("id") Integer id)throws Exception {
-		CommonResponseDTO deviceRespDTO=institutionDeviceLinkService.deleteDevice(id);
+	public ResponseEntity<CommonResponseDTO> deleteDevice(@PathVariable("id") String id) throws Exception {
+		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.deleteDevice(id);
 		return ResponseEntity.ok(deviceRespDTO);
 	}
 

@@ -10,6 +10,7 @@ import lombok.Setter;
 
 /**
  * Entity for InstitutionDeviceLink
+ * 
  * @author Aldrin
  *
  */
@@ -20,11 +21,11 @@ import lombok.Setter;
 public class InstitutionDeviceLink extends AuditEntityModel {
 
 	@Id
-	@Column(name = "device_id", length = 10)
-	private Integer deviceId;
+	@Column(name = "device_id", length = 200)
+	private String deviceId;
 
-	@Column(name = "institution_id", length = 10, nullable = false)
-	private Integer institutionId;
+	@Column(name = "institution_id", length = 200, nullable = false)
+	private String institutionId;
 
 	@Column(name = "manufacturer", length = 200, nullable = false)
 	private String manufacturer;

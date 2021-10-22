@@ -6,24 +6,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Aldrin
- * Response DTO for InstitutionAltNameLink
+ * @author Aldrin Response DTO for InstitutionAltNameLink
  */
 @Getter
 @Setter
 public class InstitutionAltNameLinkResponseDTO {
 
-	private Integer id;
-	
-    private Integer institutionId;
-	
+	private String institutionId;
+
 	private String alternateName;
-	
+
 	private String createdBy;
-	
+
 	private Date dateCreated;
-	
+
 	private String updateBy;
-	
+
 	private Date dateUpdated;
 }
