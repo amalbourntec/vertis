@@ -20,20 +20,22 @@ import com.vetris.usermanagement.v1.repository.InstitutionRepository;
 import com.vetris.usermanagement.v1.service.InstitutionService;
 import com.vetris.utils.JWTSecurityContextUtil;
 
-/**  institution serviceimpl
+/**
+ * institution serviceImpl
+ * 
  * @author ShekarReddySamreddy
  * 
  */
 
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
-	
+
 	@Autowired
 	InstitutionRepository institutionRepository;
-	
+
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
-	
+
 	@Autowired
 	ObjectMapper objectMapper;
 
@@ -44,17 +46,17 @@ public class InstitutionServiceImpl implements InstitutionService {
 	public CommonResponseDTO addInstitution(InstitutionRequestDTO institution) throws Exception {
 		InstitutionResponseDTO institutionRespDTO = new InstitutionResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
-			UUID uuid = UUID.randomUUID();
-			Institution resultInstitution = objectMapper.convertValue(institution, Institution.class);
-			resultInstitution.setId(uuid.toString());
-	     		resultInstitution.setCreatedBy(jwtSecurityContextUtil.getId());
-			resultInstitution = institutionRepository.save(resultInstitution);
-			BeanUtils.copyProperties(resultInstitution, institutionRespDTO);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(institutionRespDTO);
-			resultDto.setMessage("Saved institution successfully");
-		
+
+		UUID uuid = UUID.randomUUID();
+		Institution resultInstitution = objectMapper.convertValue(institution, Institution.class);
+		resultInstitution.setId(uuid.toString());
+		resultInstitution.setCreatedBy(jwtSecurityContextUtil.getId());
+		resultInstitution = institutionRepository.save(resultInstitution);
+		BeanUtils.copyProperties(resultInstitution, institutionRespDTO);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(institutionRespDTO);
+		resultDto.setMessage("Saved institution successfully");
+
 		return resultDto;
 	}
 
@@ -83,56 +85,55 @@ public class InstitutionServiceImpl implements InstitutionService {
 		return resultDto;
 	}
 
-	/*	
-	 *Get institution by id	
-	 */	@Override
+	/*
+	 * Get institution by id
+	 */ @Override
 	public CommonResponseDTO getInstitutionById(String id) throws Exception {
-		 CommonResponseDTO resultDto = new CommonResponseDTO();
-		 Institution existingInstitution = institutionRepository.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		Institution existingInstitution = institutionRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		 InstitutionResponseDTO institutionRespDTO = objectMapper.convertValue(existingInstitution, InstitutionResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(institutionRespDTO);
-			resultDto.setMessage("Fetched institution successfully");
+		InstitutionResponseDTO institutionRespDTO = objectMapper.convertValue(existingInstitution,
+				InstitutionResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(institutionRespDTO);
+		resultDto.setMessage("Fetched institution successfully");
 
 		return resultDto;
 	}
 
 	/*
-	 Updating the institution
-	*/
+	 * Updating the institution
+	 */
 	@Override
 	public CommonResponseDTO updateInstitution(InstitutionRequestDTO institutionDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
+		institutionRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
 		try {
 			Institution resultInstitution = objectMapper.convertValue(institutionDto, Institution.class);
-			resultInstitution.setId(id);
 			resultInstitution.setUpdateBy(jwtSecurityContextUtil.getId());
-			resultInstitution.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
 			resultInstitution = institutionRepository.save(resultInstitution);
-			InstitutionResponseDTO institutionRespDTO = objectMapper.convertValue(resultInstitution, InstitutionResponseDTO.class);
+			InstitutionResponseDTO institutionRespDTO = objectMapper.convertValue(resultInstitution,
+					InstitutionResponseDTO.class);
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionRespDTO);
 			resultDto.setMessage("Fetched user successfully");
 		} catch (Exception e) {
-
 			throw new Exception(e);
 		}
-
 		return resultDto;
 	}
+
 	/*
-	  Deleting the institution 
-	*/
+	 * Deleting the institution
+	 */
 	@Override
 	public CommonResponseDTO deleteInstitution(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		institutionRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Institution" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		institutionRepository.deleteById(id);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Deleted institution successfully");

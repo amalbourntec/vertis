@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "2432e391-9d85-4c0c-ba08-fd4815bd2c21",
+		"name": "Institution",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Institution Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNDkwNDg4OSwiaWF0IjoxNjM0ODg2ODg5fQ.sqmwdlkoGWJsVAEJmPN1Iwi40LD2MqODogxAKfmUdSrhum9O-v-k41UkqkaYRtoX0xUowAMaaK1J1uGrjBTEmg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8597/v1/institution/27c598e9-abab-480c-ac66-b00a05230287",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"v1",
+						"institution",
+						"27c598e9-abab-480c-ac66-b00a05230287"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Institution Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNDkwNDg4OSwiaWF0IjoxNjM0ODg2ODg5fQ.sqmwdlkoGWJsVAEJmPN1Iwi40LD2MqODogxAKfmUdSrhum9O-v-k41UkqkaYRtoX0xUowAMaaK1J1uGrjBTEmg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"code\": \"code\",\r\n\"name\":\"shekar\",\r\n\"address1\":\"a\",\r\n\"address2\":\"b\",\r\n\"city\":\"hyd\",\r\n\"stateId\":1,\r\n\"countryId\":2,\r\n\"zip\":\"c\",\r\n\"emailId\":\"h\",\r\n\"phoneNo\":\"i\",\r\n\"mobileNo\":\"i\",\r\n\"contactPersonName\":\"j\",\r\n\"contactPersonMobile\":\"k\",\r\n\"isActive\":\"Y\",\r\n\"isNew\":\"Y\",\r\n\"notes\":\"l\",\r\n\"discountPer\":9.00,\r\n\"discountUpdatedby\":\"n\",\r\n\"discountUpdatedOn\":\"0\",\r\n\"infoSource\":\"p\",\r\n\"businessSourceID\":11,\r\n\"oldCode\":\"r\",\r\n\"accountantName\":\"s\",\r\n\"patientIdSrl\":3,\r\n\"isOnline\":\"Y\",\r\n\"isEmailVerified\":\"u\",\r\n\"isMobileVerified\":\"v\",\r\n\"linkExistingBillAcct\":\"w\",\r\n\"billingAcctId\":\"x\",\r\n\"formatDcmFiles\":\"z\",\r\n\"dcmFilesXferPacsMode\":\"a\",\r\n\"studyImageManualRecievePath\":\"cd\",\r\n\"consultApplicable\":\"f\",\r\n\"customReport\":\"g\",\r\n\r\n\"imageContentType\":\"kl\",\r\n\"storageApplicable\":\"m\",\r\n\"xferFilesCompress\":\"o\",\r\n\"submittedBy\":\"qr\",\r\n\"imgSoftwareName\":\"st\",\r\n\"faxRpt\":\"u\",\r\n\"faxNo\":\"wx\",\r\n\"rptFormat\":\"z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8597/v1/institution",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"v1",
+						"institution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Institution Data",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNDkwNDg4OSwiaWF0IjoxNjM0ODg2ODg5fQ.sqmwdlkoGWJsVAEJmPN1Iwi40LD2MqODogxAKfmUdSrhum9O-v-k41UkqkaYRtoX0xUowAMaaK1J1uGrjBTEmg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8597/v1/institution/27c598e9-abab-480c-ac66-b00a05230287",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"v1",
+						"institution",
+						"27c598e9-abab-480c-ac66-b00a05230287"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Institution Data",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNDkwNDg4OSwiaWF0IjoxNjM0ODg2ODg5fQ.sqmwdlkoGWJsVAEJmPN1Iwi40LD2MqODogxAKfmUdSrhum9O-v-k41UkqkaYRtoX0xUowAMaaK1J1uGrjBTEmg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\r\n\"code\": \"nnn\",\r\n\"name\":\"sheijkar\",\r\n\"address1\":\"a\",\r\n\"address2\":\"b\",\r\n\"city\":\"ban\",\r\n\"stateId\":1,\r\n\"countryId\":2,\r\n\"zip\":\"c\",\r\n\"emailId\":\"h\",\r\n\"phoneNo\":\"i\",\r\n\"mobileNo\":\"i\",\r\n\"contactPersonName\":\"j\",\r\n\"contactPersonMobile\":\"k\",\r\n\"isActive\":\"Y\",\r\n\"isNew\":\"Y\",\r\n\"notes\":\"l\",\r\n\"discountPer\":9.00,\r\n\"discountUpdatedby\":\"n\",\r\n\"discountUpdatedOn\":\"0\",\r\n\"infoSource\":\"p\",\r\n\"businessSourceID\":11,\r\n\"oldCode\":\"r\",\r\n\"accountantName\":\"s\",\r\n\"patientIdSrl\":3,\r\n\"isOnline\":\"Y\",\r\n\"isEmailVerified\":\"u\",\r\n\"isMobileVerified\":\"v\",\r\n\"linkExistingBillAcct\":\"w\",\r\n\"billingAcctId\":\"x\",\r\n\"formatDcmFiles\":\"z\",\r\n\"dcmFilesXferPacsMode\":\"a\",\r\n\"studyImageManualRecievePath\":\"cd\",\r\n\"consultApplicable\":\"f\",\r\n\"customReport\":\"g\",\r\n\"logoImage\":\"i\",\r\n\"imageContentType\":\"kl\",\r\n\"storageApplicable\":\"m\",\r\n\"xferFilesCompress\":\"o\",\r\n\"submittedBy\":\"qr\",\r\n\"imgSoftwareName\":\"st\",\r\n\"faxRpt\":\"u\",\r\n\"faxNo\":\"wx\",\r\n\"rptFormat\":\"z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8597/v1/institution/9628626b-4c36-466e-9bbc-b7ce882c74bb",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"v1",
+						"institution",
+						"9628626b-4c36-466e-9bbc-b7ce882c74bb"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
