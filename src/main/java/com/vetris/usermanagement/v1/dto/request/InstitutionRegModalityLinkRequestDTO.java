@@ -19,7 +19,7 @@ import lombok.Setter;
 public class InstitutionRegModalityLinkRequestDTO {
 
 	@NotNull
-	private Integer modalityId;
+	private String modalityId;
 
 	@NotNull
 	private String institutionId;

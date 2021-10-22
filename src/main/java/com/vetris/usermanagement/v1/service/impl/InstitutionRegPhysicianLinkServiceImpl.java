@@ -15,7 +15,6 @@ import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.InstitutionRegPhysicianLinkRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.InstitutionRegPhysicianLinkResponseDTO;
-import com.vetris.usermanagement.v1.dto.response.UserResponseDTO;
 import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.usermanagement.v1.repository.InstitutionRegPhysicianLinkRepository;
 import com.vetris.usermanagement.v1.service.InstitutionRegPhysicianLinkService;

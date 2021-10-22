@@ -15,9 +15,8 @@ import lombok.Setter;
 @Setter
 public class InstitutionRegModalityLinkResponseDTO {
 
-	private Integer id;
 
-	private Integer modalityId;
+	private String modalityId;
 
 	private String institutionId;
 

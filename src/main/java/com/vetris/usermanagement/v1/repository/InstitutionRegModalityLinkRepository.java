@@ -12,6 +12,6 @@ import com.vetris.entity.InstitutionRegModalityLink;
  *
  */
 @Repository
-public interface InstitutionRegModalityLinkRepository extends JpaRepository<InstitutionRegModalityLink, Integer> {
+public interface InstitutionRegModalityLinkRepository extends JpaRepository<InstitutionRegModalityLink, String> {
 
 }

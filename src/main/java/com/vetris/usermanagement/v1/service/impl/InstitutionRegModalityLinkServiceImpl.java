@@ -2,18 +2,17 @@ package com.vetris.usermanagement.v1.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vetris.entity.InstitutionAltNameLink;
 import com.vetris.entity.InstitutionRegModalityLink;
 import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;
 import com.vetris.usermanagement.v1.dto.request.InstitutionRegModalityLinkRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.usermanagement.v1.dto.response.InstitutionAltNameLinkResponseDTO;
 import com.vetris.usermanagement.v1.dto.response.InstitutionRegModalityLinkResponseDTO;
 import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.usermanagement.v1.repository.InstitutionRegModalityLinkRepository;
@@ -44,10 +43,11 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 	@Override
 	public CommonResponseDTO addRegModality(InstitutionRegModalityLinkRequestDTO data) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
+		UUID uuid = UUID.randomUUID();
 		InstitutionRegModalityLink regModality = objectMapper.convertValue(data, InstitutionRegModalityLink.class);
+		regModality.setModalityId(uuid.toString());
 		regModality.setCreatedBy(jwtSecurityContextUtil.getId());
 		regModality = institutionRegModalityLinkRepository.save(regModality);
-
 		InstitutionRegModalityLinkResponseDTO regModalityRespDTO = objectMapper.convertValue(regModality,
 				InstitutionRegModalityLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
@@ -83,7 +83,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 	 * Getting registration modality by Id.
 	 */
 	@Override
-	public CommonResponseDTO getRegModalityById(Integer id) throws Exception {
+	public CommonResponseDTO getRegModalityById(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionRegModalityLink existingRegModality = institutionRegModalityLinkRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
@@ -102,14 +102,14 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 	 */
 	@Override
 	public CommonResponseDTO updateInstitutionRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest,
-			Integer id) throws Exception {
+			String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		institutionRegModalityLinkRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		InstitutionRegModalityLink regModality = objectMapper.convertValue(regModalityRequest,
 				InstitutionRegModalityLink.class);
-		regModality.setId(id);
+		regModality.setModalityId(id);
 		regModality.setUpdateBy(jwtSecurityContextUtil.getId());
 		regModality = institutionRegModalityLinkRepository.save(regModality);
 
@@ -126,7 +126,7 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 	 * Deleting registration modality by Id.
 	 */
 	@Override
-	public CommonResponseDTO deleteInstitutionRegModality(Integer id) throws Exception {
+	public CommonResponseDTO deleteInstitutionRegModality(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		institutionRegModalityLinkRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));

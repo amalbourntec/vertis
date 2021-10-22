@@ -45,7 +45,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchRegModalityById(@PathVariable("id") Integer id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> fetchRegModalityById(@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO alternateNameRespDTO = institutionRegModalityLinkService.getRegModalityById(id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
@@ -70,7 +70,7 @@ public class InstitutionRegModalityLinkController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> updateRegModality(
-			@RequestBody InstitutionRegModalityLinkRequestDTO RegModalityRequest, @PathVariable("id") Integer id)
+			@RequestBody InstitutionRegModalityLinkRequestDTO RegModalityRequest, @PathVariable("id") String id)
 			throws Exception {
 		CommonResponseDTO RegModalityRespDTO = institutionRegModalityLinkService
 				.updateInstitutionRegModality(RegModalityRequest, id);
@@ -83,7 +83,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deleteRegModality(@PathVariable("id") Integer id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> deleteRegModality(@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO alternateNameRespDTO = institutionRegModalityLinkService.deleteInstitutionRegModality(id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}

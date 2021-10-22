@@ -15,11 +15,11 @@ public interface InstitutionRegModalityLinkService {
 
 	public CommonResponseDTO getAllRegModality() throws Exception;
 
-	public CommonResponseDTO getRegModalityById(Integer id) throws Exception;
+	public CommonResponseDTO getRegModalityById(String id) throws Exception;
 
 	public CommonResponseDTO updateInstitutionRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest,
-			Integer id) throws Exception;
+			String id) throws Exception;
 
-	public CommonResponseDTO deleteInstitutionRegModality(Integer id) throws Exception;
+	public CommonResponseDTO deleteInstitutionRegModality(String id) throws Exception;
 
 }
