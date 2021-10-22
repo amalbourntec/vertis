@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "21f13256-4ac1-485e-a285-d07fa67f526b",
+		"name": "Physician",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "find By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwNTA1NCwiaWF0IjoxNjM0ODg3MDU0fQ.12NMdBnckPSB7FFLmokk8SgdSI0OWU5Ehkf-DvrZrIEgMFX65w6eaxcAm2pmRitrdwGh5KVsuucDkeXD7VbTEQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{physician}}/7e9ce545-1e89-4fbb-8f99-7b502df54d49",
+					"host": [
+						"{{physician}}"
+					],
+					"path": [
+						"7e9ce545-1e89-4fbb-8f99-7b502df54d49"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwNTA1NCwiaWF0IjoxNjM0ODg3MDU0fQ.12NMdBnckPSB7FFLmokk8SgdSI0OWU5Ehkf-DvrZrIEgMFX65w6eaxcAm2pmRitrdwGh5KVsuucDkeXD7VbTEQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"institutionId\":\"Inst1\"\r\n\t,\"physicianName\":\"Prasamesh\"\r\n\t,\"physicianFname\":\"Pra\"\r\n\t,\"physicianLname\":\"saesh\"\r\n\t,\"physicianCredentials\":\"**\"\r\n\t,\"physicianEmail\":\"abc@gmail.com\"\r\n\t,\"physicianMobile\":\"+915555\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/usermanagement/v1/physician",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usermanagement",
+						"v1",
+						"physician"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDgxNjUxOCwiaWF0IjoxNjM0Nzk4NTE4fQ.QhD6TlR_SxSjz9cHDEesoLsCxIPydo6dkby3C0Z_HCojffgQ11YIUzUNd-q5GYAvQWvbhva3mpw8Yz1IfpdGGQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"code\":\"SUPP\"\r\n,\"name\":\"SUPPORT\"\r\n,\"isVisible\":\"Y\"\r\n,\"isActive\":\"Y\"\r\n,\"sysDefined\":\"Y\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/physician/25",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"physician",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/usermanagement/v1/physician",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usermanagement",
+						"v1",
+						"physician"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

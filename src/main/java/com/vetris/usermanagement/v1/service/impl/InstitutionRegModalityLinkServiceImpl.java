@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,20 +105,23 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 	public CommonResponseDTO updateInstitutionRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest,
 			String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionRegModalityLinkRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionRegModalityLink resultModality = institutionRegModalityLinkRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Modality" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		try {
+			BeanUtils.copyProperties(regModalityRequest, resultModality);
+			resultModality.setUpdateBy(jwtSecurityContextUtil.getId());
+			resultModality = institutionRegModalityLinkRepository.save(resultModality);
+			InstitutionRegModalityLinkResponseDTO modalityRespDTO = objectMapper.convertValue(resultModality,
+					InstitutionRegModalityLinkResponseDTO.class);
+//			InstitutionRegModalityLinkResponseDTO modalityRespDTO =new InstitutionRegModalityLinkResponseDTO();
+//			BeanUtils.copyProperties(resultModality, modalityRespDTO);
+			resultDto.setStatus(StatusType.SUCCESS.getMessage());
+			resultDto.setPayload(modalityRespDTO);
+			resultDto.setMessage("Fetched modality successfully");
+		} catch (Exception e) {
 
-		InstitutionRegModalityLink regModality = objectMapper.convertValue(regModalityRequest,
-				InstitutionRegModalityLink.class);
-		regModality.setModalityId(id);
-		regModality.setUpdateBy(jwtSecurityContextUtil.getId());
-		regModality = institutionRegModalityLinkRepository.save(regModality);
-
-		InstitutionRegModalityLinkResponseDTO regModalityRespDTO = objectMapper.convertValue(regModality,
-				InstitutionRegModalityLinkResponseDTO.class);
-		resultDto.setStatus(StatusType.SUCCESS.getMessage());
-		resultDto.setPayload(regModalityRespDTO);
-		resultDto.setMessage("Institution reg modality updated successfully");
+			throw new Exception(e);
+		}
 
 		return resultDto;
 	}

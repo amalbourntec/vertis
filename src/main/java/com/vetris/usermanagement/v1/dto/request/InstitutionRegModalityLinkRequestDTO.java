@@ -18,8 +18,6 @@ import lombok.Setter;
 @Validated
 public class InstitutionRegModalityLinkRequestDTO {
 
-	@NotNull
-	private String modalityId;
 
 	@NotNull
 	private String institutionId;

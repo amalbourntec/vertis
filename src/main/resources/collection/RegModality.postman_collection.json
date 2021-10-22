@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "90e2fb30-4de9-4c5e-a72b-e3862d3452ed",
+		"name": "RegModality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "find By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{reg_Modality}}/51a8e1b6-8b61-4922-8fba-17ea743b83e7",
+					"host": [
+						"{{reg_Modality}}"
+					],
+					"path": [
+						"51a8e1b6-8b61-4922-8fba-17ea743b83e7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"institutionId\":\"13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{reg_Modality}}",
+					"host": [
+						"{{reg_Modality}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{reg_Modality}}/51a8e1b6-8b61-4922-8fba-17ea743b83e7",
+					"host": [
+						"{{reg_Modality}}"
+					],
+					"path": [
+						"51a8e1b6-8b61-4922-8fba-17ea743b83e7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"institutionId\":\"14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{reg_Modality}}/51a8e1b6-8b61-4922-8fba-17ea743b83e7",
+					"host": [
+						"{{reg_Modality}}"
+					],
+					"path": [
+						"51a8e1b6-8b61-4922-8fba-17ea743b83e7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{reg_Modality}}",
+					"host": [
+						"{{reg_Modality}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

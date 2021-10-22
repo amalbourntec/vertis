@@ -21,10 +21,10 @@ import lombok.Setter;
 public class InstitutionRegModalityLink extends AuditEntityModel {
 
 	@Id
-	@Column(name = "modality_id", nullable = false, length = 100, unique = true)
+	@Column(name = "modality_id", nullable = false, length = 100)
 	private String modalityId;
 
-	@Column(name = "institution_id", nullable = false, length = 100, unique=true )
+	@Column(name = "institution_id", nullable = false, length = 100 )
 	private String institutionId;
 
 }
