@@ -7,11 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EntityScan("com.vetris.entity")
-@ComponentScan("com.vetris")
+@ComponentScan({"com.vetris.mastermanagement","com.vetris.utils"})
 @SpringBootApplication
-//@EnableJpaAuditing
+@EnableJpaAuditing
 public class MasterManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MasterManagementApplication.class, args);
 	}
-}
+}  
