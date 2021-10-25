@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "acc98c59-d8a0-46b2-8f10-cb18455899a0",
+		"name": "institution_dispute__dicom_tags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "institution_dispute__dicom_tags",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by institution_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/institutionid/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"institutionid",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by group_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/groupid/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"groupid",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get By elementt_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/elementid/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"elementid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post institution_dispute_dicom_tags",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"6\",\r\n        \"groupId\": \"6\",\r\n        \"elementId\": \"6\",\r\n        \"defaultValue\": \"six\",\r\n        \"junkCharacters\": \"six\",\r\n        \"createdBy\": \"dhanesh\",\r\n        \"dateCreated\": \"2021-10-21T18:30:00.000+00:00\",\r\n        \"updateBy\": \"dhanesh\\n\",\r\n        \"dateUpdated\": \"2021-10-21T18:30:00.000+00:00\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by Institution_id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"6\",\r\n        \"groupId\": \"6\",\r\n        \"elementId\": \"6\",\r\n        \"defaultValue\": \"six NEW\",\r\n        \"junkCharacters\": \"six NEW\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/institutionid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"institutionid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by group_id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"6\",\r\n        \"groupId\": \"6\",\r\n        \"elementId\": \"6\",\r\n        \"defaultValue\": \"six NEW group\",\r\n        \"junkCharacters\": \"six NEW group\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/groupid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"groupid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by element_id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE2MjEzMywiaWF0IjoxNjM1MTQ0MTMzfQ.YfZ628LlYJRKgHhEqU8mzcoJUrcknoTiWLksVuDdCn4bzSdOD5-C_tKH24uPU4hEFGLKSi1aecjXoMxjvGF5ww",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"6\",\r\n        \"groupId\": \"6\",\r\n        \"elementId\": \"6\",\r\n        \"defaultValue\": \"six NEW element\",\r\n        \"junkCharacters\": \"six NEW element\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/elementid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"elementid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
