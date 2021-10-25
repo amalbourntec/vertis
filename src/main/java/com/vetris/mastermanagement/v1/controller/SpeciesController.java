@@ -30,6 +30,16 @@ public class SpeciesController {
 		return ResponseEntity.ok(response);
 	}
 
+	/**
+	 * @param speciesID
+	 * @return list of  species
+	 * @throws Exception
+	 */
+	@GetMapping("{id}")
+	public ResponseEntity<CommonResponseDTO> fetchInstitutionPhysicianLinkById(@PathVariable("id")  Integer id) throws Exception {
+		CommonResponseDTO resultDto = service.getSpeciesById(id);
+		return ResponseEntity.ok(resultDto);	
+	}
 	@PostMapping
 	public ResponseEntity<CommonResponseDTO> addNewSpecies(@RequestBody SpeciesRequestDTO requestDto) throws Exception {
 		CommonResponseDTO response = service.saveSpecies(requestDto);

@@ -16,7 +16,8 @@ import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.mastermanagement.v1.dto.response.SpeciesResponseDTO;
 import com.vetris.mastermanagement.v1.repository.SpeciesRepository;
 import com.vetris.mastermanagement.v1.service.SpeciesService;
-import com.vetris.usermanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.mastermanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.utils.JWTSecurityContextUtil;
 
 @Service
 public class SpeciesServiceImpl implements SpeciesService {
@@ -26,6 +27,9 @@ public class SpeciesServiceImpl implements SpeciesService {
 
 	@Autowired
 	ObjectMapper objectMapper;
+	
+	@Autowired
+	JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	@Override
 	public CommonResponseDTO findAllSpecies() throws Exception {
@@ -50,12 +54,26 @@ public class SpeciesServiceImpl implements SpeciesService {
 	}
 
 	@Override
+	public CommonResponseDTO getSpeciesById(Integer id) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		Species existingSpecies =speciesRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Species " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
+		SpeciesResponseDTO speciesResponseDTO = objectMapper.convertValue(existingSpecies, SpeciesResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(speciesResponseDTO);
+		resultDto.setMessage("Fetched species successfully");
+
+		return resultDto;
+	}
+	
+	@Override
 	public CommonResponseDTO saveSpecies(SpeciesRequestDTO requestDto) throws Exception {
 		SpeciesResponseDTO speciesRespDTO = new SpeciesResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		
 		Species resultSpecies = objectMapper.convertValue(requestDto, Species.class);
-		resultSpecies.setCreatedBy("fygbh");
+		resultSpecies.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultSpecies = speciesRepository.save(resultSpecies);
 		BeanUtils.copyProperties(resultSpecies, speciesRespDTO);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
@@ -67,9 +85,25 @@ public class SpeciesServiceImpl implements SpeciesService {
 
 	@Override
 	public CommonResponseDTO editSpecies(SpeciesRequestDTO requestDto, Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		Species species =  speciesRepository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Species" +ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
+		try {
+			BeanUtils.copyProperties(requestDto, species);
+			species.setUpdateBy(jwtSecurityContextUtil.getId());
+			species = speciesRepository.save(species);
+			SpeciesResponseDTO speciesResponseDTO= objectMapper.convertValue(species, SpeciesResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.getMessage());
+			resultDto.setPayload(speciesResponseDTO);
+			resultDto.setMessage("Fetched species successfully");
+		} catch (Exception e) {
+
+			throw new Exception(e);
+		}
+		return resultDto;
+		
+	}	
 
 	@Override
 	public CommonResponseDTO deleteSpecies(Integer id) throws Exception {

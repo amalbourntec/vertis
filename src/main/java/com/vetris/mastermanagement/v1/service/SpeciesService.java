@@ -12,5 +12,7 @@ public interface SpeciesService {
 	public CommonResponseDTO editSpecies(SpeciesRequestDTO requestDto,Integer id)throws Exception;
 	
 	public CommonResponseDTO deleteSpecies(Integer id)throws Exception;
+
+	public CommonResponseDTO getSpeciesById(Integer id) throws Exception;
 	
 }
