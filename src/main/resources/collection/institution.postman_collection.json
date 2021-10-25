@@ -318,6 +318,325 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Institution Salesperson",
+			"item": [
+				{
+					"name": "Salesperson",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/salesperson",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"salesperson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salesperson",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"institutionId\": \"1db862c1-2dd7-4eaa-ba44-6dba109494\",\r\n            \"salespersonName\": \"William\",\r\n            \"salespersonFName\": \"Alan\",\r\n            \"salespersonLName\": \"John\",\r\n            \"salespersonCredentials\": \"sp1234\",\r\n            \"salespersonLoginEmail\": \"alan@gmail.com\",\r\n            \"salespersonEmail\": \"alan@gmail.com\",\r\n            \"salespersonMobile\": \"466346464\",\r\n            \"salespersonUserId\": \"salesperson1\",\r\n            \"salespersonPacsUserId\": \"isp\",\r\n            \"salespersonPacsPassword\": \"djkdkjkk\",\r\n            \"commission1stYr\": 45.2,\r\n            \"commission2ndYr\": 458.3,\r\n            \"billingAccountId\": \"alansp1234\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/salesperson",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"salesperson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salesperson",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"institutionId\": \"1db862c1-2dd7-4eaa-ba44-6dba109494ea\",\r\n            \"salespersonName\": \"Alan\",\r\n            \"salespersonFName\": \"Alan\",\r\n            \"salespersonLName\": \"BOB\",\r\n            \"salespersonCredentials\": \"sp1234\",\r\n            \"salespersonLoginEmail\": \"alan@gmail.com\",\r\n            \"salespersonEmail\": \"alan@gmail.com\",\r\n            \"salespersonMobile\": \"466346464\",\r\n            \"salespersonUserId\": \"salesperson\",\r\n            \"salespersonPacsUserId\": \"isp\",\r\n            \"salespersonPacsPassword\": \"djkdkjkk\",\r\n            \"commission1stYr\": 45.2,\r\n            \"commission2ndYr\": 458.3,\r\n            \"billingAccountId\": \"alansp1234\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"salesperson",
+								"8d401d6b-e215-4af5-bdef-30401fca6fe7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salesperson",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"salesperson",
+								"8d401d6b-e215-4af5-bdef-30401fca6fe7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salesperson by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/salesperson/2f995324-4a50-4a91-82a0-9b00688a687b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"salesperson",
+								"2f995324-4a50-4a91-82a0-9b00688a687b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institution rate fee",
+			"item": [
+				{
+					"name": "rate fee",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/ratefee",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"ratefee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rate fee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"institutionId\": \"1234jhg\",\r\n            \"feeAmount\": 10000.0,\r\n            \"discountPer\": 45.2\r\n            \r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/ratefee",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"ratefee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rate fee by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"ratefee",
+								"5408f646-0114-453f-9843-327b1b3dd524"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rate fee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"institutionId\": \"134jhg\",\r\n            \"feeAmount\": 10000.0,\r\n            \"discountPer\": 48.2\r\n            \r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"ratefee",
+								"5408f646-0114-453f-9843-327b1b3dd524"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rate fee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"ratefee",
+								"5408f646-0114-453f-9843-327b1b3dd524"
+							],
+							"query": [
+								{
+									"key": "AUTHORIZATION",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
