@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "faa99283-796a-4aa6-8600-4028ffdb4570",
+		"name": "Institution _reg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "institution_reg",
+			"item": [
+				{
+					"name": "Get institution_reg",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTc3MiwiaWF0IjoxNjM1MTUzNzcyfQ.KlCd_-QWgRaczypwUQCfpILVcjBQuQ0OzOUhxH-qXf2yrsJnk1sj7rqmyR0dCpT6A193cXrlaMn-Ve6qr3GsMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionsRegController",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionsRegController"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTc3MiwiaWF0IjoxNjM1MTUzNzcyfQ.KlCd_-QWgRaczypwUQCfpILVcjBQuQ0OzOUhxH-qXf2yrsJnk1sj7rqmyR0dCpT6A193cXrlaMn-Ve6qr3GsMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionsRegController/5b96d01b-a3ec-41aa-bb17-e08b190f7c30?",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionsRegController",
+								"5b96d01b-a3ec-41aa-bb17-e08b190f7c30"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Institution_reg",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTc3MiwiaWF0IjoxNjM1MTUzNzcyfQ.KlCd_-QWgRaczypwUQCfpILVcjBQuQ0OzOUhxH-qXf2yrsJnk1sj7rqmyR0dCpT6A193cXrlaMn-Ve6qr3GsMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \r\n            \"code\": \"c1\",\r\n            \"name\": \"bIPIN\",\r\n            \"address1\": \"ABC\",\r\n            \"address2\": \"ABC@\",\r\n            \"city\": \"city\",\r\n            \"stateId\": 11,\r\n            \"countryId\": 91,\r\n            \"zip\": \"688555\",\r\n            \"emailId\": \"dhanesh@gmail.com\",\r\n            \"phoneNo\": \"9495269828\",\r\n            \"mobileNo\": \"9495269828\",\r\n            \"contactPersonName\": \"dhanesh\",\r\n            \"contactPersonMobile\": \"9495269828\",\r\n            \"loginId\": \"l1\",\r\n            \"loginPassword\": \"password\",\r\n            \"loginEmailId\": \"dhaensh@gmail.com\",\r\n            \"loginMobileNumber\": \"9495269828\",\r\n            \"isEmailVerified\": \"Y\",\r\n            \"isMobileVerified\": \"Y\",\r\n            \"preferredPmtMethod\": \"m\",\r\n            \"updateBy\": \"Manu\",\r\n            \"createdBy\":\"Manu M\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionsRegController",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionsRegController"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updation",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTc3MiwiaWF0IjoxNjM1MTUzNzcyfQ.KlCd_-QWgRaczypwUQCfpILVcjBQuQ0OzOUhxH-qXf2yrsJnk1sj7rqmyR0dCpT6A193cXrlaMn-Ve6qr3GsMg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \r\n            \"code\": \"c1\",\r\n            \"name\": \"BIPIN Das P M\",\r\n            \"address1\": \"ABC 1\",\r\n            \"address2\": \"ABC2\",\r\n            \"city\": \"city\",\r\n            \"stateId\": 11,\r\n            \"countryId\": 91,\r\n            \"zip\": \"688555\",\r\n            \"emailId\": \"dhanesh@gmail.com\",\r\n            \"phoneNo\": \"9495269828\",\r\n            \"mobileNo\": \"9495269828\",\r\n            \"contactPersonName\": \"dhanesh\",\r\n            \"contactPersonMobile\": \"9495269828\",\r\n            \"loginId\": \"l1\",\r\n            \"loginPassword\": \"password\",\r\n            \"loginEmailId\": \"dhaensh@gmail.com\",\r\n            \"loginMobileNumber\": \"9495269828\",\r\n            \"isEmailVerified\": \"Y\",\r\n            \"isMobileVerified\": \"Y\",\r\n            \"preferredPmtMethod\": \"m\",\r\n            \"updateBy\": \"Manu\",\r\n            \"createdBy\":\"Manu M\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionsRegController/3f1d1c32-7eea-4e9a-a521-ddf4240d1e24",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionsRegController",
+								"3f1d1c32-7eea-4e9a-a521-ddf4240d1e24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTc3MiwiaWF0IjoxNjM1MTUzNzcyfQ.KlCd_-QWgRaczypwUQCfpILVcjBQuQ0OzOUhxH-qXf2yrsJnk1sj7rqmyR0dCpT6A193cXrlaMn-Ve6qr3GsMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionsRegController/3f1d1c32-7eea-4e9a-a521-ddf4240d1e24",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionsRegController",
+								"3f1d1c32-7eea-4e9a-a521-ddf4240d1e24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
