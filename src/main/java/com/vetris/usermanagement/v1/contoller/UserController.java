@@ -2,6 +2,7 @@ package com.vetris.usermanagement.v1.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class UserController {
 	 * @return list of users
 	 * @throws Exception
 	 */
+	//@PreAuthorize("hasAnyRole('SYSADMIN','SUPP')")
 	@GetMapping("{id}")
 	public ResponseEntity<CommonResponseDTO> fetchUserById(@PathVariable("id")  String id) throws Exception {
 		CommonResponseDTO resultDto= userService.getUserById(id);

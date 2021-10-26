@@ -3,8 +3,11 @@ package com.vetris.utils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -20,6 +23,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -74,7 +81,21 @@ public class JwtFilter implements Filter{
 			if(Objects.nonNull(decodeResponse)) {
 				Map<String,String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
 				jwtSecurityContextUtil.setId(filterResult.get(USERUUID));
+				
+				//Set roles for security context
+				if (Objects.nonNull(filterResult.get("roles"))) {
+					final List<GrantedAuthority> authorities =
+			                Arrays.stream(filterResult.get("roles").toString().split(","))
+			                        .map(SimpleGrantedAuthority::new)
+			                        .collect(Collectors.toList());
+					
+					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+							filterResult.get(USERUUID), "", authorities);
+					    SecurityContextHolder.getContext().setAuthentication(authentication);
+				}
+				    
 				httpServletResponse.setStatus(200);
+				
 			}else
 			{
 				httpServletResponse.setStatus(401);
