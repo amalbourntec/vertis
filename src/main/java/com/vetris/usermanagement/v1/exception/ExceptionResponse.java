@@ -16,12 +16,9 @@ import lombok.Setter;
 @Setter
 public class ExceptionResponse {
 
-	
-	private String responseMessage;
-	
-	private String requestURL;
-		
-	private HttpStatus httpStatus;
 	private Date timestamp;
 	private int status;
+	private HttpStatus httpStatus;
+	private String responseMessage;
+	private String requestURL;
 }
