@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "4028f805-07f2-4b92-8a4f-2cf0b2230d9f",
+		"name": "vetris All APi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{userManagementUrl}}/v1/user/",
+							"host": [
+								"{{userManagementUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{userManagementUrl}}/v1/user/439106b6-5972-4459-bb3d-ac0b571b9ac2",
+							"host": [
+								"{{userManagementUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"439106b6-5972-4459-bb3d-ac0b571b9ac2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save user Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"newCode\",\r\n  \"name\": \"sruthi\",\r\n  \"password\": \"test123\",\r\n  \"emailId\": \"sruthi@test.com\",\r\n  \"contactNo\": \"999595\",\r\n  \"userRoleId\": 0,\r\n  \"firstLogin\": \"N\",\r\n  \"pacsUserId\": \"sruthi\",\r\n  \"pacsPassword\": \"test123\",\r\n  \"isActive\": \"Y\",\r\n  \"isVisible\": \"Y\",\r\n  \"loginId\": \"sruthi\",\r\n  \"notificationPref\": \"B\",\r\n  \"allowManualSubmission\": \"N\",\r\n  \"allowDashboardView\": \"N\",\r\n  \"themePref\": \"DEFAULT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usermanagement/v1/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usermanagement",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{userManagementUrl}}/v1/user/085578a6-be20-4690-8656-08be2a229c7d",
+							"host": [
+								"{{userManagementUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"085578a6-be20-4690-8656-08be2a229c7d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userrole",
+			"item": [
+				{
+					"name": "Get users roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{userRoleurl}}",
+							"host": [
+								"{{userRoleurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save role",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"code\":\"12\"\r\n,\"name\":\"Jose\"\r\n,\"isVisible\":\"Y\"\r\n,\"isActive\":\"Y\"\r\n,\"createdBy\":\"Amal\"\r\n,\"dateCreated\":\"1998-02-11T13:34:00.000+00:00\"\r\n,\"updateBy\":\"Amal\"\r\n,\"dateUpdated\":\"2000-02-11T13:34:00.000+00:00\"\r\n,\"sysDefined\":\"Y\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_roles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "species",
+			"item": [
+				{
+					"name": "savespecies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"code\":\"11\",\"name\":\"anandu\",\"isActive\":\"Y\",\"createdBy\":\"anandu\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/species/",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"species",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editspecies",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"11\",\r\n    \"name\": \"anandu\",\r\n    \"isActive\": \"N\",\r\n    \"createdBy\": \"anandu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8093/mastermanagement/v1/species/71",
+							"host": [
+								"localhost"
+							],
+							"port": "8093",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"species",
+								"71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getspecies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"code\":\"11\",\"name\":\"anandu\",\"isActive\":\"Y\",\"createdBy\":\"anandu\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/species/",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"species",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletespecies",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"code\":\"11\",\"name\":\"anandu\",\"isActive\":\"Y\",\"createdBy\":\"anandu\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8093/mastermanagement/v1/species/72",
+							"host": [
+								"localhost"
+							],
+							"port": "8093",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"species",
+								"72"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "physician",
+			"item": [
+				{
+					"name": "savephysician",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"code\": \"11\",\r\n        \"name\": \"anandu\",\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"278b6c57-673d-4605-8766-3f0600f8074f\",\r\n        \"dateCreated\": \"2021-10-26T09:41:36.571+00:00\",\r\n        \"updatedBy\": null,\r\n        \"dateupdated\": null,\r\n        \"fname\": null,\r\n        \"lname\": null,\r\n        \"credentials\": null,\r\n        \"address1\": null,\r\n        \"address2\": null,\r\n        \"city\": null,\r\n        \"stateId\": null,\r\n        \"countryId\": null,\r\n        \"zip\": null,\r\n        \"emailId\": null,\r\n        \"phoneNo\": null,\r\n        \"mobileNo\": null,\r\n        \"institutionId\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/physician/",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"physician",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allphysician",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"code\": \"11\",\r\n        \"name\": \"anandu\",\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"278b6c57-673d-4605-8766-3f0600f8074f\",\r\n        \"dateCreated\": \"2021-10-26T09:41:36.571+00:00\",\r\n        \"updatedBy\": null,\r\n        \"dateupdated\": null,\r\n        \"fname\": null,\r\n        \"lname\": null,\r\n        \"credentials\": null,\r\n        \"address1\": null,\r\n        \"address2\": null,\r\n        \"city\": null,\r\n        \"stateId\": null,\r\n        \"countryId\": null,\r\n        \"zip\": null,\r\n        \"emailId\": null,\r\n        \"phoneNo\": null,\r\n        \"mobileNo\": null,\r\n        \"institutionId\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/physician/",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"physician",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "physicianById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"code\": \"11\",\r\n        \"name\": \"anandu\",\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"278b6c57-673d-4605-8766-3f0600f8074f\",\r\n        \"dateCreated\": \"2021-10-26T09:41:36.571+00:00\",\r\n        \"updatedBy\": null,\r\n        \"dateupdated\": null,\r\n        \"fname\": null,\r\n        \"lname\": null,\r\n        \"credentials\": null,\r\n        \"address1\": null,\r\n        \"address2\": null,\r\n        \"city\": null,\r\n        \"stateId\": null,\r\n        \"countryId\": null,\r\n        \"zip\": null,\r\n        \"emailId\": null,\r\n        \"phoneNo\": null,\r\n        \"mobileNo\": null,\r\n        \"institutionId\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/physician/1af7a16f-299e-42ba-ab42-d43c6e3e8807",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"physician",
+								"1af7a16f-299e-42ba-ab42-d43c6e3e8807"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a physician",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"code\": \"11\",\r\n        \"name\": \"anandu\",\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"278b6c57-673d-4605-8766-3f0600f8074f\",\r\n        \"dateCreated\": \"2021-10-26T09:41:36.571+00:00\",\r\n        \"updatedBy\": null,\r\n        \"dateupdated\": null,\r\n        \"fname\": null,\r\n        \"lname\": null,\r\n        \"credentials\": null,\r\n        \"address1\": null,\r\n        \"address2\": null,\r\n        \"city\": null,\r\n        \"stateId\": null,\r\n        \"countryId\": null,\r\n        \"zip\": null,\r\n        \"emailId\": null,\r\n        \"phoneNo\": null,\r\n        \"mobileNo\": null,\r\n        \"institutionId\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/physician/1af7a16f-299e-42ba-ab42-d43c6e3e8807",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"physician",
+								"1af7a16f-299e-42ba-ab42-d43c6e3e8807"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a physician",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"code\": \"11\",\r\n        \"name\": \"anandu\",\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"278b6c57-673d-4605-8766-3f0600f8074f\",\r\n        \"dateCreated\": \"2021-10-26T09:41:36.571+00:00\",\r\n        \"updatedBy\": null,\r\n        \"dateupdated\": null,\r\n        \"fname\": null,\r\n        \"lname\": null,\r\n        \"credentials\": null,\r\n        \"address1\": null,\r\n        \"address2\": null,\r\n        \"city\": null,\r\n        \"stateId\": null,\r\n        \"countryId\": null,\r\n        \"zip\": null,\r\n        \"emailId\": null,\r\n        \"phoneNo\": null,\r\n        \"mobileNo\": null,\r\n        \"institutionId\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{speciesUrl}}/v1/physician/c7c41308-bbec-4337-8976-10798713299c",
+							"host": [
+								"{{speciesUrl}}"
+							],
+							"path": [
+								"v1",
+								"physician",
+								"c7c41308-bbec-4337-8976-10798713299c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// pm = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"token\", pm.response.headers.get(\"AUTHORIZATION\") );\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "something",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{tokenurl}}",
+					"host": [
+						"{{tokenurl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
