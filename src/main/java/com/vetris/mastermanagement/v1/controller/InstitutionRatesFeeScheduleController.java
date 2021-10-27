@@ -24,7 +24,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionRatesFeeScheduleService
  */
 
 @RestController(value = "InstitutionRatesFeeScheduleController")
-@RequestMapping("/usermanagement/v1/ratefee")
+@RequestMapping("/v1/ratefee")
 @CrossOrigin(origins = "*")
 public class InstitutionRatesFeeScheduleController {
 

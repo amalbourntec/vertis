@@ -24,7 +24,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionDeviceLinkService;
  */
 
 @RestController(value = "InstitutionDeviceLinkController")
-@RequestMapping("/usermanagement/v1/device")
+@RequestMapping("/v1/device")
 @CrossOrigin(origins = "*")
 public class InstitutionDeviceLinkController {
 

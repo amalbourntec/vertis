@@ -15,18 +15,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/device",
+							"raw": "localhost:8080/v1/device",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"device"
 							]
@@ -41,21 +40,20 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "localhost:8080/v1/device/4eb1148c-5a00-4986-a209-e5b880329cc4",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"device",
-								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
+								"4eb1148c-5a00-4986-a209-e5b880329cc4"
 							]
 						}
 					},
@@ -68,7 +66,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -82,13 +80,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/device",
+							"raw": "localhost:8080/v1/device",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"device"
 							]
@@ -103,7 +100,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -117,14 +114,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "http://localhost:8080/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"device",
 								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
@@ -140,19 +136,18 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/usermanagement/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "http://localhost:8080/v1/device/1db862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"device",
 								"1db862c1-2dd7-4eaa-ba44-6dba109494ea"
@@ -173,18 +168,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/alternate_name",
+							"raw": "localhost:8080/v1/alternate_name",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"alternate_name"
 							]
@@ -199,18 +193,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "localhost:8080/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"alternate_name",
 								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
@@ -226,7 +219,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -240,13 +233,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/alternate_name",
+							"raw": "localhost:8080/v1/alternate_name",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"alternate_name"
 							]
@@ -261,7 +253,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -275,13 +267,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "localhost:8080/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"alternate_name",
 								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
@@ -297,18 +288,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDg5NDY3MSwiaWF0IjoxNjM0ODc2NjcxfQ.uCLnc31Ex8tRzVy8R2YpgTbxfWRmtUXA6p8InHUePHAFaqEeEvMIzVoQmTeEig2locCYpmbo5bKnOCwTj1vcCw",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
+							"raw": "localhost:8080/v1/alternate_name/25b862c1-2dd7-4eaa-ba44-6dba109494ea",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"alternate_name",
 								"25b862c1-2dd7-4eaa-ba44-6dba109494ea"
@@ -329,18 +319,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/salesperson",
+							"raw": "localhost:8080/v1/salesperson",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"salesperson"
 							]
@@ -355,13 +344,13 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n            \"institutionId\": \"1db862c1-2dd7-4eaa-ba44-6dba109494\",\r\n            \"salespersonName\": \"William\",\r\n            \"salespersonFName\": \"Alan\",\r\n            \"salespersonLName\": \"John\",\r\n            \"salespersonCredentials\": \"sp1234\",\r\n            \"salespersonLoginEmail\": \"alan@gmail.com\",\r\n            \"salespersonEmail\": \"alan@gmail.com\",\r\n            \"salespersonMobile\": \"466346464\",\r\n            \"salespersonUserId\": \"salesperson1\",\r\n            \"salespersonPacsUserId\": \"isp\",\r\n            \"salespersonPacsPassword\": \"djkdkjkk\",\r\n            \"commission1stYr\": 45.2,\r\n            \"commission2ndYr\": 458.3,\r\n            \"billingAccountId\": \"alansp1234\"\r\n        }",
+							"raw": " {\r\n            \"institutionId\": \"1db862c1-2dd7-4eaa-ba44-6dba108546\",\r\n            \"salespersonName\": \"Thomas\",\r\n            \"salespersonFName\": \"Alan\",\r\n            \"salespersonLName\": \"John\",\r\n            \"salespersonCredentials\": \"sp1234\",\r\n            \"salespersonLoginEmail\": \"alan@gmail.com\",\r\n            \"salespersonEmail\": \"alan@gmail.com\",\r\n            \"salespersonMobile\": \"466346464\",\r\n            \"salespersonUserId\": \"salesperson1\",\r\n            \"salespersonPacsUserId\": \"isp1234\",\r\n            \"salespersonPacsPassword\": \"djkdkjkk54\",\r\n            \"commission1stYr\": 45.2,\r\n            \"commission2ndYr\": 458.3,\r\n            \"billingAccountId\": \"alansp1234\"\r\n        }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -369,13 +358,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/salesperson",
+							"raw": "localhost:8080/v1/salesperson",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"salesperson"
 							]
@@ -390,7 +378,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -404,13 +392,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
+							"raw": "localhost:8080/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"salesperson",
 								"8d401d6b-e215-4af5-bdef-30401fca6fe7"
@@ -426,18 +413,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
+							"raw": "localhost:8080/v1/salesperson/8d401d6b-e215-4af5-bdef-30401fca6fe7",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"salesperson",
 								"8d401d6b-e215-4af5-bdef-30401fca6fe7"
@@ -453,18 +439,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE0NzU3NywiaWF0IjoxNjM1MTI5NTc3fQ.MrEG3Bp1Ez9PD4YFZZYIAquwZnv8mT6J5Xx0HoNNRFJ_Jxctn5dVhefLMB0ByNl6OyiyhItpraYKnMe9Paz0hQ",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/salesperson/2f995324-4a50-4a91-82a0-9b00688a687b",
+							"raw": "localhost:8080/v1/salesperson/2f995324-4a50-4a91-82a0-9b00688a687b",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"salesperson",
 								"2f995324-4a50-4a91-82a0-9b00688a687b"
@@ -490,13 +475,13 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/ratefee",
+							"raw": "localhost:8080/mastermanagement/v1/ratefee",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
+								"mastermanagement",
 								"v1",
 								"ratefee"
 							]
@@ -511,7 +496,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -525,13 +510,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/ratefee",
+							"raw": "localhost:8080/v1/ratefee",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"ratefee"
 							]
@@ -546,18 +530,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"raw": "localhost:8080/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"ratefee",
 								"5408f646-0114-453f-9843-327b1b3dd524"
@@ -573,7 +556,7 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -587,13 +570,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"raw": "localhost:8080/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"ratefee",
 								"5408f646-0114-453f-9843-327b1b3dd524"
@@ -609,18 +591,17 @@
 						"header": [
 							{
 								"key": "AUTHORIZATION",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTE3MTQyMCwiaWF0IjoxNjM1MTUzNDIwfQ.VRiseVjxHi5CZnWzga4f97e7_LfUoPnIXMSY2VoHrQ14G2Pu8kx9UtNUjxEpKMSCuOgcg5FyHGea_rbP1gtW5A",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usermanagement/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
+							"raw": "localhost:8080/v1/ratefee/5408f646-0114-453f-9843-327b1b3dd524",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usermanagement",
 								"v1",
 								"ratefee",
 								"5408f646-0114-453f-9843-327b1b3dd524"

@@ -23,7 +23,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionAltNameLinkService;
  *
  */
 @RestController(value = "InstitutionAltNameLinkController")
-@RequestMapping("/usermanagement/v1/alternate_name")
+@RequestMapping("/v1/alternate_name")
 @CrossOrigin(origins = "*")
 public class InstitutionAltNameLinkController {
 
