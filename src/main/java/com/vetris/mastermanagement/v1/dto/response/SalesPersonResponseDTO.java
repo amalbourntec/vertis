@@ -1,5 +1,7 @@
 package com.vetris.mastermanagement.v1.dto.response;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,5 +36,9 @@ public class SalesPersonResponseDTO {
 	private String loginId;
 	private String loginPwd;
 	private String notificationPref;
+	private String createdBy;
+	private Date dateCreated;
+	private String updateBy;
+	private Date dateUpdated;
 
 }
