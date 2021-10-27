@@ -523,6 +523,374 @@
 			]
 		},
 		{
+			"name": "user menu rights",
+			"item": [
+				{
+					"name": "saveuserrights",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":\"sexdrctfvgbhjn\",\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_menu_rights",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_menu_rights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all user rights",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":\"278b6c57-673d-4605-8766-3f0600f8074f\",\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_menu_rights",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_menu_rights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user rights",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":\"278b6c57-673d-4605-8766-3f0600f8074f\",\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_menu_rights/sexdrctfvgbhjn",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_menu_rights",
+								"sexdrctfvgbhjn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user rights by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":\"278b6c57-673d-4605-8766-3f0600f8074f\",\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_menu_rights/sexdrctfvgbhjn",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_menu_rights",
+								"sexdrctfvgbhjn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user rights",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":\"278b6c57-673d-4605-8766-3f0600f8074f\",\"menuId\":123456778}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_menu_rights/278b6c57-673d-4605-8766-3f0600f8074f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_menu_rights",
+								"278b6c57-673d-4605-8766-3f0600f8074f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserRoleMenuRights",
+			"item": [
+				{
+					"name": "saveuserrights",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userRoleId\":1,\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_role_menu_rights",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_role_menu_rights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user role rights by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userRoleId\":1,\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_role_menu_rights/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_role_menu_rights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user role rights ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userRoleId\":1,\"menuId\":1234}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_role_menu_rights",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_role_menu_rights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit user role rights ",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userRoleId\":1,\"menuId\":12345678}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_role_menu_rights/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_role_menu_rights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user role rights ",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userRoleId\":1,\"menuId\":12345678}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/user_role_menu_rights/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user_role_menu_rights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login",
 			"event": [
 				{
