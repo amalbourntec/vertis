@@ -62,7 +62,7 @@ public class SalesPersonServiceImpl implements SalesPersonService {
 	public CommonResponseDTO saveSalesPerson(SalesPersonRequestDTO requestDto) throws Exception {
 		SalesPersonResponseDTO salespersonRespDTO = new SalesPersonResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-System.out.println(requestDto.getName());
+		
 		UUID uuid = UUID.randomUUID();
 		SalesPerson resultSalesPerson = objectMapper.convertValue(requestDto, SalesPerson.class);
 		resultSalesPerson.setId(uuid.toString());
@@ -79,7 +79,7 @@ System.out.println(requestDto.getName());
 	}
 
 	@Override
-	public CommonResponseDTO editSalesPerson(SalesPersonRequestDTO requestDto, String id) throws Exception {
+	public CommonResponseDTO updateSalesPerson(SalesPersonRequestDTO requestDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		salespersonRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("SalesPerson " + ErrorCodes.DATA_NOT_FOUND.getMessage()));

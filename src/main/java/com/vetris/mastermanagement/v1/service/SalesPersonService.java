@@ -15,7 +15,7 @@ public interface SalesPersonService {
 
 	public CommonResponseDTO saveSalesPerson(SalesPersonRequestDTO requestDto) throws Exception;
 
-	public CommonResponseDTO editSalesPerson(SalesPersonRequestDTO requestDto, String id) throws Exception;
+	public CommonResponseDTO updateSalesPerson(SalesPersonRequestDTO requestDto, String id) throws Exception;
 
 	public CommonResponseDTO deleteSalesPerson(String id) throws Exception;
 

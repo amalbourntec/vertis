@@ -59,7 +59,7 @@ public class SalesPersonController {
 	@PutMapping("{id}")
 	public ResponseEntity<CommonResponseDTO> editSalesPerson(@RequestBody SalesPersonRequestDTO requestDto,
 			@PathVariable String id) throws Exception {
-		CommonResponseDTO response = service.editSalesPerson(requestDto, id);
+		CommonResponseDTO response = service.updateSalesPerson(requestDto, id);
 		return ResponseEntity.ok(response);
 	}
 

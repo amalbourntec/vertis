@@ -114,6 +114,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 		try {
 			Institution resultInstitution = objectMapper.convertValue(institutionDto, Institution.class);
 			resultInstitution.setUpdateBy(jwtSecurityContextUtil.getId());
+			resultInstitution.setId(id);
 			resultInstitution = institutionRepository.save(resultInstitution);
 			InstitutionResponseDTO institutionRespDTO = objectMapper.convertValue(resultInstitution,
 					InstitutionResponseDTO.class);
