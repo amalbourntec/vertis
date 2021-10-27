@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "533522a1-0646-4bcf-a0f5-a950199d5d24",
+		"name": "SalesPerson",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get SalesPerson",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8597/mastermanagement/v1/salesperson",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"mastermanagement",
+						"v1",
+						"salesperson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save SalesPerson",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNTI2MjE4OSwiaWF0IjoxNjM1MjQ0MTg5fQ.jtWNH1egv5BQVLeNglrUq7UMXjlJQBnZPgQPT669MHrRj4BDDxDe3zzZASUyXoTse2r5vGpj7AuYUyImQy4IDQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   { \r\n     \"code\":\"xyz\",\r\n\t  \"fName\":\"shekar\",\r\n\t  \"iName\":\"samreddy\",\r\n\t  \"name\":\"reddy\",\r\n\t  \"address1\":\"telanagana\",\r\n\t  \"address2\":\"Hyd\",\r\n\t  \"city\":\"Vpuram\",\r\n\t  \"stateId\":\"1\",\r\n\t  \"countryId\":\"2\",\r\n\t  \"zip\":\"c\",\r\n\t  \"emailId\":\"abc\",\r\n\t  \"phoneNo\":\"9640\",\t  \r\n\t  \"mobileNo\":\"755005\",\r\n\t  \"pacsUserId\":\"pac\",\r\n\t  \"pacsPassword\":\"pacpwd\",\r\n\t  \"isActive\":\"Y\",\r\n\t  \"loginUserId\":\"oo\",\r\n\t  \"loginId\":\"shekar\",\r\n\t  \"loginPwd\":\"test123\",\r\n\t  \"notificationPref\":\"a\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8597/mastermanagement/v1/salesperson",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"mastermanagement",
+						"v1",
+						"salesperson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete SalesPerson",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNTI2MjE4OSwiaWF0IjoxNjM1MjQ0MTg5fQ.jtWNH1egv5BQVLeNglrUq7UMXjlJQBnZPgQPT669MHrRj4BDDxDe3zzZASUyXoTse2r5vGpj7AuYUyImQy4IDQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8597/mastermanagement/v1/salesperson",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"mastermanagement",
+						"v1",
+						"salesperson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update SalesPerson",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjA4NTU3OGE2LWJlMjAtNDY5MC04NjU2LTA4YmUyYTIyOWM3ZCIsImV4cCI6MTYzNTI2MjE4OSwiaWF0IjoxNjM1MjQ0MTg5fQ.jtWNH1egv5BQVLeNglrUq7UMXjlJQBnZPgQPT669MHrRj4BDDxDe3zzZASUyXoTse2r5vGpj7AuYUyImQy4IDQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   { \r\n     \"code\":\"xyz\",\r\n\t  \"fName\":\"shekar\",\r\n\t  \"iName\":\"samreddy\",\r\n\t  \"name\":\"reddy\",\r\n\t  \"address1\":\"telanagana\",\r\n\t  \"address2\":\"Hyd\",\r\n\t  \"city\":\"Vpuram\",\r\n\t  \"stateId\":\"1\",\r\n\t  \"countryId\":\"2\",\r\n\t  \"zip\":\"c\",\r\n\t  \"emailId\":\"abc\",\r\n\t  \"phoneNo\":\"9640\",\t  \r\n\t  \"mobileNo\":\"755005\",\r\n\t  \"pacsUserId\":\"pac\",\r\n\t  \"pacsPassword\":\"pacpwd\",\r\n\t  \"isActive\":\"Y\",\r\n\t  \"loginUserId\":\"oo\",\r\n\t  \"loginId\":\"shekar\",\r\n\t  \"loginPwd\":\"test123\",\r\n\t  \"notificationPref\":\"a\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8597/mastermanagement/v1/salesperson",
+					"host": [
+						"localhost"
+					],
+					"port": "8597",
+					"path": [
+						"mastermanagement",
+						"v1",
+						"salesperson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SalesPerson by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
