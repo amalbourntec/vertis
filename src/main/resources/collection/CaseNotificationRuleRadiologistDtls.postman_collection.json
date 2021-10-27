@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "99834024-987e-459d-8736-ac4ef67fdb4f",
+		"name": "CaseNotificationRuleRadiologistDtls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RuleRadiology By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"radiologistId\": \"rid2\",\r\n        \"userId\": \"uid2\",\r\n        \"notifyAlways\": \"Y\",\r\n        \"notifyIfScheduled\": \"Y\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/case_notification_rule_radiologist_dtls/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"case_notification_rule_radiologist_dtls",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RuleRadiology By Id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/case_notification_rule_radiologist_dtls/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"case_notification_rule_radiologist_dtls",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add RuleRadiology",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/case_notification_rule_radiologist_dtls",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"case_notification_rule_radiologist_dtls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get RuleRadiology",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/case_notification_rule_radiologist_dtls",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"case_notification_rule_radiologist_dtls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RuleRadiology By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/case_notification_rule_radiologist_dtls/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"case_notification_rule_radiologist_dtls",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

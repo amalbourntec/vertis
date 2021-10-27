@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "4cf9d2af-89da-4e1b-9518-d5f152b7cc8b",
+		"name": "InstitutionCategory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_category_link",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_category_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category By id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_category_link/32",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_category_link",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category By id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_category_link/22",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_category_link",
+						"22"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"institutionId\": \"inid32\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/institution_category_link",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_category_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category By id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"institutionId\": \"inid32\"\r\n        \r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/institution_category_link/32",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_category_link",
+						"32"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

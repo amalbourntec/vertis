@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "5bfd7769-8e34-4a01-b7e9-64ca2df85ca8",
+		"name": "IntitutionPhysician",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get physician",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_physician_link",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_physician_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get physician by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_physician_link/546e2ac2-be9d-4b54-9039-41941375a698",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_physician_link",
+						"546e2ac2-be9d-4b54-9039-41941375a698"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save physician",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"institutionId\": \"inid9\",\r\n        \"physicianName\": \"TEst9\",\r\n        \"physicianFname\": \"Ftest9\",\r\n        \"physicianLname\": \"Ltest9\",\r\n        \"physicianCredentials\": \"test\",\r\n        \"physicianLoginEmail\": \"test9@gmail.com\",\r\n        \"physicianEmail\": \"test9@gmail.com\",\r\n        \"physicianMobile\": \"7894561230\",\r\n        \"physicianUserId\": \"test@9\",\r\n        \"physicianPacsUserId\": \"test1@3\",\r\n        \"physicianPacsPassword\": \"test@9\",\r\n        \"billingAccountId\": \"baid9\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/institution_physician_link",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_physician_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete physician",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/institution_physician_link/546e2ac2-be9d-4b54-9039-41941375a698",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_physician_link",
+						"546e2ac2-be9d-4b54-9039-41941375a698"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit physician",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNDkwMTIwOCwiaWF0IjoxNjM0ODgzMjA4fQ.tbQhjO5rzwYynt4A3CAj6nDJPB0iLSPK7VA2FN2oSJG0DVlNdtAM5C0qsLcbEcoWwR3LO3JQMxdq1NU80RMx6Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"physicianId\": \"b37008d2-f2a1-43f9-a39b-c7b10b4b7a15\",\r\n            \"institutionId\": \" inid5\",\r\n            \"physicianName\": \"TEst5\",\r\n            \"physicianFname\": \"Ftest5\",\r\n            \"physicianLname\": \"Ltest5\",\r\n            \"physicianCredentials\": \"test5\",\r\n            \"physicianLoginEmail\": \"test5@gmail.com\",\r\n            \"physicianEmail\": \"test5@gmail.com\",\r\n            \"physicianMobile\": \"7894561230\",\r\n            \"physicianUserId\": \"phid5\",\r\n            \"physicianPacsUserId\": \"test1@2\",\r\n            \"physicianPacsPassword\": \"test5@5\",\r\n           \r\n            \"billingAccountId\": \"baid5\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/institution_physician_link/b37008d2-f2a1-43f9-a39b-c7b10b4b7a15",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"institution_physician_link",
+						"b37008d2-f2a1-43f9-a39b-c7b10b4b7a15"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
