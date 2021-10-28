@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "a7712e5c-a7b4-4da9-bba1-0a3eba05a4b4",
+		"name": "institution_user_link",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "institution_user_link",
+			"item": [
+				{
+					"name": "Post method",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"userId\": \"7\",\r\n            \"institutionId\": \"7\",\r\n            \"userLoginId\": \"MATHEW\",\r\n            \"userPwd\": \"password1\",\r\n            \"userPacsUserId\": \"dhaneshcp\",\r\n            \"userPacsPassword\": \"password\",\r\n            \"userEmail\": \"dhaneshcp@gmail.com\",\r\n            \"grantedRightsPacs\": \"yes\",\r\n            \"updatedInPacs\": \"y\",\r\n            \"dateUpdatedInPacs\": \"2021-10-25T18:30:00.000+00:00\",\r\n            \"userContactNo\": \"9495269828\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by institutionId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"userId\": \"6\",\r\n            \"institutionId\": \"6\",\r\n            \"userLoginId\": \"THOMAS\",\r\n            \"userPwd\": \"password1\",\r\n            \"userPacsUserId\": \"dhaneshcp\",\r\n            \"userPacsPassword\": \"password\",\r\n            \"userEmail\": \"dhaneshcp@gmail.com\",\r\n            \"grantedRightsPacs\": \"yes\",\r\n            \"updatedInPacs\": \"y\",\r\n            \"dateUpdatedInPacs\": \"2021-10-25T18:30:00.000+00:00\",\r\n            \"userContactNo\": \"9495269828\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink/institutionid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink",
+								"institutionid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by InstitutionId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink/byinstitutionid/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink",
+								"byinstitutionid",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by UserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink/byuserid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink",
+								"byuserid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by UserId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcnV0aGkiLCJpZCI6IjQzOTEwNmI2LTU5NzItNDQ1OS1iYjNkLWFjMGI1NzFiOWFjMiIsImV4cCI6MTYzNTI1ODM0MywiaWF0IjoxNjM1MjQwMzQzfQ.uTmM4FoyxhkvynwHrCBHquJODYLfeJK5h4QdGQfhMZF1Dmx6OsqEHBzbYMjA4b31_uJTtH_Jb8UcGObPWw1j1Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"userId\": \"6\",\r\n            \"institutionId\": \"6\",\r\n            \"userLoginId\": \"THOMAS\",\r\n            \"userPwd\": \"thomas123\",\r\n            \"userPacsUserId\": \"dhaneshcp\",\r\n            \"userPacsPassword\": \"password\",\r\n            \"userEmail\": \"dhaneshcp@gmail.com\",\r\n            \"grantedRightsPacs\": \"yes\",\r\n            \"updatedInPacs\": \"y\",\r\n            \"dateUpdatedInPacs\": \"2021-10-25T18:30:00.000+00:00\",\r\n            \"userContactNo\": \"9495269828\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/mastermanagement/v1/institutionUserLink/userid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mastermanagement",
+								"v1",
+								"institutionUserLink",
+								"userid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
