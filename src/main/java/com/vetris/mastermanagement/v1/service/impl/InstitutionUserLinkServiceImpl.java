@@ -3,7 +3,6 @@ package com.vetris.mastermanagement.v1.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,56 +102,91 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		
 	}
 
+	
 	@Override
-	public CommonResponseDTO updateInstitutionUserLinkByUserId(InstitutionUserLinkRequestDTO requestDto, String userId)
-			throws Exception {
+	public CommonResponseDTO deleteInstitutionUserLink(String institutionId, String userId)throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink resultInstitutionUserLink=institutionUserLinkRepository.findByUserId(userId).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
-			try {
-				BeanUtils.copyProperties(requestDto,resultInstitutionUserLink);
-				resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
-				resultInstitutionUserLink=institutionUserLinkRepository.save(resultInstitutionUserLink);
-				InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
-				resultDto.setStatus(StatusType.SUCCESS.toString());
-				resultDto.setPayload(institutionUserLinkResponseDTO);
-				resultDto.setMessage("Fetched successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
-
-		
+		institutionUserLinkRepository.delete(existingInstitutionUserLink);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setMessage("Deleted successfully");
 		return resultDto;
 	}
 
 	@Override
-	public CommonResponseDTO updateInstitutionUserLinkByInstitutionId(InstitutionUserLinkRequestDTO requestDto,
-			String institutionId) throws Exception {
+	public CommonResponseDTO updateInstitutionUserLink(InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO,
+			String institutionId, String userId) throws Exception{
+		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink resultInstitutionUserLink=institutionUserLinkRepository.findByInstitutionId(institutionId).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			try {
-				BeanUtils.copyProperties(requestDto,resultInstitutionUserLink);
-				resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
-				resultInstitutionUserLink=institutionUserLinkRepository.save(resultInstitutionUserLink);
-				InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
-				resultDto.setStatus(StatusType.SUCCESS.toString());
-				resultDto.setPayload(institutionUserLinkResponseDTO);
-				resultDto.setMessage("Fetched successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
+		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
+				.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (resultInstitutionUserLinkCheck == null) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
 
-		
+			InstitutionUserLink resultInstitutionUserLink = objectMapper
+					.convertValue(institutionUserLinkRequestDTO, InstitutionUserLink.class);
+			resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
+
+			resultInstitutionUserLink = institutionUserLinkRepository
+					.save(resultInstitutionUserLink);
+
+			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
+					InstitutionUserLinkResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionUserLinkResponseDTO);
+			resultDto.setMessage("Saved successfully");
+		}
 		return resultDto;
 	}
 
 	@Override
-	public CommonResponseDTO deleteInstitutionUserLinkByUserId(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public CommonResponseDTO fetchInstitutionUserLinkByAll(String institutionId, String userId) throws Exception {
+		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
+				.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (resultInstitutionUserLinkCheck == null) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLinkCheck,
+					InstitutionUserLinkResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionUserLinkResponseDTO);
+			resultDto.setMessage("Fetched successfully");
+		}
+
+		return resultDto;
+	}
+
+	@Override
+	public CommonResponseDTO getByInstitutionIdORUserId(String id) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO = new ArrayList<InstitutionUserLinkResponseDTO>();
+		List<InstitutionUserLink> existingInstitutionUserLink = institutionUserLinkRepository
+				.findByInstitutionIdORUserId(id);
+
+		if (existingInstitutionUserLink.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> {
+				institutionUserLinkResponseDTO.add(objectMapper.convertValue(institutionUserLinkItem,
+						InstitutionUserLinkResponseDTO.class));
+			});
+
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionUserLinkResponseDTO);
+			resultDto.setMessage("Fetched successfully");
+		}
+
+		return resultDto;
 	}
 
 }
