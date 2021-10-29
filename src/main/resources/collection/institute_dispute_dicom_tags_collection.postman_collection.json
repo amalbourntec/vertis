@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "ceaa16dc-52a9-4be6-9295-15ec1079c972",
+		"name": "institute_dispute_dicom_tags_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "institute_dispute_dicom_tags",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by institution_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/institutionid/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"institutionid",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by group_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/groupid/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"groupid",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get By elementt_id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/elementid/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"elementid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post institution_dispute_dicom_tags",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"13\",\r\n        \"groupId\": \"6\",\r\n        \"elementId\": \"6\",\r\n        \"defaultValue\": \"six\",\r\n        \"junkCharacters\": \"six\",\r\n        \"createdBy\": \"dhanesh\",\r\n        \"dateCreated\": \"2021-10-21T18:30:00.000+00:00\",\r\n        \"updateBy\": \"dhanesh\\n\",\r\n        \"dateUpdated\": \"2021-10-21T18:30:00.000+00:00\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateByInstitutionIdAndGroupIdAndElementId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"institutionId\": \"6\",\r\n        \"groupId\": \"5\",\r\n        \"elementId\": \"5\",\r\n        \"defaultValue\": \"tesdefaultVALUE\",\r\n        \"junkCharacters\": \"test123\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/update/6/5/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"update",
+								"6",
+								"5",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by institutionId or groupId or elementId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/id/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"id",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by CompositKeys",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/getbyall/6/9/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"getbyall",
+								"6",
+								"9",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by composite keys",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/institutionDisputeDicomTags/delete/6/5/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"institutionDisputeDicomTags",
+								"delete",
+								"6",
+								"5",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

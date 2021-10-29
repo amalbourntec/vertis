@@ -3,7 +3,6 @@ package com.vetris.mastermanagement.v1.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,22 +36,21 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 	@Autowired
 	ObjectMapper objectMapper;
 
-	/**
-	 * Get All InstitutionDisputeDicomTags
-	 */
 	@Override
-	public CommonResponseDTO addInstitutionDisputeDicomTags(InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO)
-			throws Exception {
+	public CommonResponseDTO addInstitutionDisputeDicomTags(
+			InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO) throws Exception {
 		// TODO Auto-generated method stub
 		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper.convertValue(institutionDisputeDicomTagsRequestDTO, InstitutionDisputeDicomTags.class);
+		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper
+				.convertValue(institutionDisputeDicomTagsRequestDTO, InstitutionDisputeDicomTags.class);
 		resultInstitutionDisputeDicomTags.setCreatedBy(jwtSecurityContextUtil.getId());
-		
-		resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.save(resultInstitutionDisputeDicomTags);
-		//BeanUtils.copyProperties(resultInstitutionDisputeDicomTags, institutionDisputeDicomTagsResponseDTO);
-		institutionDisputeDicomTagsResponseDTO =objectMapper.convertValue(resultInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
+
+		resultInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+				.save(resultInstitutionDisputeDicomTags);
+		institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTags,
+				InstitutionDisputeDicomTagsResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
 		resultDto.setMessage("Saved successfully");
@@ -60,17 +58,13 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 		return resultDto;
 	}
 
-	/**
-	 * Getting InstitutionDisputeDicomTags by id
-	 */
 	@Override
 	public CommonResponseDTO getAllInstitutionDisputeDicomTags() throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<InstitutionDisputeDicomTags> institutionDisputeDicomTags = institutionDisputeDicomTagsRepository.findAll();
 		List<InstitutionDisputeDicomTagsResponseDTO> resultResponseDto = new ArrayList<>();
 		if (institutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setStatus(StatusType.FAILURE.toString());
 			resultDto.setPayload("");
 			resultDto.setMessage("Not found");
 		} else {
@@ -86,56 +80,55 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 
 		return resultDto;
 	}
-	//general get method for three PK values
-	/*
-	 * @Override public List<CommonResponseDTO>
-	 * getInstitutionDisputeDicomTagsByInstitutionIdOrGroupIdOrElementId( String
-	 * institutionOrGroupOrElementId) throws Exception { // TODO Auto-generated
-	 * method stub CommonResponseDTO resultDto=new CommonResponseDTO();
-	 * List<InstitutionDisputeDicomTags>
-	 * institutionDisputeDicomTags=institutionDisputeDicomTagsRepository.
-	 * findByInstitutionIdOrGroupIdOrElementId(institutionOrGroupOrElementId);
-	 * List<InstitutionDisputeDicomTagsResponseDTO> resultResponseDto=new
-	 * ArrayList<>(); if(institutionDisputeDicomTags.isEmpty()) {
-	 * resultDto.setStatus(StatusType.SUCCESS.toString()); resultDto.setPayload("");
-	 * resultDto.setMessage("Not found"); }else {
-	 * institutionDisputeDicomTags.stream().forEach(
-	 * institutionDisputeDicomTagsGeneralItem -> {
-	 * resultResponseDto.add(objectMapper.convertValue(
-	 * institutionDisputeDicomTagsGeneralItem,
-	 * InstitutionDisputeDicomTagsResponseDTO.class)); });
-	 * 
-	 * resultDto.setStatus(StatusType.SUCCESS.toString());
-	 * resultDto.setPayload(resultResponseDto);
-	 * resultDto.setMessage("Fetched successfully"); } return null; }
-	 */
+
 	@Override
 	public CommonResponseDTO getInstitutionDisputeDicomTagsByInstitutionId(String institutionId) throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO= new InstitutionDisputeDicomTagsResponseDTO();
-		InstitutionDisputeDicomTags existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository.findByInstitutionId(institutionId).orElseThrow(()->new ResourceNotFoundException( ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-		 institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(existingInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
+		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
+		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+				.findAllInstitutionId(institutionId);
+
+		if (existingInstitutionDisputeDicomTags.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
+				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
+						InstitutionDisputeDicomTagsResponseDTO.class));
+			});
+
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
 			resultDto.setMessage("Fetched successfully");
-		
+		}
+
 		return resultDto;
 	}
-	
+
 	@Override
 	public CommonResponseDTO getInstitutionDisputeDicomTagsByGroupId(String groupId) throws Exception {
-		// TODO Auto-generated method stub
+
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO= new InstitutionDisputeDicomTagsResponseDTO();
-		InstitutionDisputeDicomTags existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository.findByGroupId(groupId).orElseThrow(()->new ResourceNotFoundException( ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-		 institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(existingInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
+		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
+		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+				.findAllGroupId(groupId);
+
+		if (existingInstitutionDisputeDicomTags.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
+				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
+						InstitutionDisputeDicomTagsResponseDTO.class));
+			});
+
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
 			resultDto.setMessage("Fetched successfully");
-		
+		}
+
 		return resultDto;
 	}
 
@@ -143,118 +136,117 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 	public CommonResponseDTO getInstitutionDisputeDicomTagsByElementId(String elementId) throws Exception {
 		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO= new InstitutionDisputeDicomTagsResponseDTO();
-		InstitutionDisputeDicomTags existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository.findByElementId(elementId).orElseThrow(()->new ResourceNotFoundException( ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-		 institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(existingInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
+		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
+		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+				.findAllElementId(elementId);
+
+		if (existingInstitutionDisputeDicomTags.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
+				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
+						InstitutionDisputeDicomTagsResponseDTO.class));
+			});
+
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
 			resultDto.setMessage("Fetched successfully");
-		
+		}
+
 		return resultDto;
 	}
 
-	
-	
-
 	@Override
-	public CommonResponseDTO updateInstitutionDisputeDicomTagsByInstitutionId(InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO,
-			String institutionId) throws Exception {
-		// TODO Auto-generated method stub
+	public CommonResponseDTO getByInstitutionIdORGroupIdORElementId(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.findByInstitutionId(institutionId).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			try {
-				BeanUtils.copyProperties(institutionDisputeDicomTagsRequestDTO,resultInstitutionDisputeDicomTags);
-				//InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper.convertValue(institutionDisputeDicomTagsRequestDTO, InstitutionDisputeDicomTags.class);
-				//resultInstitutionDisputeDicomTags.setId(id);
-				resultInstitutionDisputeDicomTags.setUpdateBy(jwtSecurityContextUtil.getId());
-				//resultInstitutionDisputeDicomTags.setDateUpdated(jwtSecurityContextUtil.getCurrentDate());
-				resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.save(resultInstitutionDisputeDicomTags);
-				InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
-				resultDto.setStatus(StatusType.SUCCESS.toString());
-				resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
-				resultDto.setMessage("Fetched successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
+		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
+		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+				.findByInstitutionIdORGroupIdORElementId(id);
 
-		
+		if (existingInstitutionDisputeDicomTags.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
+				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
+						InstitutionDisputeDicomTagsResponseDTO.class));
+			});
+
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
+			resultDto.setMessage("Fetched successfully");
+		}
+
 		return resultDto;
 	}
+
 	@Override
-	public CommonResponseDTO updateInstitutionDisputeDicomTagsByGroupId(
-			InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO, String groupId) throws Exception {
+	public CommonResponseDTO updateInstitutionDisputeDicomTags(
+			InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest, String institutionId,
+			String groupId, String elementId) throws Exception {
+		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.findByGroupId(groupId).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			try {
-				BeanUtils.copyProperties(institutionDisputeDicomTagsRequestDTO,resultInstitutionDisputeDicomTags);
-				resultInstitutionDisputeDicomTags.setUpdateBy(jwtSecurityContextUtil.getId());
-				resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.save(resultInstitutionDisputeDicomTags);
-				InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
-				resultDto.setStatus(StatusType.SUCCESS.toString());
-				resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
-				resultDto.setMessage("Fetched successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
+		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTagsCheck = institutionDisputeDicomTagsRepository
+				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (resultInstitutionDisputeDicomTagsCheck == null) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
 
-		
+			InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper
+					.convertValue(institutionDisputeDicomTagsRequest, InstitutionDisputeDicomTags.class);
+			resultInstitutionDisputeDicomTags.setUpdateBy(jwtSecurityContextUtil.getId());
+
+			resultInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
+					.save(resultInstitutionDisputeDicomTags);
+
+			institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTags,
+					InstitutionDisputeDicomTagsResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
+			resultDto.setMessage("Saved successfully");
+		}
 		return resultDto;
 	}
+
 	@Override
-	public CommonResponseDTO updateInstitutionDisputeDicomTagsByElementId(
-			InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO, String elementId)
+	public CommonResponseDTO fetchInstitutionDisputeDicomTagsByAll(String institutionId, String groupId,
+			String elementId) throws Exception {
+		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTagsCheck = institutionDisputeDicomTagsRepository
+				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (resultInstitutionDisputeDicomTagsCheck == null) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTagsCheck,
+					InstitutionDisputeDicomTagsResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
+			resultDto.setMessage("Fetched successfully");
+		}
+
+		return resultDto;
+	}
+
+	@Override
+	public CommonResponseDTO deleteInstitutionDisputeDicomTags(String institutionId, String groupId, String elementId)
 			throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.findByElementId(elementId).orElseThrow(()->new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionDisputeDicomTags existingInstitutionsReg = institutionDisputeDicomTagsRepository.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		
-			try {
-				BeanUtils.copyProperties(institutionDisputeDicomTagsRequestDTO,resultInstitutionDisputeDicomTags);
-				resultInstitutionDisputeDicomTags.setUpdateBy(jwtSecurityContextUtil.getId());
-				resultInstitutionDisputeDicomTags=institutionDisputeDicomTagsRepository.save(resultInstitutionDisputeDicomTags);
-				InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTags, InstitutionDisputeDicomTagsResponseDTO.class);
-				resultDto.setStatus(StatusType.SUCCESS.toString());
-				resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
-				resultDto.setMessage("Fetched successfully");
-			} catch (Exception e) {
-				
-				throw new Exception(e);
-			}
-
-		
+			institutionDisputeDicomTagsRepository.delete(existingInstitutionsReg);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setMessage("Deleted successfully");
 		return resultDto;
 	}
-
-	/*
-	 * @Override public CommonResponseDTO deleteInstitutionDisputeDicomTags(String
-	 * id) throws Exception { // TODO Auto-generated method stub CommonResponseDTO
-	 * resultDto = new CommonResponseDTO(); Optional<InstitutionDisputeDicomTags>
-	 * existingInstitutionDisputeDicomTags =
-	 * institutionDisputeDicomTagsRepository.findById(id); if
-	 * (existingInstitutionDisputeDicomTags.isPresent()) {
-	 * institutionDisputeDicomTagsRepository.deleteById(id);
-	 * resultDto.setStatus(StatusType.SUCCESS.toString());
-	 * resultDto.setMessage("Deleted successfully"); } else {
-	 * resultDto.setStatus(StatusType.FAILURE.toString());
-	 * resultDto.setMessage("Unable to fetch details"); } return resultDto; }
-	 */
-
-	/*
-	 * @Override public CommonResponseDTO
-	 * deleteInstitutionDisputeDicomTagsByInstitutionId(String institutionId) throws
-	 * Exception { CommonResponseDTO resultDto = new CommonResponseDTO();
-	 * Optional<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags =
-	 * institutionDisputeDicomTagsRepository.findByInstitutionId(institutionId); if
-	 * (existingInstitutionDisputeDicomTags.isPresent()) {
-	 * institutionDisputeDicomTagsRepository.deleteByInstitutionId(institutionId);
-	 * resultDto.setStatus(StatusType.SUCCESS.toString());
-	 * resultDto.setMessage("Deleted successfully"); } else {
-	 * resultDto.setStatus(StatusType.FAILURE.toString());
-	 * resultDto.setMessage("Unable to fetch details"); } return resultDto; }
-	 */
 
 }

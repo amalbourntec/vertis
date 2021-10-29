@@ -3,6 +3,7 @@ package com.vetris.mastermanagement.v1.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,19 @@ public class InstitutionDisputeDicomTagsController {
 	@Autowired
 	InstitutionDisputeDicomTagsService institutionDisputeDicomTagsService;
 
+	@GetMapping("")
+	public CommonResponseDTO fetchAllInstitutionDisputeDicomTags() throws Exception {
+		return this.institutionDisputeDicomTagsService.getAllInstitutionDisputeDicomTags();
+	}
+
+	@GetMapping("/id/{id}")
+	public ResponseEntity<CommonResponseDTO> fetchByInstitutionIdORGroupIdORElementId(@PathVariable("id") String id)
+			throws Exception {
+
+		CommonResponseDTO resultDto = institutionDisputeDicomTagsService.getByInstitutionIdORGroupIdORElementId(id);
+		return ResponseEntity.ok(resultDto);
+	}
+
 	@GetMapping("/institutionid/{institutionId}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionDisputeDicomTagsByInstitutionId(
 			@PathVariable("institutionId") String institutionId) throws Exception {
@@ -38,7 +52,7 @@ public class InstitutionDisputeDicomTagsController {
 				.getInstitutionDisputeDicomTagsByGroupId(groupId);
 		return ResponseEntity.ok(resultDto);
 	}
-	
+
 	@GetMapping("/elementid/{elementId}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionDisputeDicomTagsByElementIdId(
 			@PathVariable("elementId") String elementId) throws Exception {
@@ -46,23 +60,14 @@ public class InstitutionDisputeDicomTagsController {
 				.getInstitutionDisputeDicomTagsByElementId(elementId);
 		return ResponseEntity.ok(resultDto);
 	}
-	
-	
-	/*Getting values based on three PK values
-	 * @GetMapping(path = "/{institutionOrGroupOrElementId}") public
-	 * ResponseEntity<List<CommonResponseDTO>>
-	 * fetchInstitutionDisputeDicomTagsByInstitutionIdOrGroupIdOrElementId(@
-	 * PathVariable("institutionOrGroupOrElementId") String
-	 * institutionOrGroupOrElementId)throws Exception { List<CommonResponseDTO>
-	 * resultDto = institutionDisputeDicomTagsService.
-	 * getInstitutionDisputeDicomTagsByInstitutionIdOrGroupIdOrElementId(
-	 * institutionOrGroupOrElementId); return ResponseEntity.ok(resultDto); }
-	 */
-	 
 
-	@GetMapping("")
-	public CommonResponseDTO fetchAllInstitutionDisputeDicomTags() throws Exception {
-		return this.institutionDisputeDicomTagsService.getAllInstitutionDisputeDicomTags();
+	@GetMapping("/getbyall/{institutionId}/{groupId}/{elementId}")
+	public ResponseEntity<CommonResponseDTO> fetchInstitutionDisputeDicomTagsByAll(
+			@PathVariable("institutionId") String institutionId, @PathVariable("groupId") String groupId,
+			@PathVariable("elementId") String elementId) throws Exception {
+		CommonResponseDTO resultDto = institutionDisputeDicomTagsService
+				.fetchInstitutionDisputeDicomTagsByAll(institutionId, groupId, elementId);
+		return ResponseEntity.ok(resultDto);
 	}
 
 	@PostMapping("")
@@ -73,39 +78,23 @@ public class InstitutionDisputeDicomTagsController {
 		return ResponseEntity.ok(resultDto);
 	}
 
-	@PutMapping("/institutionid/{institutionId}")
-	public ResponseEntity<CommonResponseDTO> updateInstitutionDisputeDicomTagsByInstitutionId(
+	@PutMapping("/update/{institutionId}/{groupId}/{elementId}")
+	public ResponseEntity<CommonResponseDTO> updateInstitutionDisputeDicomTags(
 			@RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest,
-			@PathVariable("institutionId") String institutionId) throws Exception {
-		CommonResponseDTO resultDto = institutionDisputeDicomTagsService
-				.updateInstitutionDisputeDicomTagsByInstitutionId(institutionDisputeDicomTagsRequest, institutionId);
+			@PathVariable("institutionId") String institutionId, @PathVariable("groupId") String groupId,
+			@PathVariable("elementId") String elementId) throws Exception {
+		CommonResponseDTO resultDto = institutionDisputeDicomTagsService.updateInstitutionDisputeDicomTags(
+				institutionDisputeDicomTagsRequest, institutionId, groupId, elementId);
 		return ResponseEntity.ok(resultDto);
 	}
 
-	@PutMapping("/groupid/{groupId}")
-	public ResponseEntity<CommonResponseDTO> updateInstitutionDisputeDicomTagsByGroupId(
-			@RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest,
-			@PathVariable("groupId") String groupId) throws Exception {
-		CommonResponseDTO resultDto = institutionDisputeDicomTagsService
-				.updateInstitutionDisputeDicomTagsByGroupId(institutionDisputeDicomTagsRequest, groupId);
-		return ResponseEntity.ok(resultDto);
-	}
-	@PutMapping("/elementid/{elementId}")
-	public ResponseEntity<CommonResponseDTO> updateInstitutionDisputeDicomTagsByElementId(
-			@RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest,
+	@DeleteMapping("/delete/{institutionId}/{groupId}/{elementId}")
+	public ResponseEntity<CommonResponseDTO> deleteInstitutionDisputeDicomTags(
+			@PathVariable("institutionId") String institutionId, @PathVariable("groupId") String groupId,
 			@PathVariable("elementId") String elementId) throws Exception {
 		CommonResponseDTO resultDto = institutionDisputeDicomTagsService
-				.updateInstitutionDisputeDicomTagsByElementId(institutionDisputeDicomTagsRequest, elementId);
+				.deleteInstitutionDisputeDicomTags(institutionId, groupId, elementId);
 		return ResponseEntity.ok(resultDto);
 	}
-	/*
-	 * @DeleteMapping("/institutionid/{institutionId}") public
-	 * ResponseEntity<CommonResponseDTO>
-	 * deleteInstitutionDisputeDicomTagsByInstitutionId(@PathVariable(
-	 * "institutionId") String institutionId) throws Exception { CommonResponseDTO
-	 * resultDto = institutionDisputeDicomTagsService.
-	 * deleteInstitutionDisputeDicomTagsByInstitutionId(institutionId); return
-	 * ResponseEntity.ok(resultDto); }
-	 */
 
 }
