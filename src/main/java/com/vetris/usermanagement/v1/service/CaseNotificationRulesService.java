@@ -11,16 +11,20 @@ import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
  */
 public interface CaseNotificationRulesService {
 
-	public CommonResponseDTO getCaseNotificationRulesById(Integer id) throws Exception;
-
-	public CommonResponseDTO getAllCaseNotificationRules() throws Exception;
+	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId,Integer priorityId) throws Exception;
 
 	public CommonResponseDTO addCaseNotificationRules(CaseNotificationRulesRequestDTO caseNotificationRulesRequest)
 			throws Exception;
 
 	public CommonResponseDTO updateCaseNotificationRules(CaseNotificationRulesRequestDTO caseNotificationRules,
-			Integer id) throws Exception;
+			Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Exception;
 
-	public CommonResponseDTO deleteCaseNotificationRules(Integer id) throws Exception;
+	public CommonResponseDTO deleteCaseNotificationRules(Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Exception;
+
+	public CommonResponseDTO getCaseNotificationRulesByRuleNo(Integer id) throws Exception;
+
+	public CommonResponseDTO getCaseNotificationRulesByPacsStatusId(Integer id) throws Exception;
+
+	public CommonResponseDTO getCaseNotificationRulesByPriorityId(Integer id) throws Exception;
 
 }

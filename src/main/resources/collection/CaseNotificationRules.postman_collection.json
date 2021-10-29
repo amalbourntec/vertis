@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "05aa121a-3a5d-45b0-a109-d070b59b781d",
+		"name": "CaseNotificationRules",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "find By Id-Rule No",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{case_notification_rules}}/ruleNo/1",
+					"host": [
+						"{{case_notification_rules}}"
+					],
+					"path": [
+						"ruleNo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{case_notification_rules}}/get_all/?priorityId=100&ruleNo=1&pacsStatusId=1",
+					"host": [
+						"{{case_notification_rules}}"
+					],
+					"path": [
+						"get_all",
+						""
+					],
+					"query": [
+						{
+							"key": "priorityId",
+							"value": "100"
+						},
+						{
+							"key": "ruleNo",
+							"value": "1"
+						},
+						{
+							"key": "pacsStatusId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find By Id -priorityId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{case_notification_rules}}/priorityId/100",
+					"host": [
+						"{{case_notification_rules}}"
+					],
+					"path": [
+						"priorityId",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"ruleNo\":1\r\n\t,\"ruleDesc\":\"defaultUserRole\"\r\n\t,\"pacsStatusId\":1\r\n\t,\"priorityId\":100\r\n\t,\"timeEllapsedMins\":10\r\n\t,\"defaultUserRole\":\"DEFAULT\"\r\n\t,\"secondLevelAlertReceipientId\":\"11\"\r\n\t,\"isActive\":\"Y\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{case_notification_rules}}",
+					"host": [
+						"{{case_notification_rules}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{case_notification_rules}}?priorityId=100&ruleNo=1&pacsStatusId=1",
+					"host": [
+						"{{case_notification_rules}}"
+					],
+					"query": [
+						{
+							"key": "priorityId",
+							"value": "100"
+						},
+						{
+							"key": "ruleNo",
+							"value": "1"
+						},
+						{
+							"key": "pacsStatusId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"ruleNo\":1\r\n\t,\"ruleDesc\":\"test\"\r\n\t,\"pacsStatusId\":1\r\n\t,\"priorityId\":100\r\n\t,\"timeEllapsedMins\":10\r\n\t,\"defaultUserRole\":\"DEFAULT\"\r\n\t,\"secondLevelAlertReceipientId\":\"11\"\r\n\t,\"isActive\":\"Y\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{case_notification_rules}}?priorityId=100&ruleNo=1&pacsStatusId=1",
+					"host": [
+						"{{case_notification_rules}}"
+					],
+					"query": [
+						{
+							"key": "priorityId",
+							"value": "100"
+						},
+						{
+							"key": "ruleNo",
+							"value": "1"
+						},
+						{
+							"key": "pacsStatusId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find By PacsId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{case_notification_rules}}",
+					"host": [
+						"{{case_notification_rules}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

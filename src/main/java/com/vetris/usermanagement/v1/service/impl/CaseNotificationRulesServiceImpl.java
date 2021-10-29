@@ -38,21 +38,26 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	/**
-	 * Getting Case notification rule by id
+	 * Getting Case notification rule by no
 	 */
 	@Override
-	public CommonResponseDTO getCaseNotificationRulesById(Integer id) throws Exception {
+	public CommonResponseDTO getCaseNotificationRulesByRuleNo(Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		CaseNotificationRules existingNotificationRule = caseNotificationRulesRepo.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException(
-						"Case notiication rules " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		List<CaseNotificationRulesResponseDTO> notificationRuleRespDTO = new ArrayList<CaseNotificationRulesResponseDTO>();
+		List<CaseNotificationRules> existingNotificationRule = caseNotificationRulesRepo.findByRuleNo(id);
+		if (existingNotificationRule.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingNotificationRule.stream().forEach(item -> {
+				notificationRuleRespDTO.add(objectMapper.convertValue(item, CaseNotificationRulesResponseDTO.class));
+			});
 
-		CaseNotificationRulesResponseDTO notificationRuleRespDTO = objectMapper.convertValue(existingNotificationRule,
-				CaseNotificationRulesResponseDTO.class);
-		resultDto.setStatus(StatusType.SUCCESS.getMessage());
-		resultDto.setPayload(notificationRuleRespDTO);
-		resultDto.setMessage("Fetched case notification rules successfully");
-
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(notificationRuleRespDTO);
+			resultDto.setMessage("Fetched case notification rules successfully");
+		}
 		return resultDto;
 	}
 
@@ -61,22 +66,23 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	 */
 
 	// @Override
-	public CommonResponseDTO getAllCaseNotificationRules() throws Exception {
+	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId, Integer priorityId)
+			throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		List<CaseNotificationRules> notificationRules = caseNotificationRulesRepo.findAll();
-		List<CaseNotificationRulesResponseDTO> resultResponseDto = new ArrayList<>();
-		if (notificationRules.isEmpty()) {
+		CaseNotificationRulesResponseDTO caseNotificationRulesResponseDTO = new CaseNotificationRulesResponseDTO();
+		CaseNotificationRules notificationRules = caseNotificationRulesRepo
+				.findByRuleNoANDPacsStatusIdANDPriorityId(ruleNo, pacsStatusId, priorityId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (notificationRules.equals(null)) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setPayload("");
 			resultDto.setMessage("No notification rule found");
 		} else {
-			notificationRules.stream().forEach(existingNotificationRule -> {
-				resultResponseDto.add(
-						objectMapper.convertValue(existingNotificationRule, CaseNotificationRulesResponseDTO.class));
-			});
+			caseNotificationRulesResponseDTO = objectMapper.convertValue(notificationRules,
+					CaseNotificationRulesResponseDTO.class);
 
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(resultResponseDto);
+			resultDto.setPayload(caseNotificationRulesResponseDTO);
 			resultDto.setMessage("Fetched case notification rules successfully");
 		}
 
@@ -106,12 +112,15 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	/**
 	 * Updating a Case notification rule using request DTO
 	 */
+
 	@Override
 	public CommonResponseDTO updateCaseNotificationRules(CaseNotificationRulesRequestDTO notificationRuleDto,
-			Integer id) throws Exception {
+			Integer ruleNo, Integer pacsStatusId, Integer priorityId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		CaseNotificationRules resultNotificationRule = caseNotificationRulesRepo.findById(id).orElseThrow(
-				() -> new ResourceNotFoundException("Case notiication rules" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		CaseNotificationRules resultNotificationRule = caseNotificationRulesRepo
+				.findByRuleNoANDPacsStatusIdANDPriorityId(ruleNo, pacsStatusId, priorityId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Case notiication rules" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		try {
 			BeanUtils.copyProperties(notificationRuleDto, resultNotificationRule);
 			resultNotificationRule.setUpdateBy(jwtSecurityContextUtil.getId());
@@ -134,13 +143,67 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	 */
 
 	@Override
-	public CommonResponseDTO deleteCaseNotificationRules(Integer id) throws Exception {
+	public CommonResponseDTO deleteCaseNotificationRules(Integer ruleNo, Integer pacsStatusId, Integer priorityId)
+			throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		caseNotificationRulesRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(
-				"Case notification rules" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		caseNotificationRulesRepo.deleteById(id);
+		CaseNotificationRules caseNotificationRules = caseNotificationRulesRepo
+				.findByRuleNoANDPacsStatusIdANDPriorityId(ruleNo, pacsStatusId, priorityId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Case notification rules" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		caseNotificationRulesRepo.delete(caseNotificationRules);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Deleted case notiication rule successfully");
 		return resultDto;
 	}
+
+	/**
+	 * get case notification rule by PacsStatusId
+	 */
+	@Override
+	public CommonResponseDTO getCaseNotificationRulesByPacsStatusId(Integer Id) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<CaseNotificationRulesResponseDTO> notificationRuleRespDTO = new ArrayList<CaseNotificationRulesResponseDTO>();
+		List<CaseNotificationRules> existingNotificationRule = caseNotificationRulesRepo.findByPacsStatusId(Id);
+		if (existingNotificationRule.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingNotificationRule.stream().forEach(item -> {
+				notificationRuleRespDTO.add(objectMapper.convertValue(item, CaseNotificationRulesResponseDTO.class));
+			});
+
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(notificationRuleRespDTO);
+			resultDto.setMessage("Fetched case notification rules successfully");
+		}
+		return resultDto;
+	}
+
+	/**
+	 * get case notification rule by PriorityId
+	 */
+	@Override
+	public CommonResponseDTO getCaseNotificationRulesByPriorityId(Integer id) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<CaseNotificationRulesResponseDTO> notificationRuleRespDTO = new ArrayList<CaseNotificationRulesResponseDTO>();
+		List<CaseNotificationRules> existingNotificationRule = caseNotificationRulesRepo.findByPriorityId(id);
+
+		if (existingNotificationRule.isEmpty()) {
+			resultDto.setStatus(StatusType.FAILURE.toString());
+			resultDto.setPayload("");
+			resultDto.setMessage("Not found");
+		} else {
+			existingNotificationRule.stream().forEach(item -> {
+				notificationRuleRespDTO.add(objectMapper.convertValue(item, CaseNotificationRulesResponseDTO.class));
+			});
+
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(notificationRuleRespDTO);
+			resultDto.setMessage("Fetched case notification rules successfully");
+		}
+
+		return resultDto;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,20 +21,21 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "case_notification_rules")
+@IdClass(CaseNotificationRulesPKId.class)
 public class CaseNotificationRules extends AuditEntityModel{
 
 	@Id
 	@Column(name = "rule_no")
 	private Integer ruleNo;
 
-	@Column(name = "rule_desc", nullable = false, length = 500)
+	@Column(name = "rule_desc")
 	private String ruleDesc;
 	
-
-	@Column(name = "pacs_status_id", length = 200)
+	@Id
+	@Column(name = "pacs_status_id")
 	private Integer pacsStatusId;
 
-
+	@Id
 	@Column(name = "priority_id")
 	private Integer priorityId;
 
