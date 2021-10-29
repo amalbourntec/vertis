@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "ccb50b6a-563c-452a-aa20-b7452f74ce61",
+		"name": "CaseNotificationRuleHdr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "caseNotificationRuleHdr",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/caseNotificationRuleHdr",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"caseNotificationRuleHdr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "caseNotificationRuleHdr",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"ruleNo\": 2,\r\n            \"ruleDesc\": \"439106b6-5972-4459-bb3d-ac0b57\",\r\n            \"pacsStatusId\": 123456,\r\n            \"priorityId\": 125478,\r\n            \"timeEllapsedMins\": 20,\r\n            \"isActive\": \"Y\",\r\n            \"createdBy\": \"439106b6-5972-4459-bb3d-ac0b571b9ac2\",\r\n            \"dateCreated\": \"2021-10-07T18:30:00.000+00:00\",\r\n            \"updateBy\": null,\r\n            \"dateUpdated\": \"2021-10-07T18:30:00.000+00:00\",\r\n            \"forSmsVerification\": \"Y\",\r\n            \"timeLeftMins\": 20,\r\n            \"notifyByTime\": \"Y\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/caseNotificationRuleHdr",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"caseNotificationRuleHdr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "caseNotificationRuleHdr",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/caseNotificationRuleHdr/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"caseNotificationRuleHdr",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "caseNotificationRuleHdr",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"ruleNo\": 2,\r\n        \"ruleDesc\": \"439106b6-5972-4459-bb3d-ac0b57\",\r\n        \"pacsStatusId\": 123456888,\r\n        \"priorityId\": 125478,\r\n        \"timeEllapsedMins\": 20,\r\n        \"isActive\": \"Y\",\r\n        \"createdBy\": \"439106b6-5972-4459-bb3d-ac0b571b9ac2\",\r\n        \"dateCreated\": \"2021-10-28T17:19:49.541+00:00\",\r\n        \"updateBy\": null,\r\n        \"dateUpdated\": \"2021-10-28T17:19:49.541+00:00\",\r\n        \"forSmsVerification\": \"Y\",\r\n        \"timeLeftMins\": 20,\r\n        \"notifyByTime\": \"Y\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/caseNotificationRuleHdr/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"caseNotificationRuleHdr",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "caseNotificationRuleHdr",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/caseNotificationRuleHdr/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"caseNotificationRuleHdr",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
