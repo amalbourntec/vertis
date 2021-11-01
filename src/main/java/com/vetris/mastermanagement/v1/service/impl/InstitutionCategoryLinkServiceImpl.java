@@ -20,39 +20,40 @@ import com.vetris.mastermanagement.v1.service.InstitutionCategoryLinkService;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 /**
-* Service Implementation for Institution Category Link
-* @author Jini
-*
-*/
+ * Service Implementation for Institution Category Link
+ * 
+ * @author Jini
+ *
+ */
 
 @Service
 public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLinkService {
-	
+
 	@Autowired
 	InstitutionCategoryLinkRepository institutionCategoryLinkRepository;
-	
+
 	@Autowired
 	ObjectMapper objectMapper;
-	
+
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
-	
+
 	/**
-	* Adding a institution Category link  using request DTO
-	*/
+	 * Adding a institution Category link using request DTO
+	 */
 	@Override
-	public CommonResponseDTO addInstitutionCategoryLink(
-			InstitutionCategoryLinkRequestDTO institutionCategoryLinkDTO) throws Exception {
-		
+	public CommonResponseDTO addInstitutionCategoryLink(InstitutionCategoryLinkRequestDTO institutionCategoryLinkDTO)
+			throws Exception {
+
 		InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = new InstitutionCategoryLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
-		InstitutionCategoryLink resultInstitutionCategoryLink = objectMapper.convertValue(
-				institutionCategoryLinkDTO, InstitutionCategoryLink.class);
+
+		InstitutionCategoryLink resultInstitutionCategoryLink = objectMapper.convertValue(institutionCategoryLinkDTO,
+				InstitutionCategoryLink.class);
 		resultInstitutionCategoryLink.setCreatedBy(jwtSecurityContextUtil.getId());
-		
+
 		resultInstitutionCategoryLink = institutionCategoryLinkRepository.save(resultInstitutionCategoryLink);
-		
+
 		BeanUtils.copyProperties(resultInstitutionCategoryLink, institutionCategoryLinkResponseDTO);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkResponseDTO);
@@ -64,21 +65,22 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 	/**
 	 * Getting institution Category Link by categoryId
 	 */
-	
+
 	@Override
 	public CommonResponseDTO getInstitutionCategoryLinkById(Integer categoryId) throws Exception {
-	
+
 		InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = new InstitutionCategoryLinkResponseDTO();
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		
-		InstitutionCategoryLink institutionCategoryLink = institutionCategoryLinkRepository.findById(categoryId).
-				orElseThrow(()->new ResourceNotFoundException("Institution Category Link " +ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+
+		InstitutionCategoryLink institutionCategoryLink = institutionCategoryLinkRepository.findById(categoryId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Institution Category Link " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		BeanUtils.copyProperties(institutionCategoryLink, institutionCategoryLinkResponseDTO);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkResponseDTO);
 		resultDto.setMessage("Fetched institution Category Link successfully");
-		
-		return resultDto;		
+
+		return resultDto;
 	}
 
 	/**
@@ -86,43 +88,43 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 	 */
 	@Override
 	public CommonResponseDTO getAllInstitutionCategoryLink() throws Exception {
-		
+
 		List<InstitutionCategoryLink> institutionCategoryLinkList = institutionCategoryLinkRepository.findAll();
 		List<InstitutionCategoryLinkResponseDTO> institutionCategoryLinkRespDTO = new ArrayList<>();
-		CommonResponseDTO resultDto= new CommonResponseDTO();
-		
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+
 		if (institutionCategoryLinkList.isEmpty()) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setMessage("No institution Category Link found");
 		} else {
-			institutionCategoryLinkList.stream()
-			.forEach(category->{institutionCategoryLinkRespDTO
-				.add(objectMapper.convertValue(category, InstitutionCategoryLinkResponseDTO.class));
-			});	
+			institutionCategoryLinkList.stream().forEach(category -> institutionCategoryLinkRespDTO
+					.add(objectMapper.convertValue(category, InstitutionCategoryLinkResponseDTO.class)));
 		}
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkRespDTO);
 		resultDto.setMessage("Fetched institution Category Link successfully");
-		
+
 		return resultDto;
 	}
 
 	/**
-	* updating the existing institution Category link by categoryId 
-	*/
+	 * updating the existing institution Category link by categoryId
+	 */
 	@Override
 	public CommonResponseDTO updateInstitutionCategoryLink(
 			InstitutionCategoryLinkRequestDTO institutionCategoryLinkReqDTO, Integer categoryId) throws Exception {
-		
+
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionCategoryLink institutionCategoryLink =  institutionCategoryLinkRepository.findById(categoryId)
-				.orElseThrow(()-> new ResourceNotFoundException("Institution Category Link " +ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionCategoryLink institutionCategoryLink = institutionCategoryLinkRepository.findById(categoryId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Institution Category Link " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		try {
 			BeanUtils.copyProperties(institutionCategoryLinkReqDTO, institutionCategoryLink);
 			institutionCategoryLink.setUpdateBy(jwtSecurityContextUtil.getId());
 			institutionCategoryLink = institutionCategoryLinkRepository.save(institutionCategoryLink);
-			InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = objectMapper.convertValue(institutionCategoryLink, InstitutionCategoryLinkResponseDTO.class);
+			InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = objectMapper
+					.convertValue(institutionCategoryLink, InstitutionCategoryLinkResponseDTO.class);
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(institutionCategoryLinkResponseDTO);
 			resultDto.setMessage("Fetched user successfully");
@@ -131,28 +133,26 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 			throw new Exception(e);
 		}
 		return resultDto;
-		
+
 	}
 
-	
 	/**
-	* Deleting the institution Category link by categoryId
-	*/
-	
+	 * Deleting the institution Category link by categoryId
+	 */
+
 	@Override
 	public CommonResponseDTO deleteInstitutionCategoryLink(Integer categoryId) throws Exception {
-		
+
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionCategoryLinkRepository.findById(categoryId)
-				.orElseThrow(() -> new ResourceNotFoundException("Institution Category Link" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
+		institutionCategoryLinkRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(
+				"Institution Category Link" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
 		institutionCategoryLinkRepository.deleteById(categoryId);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Deleted Institution Category Link successfully");
-		
+
 		return resultDto;
 
 	}
 
-		
 }

@@ -5,6 +5,7 @@ import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 
 /**
  * Service for CaseNotificationRuleRadiologistDtls
+ * 
  * @author Jini
  *
  */
@@ -16,12 +17,13 @@ public interface CaseNotificationRuleRadiologistDtlsService {
 	public CommonResponseDTO getCaseNotificationRuleRadiologistDtlsById(Integer ruleNo) throws Exception;
 
 	public CommonResponseDTO addCaseNotificationRuleRadiologistDtls(
-			CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO) throws Exception;
+			CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO)
+			throws Exception;
 
 	public CommonResponseDTO updateCaseNotificationRuleRadiologistDtls(
-			CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO,
-			Integer ruleNo) throws Exception;
+			CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO, Integer ruleNo)
+			throws Exception;
 
-	public CommonResponseDTO deleteCaseNotificationRuleRadiologistDtls(Integer ruleNo)throws Exception;
+	public CommonResponseDTO deleteCaseNotificationRuleRadiologistDtls(Integer ruleNo) throws Exception;
 
 }

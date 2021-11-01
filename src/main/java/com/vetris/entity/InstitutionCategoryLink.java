@@ -12,6 +12,7 @@ import lombok.Setter;
 
 /**
  * Entity for InstitutionCategoryLink
+ * 
  * @author Jini
  *
  */
@@ -21,16 +22,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "InstitutionCategoryLink")
 public class InstitutionCategoryLink extends AuditEntityModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="category_id", nullable = false)
+	@Column(name = "category_id", nullable = false)
 	private Integer categoryId;
-	
-	@Column(name ="institution_id", nullable = false)
-	private String institutionId;
-	
-	
-	
-}
 
+	@Column(name = "institution_id", nullable = false)
+	private String institutionId;
+
+}

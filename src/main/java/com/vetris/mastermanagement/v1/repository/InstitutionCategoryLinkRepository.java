@@ -7,13 +7,12 @@ import com.vetris.entity.InstitutionCategoryLink;
 
 /**
  * Repository for InstitutionCategoryLink
+ * 
  * @author Jini
  *
  */
 
 @Repository
-public interface InstitutionCategoryLinkRepository  extends JpaRepository<InstitutionCategoryLink, Integer> {
-
-
+public interface InstitutionCategoryLinkRepository extends JpaRepository<InstitutionCategoryLink, Integer> {
 
 }

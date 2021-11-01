@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
-*  Institution Category Link Response DTO class
-* @author Jini
-*
-*/
+ * Institution Category Link Response DTO class
+ * 
+ * @author Jini
+ *
+ */
 
 @Getter
 @Setter

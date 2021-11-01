@@ -12,6 +12,7 @@ import lombok.Setter;
 
 /**
  * Entity for CaseNotificationRuleRadiologistDtls
+ * 
  * @author Jini
  *
  */
@@ -20,22 +21,22 @@ import lombok.Setter;
 @Entity
 @Table(name = "case_notification_rule_radiologist_dtls")
 public class CaseNotificationRuleRadiologistDtls {
-	
+
 	@Id
 	@Column(name = "rule_no", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer RuleNo;
-	
+	private Integer ruleNo;
+
 	@Column(name = "radiologist_id ", nullable = false)
-	private String RadiologistId;
-	
+	private String radiologistId;
+
 	@Column(name = "user_id", nullable = true)
-	private String UserId;
-	
+	private String userId;
+
 	@Column(name = "notify_if_scheduled", length = 1, nullable = true)
-	private String NotifyIfScheduled;
-	
+	private String notifyIfScheduled;
+
 	@Column(name = "notify_always", length = 1, nullable = true)
-	private String NotifyAlways;
+	private String notifyAlways;
 
 }

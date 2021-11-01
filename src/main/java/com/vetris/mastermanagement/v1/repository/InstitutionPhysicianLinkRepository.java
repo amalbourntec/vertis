@@ -7,13 +7,12 @@ import com.vetris.entity.InstitutionPhysicianLink;
 
 /**
  * Repository for InstitutionPhysicianLink
+ * 
  * @author Jini
  *
  */
 
 @Repository
 public interface InstitutionPhysicianLinkRepository extends JpaRepository<InstitutionPhysicianLink, String> {
-
-
 
 }
