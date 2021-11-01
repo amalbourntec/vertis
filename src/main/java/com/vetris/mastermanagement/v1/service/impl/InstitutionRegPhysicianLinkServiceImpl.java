@@ -114,7 +114,6 @@ public class InstitutionRegPhysicianLinkServiceImpl implements InstitutionRegPhy
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionRegPhysicianLink resultPhysician = institutionRegPhysicianLinkRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Physician" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
 			BeanUtils.copyProperties(physicianDto, resultPhysician);
 			resultPhysician.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultPhysician = institutionRegPhysicianLinkRepo.save(resultPhysician);
@@ -122,10 +121,6 @@ public class InstitutionRegPhysicianLinkServiceImpl implements InstitutionRegPhy
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(physicianRespDTO);
 			resultDto.setMessage("Fetched physician successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
 
 		return resultDto;
 	}

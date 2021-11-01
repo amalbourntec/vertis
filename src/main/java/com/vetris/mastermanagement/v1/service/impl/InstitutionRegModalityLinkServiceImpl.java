@@ -107,7 +107,6 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionRegModalityLink resultModality = institutionRegModalityLinkRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Modality" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
 			BeanUtils.copyProperties(regModalityRequest, resultModality);
 			resultModality.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultModality = institutionRegModalityLinkRepository.save(resultModality);
@@ -118,10 +117,6 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(modalityRespDTO);
 			resultDto.setMessage("Fetched modality successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
 
 		return resultDto;
 	}

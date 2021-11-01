@@ -73,7 +73,7 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 		CaseNotificationRules notificationRules = caseNotificationRulesRepo
 				.findByRuleNoANDPacsStatusIdANDPriorityId(ruleNo, pacsStatusId, priorityId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (notificationRules.equals(null)) {
+		if (notificationRules==null) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setPayload("");
 			resultDto.setMessage("No notification rule found");

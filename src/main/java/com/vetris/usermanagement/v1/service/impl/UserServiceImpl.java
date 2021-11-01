@@ -91,7 +91,6 @@ public class UserServiceImpl implements UserService {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		User resultUser =userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
 			BeanUtils.copyProperties(userDto, resultUser);
 			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultUser.setPassword(encodePassword(userDto.getPassword()));
@@ -102,10 +101,6 @@ public class UserServiceImpl implements UserService {
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(userRespDTO);
 			resultDto.setMessage("Fetched user successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
 
 		return resultDto;
 	}

@@ -22,7 +22,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionRegModalityLinkService;
  * @author Jose Eldhose
  *
  */
-@RestController(value = "InstitutionRegModalityLinkController")
+@RestController("InstitutionRegModalityLinkController")
 @RequestMapping("/v1/reg_modality")
 @CrossOrigin(origins = "*")
 public class InstitutionRegModalityLinkController {
@@ -70,11 +70,11 @@ public class InstitutionRegModalityLinkController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> updateRegModality(
-			@RequestBody InstitutionRegModalityLinkRequestDTO RegModalityRequest, @PathVariable("id") String id)
+			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest, @PathVariable("id") String id)
 			throws Exception {
-		CommonResponseDTO RegModalityRespDTO = institutionRegModalityLinkService
-				.updateInstitutionRegModality(RegModalityRequest, id);
-		return ResponseEntity.ok(RegModalityRespDTO);
+		CommonResponseDTO regModalityRespDTO = institutionRegModalityLinkService
+				.updateInstitutionRegModality(regModalityRequest, id);
+		return ResponseEntity.ok(regModalityRespDTO);
 	}
 
 	/**

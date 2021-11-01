@@ -23,7 +23,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionRegPhysicianLinkService
  *
  */
 
-@RestController(value = "InstitutionRegPhysicianLinkController")
+@RestController("InstitutionRegPhysicianLinkController")
 @RequestMapping("/v1/physician")
 @CrossOrigin(origins = "*")
 public class InstitutionRegPhysicianLinkController {
@@ -58,8 +58,8 @@ public class InstitutionRegPhysicianLinkController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createPhysician(
-			@RequestBody InstitutionRegPhysicianLinkRequestDTO PhysicianRequest) throws Exception {
-		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.addPhysician(PhysicianRequest);
+			@RequestBody InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Exception {
+		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.addPhysician(physicianRequest);
 		return ResponseEntity.ok(resultDto);
 	}
 
