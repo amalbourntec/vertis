@@ -4,22 +4,23 @@ import com.vetris.mastermanagement.v1.dto.request.InstitutionPhysicianLinkReques
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 
 /**
-* Service for Institution Physician Link
-* @author Jini
-*
-*/
+ * Service for Institution Physician Link
+ * 
+ * @author Jini
+ *
+ */
 
 public interface InstitutionPhysicianLinkService {
 
-	public CommonResponseDTO getAllInstitutionPhysicianLink()throws Exception;
+	public CommonResponseDTO getAllInstitutionPhysicianLink() throws Exception;
 
-	public CommonResponseDTO getInstitutionPhysicianLinkById(String physicianId)throws Exception;
+	public CommonResponseDTO getInstitutionPhysicianLinkById(String physicianId) throws Exception;
 
 	public CommonResponseDTO addInstitutionPhysicianLink(
 			InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkRequest) throws Exception;
 
 	public CommonResponseDTO updateInstitutionPhysicianLink(
-			InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDto, String physicianId)throws Exception;
+			InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDto, String physicianId) throws Exception;
 
 	public CommonResponseDTO deleteInstitutionPhysicianLink(String physicianId) throws Exception;
 

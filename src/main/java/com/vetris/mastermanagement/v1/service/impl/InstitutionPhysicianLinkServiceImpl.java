@@ -23,23 +23,24 @@ import com.vetris.mastermanagement.v1.service.InstitutionPhysicianLinkService;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 /**
-* Service Implementation for Institution Physician Link
-* @author Jini
-*
-*/
+ * Service Implementation for Institution Physician Link
+ * 
+ * @author Jini
+ *
+ */
 
 @Service
-public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysicianLinkService{
-	
+public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysicianLinkService {
+
 	@Autowired
 	InstitutionPhysicianLinkRepository institutionPhysicianLinkRepository;
-	
+
 	@Autowired
 	ObjectMapper objectMapper;
-	
+
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
-	
+
 	/**
 	 * Get all institution Physician Link
 	 */
@@ -48,22 +49,19 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 		List<InstitutionPhysicianLink> institutionPhysicianLinkList = institutionPhysicianLinkRepository.findAll();
 		List<InstitutionPhysicianLinkResponseDTO> institutionPhysicianLinkRespDTO = new ArrayList<>();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
-		if(institutionPhysicianLinkList.isEmpty()) {
+
+		if (institutionPhysicianLinkList.isEmpty()) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setMessage("No Institution Physician Link found");
-		}else {
-			institutionPhysicianLinkList.stream()
-			.forEach(physician->{institutionPhysicianLinkRespDTO
-				.add(objectMapper.convertValue(physician, InstitutionPhysicianLinkResponseDTO.class));
-			});
+		} else {
+			institutionPhysicianLinkList.stream().forEach(physician -> institutionPhysicianLinkRespDTO
+					.add(objectMapper.convertValue(physician, InstitutionPhysicianLinkResponseDTO.class)));
 		}
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkRespDTO);
 		resultDto.setMessage("Fetched list of Institution Physician Link successfully");
-		return resultDto;	
+		return resultDto;
 	}
-
 
 	/**
 	 * Getting institution Physician Link by physicianId
@@ -71,10 +69,12 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 	@Override
 	public CommonResponseDTO getInstitutionPhysicianLinkById(String physicianId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionPhysicianLink existingInstitutionPhysicianLink = institutionPhysicianLinkRepository.findById(physicianId)
-				.orElseThrow(() -> new ResourceNotFoundException("Institution Physician Link" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionPhysicianLink existingInstitutionPhysicianLink = institutionPhysicianLinkRepository
+				.findById(physicianId).orElseThrow(() -> new ResourceNotFoundException(
+						"Institution Physician Link" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper.convertValue(existingInstitutionPhysicianLink, InstitutionPhysicianLinkResponseDTO.class);
+		InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper
+				.convertValue(existingInstitutionPhysicianLink, InstitutionPhysicianLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkResponseDTO);
 		resultDto.setMessage("Fetched institution Physician Link successfully");
@@ -83,50 +83,55 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 	}
 
 	/**
-	* Adding a institution Physician link using request DTO
-	*/
+	 * Adding a institution Physician link using request DTO
+	 */
 
 	@Override
 	public CommonResponseDTO addInstitutionPhysicianLink(
 			InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkRequest) throws Exception {
-		
+
 		InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = new InstitutionPhysicianLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
+
 		UUID uuid = UUID.randomUUID();
-		InstitutionPhysicianLink institutionPhysician = objectMapper.convertValue(institutionPhysicianLinkRequest, InstitutionPhysicianLink.class);
+		InstitutionPhysicianLink institutionPhysician = objectMapper.convertValue(institutionPhysicianLinkRequest,
+				InstitutionPhysicianLink.class);
 		institutionPhysician.setPhysicianId(uuid.toString());
-		
-		institutionPhysician.setPhysicianPacsPassword(encodePassword(institutionPhysicianLinkRequest.getPhysicianPacsPassword()));
+
+		institutionPhysician
+				.setPhysicianPacsPassword(encodePassword(institutionPhysicianLinkRequest.getPhysicianPacsPassword()));
 		institutionPhysician.setCreatedBy(jwtSecurityContextUtil.getId());
 		institutionPhysician = institutionPhysicianLinkRepository.save(institutionPhysician);
-		
+
 		BeanUtils.copyProperties(institutionPhysician, institutionPhysicianLinkResponseDTO);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkResponseDTO);
 		resultDto.setMessage("Saved institution Physician Link successfully");
-		
+
 		return resultDto;
 	}
 
 	/**
-	* updating the existing institution Physician link by physicianId
-	*/
+	 * updating the existing institution Physician link by physicianId
+	 */
 
 	@Override
 	public CommonResponseDTO updateInstitutionPhysicianLink(
 			InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDto, String physicianId) throws Exception {
-		
+
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionPhysicianLink institutionPhysician =  institutionPhysicianLinkRepository.findById(physicianId)
-				.orElseThrow(()-> new ResourceNotFoundException("InstitutionPhysician" +ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionPhysicianLink institutionPhysician = institutionPhysicianLinkRepository.findById(physicianId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"InstitutionPhysician" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		try {
 			BeanUtils.copyProperties(institutionPhysicianLinkReqDto, institutionPhysician);
 			institutionPhysician.setUpdateBy(jwtSecurityContextUtil.getId());
-			institutionPhysician.setPhysicianPacsPassword(encodePassword(institutionPhysicianLinkReqDto.getPhysicianPacsPassword()));
+			institutionPhysician.setPhysicianPacsPassword(
+					encodePassword(institutionPhysicianLinkReqDto.getPhysicianPacsPassword()));
 			institutionPhysician = institutionPhysicianLinkRepository.save(institutionPhysician);
-			InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper.convertValue(institutionPhysician, InstitutionPhysicianLinkResponseDTO.class);
+			InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper
+					.convertValue(institutionPhysician, InstitutionPhysicianLinkResponseDTO.class);
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(institutionPhysicianLinkResponseDTO);
 			resultDto.setMessage("Fetched user successfully");
@@ -135,18 +140,18 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 			throw new Exception(e);
 		}
 		return resultDto;
-		
+
 	}
 
-	
 	/**
-	* Deleting the institution Physician link by physicianId
-	*/
-	
+	 * Deleting the institution Physician link by physicianId
+	 */
+
 	@Override
 	public CommonResponseDTO deleteInstitutionPhysicianLink(String physicianId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionPhysicianLinkRepository.findById(physicianId).orElseThrow(()-> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		institutionPhysicianLinkRepository.findById(physicianId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		institutionPhysicianLinkRepository.deleteById(physicianId);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
@@ -154,17 +159,16 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 
 		return resultDto;
 	}
-	
 
 	/**
-	 * This method used to encode password TODO needs to be changed according real
-	 * application
+	 * This method used to encode password TODO needs to be changed according
+	 * real application
 	 * 
 	 * @param password
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	
+
 	private String encodePassword(String physicianPacsPassword) throws NoSuchAlgorithmException {
 		String encryptedpassword = null;
 

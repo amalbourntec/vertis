@@ -7,11 +7,13 @@ import com.vetris.entity.CaseNotificationRuleRadiologistDtls;
 
 /**
  * Repository for CaseNotificationRuleRadiologistDtls
+ * 
  * @author Jini
  *
  */
 
 @Repository
-public interface CaseNotificationRuleRadiologistDtlsRepository extends JpaRepository<CaseNotificationRuleRadiologistDtls, Integer>{
+public interface CaseNotificationRuleRadiologistDtlsRepository
+		extends JpaRepository<CaseNotificationRuleRadiologistDtls, Integer> {
 
 }
