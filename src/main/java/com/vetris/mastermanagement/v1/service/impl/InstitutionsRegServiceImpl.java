@@ -24,7 +24,7 @@ import com.vetris.mastermanagement.v1.service.InstitutionsRegService;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 /**
- * Service Implementation for InstitutionDisputeDicomTags
+ * Service Implementation for InstitutionsReg
  * 
  * @author Dhanesh
  *
@@ -43,7 +43,6 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 
 	@Override
 	public CommonResponseDTO addInstitutionsReg(InstitutionsRegRequestDTO institutionRegRequest) throws Exception {
-		// TODO Auto-generated method stub
 		InstitutionsRegResponseDTO institutionsRegResponseDTO = new InstitutionsRegResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		UUID uuid = UUID.randomUUID();
@@ -51,7 +50,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 		InstitutionsReg institutionsReg = objectMapper.convertValue(institutionRegRequest, InstitutionsReg.class);
 		institutionsReg.setId(uuid.toString());
 		institutionsReg.setLoginPassword(encodePassword(institutionRegRequest.getLoginPassword()));
-		institutionsReg=institutionsRegRepository.save(institutionsReg);
+		institutionsReg = institutionsRegRepository.save(institutionsReg);
 		BeanUtils.copyProperties(institutionsReg, institutionsRegResponseDTO);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(institutionsRegResponseDTO);
@@ -61,7 +60,6 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 
 	@Override
 	public CommonResponseDTO getAllInstitutionsReg() throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<InstitutionsReg> institutionsReg = institutionsRegRepository.findAll();
 		List<InstitutionsRegResponseDTO> resultresponseDto = new ArrayList<>();
@@ -70,9 +68,8 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 			resultDto.setPayload("");
 			resultDto.setMessage("Not found");
 		} else {
-			institutionsReg.stream().forEach(institutionsRegItem -> {
-				resultresponseDto.add(objectMapper.convertValue(institutionsRegItem, InstitutionsRegResponseDTO.class));
-			});
+			institutionsReg.stream().forEach(institutionsRegItem -> resultresponseDto
+					.add(objectMapper.convertValue(institutionsRegItem, InstitutionsRegResponseDTO.class)));
 
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(resultresponseDto);
@@ -84,7 +81,6 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 
 	@Override
 	public CommonResponseDTO getInstitutionsRegById(String id) throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionsRegResponseDTO institutionsRegResponseDTO = new InstitutionsRegResponseDTO();
 		InstitutionsReg existingInstitutionsReg = institutionsRegRepository.findById(id)
@@ -102,7 +98,6 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 	@Override
 	public CommonResponseDTO updateInstitutionsReg(InstitutionsRegRequestDTO institutionReg, String id)
 			throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		institutionsRegRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
@@ -127,7 +122,6 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 
 	@Override
 	public CommonResponseDTO deleteInstitutionsReg(String id) throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		Optional<InstitutionsReg> existingInstitutionsReg = institutionsRegRepository.findById(id);
 		if (existingInstitutionsReg.isPresent()) {

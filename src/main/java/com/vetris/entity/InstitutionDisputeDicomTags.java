@@ -10,14 +10,19 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Entity for InstitutionDisputeDicomTags
+ * 
+ * @author Dhanesh
+ *
+ */
+
 @Getter
 @Setter
 @Entity
 @Table(name = "institution_dispute__dicom_tags")
 @IdClass(InstitutionDisputeDicomTagsId.class)
-public class InstitutionDisputeDicomTags extends AuditEntityModel{
-
-
+public class InstitutionDisputeDicomTags extends AuditEntityModel {
 
 	@Id
 	private String institutionId;

@@ -16,6 +16,13 @@ import com.vetris.mastermanagement.v1.dto.request.InstitutionsRegRequestDTO;
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.mastermanagement.v1.service.InstitutionsRegService;
 
+/**
+ * Controller for InstitutionsReg
+ * 
+ * @author Dhanesh
+ *
+ */
+
 @RestController(value = "InstitutionsRegController")
 @RequestMapping("/v1/institutionsRegController")
 @CrossOrigin(origins = "*")
@@ -24,8 +31,7 @@ public class InstitutionsRegController {
 	InstitutionsRegService institutionsRegService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchInstitutionsRegById(@PathVariable("id") String id)
-			throws Exception {
+	public ResponseEntity<CommonResponseDTO> fetchInstitutionsRegById(@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO resultDto = institutionsRegService.getInstitutionsRegById(id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -38,23 +44,20 @@ public class InstitutionsRegController {
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionsReg(
 			@RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO) throws Exception {
-		CommonResponseDTO resultDto = institutionsRegService
-				.addInstitutionsReg(institutionsRegRequestDTO);
+		CommonResponseDTO resultDto = institutionsRegService.addInstitutionsReg(institutionsRegRequestDTO);
 		return ResponseEntity.ok(resultDto);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionsReg(
-			@RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO,
-			@PathVariable("id") String id) throws Exception {
-		CommonResponseDTO resultDto = institutionsRegService
-				.updateInstitutionsReg(institutionsRegRequestDTO, id);
+			@RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO, @PathVariable("id") String id)
+			throws Exception {
+		CommonResponseDTO resultDto = institutionsRegService.updateInstitutionsReg(institutionsRegRequestDTO, id);
 		return ResponseEntity.ok(resultDto);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deleteInstitutionsReg(@PathVariable("id") String id)
-			throws Exception {
+	public ResponseEntity<CommonResponseDTO> deleteInstitutionsReg(@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO resultDto = institutionsRegService.deleteInstitutionsReg(id);
 		return ResponseEntity.ok(resultDto);
 	}

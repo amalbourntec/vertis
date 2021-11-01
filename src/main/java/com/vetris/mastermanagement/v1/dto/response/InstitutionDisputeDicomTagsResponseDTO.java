@@ -13,8 +13,6 @@ import lombok.Setter;
 
 public class InstitutionDisputeDicomTagsResponseDTO {
 
-	
-
 	private String institutionId;
 
 	private String groupId;
@@ -24,12 +22,12 @@ public class InstitutionDisputeDicomTagsResponseDTO {
 	private String defaultValue;
 
 	private String junkCharacters;
-	
+
 	private String createdBy;
-	
+
 	private Date dateCreated;
-	
+
 	private String updateBy;
-	
+
 	private Date dateUpdated;
 }

@@ -79,7 +79,7 @@ public class InstitutionsRegRequestDTO {
 
 	@Size(max = 5, message = "preferredPmtMethod  must be atmost 5 characters")
 	private String preferredPmtMethod;
-	
+
 	@Size(max = 200, message = "created by  must be atmost 200 characters")
 	@NotNull
 	private String createdBy;

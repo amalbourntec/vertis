@@ -3,6 +3,10 @@ package com.vetris.mastermanagement.v1.service;
 import com.vetris.mastermanagement.v1.dto.request.InstitutionDisputeDicomTagsRequestDTO;
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 
+/*
+ * @author Dhanesh C P
+ * Service for InstitutionDisputeDicomTagsService
+ * */
 public interface InstitutionDisputeDicomTagsService {
 	public CommonResponseDTO addInstitutionDisputeDicomTags(InstitutionDisputeDicomTagsRequestDTO institution)
 			throws Exception;
@@ -22,8 +26,9 @@ public interface InstitutionDisputeDicomTagsService {
 			String groupId, String elementId) throws Exception;
 
 	public CommonResponseDTO fetchInstitutionDisputeDicomTagsByAll(String institutionId, String groupId,
-			String elementId)throws Exception;
+			String elementId) throws Exception;
 
-	public CommonResponseDTO deleteInstitutionDisputeDicomTags(String institutionId, String groupId, String elementId) throws Exception;
+	public CommonResponseDTO deleteInstitutionDisputeDicomTags(String institutionId, String groupId, String elementId)
+			throws Exception;
 
 }

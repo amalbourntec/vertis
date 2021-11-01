@@ -2,8 +2,10 @@ package com.vetris.mastermanagement.v1.service;
 
 import com.vetris.mastermanagement.v1.dto.request.InstitutionsRegRequestDTO;
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
+
 /*
- * Author : Dhanesh
+ * @author Dhanesh C P
+ * Service for InstitutionsReg
  * */
 public interface InstitutionsRegService {
 

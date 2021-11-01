@@ -1,12 +1,8 @@
 package com.vetris.mastermanagement.v1.dto.request;
 
-import java.util.Date;
-
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
-
-import com.sun.istack.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +16,6 @@ import lombok.Setter;
 @Validated
 public class InstitutionDisputeDicomTagsRequestDTO {
 
-	
 	@Size(max = 5, message = "institutionId  must be atmost 5 characters")
 	private String institutionId;
 
@@ -35,6 +30,5 @@ public class InstitutionDisputeDicomTagsRequestDTO {
 
 	@Size(max = 250, message = "junkCharacters must be atmost 250 characters")
 	private String junkCharacters;
-
 
 }

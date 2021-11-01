@@ -39,7 +39,6 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 	@Override
 	public CommonResponseDTO addInstitutionDisputeDicomTags(
 			InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO) throws Exception {
-		// TODO Auto-generated method stub
 		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
@@ -68,10 +67,9 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 			resultDto.setPayload("");
 			resultDto.setMessage("Not found");
 		} else {
-			institutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
-				resultResponseDto.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
-						InstitutionDisputeDicomTagsResponseDTO.class));
-			});
+			institutionDisputeDicomTags.stream()
+					.forEach(institutionDisputeDicomTagsItem -> resultResponseDto.add(objectMapper.convertValue(
+							institutionDisputeDicomTagsItem, InstitutionDisputeDicomTagsResponseDTO.class)));
 
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(resultResponseDto);
@@ -108,7 +106,6 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 
 	@Override
 	public CommonResponseDTO getInstitutionDisputeDicomTagsByGroupId(String groupId) throws Exception {
-
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
 		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
@@ -134,7 +131,6 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 
 	@Override
 	public CommonResponseDTO getInstitutionDisputeDicomTagsByElementId(String elementId) throws Exception {
-		// TODO Auto-generated method stub
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<InstitutionDisputeDicomTagsResponseDTO> institutionDisputeDicomTagsResponseDTO = new ArrayList<InstitutionDisputeDicomTagsResponseDTO>();
 		List<InstitutionDisputeDicomTags> existingInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository
@@ -241,11 +237,13 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 	public CommonResponseDTO deleteInstitutionDisputeDicomTags(String institutionId, String groupId, String elementId)
 			throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTags existingInstitutionsReg = institutionDisputeDicomTagsRepository.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
-			institutionDisputeDicomTagsRepository.delete(existingInstitutionsReg);
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setMessage("Deleted successfully");
+		InstitutionDisputeDicomTags existingInstitutionsReg = institutionDisputeDicomTagsRepository
+				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
+		institutionDisputeDicomTagsRepository.delete(existingInstitutionsReg);
+		resultDto.setStatus(StatusType.SUCCESS.toString());
+		resultDto.setMessage("Deleted successfully");
 		return resultDto;
 	}
 

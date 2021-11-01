@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Dhanesh InstitutionDisputeDicomTagsResponseDTO class
+ * @author Dhanesh class for InstitutionsRegResponseDTO
  */
 @Getter
 @Setter

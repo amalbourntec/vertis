@@ -16,6 +16,13 @@ import com.vetris.mastermanagement.v1.dto.request.InstitutionDisputeDicomTagsReq
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.mastermanagement.v1.service.InstitutionDisputeDicomTagsService;
 
+/**
+ * Controller for InstitutionDisputeDicomTags
+ * 
+ * @author Dhanesh
+ *
+ */
+
 @RestController(value = "InstitutionDisputeDicomTagsController")
 @RequestMapping("/v1/institutionDisputeDicomTags")
 @CrossOrigin(origins = "*")

@@ -8,23 +8,21 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Entity for InstitutionsReg
+ * 
+ * @author Dhanesh
+ *
+ */
+
 @Getter
 @Setter
 @Entity
 @Table(name = "institution_reg")
 public class InstitutionsReg extends AuditEntityModel {
 
-	// only updated_by and date_updated are extended from AuditEntityModel,createdBy
-	// and dateCreated are not used
-
 	@Id
 	@Column(name = "id", length = 200)
-	/*
-	 * @SequenceGenerator(name = "institutionReg_seq", allocationSize = 1)
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =
-	 * "institutionReg_seq")
-	 */
 	private String id;
 
 	@Column(name = "code", length = 5, nullable = true)

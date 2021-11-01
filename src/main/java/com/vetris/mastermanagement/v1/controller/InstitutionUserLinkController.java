@@ -16,6 +16,13 @@ import com.vetris.mastermanagement.v1.dto.request.InstitutionUserLinkRequestDTO;
 import com.vetris.mastermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.mastermanagement.v1.service.InstitutionUserLinkService;
 
+/**
+ * Controller for InstitutionUserLink
+ * 
+ * @author Dhanesh
+ *
+ */
+
 @RestController(value = "InstitutionUserLinkController")
 @RequestMapping("/mastermanagement/v1/institutionUserLink")
 @CrossOrigin(origins = "*")
@@ -37,7 +44,7 @@ public class InstitutionUserLinkController {
 		CommonResponseDTO resultDto = institutionUserLinkService.getByInstitutionIdORUserId(id);
 		return ResponseEntity.ok(resultDto);
 	}
-	
+
 	@GetMapping("/byuserid/{userId}")
 	public ResponseEntity<CommonResponseDTO> findInstitutionUserLinkByUserId(@PathVariable("userId") String userId)
 			throws Exception {
@@ -54,12 +61,12 @@ public class InstitutionUserLinkController {
 
 	@GetMapping("/getbyall/{institutionId}/{userId}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionDisputeDicomTagsByAll(
-			@PathVariable("institutionId") String institutionId, @PathVariable("userId") String userId) throws Exception {
-		CommonResponseDTO resultDto = institutionUserLinkService
-				.fetchInstitutionUserLinkByAll(institutionId, userId);
+			@PathVariable("institutionId") String institutionId, @PathVariable("userId") String userId)
+			throws Exception {
+		CommonResponseDTO resultDto = institutionUserLinkService.fetchInstitutionUserLinkByAll(institutionId, userId);
 		return ResponseEntity.ok(resultDto);
 	}
-	
+
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionUserLink(
 			@RequestBody InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO) throws Exception {

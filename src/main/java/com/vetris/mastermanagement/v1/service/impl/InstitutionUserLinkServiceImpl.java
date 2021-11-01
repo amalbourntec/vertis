@@ -18,6 +18,12 @@ import com.vetris.mastermanagement.v1.repository.InstitutionUserLinkRepository;
 import com.vetris.mastermanagement.v1.service.InstitutionUserLinkService;
 import com.vetris.utils.JWTSecurityContextUtil;
 
+/**
+ * Service Implementation for InstitutionUserLink
+ * 
+ * @author Dhanesh
+ *
+ */
 @Service
 public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkService {
 
@@ -40,10 +46,8 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 			resultDto.setPayload("");
 			resultDto.setMessage("Not found");
 		} else {
-			institutionUserLink.stream().forEach(institutionUserLinkItem -> {
-				responseDTO
-						.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class));
-			});
+			institutionUserLink.stream().forEach(institutionUserLinkItem -> responseDTO
+					.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
 
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(responseDTO);
@@ -54,9 +58,9 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 
 	@Override
 	public CommonResponseDTO findByUserId(String userId) throws Exception {
-
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository.findByUserId(userId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = objectMapper
 				.convertValue(existingInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
@@ -86,53 +90,56 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 
 	@Override
 	public CommonResponseDTO saveInstitutionUserLinks(InstitutionUserLinkRequestDTO requestDto) throws Exception {
-		
+
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
-		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(requestDto, InstitutionUserLink.class);
+		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(requestDto,
+				InstitutionUserLink.class);
 		resultInstitutionUserLink.setCreatedBy(jwtSecurityContextUtil.getId());
-		resultInstitutionUserLink=institutionUserLinkRepository.save(resultInstitutionUserLink);
-		institutionUserLinkResponseDTO =objectMapper.convertValue(resultInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
+		resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
+		institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
+				InstitutionUserLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(institutionUserLinkResponseDTO);
 		resultDto.setMessage("Saved successfully");
 
 		return resultDto;
-		
+
 	}
 
-	
 	@Override
-	public CommonResponseDTO deleteInstitutionUserLink(String institutionId, String userId)throws Exception {
+	public CommonResponseDTO deleteInstitutionUserLink(String institutionId, String userId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		
+		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository
+				.findByInstitutionIdANDUserId(institutionId, userId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+
 		institutionUserLinkRepository.delete(existingInstitutionUserLink);
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setMessage("Deleted successfully");
+		resultDto.setStatus(StatusType.SUCCESS.toString());
+		resultDto.setMessage("Deleted successfully");
 		return resultDto;
 	}
 
 	@Override
 	public CommonResponseDTO updateInstitutionUserLink(InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO,
-			String institutionId, String userId) throws Exception{
+			String institutionId, String userId) throws Exception {
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
-				.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+				.findByInstitutionIdANDUserId(institutionId, userId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		if (resultInstitutionUserLinkCheck == null) {
 			resultDto.setStatus(StatusType.FAILURE.toString());
 			resultDto.setPayload("");
 			resultDto.setMessage("Not found");
 		} else {
 
-			InstitutionUserLink resultInstitutionUserLink = objectMapper
-					.convertValue(institutionUserLinkRequestDTO, InstitutionUserLink.class);
+			InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
+					InstitutionUserLink.class);
 			resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
 
-			resultInstitutionUserLink = institutionUserLinkRepository
-					.save(resultInstitutionUserLink);
+			resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
 
 			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
 					InstitutionUserLinkResponseDTO.class);
@@ -148,7 +155,8 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
-				.findByInstitutionIdANDUserId(institutionId, userId).orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+				.findByInstitutionIdANDUserId(institutionId, userId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		if (resultInstitutionUserLinkCheck == null) {
 			resultDto.setStatus(StatusType.FAILURE.toString());
 			resultDto.setPayload("");
@@ -177,8 +185,8 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 			resultDto.setMessage("Not found");
 		} else {
 			existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> {
-				institutionUserLinkResponseDTO.add(objectMapper.convertValue(institutionUserLinkItem,
-						InstitutionUserLinkResponseDTO.class));
+				institutionUserLinkResponseDTO
+						.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class));
 			});
 
 			resultDto.setStatus(StatusType.SUCCESS.toString());

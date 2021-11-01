@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.vetris.entity.InstitutionsReg;
 
 /**
- * Repository for InstitutionDisputeDicomTags
+ * Repository for InstitutionsReg
+ * 
  * @author Dhanesh
  *
  */
