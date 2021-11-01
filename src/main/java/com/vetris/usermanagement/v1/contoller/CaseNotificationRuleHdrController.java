@@ -61,9 +61,9 @@ public class CaseNotificationRuleHdrController {
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createCaseNotificationRuleHdr(
 			@RequestBody CaseNotificationRuleHdrRequestDTO caseNotificationRuleHdrRequest) throws Exception {
-		CommonResponseDTO CaseNotificationRuleHdrRespDTO = caseNotificationRuleHdrService
+		CommonResponseDTO caseNotificationRuleHdrRespDTO = caseNotificationRuleHdrService
 				.addCaseNotificationRuleHdr(caseNotificationRuleHdrRequest);
-		return ResponseEntity.ok(CaseNotificationRuleHdrRespDTO);
+		return ResponseEntity.ok(caseNotificationRuleHdrRespDTO);
 	}
 
 	/**
