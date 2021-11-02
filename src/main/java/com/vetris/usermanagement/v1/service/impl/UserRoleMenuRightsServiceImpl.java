@@ -55,14 +55,14 @@ public class UserRoleMenuRightsServiceImpl  implements UserRoleMenuRightsService
 	@Override
 	public CommonResponseDTO getAllUserRoleMenuRights() throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		List<UserRoleMenuRights> UserRoleMenuRights = userRoleMenuRightsRepository.findAll();
+		List<UserRoleMenuRights> userRoleMenuRights = userRoleMenuRightsRepository.findAll();
 		List<UserRoleMenuRightsResponseDTO> resultresponseDto = new ArrayList<>();
-		if (UserRoleMenuRights.isEmpty()) {
+		if (userRoleMenuRights.isEmpty()) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setPayload("");
 			resultDto.setMessage("No user role menu rights found");
 		} else {
-			UserRoleMenuRights.stream().forEach(existingUserRoleMenuRights -> {
+			userRoleMenuRights.stream().forEach(existingUserRoleMenuRights -> {
 				resultresponseDto.add(objectMapper.convertValue(existingUserRoleMenuRights, UserRoleMenuRightsResponseDTO.class));
 			});
 
@@ -94,7 +94,6 @@ public class UserRoleMenuRightsServiceImpl  implements UserRoleMenuRightsService
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		UserRoleMenuRights resultUserRoleMenu =userRoleMenuRightsRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user menu rights" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
 			BeanUtils.copyProperties(userRoleMenuRequestDto, resultUserRoleMenu);
 			resultUserRoleMenu.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultUserRoleMenu = userRoleMenuRightsRepository.save(resultUserRoleMenu);
@@ -102,11 +101,6 @@ public class UserRoleMenuRightsServiceImpl  implements UserRoleMenuRightsService
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(userMenuRespDTO);
 			resultDto.setMessage("updated user role menu rights successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
-
 		return resultDto;
 	}
 

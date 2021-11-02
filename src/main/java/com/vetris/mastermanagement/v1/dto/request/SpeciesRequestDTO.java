@@ -1,6 +1,5 @@
 package com.vetris.mastermanagement.v1.dto.request;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;

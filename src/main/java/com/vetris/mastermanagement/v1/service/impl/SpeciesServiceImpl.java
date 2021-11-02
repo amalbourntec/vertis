@@ -27,7 +27,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 
 	@Autowired
 	ObjectMapper objectMapper;
-	
+
 	@Autowired
 	JWTSecurityContextUtil jwtSecurityContextUtil;
 
@@ -56,7 +56,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 	@Override
 	public CommonResponseDTO getSpeciesById(Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Species existingSpecies =speciesRepository.findById(id)
+		Species existingSpecies = speciesRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Species " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		SpeciesResponseDTO speciesResponseDTO = objectMapper.convertValue(existingSpecies, SpeciesResponseDTO.class);
@@ -66,12 +66,12 @@ public class SpeciesServiceImpl implements SpeciesService {
 
 		return resultDto;
 	}
-	
+
 	@Override
 	public CommonResponseDTO saveSpecies(SpeciesRequestDTO requestDto) throws Exception {
 		SpeciesResponseDTO speciesRespDTO = new SpeciesResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
+
 		Species resultSpecies = objectMapper.convertValue(requestDto, Species.class);
 		resultSpecies.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultSpecies = speciesRepository.save(resultSpecies);
@@ -79,31 +79,26 @@ public class SpeciesServiceImpl implements SpeciesService {
 		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(speciesRespDTO);
 		resultDto.setMessage("Saved species successfully");
-		
+
 		return resultDto;
 	}
 
 	@Override
 	public CommonResponseDTO editSpecies(SpeciesRequestDTO requestDto, Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Species species =  speciesRepository.findById(id)
-				.orElseThrow(()-> new ResourceNotFoundException("Species" +ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		Species species = speciesRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Species" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		BeanUtils.copyProperties(requestDto, species);
+		species.setUpdateBy(jwtSecurityContextUtil.getId());
+		species = speciesRepository.save(species);
+		SpeciesResponseDTO speciesResponseDTO = objectMapper.convertValue(species, SpeciesResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(speciesResponseDTO);
+		resultDto.setMessage("Fetched species successfully");
 
-		try {
-			BeanUtils.copyProperties(requestDto, species);
-			species.setUpdateBy(jwtSecurityContextUtil.getId());
-			species = speciesRepository.save(species);
-			SpeciesResponseDTO speciesResponseDTO= objectMapper.convertValue(species, SpeciesResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(speciesResponseDTO);
-			resultDto.setMessage("Fetched species successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
 		return resultDto;
-		
-	}	
+
+	}
 
 	@Override
 	public CommonResponseDTO deleteSpecies(Integer id) throws Exception {

@@ -110,7 +110,6 @@ public class UserMenuRightsServiceImpl implements UserMenuRightsService{
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		UserMenuRights resultUserMenu =userMenuRightsRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user menu rights" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
 			BeanUtils.copyProperties(userMenuRequestDto, resultUserMenu);
 			resultUserMenu.setUpdateBy(jwtSecurityContextUtil.getId());
 			resultUserMenu = userMenuRightsRepository.save(resultUserMenu);
@@ -118,11 +117,6 @@ public class UserMenuRightsServiceImpl implements UserMenuRightsService{
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(userMenuRespDTO);
 			resultDto.setMessage("Fetched user menu rights successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
-
 		return resultDto;
 	}
 

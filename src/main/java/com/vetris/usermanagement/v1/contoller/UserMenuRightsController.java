@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vetris.usermanagement.v1.dto.request.UserMenuRightsRequestDTO;
-import com.vetris.usermanagement.v1.dto.request.UserRolesRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.usermanagement.v1.service.UserMenuRightsService;
 

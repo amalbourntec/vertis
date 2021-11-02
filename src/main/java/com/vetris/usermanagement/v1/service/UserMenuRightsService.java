@@ -1,7 +1,6 @@
 package com.vetris.usermanagement.v1.service;
 
 import com.vetris.usermanagement.v1.dto.request.UserMenuRightsRequestDTO;
-import com.vetris.usermanagement.v1.dto.request.UserRequestDTO;
 import com.vetris.usermanagement.v1.dto.response.CommonResponseDTO;
 
 /**

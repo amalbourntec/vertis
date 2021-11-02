@@ -25,26 +25,26 @@ import com.vetris.utils.JWTSecurityContextUtil;
  *
  */
 @Service
-public class PhysicianServiceImpl implements PhysicianService{
-	
+public class PhysicianServiceImpl implements PhysicianService {
+
 	@Autowired
 	ObjectMapper objectMapper;
 
 	@Autowired
 	PhysicianRepository physicianRepository;
-	
+
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
-	
+
 	/**
-	 *method to add new physician in table
+	 * method to add new physician in table
 	 */
 	@Override
 	public CommonResponseDTO addPhysician(PhysicianRequestDTO physicianDto) throws Exception {
 
 		PhysicianResponseDTO physicianResponseDTO = new PhysicianResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
+
 		UUID uuid = UUID.randomUUID();
 		Physicians resultPhysician = objectMapper.convertValue(physicianDto, Physicians.class);
 		resultPhysician.setId(uuid.toString());
@@ -54,12 +54,12 @@ public class PhysicianServiceImpl implements PhysicianService{
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(physicianResponseDTO);
 		resultDto.setMessage("Saved physician successfully");
-		
-		return resultDto;	
+
+		return resultDto;
 	}
 
 	/**
-	 *method to fetch all physicians from table
+	 * method to fetch all physicians from table
 	 */
 	@Override
 	public CommonResponseDTO getAllPhysician() throws Exception {
@@ -84,14 +84,15 @@ public class PhysicianServiceImpl implements PhysicianService{
 	}
 
 	/**
-	 *method to fetch all physicians from table
+	 * method to fetch all physicians from table
 	 */
 	@Override
 	public CommonResponseDTO getPhysicianById(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		Physicians existingPhysician = physicianRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Physician" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		PhysicianResponseDTO physicianRespDTO = objectMapper.convertValue(existingPhysician, PhysicianResponseDTO.class);
+		PhysicianResponseDTO physicianRespDTO = objectMapper.convertValue(existingPhysician,
+				PhysicianResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(physicianRespDTO);
 		resultDto.setMessage("Fetched physician successfully");
@@ -99,31 +100,26 @@ public class PhysicianServiceImpl implements PhysicianService{
 	}
 
 	/**
-	 *method to update a physicians from table
+	 * method to update a physicians from table
 	 */
 	@Override
 	public CommonResponseDTO updatePhysician(PhysicianRequestDTO physicianDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		Physicians resultPhysician =physicianRepository.findById(id)
+		Physicians resultPhysician = physicianRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Physician" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		try {
-			BeanUtils.copyProperties(physicianDto, resultPhysician);
-			resultPhysician.setUpdateBy(jwtSecurityContextUtil.getId());
-			resultPhysician = physicianRepository.save(resultPhysician);
-			PhysicianResponseDTO physicianRespDTO = objectMapper.convertValue(resultPhysician, PhysicianResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(physicianRespDTO);
-			resultDto.setMessage("Updated Physician successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
+		BeanUtils.copyProperties(physicianDto, resultPhysician);
+		resultPhysician.setUpdateBy(jwtSecurityContextUtil.getId());
+		resultPhysician = physicianRepository.save(resultPhysician);
+		PhysicianResponseDTO physicianRespDTO = objectMapper.convertValue(resultPhysician, PhysicianResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(physicianRespDTO);
+		resultDto.setMessage("Updated Physician successfully");
 
 		return resultDto;
 	}
 
 	/**
-	 *method to delete a physicians from table
+	 * method to delete a physicians from table
 	 */
 	@Override
 	public CommonResponseDTO deletePhysician(String id) throws Exception {

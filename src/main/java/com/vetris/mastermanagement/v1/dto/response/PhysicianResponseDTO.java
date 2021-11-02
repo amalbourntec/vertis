@@ -2,10 +2,6 @@ package com.vetris.mastermanagement.v1.dto.response;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
-
-import com.sun.istack.NotNull;
-
 import lombok.Getter;
 import lombok.Setter;
 
