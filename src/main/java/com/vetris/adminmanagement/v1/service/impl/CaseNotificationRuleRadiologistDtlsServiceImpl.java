@@ -49,9 +49,10 @@ public class CaseNotificationRuleRadiologistDtlsServiceImpl implements CaseNotif
 			resultDto.setMessage("No Case Notification Rule Radiologist Dtls found");
 		} else {
 			caseNotificationRuleRadiologistDtlsList.stream()
-					.forEach(RuleRadiologistDtls -> caseNotificationRuleRadiologistDtlsRespDTO.add(objectMapper
-							.convertValue(RuleRadiologistDtls, CaseNotificationRuleRadiologistDtlsResponseDTO.class)));
+					.forEach(ruleRadiologistDtls -> caseNotificationRuleRadiologistDtlsRespDTO.add(objectMapper
+							.convertValue(ruleRadiologistDtls, CaseNotificationRuleRadiologistDtlsResponseDTO.class)));
 		}
+
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(caseNotificationRuleRadiologistDtlsRespDTO);
 		resultDto.setMessage("Fetched Case Notification Rule Radiologist Dtls Successfully");
@@ -116,22 +117,18 @@ public class CaseNotificationRuleRadiologistDtlsServiceImpl implements CaseNotif
 				.findById(ruleNo).orElseThrow(() -> new ResourceNotFoundException(
 						"Case Notification Rule Radiologist Dtls " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		try {
-			BeanUtils.copyProperties(caseNotificationRuleRadiologistDtlsRequestDTO,
-					caseNotificationRuleRadiologistDtlsLink);
-			caseNotificationRuleRadiologistDtlsLink = caseNotificationRuleRadiologistDtlsRepository
-					.save(caseNotificationRuleRadiologistDtlsLink);
-			CaseNotificationRuleRadiologistDtlsResponseDTO caseNotificationRuleRadiologistDtlsRespDTO = objectMapper
-					.convertValue(caseNotificationRuleRadiologistDtlsLink,
-							CaseNotificationRuleRadiologistDtlsResponseDTO.class);
+		BeanUtils.copyProperties(caseNotificationRuleRadiologistDtlsRequestDTO,
+				caseNotificationRuleRadiologistDtlsLink);
+		caseNotificationRuleRadiologistDtlsLink = caseNotificationRuleRadiologistDtlsRepository
+				.save(caseNotificationRuleRadiologistDtlsLink);
+		CaseNotificationRuleRadiologistDtlsResponseDTO caseNotificationRuleRadiologistDtlsRespDTO = objectMapper
+				.convertValue(caseNotificationRuleRadiologistDtlsLink,
+						CaseNotificationRuleRadiologistDtlsResponseDTO.class);
 
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(caseNotificationRuleRadiologistDtlsRespDTO);
-			resultDto.setMessage("Fetched Case Notification Rule Radiologist successfully");
-		} catch (Exception e) {
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(caseNotificationRuleRadiologistDtlsRespDTO);
+		resultDto.setMessage("Fetched Case Notification Rule Radiologist successfully");
 
-			throw new Exception(e);
-		}
 		return resultDto;
 	}
 
@@ -151,5 +148,4 @@ public class CaseNotificationRuleRadiologistDtlsServiceImpl implements CaseNotif
 
 		return resultDto;
 	}
-
 }

@@ -119,19 +119,15 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 				.orElseThrow(() -> new ResourceNotFoundException(
 						"Institution Category Link " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		try {
-			BeanUtils.copyProperties(institutionCategoryLinkReqDTO, institutionCategoryLink);
-			institutionCategoryLink.setUpdateBy(jwtSecurityContextUtil.getId());
-			institutionCategoryLink = institutionCategoryLinkRepository.save(institutionCategoryLink);
-			InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = objectMapper
-					.convertValue(institutionCategoryLink, InstitutionCategoryLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(institutionCategoryLinkResponseDTO);
-			resultDto.setMessage("Fetched user successfully");
-		} catch (Exception e) {
+		BeanUtils.copyProperties(institutionCategoryLinkReqDTO, institutionCategoryLink);
+		institutionCategoryLink.setUpdateBy(jwtSecurityContextUtil.getId());
+		institutionCategoryLink = institutionCategoryLinkRepository.save(institutionCategoryLink);
+		InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = objectMapper
+				.convertValue(institutionCategoryLink, InstitutionCategoryLinkResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(institutionCategoryLinkResponseDTO);
+		resultDto.setMessage("Fetched user successfully");
 
-			throw new Exception(e);
-		}
 		return resultDto;
 
 	}
