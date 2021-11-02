@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 
 @EntityScan("com.vetris.entity")
-@ComponentScan({"com.vetris.usermanagement","com.vetris.utils"})
+@ComponentScan({"com.vetris.adminmanagement","com.vetris.utils"})
 @SpringBootApplication(exclude= {UserDetailsServiceAutoConfiguration.class})
 @EnableJpaAuditing
 public class AdminManagementApplication {
