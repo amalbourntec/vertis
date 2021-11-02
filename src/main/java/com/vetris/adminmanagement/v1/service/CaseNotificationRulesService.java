@@ -11,20 +11,20 @@ import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
  */
 public interface CaseNotificationRulesService {
 
-	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId,Integer priorityId) throws Exception;
+	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId,Integer priorityId) throws Throwable;
 
 	public CommonResponseDTO addCaseNotificationRules(CaseNotificationRulesRequestDTO caseNotificationRulesRequest)
-			throws Exception;
+			throws Throwable;
 
 	public CommonResponseDTO updateCaseNotificationRules(CaseNotificationRulesRequestDTO caseNotificationRules,
-			Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Exception;
+			Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Throwable;
 
-	public CommonResponseDTO deleteCaseNotificationRules(Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Exception;
+	public CommonResponseDTO deleteCaseNotificationRules(Integer ruleNo,Integer pacsStatusId,Integer priorityId) throws Throwable;
 
-	public CommonResponseDTO getCaseNotificationRulesByRuleNo(Integer id) throws Exception;
+	public CommonResponseDTO getCaseNotificationRulesByRuleNo(Integer id) throws Throwable;
 
-	public CommonResponseDTO getCaseNotificationRulesByPacsStatusId(Integer id) throws Exception;
+	public CommonResponseDTO getCaseNotificationRulesByPacsStatusId(Integer id) throws Throwable;
 
-	public CommonResponseDTO getCaseNotificationRulesByPriorityId(Integer id) throws Exception;
+	public CommonResponseDTO getCaseNotificationRulesByPriorityId(Integer id) throws Throwable;
 
 }

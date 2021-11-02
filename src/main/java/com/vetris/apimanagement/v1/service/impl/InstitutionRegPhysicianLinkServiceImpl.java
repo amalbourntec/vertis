@@ -30,10 +30,10 @@ import com.vetris.utils.JWTSecurityContextUtil;
 public class InstitutionRegPhysicianLinkServiceImpl implements InstitutionRegPhysicianLinkService {
 
 	@Autowired
-	InstitutionRegPhysicianLinkRepository institutionRegPhysicianLinkRepo;
+	private InstitutionRegPhysicianLinkRepository institutionRegPhysicianLinkRepo;
 
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;

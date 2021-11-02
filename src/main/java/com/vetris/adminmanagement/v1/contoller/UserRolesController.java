@@ -22,13 +22,13 @@ import com.vetris.adminmanagement.v1.service.UserRolesService;
  *
  */
 
-@RestController(value="UserRolesController")
+@RestController("UserRolesController")
 @RequestMapping("/v1/user_roles")
 @CrossOrigin(origins="*")
 public class UserRolesController {
 	
 	@Autowired
-	UserRolesService userRolesService;
+	private UserRolesService userRolesService;
 	
 	/**
 	 * @param id
@@ -36,7 +36,7 @@ public class UserRolesController {
 	 * @throws Exception
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchUserRolesById(@PathVariable(value="id") int id)throws Exception {	
+	public ResponseEntity<CommonResponseDTO> fetchUserRolesById(@PathVariable(value="id") int id)throws Throwable {	
 		CommonResponseDTO userRolesRespDto=userRolesService.getUserRolesById(id);
 		return ResponseEntity.ok(userRolesRespDto); 
 	}
@@ -45,7 +45,7 @@ public class UserRolesController {
 	 * @return All user roles
 	 */
 	@GetMapping("")
-	public CommonResponseDTO fetchAllUserRoles() throws Exception {
+	public CommonResponseDTO fetchAllUserRoles() throws Throwable {
 		return userRolesService.getAllUserRoles();
 	}
 	
@@ -55,7 +55,7 @@ public class UserRolesController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createUserRole(@RequestBody UserRolesRequestDTO userRoleRequest) throws Exception {
+	public ResponseEntity<CommonResponseDTO> createUserRole(@RequestBody UserRolesRequestDTO userRoleRequest) throws Throwable {
 		CommonResponseDTO userRolesRespDto=userRolesService.addUserRoles(userRoleRequest);
 		return ResponseEntity.ok(userRolesRespDto);
 	}
@@ -67,7 +67,7 @@ public class UserRolesController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> updateUserRoles(@RequestBody UserRolesRequestDTO roleReqDto, @PathVariable(value="id") int id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> updateUserRoles(@RequestBody UserRolesRequestDTO roleReqDto, @PathVariable(value="id") int id) throws Throwable {
 		CommonResponseDTO userRolesRespDto=userRolesService.updateUserRoles(roleReqDto,id);
 		return ResponseEntity.ok(userRolesRespDto);
 	}
@@ -78,7 +78,7 @@ public class UserRolesController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> deleteUserRoles(@PathVariable(value="id") int id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> deleteUserRoles(@PathVariable(value="id") int id) throws Throwable {
 		CommonResponseDTO userRolesRespDto=userRolesService.deleteUserRoles(id);
 		return ResponseEntity.ok(userRolesRespDto);
 	}

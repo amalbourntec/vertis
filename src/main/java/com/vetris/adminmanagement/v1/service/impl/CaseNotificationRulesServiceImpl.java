@@ -32,7 +32,7 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	private CaseNotificationRulesRepository caseNotificationRulesRepo;
 
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;

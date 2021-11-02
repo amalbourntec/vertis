@@ -30,13 +30,13 @@ import com.vetris.utils.JWTSecurityContextUtil;
 public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModalityLinkService {
 
 	@Autowired
-	InstitutionRegModalityLinkRepository institutionRegModalityLinkRepository;
+	private InstitutionRegModalityLinkRepository institutionRegModalityLinkRepository;
 
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	/**
 	 * Adding new registration modality.
