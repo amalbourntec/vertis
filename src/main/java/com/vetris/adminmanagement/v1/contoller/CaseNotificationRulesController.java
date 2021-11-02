@@ -17,7 +17,7 @@ import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRulesRequestDTO
 import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.service.CaseNotificationRulesService;
 
-@RestController(value = "CaseNotificationRulesController")
+@RestController("CaseNotificationRulesController")
 @RequestMapping("/v1/case_notification_rules")
 @CrossOrigin(origins = "*")
 /**
@@ -28,7 +28,7 @@ import com.vetris.adminmanagement.v1.service.CaseNotificationRulesService;
  */
 public class CaseNotificationRulesController {
 	@Autowired
-	CaseNotificationRulesService caseNotificationRulesService;
+	private CaseNotificationRulesService caseNotificationRulesService;
 
 	/**
 	 * @param ruleNo
@@ -37,7 +37,7 @@ public class CaseNotificationRulesController {
 	 */
 	@GetMapping("ruleNo/{id}")
 	public ResponseEntity<CommonResponseDTO> fetchCaseNotificationRulesByRuleNo(@PathVariable("id") Integer id)
-			throws Exception {
+			throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.getCaseNotificationRulesByRuleNo(id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -49,7 +49,7 @@ public class CaseNotificationRulesController {
 	 */
 	@GetMapping("/get_all")
 	public ResponseEntity<CommonResponseDTO> fetchAllCaseNotificationRules(@RequestParam Integer ruleNo,
-			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Exception {
+			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.getAllCaseNotificationRules(ruleNo, pacsStatusId,
 				priorityId);
 		return ResponseEntity.ok(resultDto);
@@ -62,7 +62,7 @@ public class CaseNotificationRulesController {
 	 */
 	@GetMapping("/pacsStatusId/{id}")
 	public ResponseEntity<CommonResponseDTO> fetchCaseNotificationRulesByPacsStatusId(@PathVariable("id") Integer id)
-			throws Exception {
+			throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.getCaseNotificationRulesByPacsStatusId(id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -74,7 +74,7 @@ public class CaseNotificationRulesController {
 	 */
 	@GetMapping("priorityId/{id}")
 	public ResponseEntity<CommonResponseDTO> fetchCaseNotificationRulesByPriorityId(@PathVariable("id") Integer id)
-			throws Exception {
+			throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.getCaseNotificationRulesByPriorityId(id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -97,7 +97,7 @@ public class CaseNotificationRulesController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createCaseNotificationRules(
-			@RequestBody CaseNotificationRulesRequestDTO caseNotificationRulesRequest) throws Exception {
+			@RequestBody CaseNotificationRulesRequestDTO caseNotificationRulesRequest) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService
 				.addCaseNotificationRules(caseNotificationRulesRequest);
 		return ResponseEntity.ok(resultDto);
@@ -112,7 +112,7 @@ public class CaseNotificationRulesController {
 	@PutMapping("")
 	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRules(
 			@RequestBody CaseNotificationRulesRequestDTO caseNotificationRules, @RequestParam Integer ruleNo,
-			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Exception {
+			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.updateCaseNotificationRules(caseNotificationRules,
 				ruleNo, pacsStatusId, priorityId);
 		return ResponseEntity.ok(resultDto);
@@ -125,7 +125,7 @@ public class CaseNotificationRulesController {
 	 */
 	@DeleteMapping("")
 	public ResponseEntity<CommonResponseDTO> deleteCaseNotificationRules(@RequestParam Integer ruleNo,
-			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Exception {
+			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.deleteCaseNotificationRules(ruleNo, pacsStatusId,
 				priorityId);
 		return ResponseEntity.ok(resultDto);

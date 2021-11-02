@@ -11,15 +11,15 @@ import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
  */
 public interface InstitutionRegPhysicianLinkService {
 
-	public CommonResponseDTO getPhysicianById(String id) throws Exception;
+	public CommonResponseDTO getPhysicianById(String id) throws Throwable;
 
-	public CommonResponseDTO getAllPhysicians() throws Exception;
+	public CommonResponseDTO getAllPhysicians() throws Throwable;
 
-	public CommonResponseDTO addPhysician(InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Exception;
+	public CommonResponseDTO addPhysician(InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Throwable;
 
 	public CommonResponseDTO updatePhysician(InstitutionRegPhysicianLinkRequestDTO physician, String id)
-			throws Exception;
+			throws Throwable;
 
-	public CommonResponseDTO deletePhysician(String id) throws Exception;
+	public CommonResponseDTO deletePhysician(String id) throws Throwable;
 
 }

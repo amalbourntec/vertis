@@ -11,15 +11,15 @@ import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
  */
 public interface InstitutionRegModalityLinkService {
 
-	public CommonResponseDTO addRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest) throws Exception;
+	public CommonResponseDTO addRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest) throws Throwable;
 
-	public CommonResponseDTO getAllRegModality() throws Exception;
+	public CommonResponseDTO getAllRegModality() throws Throwable;
 
-	public CommonResponseDTO getRegModalityById(String id) throws Exception;
+	public CommonResponseDTO getRegModalityById(String id) throws Throwable;
 
 	public CommonResponseDTO updateInstitutionRegModality(InstitutionRegModalityLinkRequestDTO regModalityRequest,
-			String id) throws Exception;
+			String id) throws Throwable;
 
-	public CommonResponseDTO deleteInstitutionRegModality(String id) throws Exception;
+	public CommonResponseDTO deleteInstitutionRegModality(String id) throws Throwable;
 
 }
