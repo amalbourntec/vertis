@@ -20,6 +20,8 @@ import lombok.Setter;
 @Validated
 public class InstitutionsRegRequestDTO {
 
+	private String id;
+	
 	@Size(max = 5, message = "code  must be atmost 5 characters")
 	private String code;
 

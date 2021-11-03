@@ -23,12 +23,16 @@ import com.vetris.apimanagement.v1.service.InstitutionsRegService;
  *
  */
 
-@RestController(value = "InstitutionsRegController")
+@RestController("InstitutionsRegController")
 @RequestMapping("/v1/institutionsRegController")
 @CrossOrigin(origins = "*")
 public class InstitutionsRegController {
+
 	@Autowired
 	InstitutionsRegService institutionsRegService;
+
+	public InstitutionsRegController() {
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionsRegById(@PathVariable("id") String id) throws Exception {
