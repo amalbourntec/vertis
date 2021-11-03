@@ -30,10 +30,10 @@ import com.vetris.utils.JWTSecurityContextUtil;
 public class UserRolesServiceImpl implements UserRolesService {
 
 	@Autowired
-	UserRolesRepostitory userRoleRepository;
+	private UserRolesRepostitory userRoleRepository;
 
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;

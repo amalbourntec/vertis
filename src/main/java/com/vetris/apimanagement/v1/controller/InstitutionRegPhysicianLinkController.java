@@ -28,7 +28,7 @@ import com.vetris.apimanagement.v1.service.InstitutionRegPhysicianLinkService;
 @CrossOrigin(origins = "*")
 public class InstitutionRegPhysicianLinkController {
 	@Autowired
-	InstitutionRegPhysicianLinkService institutionRegPhysicianLinkService;
+	private InstitutionRegPhysicianLinkService institutionRegPhysicianLinkService;
 
 	/**
 	 * @param id
@@ -36,7 +36,7 @@ public class InstitutionRegPhysicianLinkController {
 	 * @throws Exception
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> fetchPhysicianById(@PathVariable("id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> fetchPhysicianById(@PathVariable("id") String id) throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.getPhysicianById(id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -47,7 +47,7 @@ public class InstitutionRegPhysicianLinkController {
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public CommonResponseDTO fetchAllPhysicians() throws Exception {
+	public CommonResponseDTO fetchAllPhysicians() throws Throwable {
 		return this.institutionRegPhysicianLinkService.getAllPhysicians();
 	}
 
@@ -58,7 +58,7 @@ public class InstitutionRegPhysicianLinkController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createPhysician(
-			@RequestBody InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Exception {
+			@RequestBody InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.addPhysician(physicianRequest);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -72,7 +72,7 @@ public class InstitutionRegPhysicianLinkController {
 	@PutMapping("{id}")
 	public ResponseEntity<CommonResponseDTO> updatePhysician(
 			@RequestBody InstitutionRegPhysicianLinkRequestDTO physician, @PathVariable("id") String id)
-			throws Exception {
+			throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.updatePhysician(physician, id);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -83,7 +83,7 @@ public class InstitutionRegPhysicianLinkController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deletePhysician(@PathVariable("id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> deletePhysician(@PathVariable("id") String id) throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.deletePhysician(id);
 		return ResponseEntity.ok(resultDto);
 	}

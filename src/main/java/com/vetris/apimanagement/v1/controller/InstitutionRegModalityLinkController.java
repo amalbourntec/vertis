@@ -28,14 +28,14 @@ import com.vetris.apimanagement.v1.service.InstitutionRegModalityLinkService;
 public class InstitutionRegModalityLinkController {
 
 	@Autowired
-	InstitutionRegModalityLinkService institutionRegModalityLinkService;
+	private InstitutionRegModalityLinkService institutionRegModalityLinkService;
 
 	/**
 	 * @return List of registration modality
 	 * @throws Exception
 	 */
 	@GetMapping("")
-	public CommonResponseDTO fetchAllRegModality() throws Exception {
+	public CommonResponseDTO fetchAllRegModality() throws Throwable {
 		return institutionRegModalityLinkService.getAllRegModality();
 	}
 
@@ -45,7 +45,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchRegModalityById(@PathVariable("id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> fetchRegModalityById(@PathVariable("id") String id) throws Throwable {
 		CommonResponseDTO alternateNameRespDTO = institutionRegModalityLinkService.getRegModalityById(id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
@@ -57,7 +57,7 @@ public class InstitutionRegModalityLinkController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createRegModality(
-			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest) throws Exception {
+			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest) throws Throwable {
 		CommonResponseDTO regModalityRespDTO = institutionRegModalityLinkService.addRegModality(regModalityRequest);
 		return ResponseEntity.ok(regModalityRespDTO);
 	}
@@ -71,7 +71,7 @@ public class InstitutionRegModalityLinkController {
 	@PutMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> updateRegModality(
 			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest, @PathVariable("id") String id)
-			throws Exception {
+			throws Throwable {
 		CommonResponseDTO regModalityRespDTO = institutionRegModalityLinkService
 				.updateInstitutionRegModality(regModalityRequest, id);
 		return ResponseEntity.ok(regModalityRespDTO);
@@ -83,7 +83,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> deleteRegModality(@PathVariable("id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> deleteRegModality(@PathVariable("id") String id) throws Throwable {
 		CommonResponseDTO alternateNameRespDTO = institutionRegModalityLinkService.deleteInstitutionRegModality(id);
 		return ResponseEntity.ok(alternateNameRespDTO);
 	}
