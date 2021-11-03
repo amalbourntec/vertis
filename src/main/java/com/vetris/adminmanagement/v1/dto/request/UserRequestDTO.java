@@ -20,8 +20,6 @@ import lombok.Setter;
 @Validated
 public class UserRequestDTO {
 	
-
-	
 	@Size( max = 40, message = "code  must be atmost 40 characters")
 	private String code;
 	
@@ -70,5 +68,8 @@ public class UserRequestDTO {
 	
 	@Size( max = 10, message = "theme_pref  must be atmost 10 characters")
 	private String themePref;
+	
+	@Size( max = 1, message = "enable_mfa must be atmost 1 characters")
+	private String enableMfa;
 
 }

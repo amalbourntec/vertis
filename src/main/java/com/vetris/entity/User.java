@@ -28,7 +28,6 @@ public class User extends AuditEntityModel{
 	@Column(name = "id",length=200)
 	private String id;
 	
-	
 	@Column(name = "code",length = 40,nullable=true)
 	private String code;
 	
@@ -74,56 +73,12 @@ public class User extends AuditEntityModel{
 	@Column(name = "allow_dashboard_view",length = 1,nullable=true)
 	private String allowDashboardView;
 	
+	@Column(name = "enable_mfa",length = 1,nullable=true)
+	private String enableMfa;
+	
+	@Column(name = "secret_key",length = 200,nullable=true)
+	private String secretKey;
+	
 	@Column(name = "theme_pref",length = 10,nullable=true)
 	private String themePref;
-
-	//Default constructor
-	public User() {
-		
-	}
-
-	/**
-	 * @param id
-	 * @param code
-	 * @param name
-	 * @param password
-	 * @param emailId
-	 * @param contactNo
-	 * @param userRoleId
-	 * @param firstLogin
-	 * @param pacsUserId
-	 * @param pacsPassword
-	 * @param isActive
-	 * @param isVisible
-	 * @param loginId
-	 * @param notificationPref
-	 * @param allowManualSubmission
-	 * @param allowDashboardView
-	 * @param themePref
-	 */
-	public User(String id, String code, String name, String password, String emailId, String contactNo,
-			Integer userRoleId, String firstLogin, String pacsUserId, String pacsPassword, String isActive,
-			String isVisible, String loginId, String notificationPref, String allowManualSubmission,
-			String allowDashboardView, String themePref) {
-		super();
-		this.id = id;
-		this.code = code;
-		this.name = name;
-		this.password = password;
-		this.emailId = emailId;
-		this.contactNo = contactNo;
-		this.userRoleId = userRoleId;
-		this.firstLogin = firstLogin;
-		this.pacsUserId = pacsUserId;
-		this.pacsPassword = pacsPassword;
-		this.isActive = isActive;
-		this.isVisible = isVisible;
-		this.loginId = loginId;
-		this.notificationPref = notificationPref;
-		this.allowManualSubmission = allowManualSubmission;
-		this.allowDashboardView = allowDashboardView;
-		this.themePref = themePref;
-	}
-	
-	
 }

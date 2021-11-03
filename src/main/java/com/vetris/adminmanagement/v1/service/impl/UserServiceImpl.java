@@ -1,16 +1,23 @@
 package com.vetris.adminmanagement.v1.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.zxing.WriterException;
 import com.vetris.adminmanagement.v1.dto.request.UserRequestDTO;
 import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.dto.response.UserResponseDTO;
@@ -21,6 +28,7 @@ import com.vetris.entity.User;
 import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;
 import com.vetris.utils.JWTSecurityContextUtil;
+import com.vetris.utils.MfaUtil;
 
 /**
  * Service Implementation for UserManagement
@@ -89,18 +97,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO updateUser(UserRequestDTO userDto, String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		User resultUser =userRepository.findById(id)
+		User resultUser = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-			BeanUtils.copyProperties(userDto, resultUser);
-			resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
-			resultUser.setPassword(encodePassword(userDto.getPassword()));
-			resultUser.setPacsPassword(
-					userDto.getUserRoleId().equals(5) ? encodePassword(userDto.getPacsPassword()) : " ");
-			resultUser = userRepository.save(resultUser);
-			UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(userRespDTO);
-			resultDto.setMessage("Fetched user successfully");
+		BeanUtils.copyProperties(userDto, resultUser);
+		resultUser.setUpdateBy(jwtSecurityContextUtil.getId());
+		resultUser.setPassword(encodePassword(userDto.getPassword()));
+		resultUser.setPacsPassword(userDto.getUserRoleId().equals(5) ? encodePassword(userDto.getPacsPassword()) : " ");
+		resultUser = userRepository.save(resultUser);
+		UserResponseDTO userRespDTO = objectMapper.convertValue(resultUser, UserResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(userRespDTO);
+		resultDto.setMessage("Fetched user successfully");
 
 		return resultDto;
 	}
@@ -127,25 +134,30 @@ public class UserServiceImpl implements UserService {
 
 		UserResponseDTO userRespDTO = new UserResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		
-			UUID uuid = UUID.randomUUID();
-			User resultUser = objectMapper.convertValue(userDto, User.class);
-			resultUser.setId(uuid.toString());
-			resultUser.setPassword(encodePassword(userDto.getPassword()));
-			resultUser.setPacsPassword(
-					userDto.getUserRoleId().equals(5) ? encodePassword(userDto.getPacsPassword()) : " ");
-			resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
-			resultUser = userRepository.save(resultUser);
-			BeanUtils.copyProperties(resultUser, userRespDTO);
-			resultDto.setStatus(StatusType.SUCCESS.getMessage());
-			resultDto.setPayload(userRespDTO);
-			resultDto.setMessage("Saved user successfully");
-		
+
+		UUID uuid = UUID.randomUUID();
+		User resultUser = objectMapper.convertValue(userDto, User.class);
+		resultUser.setId(uuid.toString());
+		resultUser.setPassword(encodePassword(userDto.getPassword()));
+		resultUser.setPacsPassword(userDto.getUserRoleId().equals(5) ? encodePassword(userDto.getPacsPassword()) : " ");
+		//Generate secret key for MFA opted users
+		if(userDto.getEnableMfa().equals("Y")) {
+			resultUser.setEnableMfa(userDto.getEnableMfa());
+			resultUser.setSecretKey(generateSecretKey(userDto.getLoginId()));
+		}
+		resultUser.setCreatedBy(jwtSecurityContextUtil.getId());
+		resultUser = userRepository.save(resultUser);
+		BeanUtils.copyProperties(resultUser, userRespDTO);
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(userRespDTO);
+		resultDto.setMessage("Saved user successfully");
+
 		return resultDto;
 	}
 
 	/**
-	 * This method used to encode password TODO needs to be changed according real
+	 * This method used to encode password 
+	 * TODO needs to be changed according real
 	 * application
 	 * 
 	 * @param password
@@ -168,6 +180,41 @@ public class UserServiceImpl implements UserService {
 		encryptedpassword = s.toString();
 
 		return encryptedpassword;
+	}
+
+	/**
+	 * This method is to generate secret key for MFA opted users
+	 * @param userId
+	 * @return
+	 */
+	private String generateSecretKey(String userId) {
+
+		String mfaSecretKey = null;
+		String companyName = "vetris";
+		String barCodeData = null;
+
+		mfaSecretKey = MfaUtil.generateSecretKey();
+		barCodeData = MfaUtil.getGoogleAuthenticatorBarCode(mfaSecretKey, userId, companyName);
+
+		Path path = Paths.get(FileUtils.getTempDirectory().getAbsolutePath(), userId + "_QR_CODE_" + System.nanoTime());
+		String tmpdir = null;
+		try {
+			tmpdir = Files.createDirectories(path).toFile().getAbsolutePath();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		File generateFile = new File(tmpdir, userId + "_QR_CODE" + ".png");
+
+		try {
+			MfaUtil.createQRCode(barCodeData, generateFile.getPath(), 400, 400);
+		} catch (WriterException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		//TODO need to delete the temp QR code file after sending it.
+
+		return mfaSecretKey;
+
 	}
 
 }

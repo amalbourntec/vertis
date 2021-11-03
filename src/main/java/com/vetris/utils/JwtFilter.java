@@ -35,79 +35,85 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.enums.ErrorCodes;
 
 @Component
-public class JwtFilter implements Filter{
-	
+public class JwtFilter implements Filter {
+
 	private static final String AUTHORIZATION = "AUTHORIZATION";
 	private static final String USERUUID = "id";
-	
+	private static final String USERROLES = "roles";
+	private static final String MFAENABLE = "mfaEnabled";
+	private static final String MFAVALIDATED = "mfaValidated";
+
 	@Autowired
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
-	
+
 	@Autowired
 	private ObjectMapper objectMapper;
-	
-	RestTemplate restTemplate= new RestTemplate();
-	
+
+	RestTemplate restTemplate = new RestTemplate();
+
 	@Value("${jwt.decode.url}")
 	private String decodeUrl;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-		HttpServletResponse httpServletResponse =(HttpServletResponse) response;
-		
-		if(httpServletRequest.getHeader(AUTHORIZATION) != null) {
-			URI uri=null;
-			try {
-				uri=new URI(decodeUrl);
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.set(AUTHORIZATION, httpServletRequest.getHeader(AUTHORIZATION));
-			
-			HttpEntity<String> entity = new HttpEntity<>(null,headers);
-			ResponseEntity<String> decodeResponse = null;
-			try {
-			 decodeResponse=restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-			} catch(RestClientException exc) {
-				httpServletResponse.sendError(401,ErrorCodes.TOKEN_EXPIRED.getMessage());
-				return;
-			}
-			if(Objects.nonNull(decodeResponse)) {
-				Map<String,String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
-				jwtSecurityContextUtil.setId(filterResult.get(USERUUID));
-				
-				//Set roles for security context
-				if (Objects.nonNull(filterResult.get("roles"))) {
-					final List<GrantedAuthority> authorities =
-			                Arrays.stream(filterResult.get("roles").toString().split(","))
-			                        .map(SimpleGrantedAuthority::new)
-			                        .collect(Collectors.toList());
-					
-					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-							filterResult.get(USERUUID), "", authorities);
-					    SecurityContextHolder.getContext().setAuthentication(authentication);
-				}
-				    
-				httpServletResponse.setStatus(200);
-				
-			}else
-			{
-				httpServletResponse.setStatus(401);
-				return;
-			}
-			
-		}else {
-			httpServletResponse.setStatus(401);
-			return;
+		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
+		if (httpServletRequest.getHeader(AUTHORIZATION) == null) {
+			httpServletResponse.sendError(401);
 		}
-		chain.doFilter(httpServletRequest, httpServletResponse);
+
+		URI uri = null;
+		try {
+			uri = new URI(decodeUrl);
+		} catch (URISyntaxException e) {
+			httpServletResponse.sendError(401);
+		}
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(AUTHORIZATION, httpServletRequest.getHeader(AUTHORIZATION));
+
+		HttpEntity<String> entity = new HttpEntity<>(null, headers);
+		ResponseEntity<String> decodeResponse = null;
+
+		try {
+			decodeResponse = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+		} catch (RestClientException exc) {
+			httpServletResponse.sendError(401);
+		}
+
+		if (Objects.nonNull(decodeResponse)) {
+			Map<String, String> filterResult = objectMapper.readValue(decodeResponse.getBody(), Map.class);
+
+			//Check for MFA enable users validated
+			if(Objects.nonNull(filterResult.get(MFAENABLE)) && filterResult.get(MFAENABLE).equals("Y")
+					&& filterResult.get(MFAVALIDATED).equals("false")) {
+				httpServletResponse.sendError(401, ErrorCodes.UN_AUTH_USER.getMessage());
+			}
+			
+			jwtSecurityContextUtil.setId(filterResult.get(USERUUID));
+
+			List<GrantedAuthority> authorities = null;
+			// Set roles for security context
+			if (Objects.nonNull(filterResult.get(USERROLES))) {
+				authorities = Arrays.stream(filterResult.get(USERROLES).split(","))
+						.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+			}
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+					filterResult.get(USERUUID), "", authorities);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			httpServletResponse.setStatus(200);
+		}else {
+			httpServletResponse.sendError(401);
+		}
+
 		
+
+		chain.doFilter(httpServletRequest, httpServletResponse);
+
 	}
 
 }
