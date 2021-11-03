@@ -63,6 +63,7 @@ public class JwtFilter implements Filter {
 
 		if (httpServletRequest.getHeader(AUTHORIZATION) == null) {
 			httpServletResponse.sendError(401);
+			return;
 		}
 
 		URI uri = null;
@@ -70,6 +71,7 @@ public class JwtFilter implements Filter {
 			uri = new URI(decodeUrl);
 		} catch (URISyntaxException e) {
 			httpServletResponse.sendError(401);
+			return;
 		}
 
 		HttpHeaders headers = new HttpHeaders();
@@ -82,6 +84,7 @@ public class JwtFilter implements Filter {
 			decodeResponse = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 		} catch (RestClientException exc) {
 			httpServletResponse.sendError(401);
+			return;
 		}
 
 		if (Objects.nonNull(decodeResponse)) {
@@ -91,6 +94,7 @@ public class JwtFilter implements Filter {
 			if(Objects.nonNull(filterResult.get(MFAENABLE)) && filterResult.get(MFAENABLE).equals("Y")
 					&& filterResult.get(MFAVALIDATED).equals("false")) {
 				httpServletResponse.sendError(401, ErrorCodes.UN_AUTH_USER.getMessage());
+				return;
 			}
 			
 			jwtSecurityContextUtil.setId(filterResult.get(USERUUID));
@@ -108,6 +112,7 @@ public class JwtFilter implements Filter {
 			httpServletResponse.setStatus(200);
 		}else {
 			httpServletResponse.sendError(401);
+			return;
 		}
 
 		
