@@ -29,7 +29,7 @@ import com.vetris.utils.JWTSecurityContextUtil;
 
 /*
  * @author Dhanesh C P
- * Test class for InstitutionsRegServiceImpl
+ * Test class for InstitutionUserLinkServiceImpl
  * */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionUserLinkService.class })
