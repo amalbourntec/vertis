@@ -25,6 +25,7 @@ import com.vetris.apimanagement.v1.repository.InstitutionsRegRepository;
 import com.vetris.apimanagement.v1.service.InstitutionsRegService;
 import com.vetris.entity.InstitutionsReg;
 import com.vetris.utils.JWTSecurityContextUtil;
+
 /*
  * @author Dhanesh C P
  * Test class for InstitutionsRegServiceImpl
@@ -95,7 +96,7 @@ class InstitutionsRegServiceImplTest {
 		CommonResponseDTO commonResponse = institutionsRegService.addInstitutionsReg(institutionsRegRequestDTO);
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
-	
+
 	@Test
 	public void testGetInstitutionsRegById() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -117,7 +118,7 @@ class InstitutionsRegServiceImplTest {
 		CommonResponseDTO commonResponse = institutionsRegService.getAllInstitutionsReg();
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
-	
+
 	@Test
 	public void testDeleteInstitutionsReg() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -127,6 +128,7 @@ class InstitutionsRegServiceImplTest {
 		CommonResponseDTO commonResponse = institutionsRegService.deleteInstitutionsReg("bac");
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
+
 	@Test
 	public void testUpdateInstitutionsReg() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -137,7 +139,8 @@ class InstitutionsRegServiceImplTest {
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
 		when(institutionsRegRepository.save(institutionsReg)).thenReturn(institutionsReg);
 
-		CommonResponseDTO commonResponse = institutionsRegService.updateInstitutionsReg(institutionsRegRequestDTO, "cab");
+		CommonResponseDTO commonResponse = institutionsRegService.updateInstitutionsReg(institutionsRegRequestDTO,
+				"cab");
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
 }
