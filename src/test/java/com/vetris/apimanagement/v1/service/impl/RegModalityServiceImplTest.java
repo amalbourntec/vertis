@@ -2,7 +2,6 @@ package com.vetris.apimanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -28,9 +27,15 @@ import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.apimanagement.v1.repository.InstitutionRegModalityLinkRepository;
 import com.vetris.apimanagement.v1.service.InstitutionRegModalityLinkService;
 import com.vetris.entity.InstitutionRegModalityLink;
-import com.vetris.entity.InstitutionRegPhysicianLink;
 import com.vetris.utils.JWTSecurityContextUtil;
 
+/**
+ * Test Class for InstitutionRegModalityLink Impl
+ * 
+ * @author Jose Eldhose
+ * 
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionRegModalityLinkService.class })
 public class RegModalityServiceImplTest {
@@ -88,11 +93,11 @@ public class RegModalityServiceImplTest {
 		CommonResponseDTO commonResponse = reModalityService.getRegModalityById("55b51e98-07dc-4c51-ad85-f0a7148270f9");
 		assertEquals("Success", commonResponse.getStatus());
 	}
-	
+
 	@Test
 	public void testGetallInstitutionTest() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		InstitutionRegModalityLink regModality1 = mapper.convertValue(regModalityDto	, InstitutionRegModalityLink.class);
+		InstitutionRegModalityLink regModality1 = mapper.convertValue(regModalityDto, InstitutionRegModalityLink.class);
 		List<InstitutionRegModalityLink> regModality = new ArrayList<InstitutionRegModalityLink>();
 		regModality.add(regModality1);
 		when(regModalityRepository.findById("abc")).thenReturn(Optional.of(regModality1));
@@ -100,14 +105,13 @@ public class RegModalityServiceImplTest {
 		CommonResponseDTO commonResponse = reModalityService.getAllRegModality();
 		assertEquals("Success", commonResponse.getStatus());
 	}
-	
 
 	@Test
 	public void testGetByIdResourceNotFoundException() {
 		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 			reModalityService.getRegModalityById("55b51e98-07dc-4c51-ad85-f0a7148270f9");
 		});
-		assertFalse(exception.getMessage().equalsIgnoreCase("Reg modality not found"));
+		assertFalse(exception.getMessage().equalsIgnoreCase(" not found"));
 	}
 
 	@Test

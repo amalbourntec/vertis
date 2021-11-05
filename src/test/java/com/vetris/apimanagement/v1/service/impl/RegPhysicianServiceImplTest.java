@@ -2,6 +2,7 @@ package com.vetris.apimanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -29,6 +30,12 @@ import com.vetris.apimanagement.v1.service.InstitutionRegPhysicianLinkService;
 import com.vetris.entity.InstitutionRegPhysicianLink;
 import com.vetris.utils.JWTSecurityContextUtil;
 
+/**
+ * Test Class for InstitutionRegPhysicianLink Impl
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionRegPhysicianLinkService.class })
 public class RegPhysicianServiceImplTest {
@@ -108,9 +115,9 @@ public class RegPhysicianServiceImplTest {
 	@Test
 	public void testGetByIdResourceNotFoundException() {
 		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			regPhysicianService.getPhysicianById("55b51e98-07dc-4c51-ad85-f0a7148270f9");
+			regPhysicianService.getPhysicianById("9");
 		});
-		assertFalse(exception.getMessage().equalsIgnoreCase("Reg physician not found"));
+		assertTrue(exception.getMessage().equalsIgnoreCase("Physician not found"));
 	}
 
 	@Test
