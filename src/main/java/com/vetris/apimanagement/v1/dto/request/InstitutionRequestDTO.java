@@ -133,12 +133,15 @@ public class InstitutionRequestDTO {
 	private String submittedBy;
 
 	@Size(max = 100, message = "img_software_name must be atmost 100 characters")
-	private String imageSoftwareName;
+	private String imgSoftwareName;
 
 	@Size(max = 1, message = "fax_rpt must be atmost 1 characters")
 	private String faxRpt;
 
 	@Size(max = 30, message = "fax_no must be atmost 30 characters")
 	private String faxNo;
+	
+	@Size(max = 1, message = "rpt_format must be atmost 1 characters")
+	private String rptFormat;
 
 }

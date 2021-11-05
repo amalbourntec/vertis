@@ -57,6 +57,7 @@ public class InstitutionResponseDTO {
 	private String imageSoftwareName;
 	private String faxRpt;
 	private String faxNo;
+	private String rptFormat;
 	private String createdBy;
 	private Date dateCreated;
 	private String updateBy;
