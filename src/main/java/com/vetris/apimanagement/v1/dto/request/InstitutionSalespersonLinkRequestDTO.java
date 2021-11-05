@@ -19,6 +19,10 @@ import lombok.Setter;
 @Validated
 public class InstitutionSalespersonLinkRequestDTO {
 
+	@Size(max = 200, message = "salesperson id  must be atmost 200 characters")
+	@NotNull
+	private String salespersonId;
+	
 	@Size(max = 200, message = "institution id  must be atmost 200 characters")
 	@NotNull
 	private String institutionId;

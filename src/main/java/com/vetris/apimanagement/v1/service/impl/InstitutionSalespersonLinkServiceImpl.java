@@ -79,9 +79,7 @@ public class InstitutionSalespersonLinkServiceImpl implements InstitutionSalespe
 	public CommonResponseDTO addSalesperson(InstitutionSalespersonLinkRequestDTO salespersonRequest) throws Exception {
 
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		UUID uuid = UUID.randomUUID();
 		InstitutionSalespersonLink salesperson = objectMapper.convertValue(salespersonRequest, InstitutionSalespersonLink.class);
-		salesperson.setSalespersonId(uuid.toString());
 		salesperson.setSalespersonPacsPassword(encodePassword(salespersonRequest.getSalespersonPacsPassword()));
 		salesperson.setCreatedBy(jwtSecurityContextUtil.getId());
 		salesperson = institutionSalespersonLinkRepository.save(salesperson);
