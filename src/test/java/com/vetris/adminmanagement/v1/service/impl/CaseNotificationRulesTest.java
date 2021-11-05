@@ -1,4 +1,4 @@
-package com.vetris.apimanagement.v1.service.impl;
+package com.vetris.adminmanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
