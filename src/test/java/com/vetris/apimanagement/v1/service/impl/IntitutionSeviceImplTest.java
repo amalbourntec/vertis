@@ -114,11 +114,9 @@ class IntitutionSeviceImplTest {
 
 	@Test
 	public void testgetallInstitutionTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		Institution institution4 = mapper.convertValue(institutionDto, Institution.class);
 		List<Institution> institutions = new ArrayList<Institution>();
-		institutions.add(institution4);
-		when(institutionRepository.findById("def")).thenReturn(Optional.of(institution4));
+		institutions.add(institution);
+		when(institutionRepository.findById("def")).thenReturn(Optional.of(institution));
 		when(institutionRepository.findAll()).thenReturn(institutions);
 		CommonResponseDTO commonResponse = institutionService.getAllInstitutions();
 		assertEquals("Success", commonResponse.getStatus());
@@ -126,9 +124,7 @@ class IntitutionSeviceImplTest {
 
 	@Test
 	public void testGetInstitutionById() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		Institution institution1 = mapper.convertValue(institutionDto, Institution.class);
-		when(institutionRepository.findById("def")).thenReturn(Optional.of(institution1));
+		when(institutionRepository.findById("def")).thenReturn(Optional.of(institution));
 		CommonResponseDTO commonResponse = institutionService.getInstitutionById("def");
 		assertEquals("Success", commonResponse.getStatus());
 	}
@@ -143,9 +139,7 @@ class IntitutionSeviceImplTest {
 
 	@Test
 	public void testdeleteinstitution() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		Institution institution2 = mapper.convertValue(institutionDto, Institution.class);
-		when(institutionRepository.findById("fed")).thenReturn(Optional.of(institution2));
+		when(institutionRepository.findById("fed")).thenReturn(Optional.of(institution));
 
 		CommonResponseDTO commonResponse = institutionService.deleteInstitution("fed");
 		assertEquals("Success", commonResponse.getStatus());
@@ -153,7 +147,6 @@ class IntitutionSeviceImplTest {
 
 	@Test
 	public void testupdateInstitution() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
 		when(institutionRepository.findById("xyz")).thenReturn(Optional.of(institution));
 		when(objectMapper.convertValue(institutionDto, Institution.class)).thenReturn(institution);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");

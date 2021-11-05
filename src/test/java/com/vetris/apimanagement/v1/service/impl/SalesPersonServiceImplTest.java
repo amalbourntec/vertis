@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -54,7 +56,6 @@ class SalesPersonServiceImplTest {
 
 	@BeforeAll
 	static void setUp() {
-		System.out.println("test");
 		salesPersonDto = new SalesPersonRequestDTO();
 		salesPersonDto.setCode("xyz");
 		salesPersonDto.setFName("Shekar");
@@ -93,12 +94,21 @@ class SalesPersonServiceImplTest {
 		CommonResponseDTO commonResponse = salesPersonService.saveSalesPerson(salesPersonDto);
 		assertEquals("Success", commonResponse.getStatus());
 	}
+	
+	@Test
+	public void testgetallsalesPersonTest() throws Exception {
+		List<SalesPerson> salesPersonList = new ArrayList<SalesPerson>();
+		salesPersonList.add(salesPerson);
+		when(salesPersonRepository.findById("def")).thenReturn(Optional.of(salesPerson));
+		when(salesPersonRepository.findAll()).thenReturn(salesPersonList);
+		CommonResponseDTO commonResponse = salesPersonService.getAllSalesPerson();
+		assertEquals("Success", commonResponse.getStatus());
+		
+	}
 
 	@Test
 	public void testGetSalesPersonById() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		SalesPerson salesPerson1 = mapper.convertValue(salesPersonDto, SalesPerson.class);
-		when(salesPersonRepository.findById("abc")).thenReturn(Optional.of(salesPerson1));
+		when(salesPersonRepository.findById("abc")).thenReturn(Optional.of(salesPerson));
 
 		CommonResponseDTO commonResponse = salesPersonService.getSalesPersonById("abc");
 		assertEquals("Success", commonResponse.getStatus());
@@ -107,16 +117,14 @@ class SalesPersonServiceImplTest {
 	@Test
 	public void testGetByIdResourceNotFoundException() {
 		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			salesPersonService.getSalesPersonById("abc");
+			salesPersonService.getSalesPersonById("09a35919-8e5b-416b-8c7d-3de3fd834629");
 		});
 		assertTrue(exception.getMessage().equalsIgnoreCase("SalesPerson not found"));
 	}
 
 	@Test
 	public void testdeleteSalesPerson() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		SalesPerson salesPerson2 = mapper.convertValue(salesPersonDto, SalesPerson.class);
-		when(salesPersonRepository.findById("bac")).thenReturn(Optional.of(salesPerson2));
+		when(salesPersonRepository.findById("bac")).thenReturn(Optional.of(salesPerson));
 
 		CommonResponseDTO commonResponse = salesPersonService.deleteSalesPerson("bac");
 		assertEquals("Success", commonResponse.getStatus());
@@ -124,10 +132,7 @@ class SalesPersonServiceImplTest {
 
 	@Test
 	public void testupdateSalesPerson() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		SalesPerson salesPerson3 = mapper.convertValue(salesPersonDto, SalesPerson.class);
-		salesPerson3.setId("cab");
-		when(salesPersonRepository.findById("cab")).thenReturn(Optional.of(salesPerson3));
+		when(salesPersonRepository.findById("cab")).thenReturn(Optional.of(salesPerson));
 		when(objectMapper.convertValue(salesPersonDto, SalesPerson.class)).thenReturn(salesPerson);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
 		when(salesPersonRepository.save(salesPerson)).thenReturn(salesPerson);
