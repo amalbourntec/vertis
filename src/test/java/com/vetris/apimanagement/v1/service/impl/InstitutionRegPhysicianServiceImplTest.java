@@ -38,7 +38,7 @@ import com.vetris.utils.JWTSecurityContextUtil;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionRegPhysicianLinkService.class })
-public class RegPhysicianServiceImplTest {
+public class InstitutionRegPhysicianServiceImplTest {
 
 	@InjectMocks
 	InstitutionRegPhysicianLinkServiceImpl regPhysicianService;
