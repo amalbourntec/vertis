@@ -102,18 +102,12 @@ public class UserRolesServiceImplTest {
 
 	@Test
 	public void userRolesById() throws Exception {
-		System.out.println("Inside by Id");
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println("Inside by Id2");
 		UserRoles userRoles1 = mapper.convertValue(userRolesDto, UserRoles.class);
 		UserRolesResponseDTO userRoleRespDTO = mapper.convertValue(userRoles1, UserRolesResponseDTO.class);
-		System.out.println("Inside by Id3");
 		when(userRolesRepostitory.findById(1)).thenReturn(Optional.of(userRoles1));
 		when(objectMapper.convertValue(userRoles1, UserRolesResponseDTO.class)).thenReturn(userRoleRespDTO);
-		System.out.println("Inside by Id4");
 		CommonResponseDTO commonResponse = userRolesService.getUserRolesById(1);
-		System.out.println("Inside by Id5");
-		System.out.println(commonResponse.getMessage());
 		assertEquals("Success", commonResponse.getStatus());
 	}
 

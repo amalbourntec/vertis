@@ -1,7 +1,6 @@
 package com.vetris.adminmanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -23,11 +22,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRulesRequestDTO;
-import com.vetris.adminmanagement.v1.repository.CaseNotificationRulesRepository;
-import com.vetris.adminmanagement.v1.service.CaseNotificationRulesService;
-import com.vetris.adminmanagement.v1.service.impl.CaseNotificationRulesServiceImpl;
 import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.adminmanagement.v1.repository.CaseNotificationRulesRepository;
+import com.vetris.adminmanagement.v1.service.CaseNotificationRulesService;
 import com.vetris.entity.CaseNotificationRules;
 import com.vetris.utils.JWTSecurityContextUtil;
 
@@ -39,7 +37,7 @@ import com.vetris.utils.JWTSecurityContextUtil;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { CaseNotificationRulesService.class })
-public class CaseNotificationRulesTest {
+public class CaseNotificationRulesServiceImplTest {
 
 	@InjectMocks
 	CaseNotificationRulesServiceImpl CaseNotificationRulesService;
