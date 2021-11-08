@@ -22,14 +22,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.UserMenuRightsRequestDTO;
-import com.vetris.adminmanagement.v1.dto.response.SpeciesResponseDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.adminmanagement.v1.dto.response.UserMenuRightsResponseDTO;
+import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.UserMenuRightsRepository;
+import com.vetris.adminmanagement.v1.repository.UserRolesRepostitory;
 import com.vetris.adminmanagement.v1.service.UserMenuRightsService;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
-import com.vetris.entity.Species;
+import com.vetris.entity.UserMenuRights;
+import com.vetris.entity.UserRoles;
 import com.vetris.utils.JWTSecurityContextUtil;
 
+/**
+ * Test Class for User Role Menu Rights Impl
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { UserMenuRightsService.class })
 public class UserMenuRightsServiceImplTest {
@@ -38,6 +46,9 @@ public class UserMenuRightsServiceImplTest {
 
 	@MockBean
 	UserMenuRightsRepository userMenuRightsRepo;
+	
+	@MockBean
+	UserRolesRepostitory userRoleRepository;
 
 	@MockBean
 	ObjectMapper objectMapper;
@@ -50,17 +61,16 @@ public class UserMenuRightsServiceImplTest {
 
 	static UserMenuRightsRequestDTO userMenuRightsDto;
 
-	static Species species;
+	static UserMenuRights userMenuRights;
 
 	@BeforeAll
 	static void setUp() {
 		System.out.println("test --> beofre");
 		userMenuRightsDto = new UserMenuRightsRequestDTO();
-		userMenuRightsDto.setCode("123");
-		userMenuRightsDto.setIsActive("Y");
-		userMenuRightsDto.setName("Manu");
+		userMenuRightsDto.setMenuId(1);
+		userMenuRightsDto.setUserId("123");
 		mapper = new ObjectMapper();
-		species = mapper.convertValue(userMenuRightsDto, Species.class);
+		userMenuRights = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
 	}
 
 	@BeforeEach
@@ -69,64 +79,68 @@ public class UserMenuRightsServiceImplTest {
 	}
 
 	@Test
-	public void testSpeciesPostTest() throws Exception {
-		when(objectMapper.convertValue(userMenuRightsDto, Species.class)).thenReturn(species);
-		when(userMenuRightsRepo.save(species)).thenReturn(species);
+	public void testUserMenuRightsPostTest() throws Exception {
+		UserRoles userRoles = new UserRoles();
+		userRoles.setCode("abc");
+		when(objectMapper.convertValue(userMenuRightsDto, UserMenuRights.class)).thenReturn(userMenuRights);
+		when(userMenuRightsRepo.save(userMenuRights)).thenReturn(userMenuRights);
+		when(userRoleRepository.findById(userMenuRightsDto.getMenuId())).thenReturn(Optional.of(userRoles));
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
-		CommonResponseDTO commonResponse = userMenuRightsService.saveSpecies(userMenuRightsDto);
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		CommonResponseDTO commonResponse = userMenuRightsService.addUserMenuRights(userMenuRightsDto);
+		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
-	public void testGetSpeciesById() throws Exception {
+	public void testGetUserMenuRightsById() throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
-		Species species1 = mapper.convertValue(userMenuRightsDto, Species.class);
-		SpeciesResponseDTO speciesRespDto = mapper.convertValue(species1, SpeciesResponseDTO.class);
-		when(userMenuRightsRepo.findById(1)).thenReturn(Optional.of(species1));
-		when(objectMapper.convertValue(species1, SpeciesResponseDTO.class)).thenReturn(speciesRespDto);
-		CommonResponseDTO commonResponse = userMenuRightsService.getSpeciesById(1);
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		UserMenuRights userMenuRights1 = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
+		UserMenuRightsResponseDTO UserMenuRightsRespDto = mapper.convertValue(userMenuRights1,
+				UserMenuRightsResponseDTO.class);
+		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(userMenuRights1));
+		when(objectMapper.convertValue(userMenuRights1, UserMenuRightsResponseDTO.class))
+				.thenReturn(UserMenuRightsRespDto);
+		CommonResponseDTO commonResponse = userMenuRightsService.getUserMenuRightsByUserId("123");
+		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
-	public void testGetAllSpeciesTest() throws Exception {
+	public void testGetAllUserMenuRightsTest() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		Species Species1 = mapper.convertValue(userMenuRightsDto, Species.class);
-		List<Species> Species = new ArrayList<Species>();
-		Species.add(Species1);
-		when(userMenuRightsRepo.findAll()).thenReturn(Species);
-		CommonResponseDTO commonResponse = userMenuRightsService.findAllSpecies();
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		UserMenuRights userMenuRights1 = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
+		List<UserMenuRights> UserMenuRights = new ArrayList<UserMenuRights>();
+		UserMenuRights.add(userMenuRights1);
+		when(userMenuRightsRepo.findAll()).thenReturn(UserMenuRights);
+		CommonResponseDTO commonResponse = userMenuRightsService.getAllUserMenuRights();
+		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
 	public void testGetByIdResourceNotFoundException() {
 		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			userMenuRightsService.getSpeciesById(1);
+			userMenuRightsService.getUserMenuRightsByUserId("123");
 		});
-		assertTrue(exception.getMessage().equalsIgnoreCase("Species  not found"));
+		assertTrue(exception.getMessage().equalsIgnoreCase("user menu rights  not found"));
 	}
 
 	@Test
-	public void testdeleteSpecies() throws Exception {
+	public void testdeleteUserMenuRights() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		Species Species = mapper.convertValue(userMenuRightsDto, Species.class);
-		when(userMenuRightsRepo.findById(1)).thenReturn(Optional.of(Species));
-		CommonResponseDTO commonResponse = userMenuRightsService.deleteSpecies(1);
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		UserMenuRights UserMenuRights = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
+		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(UserMenuRights));
+		CommonResponseDTO commonResponse = userMenuRightsService.deleteUserMenuRights("123");
+		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
-	public void testupdateSpecies() throws Exception {
+	public void testupdateUserMenuRights() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		Species species3 = mapper.convertValue(userMenuRightsDto, Species.class);
-		when(userMenuRightsRepo.findById(1)).thenReturn(Optional.of(species3));
-		when(objectMapper.convertValue(userMenuRightsDto, Species.class)).thenReturn(species3);
+		UserMenuRights UserMenuRights3 = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
+		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(UserMenuRights3));
+		when(objectMapper.convertValue(userMenuRightsDto, UserMenuRights.class)).thenReturn(UserMenuRights3);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
-		when(userMenuRightsRepo.save(species3)).thenReturn(species);
-		CommonResponseDTO commonResponse = userMenuRightsService.editSpecies(userMenuRightsDto, 1);
+		when(userMenuRightsRepo.save(UserMenuRights3)).thenReturn(userMenuRights);
+		CommonResponseDTO commonResponse = userMenuRightsService.updateUserMenuRights(userMenuRightsDto, "123");
 		assertEquals("Success", commonResponse.getStatus());
 	}
 }
-

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +24,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.SpeciesRequestDTO;
 import com.vetris.adminmanagement.v1.dto.response.SpeciesResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.SpeciesRepository;
 import com.vetris.adminmanagement.v1.service.SpeciesService;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.entity.Species;
 import com.vetris.utils.JWTSecurityContextUtil;
 
+/**
+ * Test Class for Species Impl
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { SpeciesService.class })
 public class SpeciesServiceImplTest {
@@ -82,11 +89,18 @@ public class SpeciesServiceImplTest {
 
 		ObjectMapper mapper = new ObjectMapper();
 		Species species1 = mapper.convertValue(speciesDto, Species.class);
-		SpeciesResponseDTO speciesRespDto = mapper.convertValue(species1, SpeciesResponseDTO.class);
+		SpeciesResponseDTO speciesRespDto = new SpeciesResponseDTO();
+		speciesRespDto.setIsActive("Y");
+		speciesRespDto.setCreatedBy("test");
+		speciesRespDto.setUpdatedBy("test");
+		speciesRespDto.setDateCreated(new Date());
+		speciesRespDto.setDateupdated(new Date());
+		speciesRespDto.setCode("abc");
+		speciesRespDto.setId(1);
 		when(speciesRepo.findById(1)).thenReturn(Optional.of(species1));
 		when(objectMapper.convertValue(species1, SpeciesResponseDTO.class)).thenReturn(speciesRespDto);
 		CommonResponseDTO commonResponse = speciesService.getSpeciesById(1);
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
