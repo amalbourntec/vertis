@@ -10,14 +10,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,10 +24,10 @@ import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.dto.response.UserMenuRightsResponseDTO;
 import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.UserMenuRightsRepository;
-import com.vetris.adminmanagement.v1.repository.UserRolesRepostitory;
+import com.vetris.adminmanagement.v1.repository.UserRepository;
 import com.vetris.adminmanagement.v1.service.UserMenuRightsService;
+import com.vetris.entity.User;
 import com.vetris.entity.UserMenuRights;
-import com.vetris.entity.UserRoles;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 /**
@@ -44,19 +42,19 @@ public class UserMenuRightsServiceImplTest {
 	@InjectMocks
 	UserMenuRightsServiceImpl userMenuRightsService;
 
-	@MockBean
+	@Mock
 	UserMenuRightsRepository userMenuRightsRepo;
-	
-	@MockBean
-	UserRolesRepostitory userRoleRepository;
 
-	@MockBean
+	@Mock
+	UserRepository userRepository;
+
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static UserMenuRightsRequestDTO userMenuRightsDto;
@@ -73,18 +71,12 @@ public class UserMenuRightsServiceImplTest {
 		userMenuRights = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
 	}
 
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
 	public void testUserMenuRightsPostTest() throws Exception {
-		UserRoles userRoles = new UserRoles();
-		userRoles.setCode("abc");
+		User user = new User();
 		when(objectMapper.convertValue(userMenuRightsDto, UserMenuRights.class)).thenReturn(userMenuRights);
 		when(userMenuRightsRepo.save(userMenuRights)).thenReturn(userMenuRights);
-		when(userRoleRepository.findById(userMenuRightsDto.getMenuId())).thenReturn(Optional.of(userRoles));
+		when(userRepository.findById(userMenuRightsDto.getUserId())).thenReturn(Optional.of(user));
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
 		CommonResponseDTO commonResponse = userMenuRightsService.addUserMenuRights(userMenuRightsDto);
 		assertEquals("Success", commonResponse.getStatus());

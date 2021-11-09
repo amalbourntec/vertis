@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserMenuRightsController;
 
 /**
  * Test class for UserMenuRightsController
@@ -32,7 +33,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserMenuRightsController.class)
 @AutoConfigureMockMvc
 public class UserMenuRightsControllerTest {
 
@@ -46,40 +47,39 @@ public class UserMenuRightsControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllUserMenuRights() throws Exception {
+	public void testGetAllUserMenuRights() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getUserMenuRightsNotFound() throws Exception {
+	public void testGetUserMenuRightsNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights/").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void postUserMenuRightsNotFound() throws Exception {
+	public void testPostUserMenuRightsNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putUserMenuRights() throws Exception {
+	public void testPutUserMenuRights() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void deleteUserMenuRightsNotFound() throws Exception {
+	public void testDeleteUserMenuRightsNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())

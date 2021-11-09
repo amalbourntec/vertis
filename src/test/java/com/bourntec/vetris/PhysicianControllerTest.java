@@ -21,7 +21,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.PhysicianController;
 
 /**
  * Test class for Physicians
@@ -30,9 +31,9 @@ import com.vetris.adminmanagement.AdminManagementApplication;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AdminManagementApplication.class)
+@ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT,classes =PhysicianController.class )
 @AutoConfigureMockMvc
 public class PhysicianControllerTest {
 	@Value("${server.port}")
@@ -45,44 +46,43 @@ public class PhysicianControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllPhysicians() throws Exception {
+	public void testGetAllPhysicians() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getPhysiciansNotFound() throws Exception {
+	public void testGetPhysiciansNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/physician/").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void postPhysiciansNotFound() throws Exception {
+	public void testPostPhysiciansNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putPhysicians() throws Exception {
+	public void testPutPhysicians() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.put("/mastermanagement/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 	
 	@Test
-	public void deletePhysicianNotFound() throws Exception {
+	public void testDeletePhysicianNotFound() throws Exception {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/mastermanagement/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Physician not found"));
     }
 }
 

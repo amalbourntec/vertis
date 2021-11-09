@@ -1,7 +1,6 @@
 package com.vetris.apimanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -11,14 +10,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,16 +40,16 @@ public class InstitutionRegPhysicianServiceImplTest {
 	@InjectMocks
 	InstitutionRegPhysicianLinkServiceImpl regPhysicianService;
 
-	@MockBean
+	@Mock
 	InstitutionRegPhysicianLinkRepository regPhysicianRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionRegPhysicianLinkRequestDTO regPhysicianDto;
@@ -74,11 +71,6 @@ public class InstitutionRegPhysicianServiceImplTest {
 		regPhysician = mapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class);
 	}
 
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
 	public void regPhysicianPostTest() throws Exception {
 		when(objectMapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class)).thenReturn(regPhysician);
@@ -92,7 +84,8 @@ public class InstitutionRegPhysicianServiceImplTest {
 	@Test
 	public void testgetallInstitutionTest() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		InstitutionRegPhysicianLink regPhysician1 = mapper.convertValue(regPhysicianDto	, InstitutionRegPhysicianLink.class);
+		InstitutionRegPhysicianLink regPhysician1 = mapper.convertValue(regPhysicianDto,
+				InstitutionRegPhysicianLink.class);
 		List<InstitutionRegPhysicianLink> regPhysician = new ArrayList<InstitutionRegPhysicianLink>();
 		regPhysician.add(regPhysician1);
 		when(regPhysicianRepository.findById("def")).thenReturn(Optional.of(regPhysician1));
@@ -100,11 +93,12 @@ public class InstitutionRegPhysicianServiceImplTest {
 		CommonResponseDTO commonResponse = regPhysicianService.getAllPhysicians();
 		assertEquals("Success", commonResponse.getStatus());
 	}
-	
+
 	@Test
 	public void testGetregPhysicianById() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		InstitutionRegPhysicianLink regPhysician1 = mapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class);
+		InstitutionRegPhysicianLink regPhysician1 = mapper.convertValue(regPhysicianDto,
+				InstitutionRegPhysicianLink.class);
 		when(regPhysicianRepository.findById("55b51e98-07dc-4c51-ad85-f0a7148270f9"))
 				.thenReturn(Optional.of(regPhysician1));
 
@@ -123,7 +117,8 @@ public class InstitutionRegPhysicianServiceImplTest {
 	@Test
 	public void testDeleteRegPhysician() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		InstitutionRegPhysicianLink regPhysician = mapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class);
+		InstitutionRegPhysicianLink regPhysician = mapper.convertValue(regPhysicianDto,
+				InstitutionRegPhysicianLink.class);
 		when(regPhysicianRepository.findById("bac")).thenReturn(Optional.of(regPhysician));
 
 		CommonResponseDTO commonResponse = regPhysicianService.deletePhysician("bac");
@@ -133,7 +128,8 @@ public class InstitutionRegPhysicianServiceImplTest {
 	@Test
 	public void testUpdateRegPhysician() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		InstitutionRegPhysicianLink regPhysician3 = mapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class);
+		InstitutionRegPhysicianLink regPhysician3 = mapper.convertValue(regPhysicianDto,
+				InstitutionRegPhysicianLink.class);
 		regPhysician3.setInstitutionId("abc");
 		when(regPhysicianRepository.findById("cab")).thenReturn(Optional.of(regPhysician3));
 		when(objectMapper.convertValue(regPhysicianDto, InstitutionRegPhysicianLink.class)).thenReturn(regPhysician);
@@ -144,4 +140,3 @@ public class InstitutionRegPhysicianServiceImplTest {
 		assertEquals("Success", commonResponse.getStatus());
 	}
 }
-

@@ -1,7 +1,6 @@
 package com.vetris.adminmanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -11,24 +10,21 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.UserRolesRequestDTO;
-import com.vetris.adminmanagement.v1.repository.UserRolesRepostitory;
-import com.vetris.adminmanagement.v1.service.UserRolesService;
-import com.vetris.adminmanagement.v1.service.impl.UserRolesServiceImpl;
 import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.dto.response.UserRolesResponseDTO;
 import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.adminmanagement.v1.repository.UserRolesRepostitory;
+import com.vetris.adminmanagement.v1.service.UserRolesService;
 import com.vetris.entity.UserRoles;
 import com.vetris.utils.JWTSecurityContextUtil;
 
@@ -45,16 +41,16 @@ public class UserRolesServiceImplTest {
 	@InjectMocks
 	UserRolesServiceImpl userRolesService;
 
-	@MockBean
+	@Mock
 	UserRolesRepostitory userRolesRepostitory;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static UserRolesRequestDTO userRolesDto;
@@ -72,11 +68,6 @@ public class UserRolesServiceImplTest {
 		userRolesDto.setSysDefined("Y");
 		mapper = new ObjectMapper();
 		userRoles = mapper.convertValue(userRolesDto, UserRoles.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test

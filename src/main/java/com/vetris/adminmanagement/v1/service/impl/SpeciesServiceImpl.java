@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.SpeciesRequestDTO;
 import com.vetris.adminmanagement.v1.dto.response.SpeciesResponseDTO;
+import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.SpeciesRepository;
 import com.vetris.adminmanagement.v1.service.SpeciesService;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.entity.Species;
 import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;
@@ -58,7 +58,6 @@ public class SpeciesServiceImpl implements SpeciesService {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		Species existingSpecies = speciesRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Species " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-
 		SpeciesResponseDTO speciesResponseDTO = objectMapper.convertValue(existingSpecies, SpeciesResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(speciesResponseDTO);
