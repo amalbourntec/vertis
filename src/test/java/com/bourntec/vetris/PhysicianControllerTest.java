@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.apimanagement.ApiManagementApplication;
 
 /**
  * Test class for Physicians
@@ -30,7 +30,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AdminManagementApplication.class)
+@ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -82,7 +82,7 @@ public class PhysicianControllerTest {
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/mastermanagement/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Physician not found"));
     }
 }
 

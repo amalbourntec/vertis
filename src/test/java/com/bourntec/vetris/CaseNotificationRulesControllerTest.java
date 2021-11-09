@@ -44,19 +44,13 @@ public class CaseNotificationRulesControllerTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 //Composite keys input required.
-//	@Test
-//	public void getAllCaseNotiRules() throws Exception {
-//		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rules/get_all/1/1/1/").accept(MediaType.APPLICATION_JSON))
-//				.andDo(print()).andExpect(status().isOk())
-//				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
-//	}
-
 	@Test
-	public void getCaseNotiRulesNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rules")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+	public void getAllCaseNotiRules() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rules/get_all/?priorityId=100&ruleNo=2&pacsStatusId=1").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
+
 
 	@Test
 	public void postCaseNotiRulesNotFound() throws Exception {
@@ -68,16 +62,16 @@ public class CaseNotificationRulesControllerTest {
 	public void deleteCaseNotiRuleNotFound() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/case_notification_rules/1").accept(MediaType.APPLICATION_JSON))
+				MockMvcRequestBuilders.delete("/v1/case_notification_rules/?priorityId=100&ruleNo=1&pacsStatusId=1").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Species not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Case notification rules not found"));
     }
 
-//	@Test
-//	public void putCaseNotiRules() throws Exception {
-//
-//		mockMvc.perform(
-//				MockMvcRequestBuilders.put("/v1/case_notification_rules/1/1/1").accept(MediaType.APPLICATION_JSON))
-//				.andDo(print()).andExpect(status().isBadRequest());
-//	}
+	@Test
+	public void putCaseNotiRules() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.put("/v1/case_notification_rules/?priorityId=100&ruleNo=2&pacsStatusId=1").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
 }
