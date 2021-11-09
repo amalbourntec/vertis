@@ -28,7 +28,7 @@ import com.vetris.utils.JWTSecurityContextUtil;
 /**
  * @author Aldrin Sunny
  * 
- *Test class for InstitutionSalespersonLinkServiceImpl
+ * Test class for InstitutionSalespersonLinkServiceImpl
  *
  */
 @RunWith(SpringRunner.class)
@@ -87,9 +87,10 @@ class InstitutionSalespersonLinkServiceImplTest {
 	public void saveInstitutionSalespersonLinkTest() throws Exception {
 		when(objectMapper.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class))
 				.thenReturn(institutionSalespersonLink);
+		when(jwtSecurityContextUtil.getId()).thenReturn("test");
 		when(institutionSalespersonLinkRepository.save(institutionSalespersonLink))
 				.thenReturn(institutionSalespersonLink);
-		when(jwtSecurityContextUtil.getId()).thenReturn("test");
+		
 		CommonResponseDTO commonResponseDTO = institutionSalespersonLinkServiceImpl
 				.addSalesperson(institutionSalespersonLinkRequestDto);
 		assertEquals("Success", commonResponseDTO.getStatus());
@@ -97,20 +98,14 @@ class InstitutionSalespersonLinkServiceImplTest {
 
 	@Test
 	public void getInstitutionSalespersonLinkByIdTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionSalespersonLink institutionSalespersonLink1 = mapper
-				.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class);
 		when(institutionSalespersonLinkRepository.findById("S1234"))
-				.thenReturn(Optional.of(institutionSalespersonLink1));
+				.thenReturn(Optional.of(institutionSalespersonLink));
 		CommonResponseDTO commonResponseDTO = institutionSalespersonLinkServiceImpl.getSalespersonById("S1234");
 		assertEquals("Success", commonResponseDTO.getStatus());
 	}
 	
 	@Test
 	public void getAllInstitutionSalespersonLinkTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionSalespersonLink institutionSalespersonLink = mapper
-				.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class);
 		List<InstitutionSalespersonLink> institutionSalespersonLinkList=new ArrayList<>();
 		institutionSalespersonLinkList.add(institutionSalespersonLink);
 		when(institutionSalespersonLinkRepository.findAll())
@@ -121,11 +116,8 @@ class InstitutionSalespersonLinkServiceImplTest {
 	
 	@Test
 	public void deleteInstitutionSalespersonLinkByIdTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionSalespersonLink institutionSalespersonLink2 = mapper
-				.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class);
 		when(institutionSalespersonLinkRepository.findById("S1234"))
-				.thenReturn(Optional.of(institutionSalespersonLink2));
+				.thenReturn(Optional.of(institutionSalespersonLink));
 
 		CommonResponseDTO commonResponse = institutionSalespersonLinkServiceImpl.deleteSalesperson("S1234");
 		assertEquals("Success", commonResponse.getStatus());
@@ -133,20 +125,16 @@ class InstitutionSalespersonLinkServiceImplTest {
 
 	@Test
 	public void updateInstitutionSalespersonLinkTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionSalespersonLink institutionSalespersonLink3 = mapper
-				.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class);
-		institutionSalespersonLink3.setSalespersonId("S234");
-		when(institutionSalespersonLinkRepository.findById("S234"))
-				.thenReturn(Optional.of(institutionSalespersonLink3));
+		when(institutionSalespersonLinkRepository.findById("S1234"))
+				.thenReturn(Optional.of(institutionSalespersonLink));
 		when(objectMapper.convertValue(institutionSalespersonLinkRequestDto, InstitutionSalespersonLink.class))
-				.thenReturn(institutionSalespersonLink3);
+				.thenReturn(institutionSalespersonLink);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
-		when(institutionSalespersonLinkRepository.save(institutionSalespersonLink3))
-				.thenReturn(institutionSalespersonLink3);
+		when(institutionSalespersonLinkRepository.save(institutionSalespersonLink))
+				.thenReturn(institutionSalespersonLink);
 
 		CommonResponseDTO commonResponse = institutionSalespersonLinkServiceImpl
-				.updateSalesperson(institutionSalespersonLinkRequestDto, "S234");
+				.updateSalesperson(institutionSalespersonLinkRequestDto, "S1234");
 		assertEquals("Success", commonResponse.getStatus());
 	}
 }

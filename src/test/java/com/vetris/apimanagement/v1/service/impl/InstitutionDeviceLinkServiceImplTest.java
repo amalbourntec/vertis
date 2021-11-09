@@ -77,8 +77,9 @@ class InstitutionDeviceLinkServiceImplTest {
 	public void saveDeviceLinkTest() throws Exception {
 		when(objectMapper.convertValue(institutionDeviceLinkRequestDto, InstitutionDeviceLink.class))
 				.thenReturn(institutionDeviceLink);
-		when(institutionDeviceLinkRepository.save(institutionDeviceLink)).thenReturn(institutionDeviceLink);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
+		when(institutionDeviceLinkRepository.save(institutionDeviceLink)).thenReturn(institutionDeviceLink);
+		
 		CommonResponseDTO commonResponseDTO = institutionDeviceLinkServiceImpl
 				.addDevice(institutionDeviceLinkRequestDto);
 		assertEquals("Success", commonResponseDTO.getStatus());
@@ -86,19 +87,13 @@ class InstitutionDeviceLinkServiceImplTest {
 
 	@Test
 	public void getDeviceLinkByIdTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionDeviceLink institutionDeviceLink1 = mapper.convertValue(institutionDeviceLinkRequestDto,
-				InstitutionDeviceLink.class);
-		when(institutionDeviceLinkRepository.findById("abc")).thenReturn(Optional.of(institutionDeviceLink1));
+		when(institutionDeviceLinkRepository.findById("abc")).thenReturn(Optional.of(institutionDeviceLink));
 		CommonResponseDTO commonResponseDTO = institutionDeviceLinkServiceImpl.getDeviceById("abc");
 		assertEquals("Success", commonResponseDTO.getStatus());
 	}
 	
 	@Test
 	public void getAllDeviceLinkTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionDeviceLink institutionDeviceLink = mapper.convertValue(institutionDeviceLinkRequestDto,
-				InstitutionDeviceLink.class);
 		List<InstitutionDeviceLink> institutionDeviceLinkList=new ArrayList<>();
 		institutionDeviceLinkList.add(institutionDeviceLink);
 		when(institutionDeviceLinkRepository.findAll()).thenReturn(institutionDeviceLinkList);
@@ -108,29 +103,22 @@ class InstitutionDeviceLinkServiceImplTest {
 
 	@Test
 	public void deleteDeviceLinkByIdTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionDeviceLink institutionDeviceLink2 = mapper.convertValue(institutionDeviceLinkRequestDto,
-				InstitutionDeviceLink.class);
-		when(institutionDeviceLinkRepository.findById("abc")).thenReturn(Optional.of(institutionDeviceLink2));
+		when(institutionDeviceLinkRepository.findById("abc")).thenReturn(Optional.of(institutionDeviceLink));
 
-		CommonResponseDTO commonResponse = institutionDeviceLinkServiceImpl.getDeviceById("abc");
+		CommonResponseDTO commonResponse = institutionDeviceLinkServiceImpl.deleteDevice("abc");
 		assertEquals("Success", commonResponse.getStatus());
 	}
 
 	@Test
 	public void updateDeviceLinkTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionDeviceLink institutionDeviceLink3 = mapper.convertValue(institutionDeviceLinkRequestDto,
-				InstitutionDeviceLink.class);
-		institutionDeviceLink3.setDeviceId("ab");
-		when(institutionDeviceLinkRepository.findById("ab")).thenReturn(Optional.of(institutionDeviceLink3));
+		when(institutionDeviceLinkRepository.findById("abc")).thenReturn(Optional.of(institutionDeviceLink));
 		when(objectMapper.convertValue(institutionDeviceLinkRequestDto, InstitutionDeviceLink.class))
-				.thenReturn(institutionDeviceLink3);
+				.thenReturn(institutionDeviceLink);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
-		when(institutionDeviceLinkRepository.save(institutionDeviceLink3)).thenReturn(institutionDeviceLink3);
+		when(institutionDeviceLinkRepository.save(institutionDeviceLink)).thenReturn(institutionDeviceLink);
 
 		CommonResponseDTO commonResponse = institutionDeviceLinkServiceImpl
-				.updateDevice(institutionDeviceLinkRequestDto, "ab");
+				.updateDevice(institutionDeviceLinkRequestDto, "abc");
 		assertEquals("Success", commonResponse.getStatus());
 	}
 }
