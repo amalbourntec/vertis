@@ -10,14 +10,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,16 +41,16 @@ public class InstitutionRegModalityServiceImplTest {
 	@InjectMocks
 	InstitutionRegModalityLinkServiceImpl reModalityService;
 
-	@MockBean
+	@Mock
 	InstitutionRegModalityLinkRepository regModalityRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionRegModalityLinkRequestDTO regModalityDto;
@@ -66,11 +64,6 @@ public class InstitutionRegModalityServiceImplTest {
 		regModalityDto.setInstitutionId("21");
 		mapper = new ObjectMapper();
 		regModality = mapper.convertValue(regModalityDto, InstitutionRegModalityLink.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
@@ -115,7 +108,7 @@ public class InstitutionRegModalityServiceImplTest {
 	}
 
 	@Test
-	public void testdeleteRegModality() throws Exception {
+	public void testDeleteRegModality() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		InstitutionRegModalityLink regModality = mapper.convertValue(regModalityDto, InstitutionRegModalityLink.class);
 		when(regModalityRepository.findById("bac")).thenReturn(Optional.of(regModality));
@@ -125,7 +118,7 @@ public class InstitutionRegModalityServiceImplTest {
 	}
 
 	@Test
-	public void testupdateRegModality() throws Exception {
+	public void testUpdateRegModality() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		InstitutionRegModalityLink regModality3 = mapper.convertValue(regModalityDto, InstitutionRegModalityLink.class);
 		regModality3.setModalityId("cab");

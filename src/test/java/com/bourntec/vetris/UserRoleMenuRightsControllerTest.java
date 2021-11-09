@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserRoleMenuRightsController;
 
 /**
  * Test class for UserRoleMenuRightsController
@@ -32,7 +33,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRoleMenuRightsController.class)
 @AutoConfigureMockMvc
 public class UserRoleMenuRightsControllerTest {
 
@@ -46,42 +47,42 @@ public class UserRoleMenuRightsControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllUserRoleMenuRights() throws Exception {
+	public void testGetAllUserRoleMenuRights() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getUserRoleMenuRightsNotFound() throws Exception {
+	public void testGetUserRoleMenuRightsNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights/").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void postUserRoleMenuRightsNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void putUserRoleMenuRights() throws Exception {
+	public void testPutUserRoleMenuRights() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void deleteUserRoleMenuRightsNotFound() throws Exception {
+	public void testPostUserRoleMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteUserRoleMenuRightsNotFound() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("user menu rights  not found"));
 	}

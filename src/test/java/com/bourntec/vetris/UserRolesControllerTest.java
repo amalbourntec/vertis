@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserRolesController;
 
 /**
  * Test class for UserRoles
@@ -32,7 +33,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRolesController.class)
 @AutoConfigureMockMvc
 public class UserRolesControllerTest {
 
@@ -46,43 +47,41 @@ public class UserRolesControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllUserRoles() throws Exception {
+	public void testGetAllUserRoles() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getUserRolesNotFound() throws Exception {
+	public void testGetUserRolesNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles/").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void postUserRolesNotFound() throws Exception {
+	public void testPutUserRoles() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testPostUserRolesNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putUserRoles() throws Exception {
+	public void testDeleteUserRolesNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-	
-	@Test
-	public void deleteUserRolesNotFound() throws Exception {
-
-		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
-    }
+	}
 }

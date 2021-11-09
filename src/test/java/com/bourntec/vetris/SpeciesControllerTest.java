@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
-
+import com.vetris.adminmanagement.v1.contoller.SpeciesController;
 
 /**
  * Test class for SpeciesControllerTest
@@ -33,7 +33,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = SpeciesController.class)
 @AutoConfigureMockMvc
 public class SpeciesControllerTest {
 	@Value("${server.port}")
@@ -46,43 +46,44 @@ public class SpeciesControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllSpecies() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON)).andDo(print())
-				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
+	public void testGetAllSpecies() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getSpeciesNotFound() throws Exception {
+	public void testGetSpeciesNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species/").accept(MediaType.APPLICATION_JSON)).andDo(print())
-				.andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species/").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void postSpeciesNotFound() throws Exception {
+	public void testPutSpecies() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON)).andDo(print())
-				.andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void putSpecies() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.put("/mastermanagement/v1/species/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(
+				MockMvcRequestBuilders.put("/mastermanagement/v1/species/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
-	public void deleteSpeciesNotFound() throws Exception {
+	public void testPostSpeciesNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteSpeciesNotFound() throws Exception {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/mastermanagement/v1/species/70").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Species not found"));
-    }
+	}
 }

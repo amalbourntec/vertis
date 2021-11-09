@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionRegModalityLinkController;
 
 /**
  * Test class for InstitutionRegModalityController
@@ -32,7 +33,7 @@ import com.vetris.apimanagement.ApiManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = InstitutionRegModalityLinkController.class)
 @AutoConfigureMockMvc
 class InstitutionRegModalityController {
 
@@ -51,40 +52,40 @@ class InstitutionRegModalityController {
 	}
 
 	@Test
-	public void getAllModality() throws Exception {
+	public void testGetAllModality() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getModalityNotFound() throws Exception {
+	public void testGetModalityNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality/55b51e98-07dc-4c51-ad85-f0a7148270f9")
 				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-		// .andExpect(status().isNotFound());
+
 	}
 
 	@Test
-	public void postModalityNotFound() throws Exception {
+	public void testPutInstitutionsRegModality() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testPostModalityNotFound() throws Exception {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putInstitutionsRegModality() throws Exception {
+	public void testDeleteSalesPersonNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-	@Test
-	public void deleteSalesPersonNotFound() throws Exception {
-
-		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
-    }
+	}
 
 }

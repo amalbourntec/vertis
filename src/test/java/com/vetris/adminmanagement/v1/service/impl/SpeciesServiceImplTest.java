@@ -11,14 +11,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +25,7 @@ import com.vetris.adminmanagement.v1.dto.response.SpeciesResponseDTO;
 import com.vetris.adminmanagement.v1.repository.SpeciesRepository;
 import com.vetris.adminmanagement.v1.service.SpeciesService;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
+import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.entity.Species;
 import com.vetris.utils.JWTSecurityContextUtil;
 
@@ -43,16 +41,16 @@ public class SpeciesServiceImplTest {
 	@InjectMocks
 	SpeciesServiceImpl speciesService;
 
-	@MockBean
+	@Mock
 	SpeciesRepository speciesRepo;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static SpeciesRequestDTO speciesDto;
@@ -68,11 +66,6 @@ public class SpeciesServiceImplTest {
 		speciesDto.setName("Manu");
 		mapper = new ObjectMapper();
 		species = mapper.convertValue(speciesDto, Species.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test

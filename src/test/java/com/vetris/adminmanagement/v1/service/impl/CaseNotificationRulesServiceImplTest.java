@@ -10,14 +10,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,16 +40,16 @@ public class CaseNotificationRulesServiceImplTest {
 	@InjectMocks
 	CaseNotificationRulesServiceImpl CaseNotificationRulesService;
 
-	@MockBean
+	@Mock
 	CaseNotificationRulesRepository CaseNotificationRulesRepo;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static CaseNotificationRulesRequestDTO caseNotificationRulesDto;
@@ -72,11 +70,6 @@ public class CaseNotificationRulesServiceImplTest {
 		caseNotificationRulesDto.setTimeEllapsedMins(5);
 		mapper = new ObjectMapper();
 		caseNotificationRules = mapper.convertValue(caseNotificationRulesDto, CaseNotificationRules.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
@@ -156,7 +149,7 @@ public class CaseNotificationRulesServiceImplTest {
 	}
 
 	@Test
-	public void testdeletecaseNotificationRules() throws Exception {
+	public void testDeletecaseNotificationRules() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		CaseNotificationRules caseNotificationRules = mapper.convertValue(caseNotificationRulesDto,
 				CaseNotificationRules.class);
@@ -167,7 +160,7 @@ public class CaseNotificationRulesServiceImplTest {
 	}
 
 	@Test
-	public void testupdatecaseNotificationRules() throws Exception {
+	public void testUpdatecaseNotificationRules() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		CaseNotificationRules caseNotificationRules3 = mapper.convertValue(caseNotificationRulesDto,
 				CaseNotificationRules.class);

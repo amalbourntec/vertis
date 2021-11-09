@@ -11,22 +11,19 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
-import com.vetris.adminmanagement.v1.dto.response.SpeciesResponseDTO;
 import com.vetris.apimanagement.v1.dto.request.PhysicianRequestDTO;
+import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.apimanagement.v1.dto.response.PhysicianResponseDTO;
+import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.apimanagement.v1.repository.PhysicianRepository;
 import com.vetris.apimanagement.v1.service.PhysicianService;
 import com.vetris.apimanagement.v1.service.impl.PhysicianServiceImpl;
@@ -45,16 +42,16 @@ public class PhysicianServiceImplTest {
 	@InjectMocks
 	PhysicianServiceImpl physiciansService;
 
-	@MockBean
+	@Mock
 	PhysicianRepository physicianRepo;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static PhysicianRequestDTO physicianDto;
@@ -82,11 +79,6 @@ public class PhysicianServiceImplTest {
 		physicianDto.setZip("zip");
 		mapper = new ObjectMapper();
 		physicians = mapper.convertValue(physicianDto, Physicians.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
@@ -134,7 +126,8 @@ public class PhysicianServiceImplTest {
 		physicianRespDto.setPhoneNo("2222");
 		physicianRespDto.setStateId(1);
 		physicianRespDto.setZip("zip");
-		//PhysicianResponseDTO userRoleRespDTO = mapper.convertValue(physicians1, PhysicianResponseDTO.class);
+		// PhysicianResponseDTO userRoleRespDTO = mapper.convertValue(physicians1,
+		// PhysicianResponseDTO.class);
 		when(physicianRepo.findById("1")).thenReturn(Optional.of(physicians1));
 		when(objectMapper.convertValue(physicians1, PhysicianResponseDTO.class)).thenReturn(physicianRespDto);
 		CommonResponseDTO commonResponse = physiciansService.getPhysicianById("1");
