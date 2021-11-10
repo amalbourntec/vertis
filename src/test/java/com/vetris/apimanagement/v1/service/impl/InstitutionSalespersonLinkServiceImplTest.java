@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,16 +36,16 @@ class InstitutionSalespersonLinkServiceImplTest {
 	@InjectMocks
 	InstitutionSalespersonLinkServiceImpl institutionSalespersonLinkServiceImpl;
 
-	@MockBean
+	@Mock
 	InstitutionSalespersonLinkRepository institutionSalespersonLinkRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionSalespersonLinkRequestDTO institutionSalespersonLinkRequestDto;
@@ -76,11 +74,6 @@ class InstitutionSalespersonLinkServiceImplTest {
 		mapper = new ObjectMapper();
 		institutionSalespersonLink = mapper.convertValue(institutionSalespersonLinkRequestDto,
 				InstitutionSalespersonLink.class);
-	}
-
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test

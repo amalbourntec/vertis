@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +26,7 @@ import com.vetris.utils.JWTSecurityContextUtil;
 /**
  * @author Aldrin Sunny
  * 
- *         Test class for CaseNotificationRuleHdrServiceImpl
+ * Test class for CaseNotificationRuleHdrServiceImpl
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { CaseNotificationRuleHdr.class })
@@ -37,16 +35,16 @@ class CaseNotificationRuleHdrServiceImplTest {
 	@InjectMocks
 	CaseNotificationRuleHdrServiceImpl caseNotificationRuleHdrServiceImpl;
 
-	@MockBean
+	@Mock
 	CaseNotificationRuleHdrRepository caseNotificationRuleHdrRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static CaseNotificationRuleHdrRequestDTO caseNotificationRuleHdrRequestDto;
@@ -70,10 +68,6 @@ class CaseNotificationRuleHdrServiceImplTest {
 		caseNotificationRuleHdr = mapper.convertValue(caseNotificationRuleHdrRequestDto, CaseNotificationRuleHdr.class);
 	}
 
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test
 	public void saveCaseNotificationRuleHdrTest() throws Exception {
