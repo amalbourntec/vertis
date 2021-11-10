@@ -141,8 +141,7 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 			String institutionId, String userId) throws Exception {
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
-				.findByInstitutionIdANDUserId(institutionId, userId)
+		institutionUserLinkRepository.findByInstitutionIdANDUserId(institutionId, userId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
