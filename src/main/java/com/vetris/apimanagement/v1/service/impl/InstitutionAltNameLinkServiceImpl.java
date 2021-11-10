@@ -67,8 +67,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 		List<InstitutionAltNameLink> institutionAltNameLinkList = institutionAltNameLinkRepo.findAll();
 		List<InstitutionAltNameLinkResponseDTO> altNameRespDTO = new ArrayList<>();
 		if (institutionAltNameLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("Institution alternate name not found");
+			 throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionAltNameLinkList.stream().forEach(altName -> {
 				altNameRespDTO.add(objectMapper.convertValue(altName, InstitutionAltNameLinkResponseDTO.class));

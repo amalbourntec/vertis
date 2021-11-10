@@ -67,8 +67,7 @@ public class InstitutionDeviceLinkServiceImpl implements InstitutionDeviceLinkSe
 		List<InstitutionDeviceLink> institutionDeviceLinkList = institutionDeviceLinkRepository.findAll();
 		List<InstitutionDeviceLinkResponseDTO> deviceRespDTO = new ArrayList<>();
 		if (institutionDeviceLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No device found");
+			 throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionDeviceLinkList.stream().forEach(device -> {
 				deviceRespDTO.add(objectMapper.convertValue(device, InstitutionDeviceLinkResponseDTO.class));

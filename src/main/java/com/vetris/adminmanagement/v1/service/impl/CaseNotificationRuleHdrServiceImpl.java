@@ -66,8 +66,7 @@ public class CaseNotificationRuleHdrServiceImpl implements CaseNotificationRuleH
 		List<CaseNotificationRuleHdr> caseNotificationRuleHdrList = caseNotificationRuleHdrRepository.findAll();
 		List<CaseNotificationRuleHdrResponseDTO> caseNotificationRuleHdrRespDTO = new ArrayList<>();
 		if (caseNotificationRuleHdrList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No CaseNotificationRuleHdr found");
+			 throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			caseNotificationRuleHdrList.stream().forEach(caseNotificationRuleHdr -> {
 				caseNotificationRuleHdrRespDTO.add(

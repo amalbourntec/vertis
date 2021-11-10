@@ -66,8 +66,7 @@ public class InstitutionRatesFeeScheduleServiceImpl implements InstitutionRatesF
 		List<InstitutionRatesFeeSchedule> rateFeeList = institutionRatesFeeScheduleRepository.findAll();
 		List<InstitutionRatesFeeScheduleResponseDTO> rateFeeRespDTO = new ArrayList<>();
 		if (rateFeeList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No InstitutionRatesFeeSchedule found");
+			 throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			rateFeeList.stream().forEach(rateFee -> {
 				rateFeeRespDTO.add(objectMapper.convertValue(rateFee, InstitutionRatesFeeScheduleResponseDTO.class));

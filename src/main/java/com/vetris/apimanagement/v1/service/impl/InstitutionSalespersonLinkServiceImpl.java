@@ -62,8 +62,7 @@ public class InstitutionSalespersonLinkServiceImpl implements InstitutionSalespe
 		List<InstitutionSalespersonLink> salespersonList = institutionSalespersonLinkRepository.findAll();
 		List<InstitutionSalespersonLinkResponseDTO> salespersonRespDTO = new ArrayList<>();
 		if (salespersonList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No Salesperson found");
+			 throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			salespersonList.stream().forEach(salesperson -> {
 				salespersonRespDTO.add(objectMapper.convertValue(salesperson, InstitutionSalespersonLinkResponseDTO.class));
