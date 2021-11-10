@@ -93,16 +93,13 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
 				.findByInstitutionIdANDUserId(institutionId, userId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (resultInstitutionUserLinkCheck == null) {
-			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
-		} else {
-			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLinkCheck,
-					InstitutionUserLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setPayload(institutionUserLinkResponseDTO);
-			resultDto.setMessage("Fetched successfully");
-		}
-	
+
+		institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLinkCheck,
+				InstitutionUserLinkResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.toString());
+		resultDto.setPayload(institutionUserLinkResponseDTO);
+		resultDto.setMessage("Fetched successfully");
+
 		return resultDto;
 	}
 
@@ -147,22 +144,19 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
 				.findByInstitutionIdANDUserId(institutionId, userId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (resultInstitutionUserLinkCheck == null) {
-			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
-		} else {
 
-			InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
-					InstitutionUserLink.class);
-			resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
+		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
+				InstitutionUserLink.class);
+		resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
 
-			resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
+		resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
 
-			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
-					InstitutionUserLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setPayload(institutionUserLinkResponseDTO);
-			resultDto.setMessage("Saved successfully");
-		}
+		institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
+				InstitutionUserLinkResponseDTO.class);
+		resultDto.setStatus(StatusType.SUCCESS.toString());
+		resultDto.setPayload(institutionUserLinkResponseDTO);
+		resultDto.setMessage("Saved successfully");
+
 		return resultDto;
 	}
 
