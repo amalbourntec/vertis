@@ -64,9 +64,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 		List<InstitutionsReg> institutionsReg = institutionsRegRepository.findAll();
 		List<InstitutionsRegResponseDTO> resultresponseDto = new ArrayList<>();
 		if (institutionsReg.isEmpty()) {
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionsReg.stream().forEach(institutionsRegItem -> resultresponseDto
 					.add(objectMapper.convertValue(institutionsRegItem, InstitutionsRegResponseDTO.class)));
@@ -129,8 +127,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setMessage("Deleted successfully");
 		} else {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setMessage("Unable to fetch details");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		}
 		return resultDto;
 	}

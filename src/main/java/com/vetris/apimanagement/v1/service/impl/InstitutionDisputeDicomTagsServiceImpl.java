@@ -63,9 +63,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 		List<InstitutionDisputeDicomTags> institutionDisputeDicomTags = institutionDisputeDicomTagsRepository.findAll();
 		List<InstitutionDisputeDicomTagsResponseDTO> resultResponseDto = new ArrayList<>();
 		if (institutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionDisputeDicomTags.stream()
 					.forEach(institutionDisputeDicomTagsItem -> resultResponseDto.add(objectMapper.convertValue(
@@ -87,9 +85,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findAllInstitutionId(institutionId);
 
 		if (existingInstitutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
 				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
@@ -112,9 +108,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findAllGroupId(groupId);
 
 		if (existingInstitutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
 				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
@@ -137,9 +131,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findAllElementId(elementId);
 
 		if (existingInstitutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
 				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
@@ -162,9 +154,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findByInstitutionIdORGroupIdORElementId(id);
 
 		if (existingInstitutionDisputeDicomTags.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			existingInstitutionDisputeDicomTags.stream().forEach(institutionDisputeDicomTagsItem -> {
 				institutionDisputeDicomTagsResponseDTO.add(objectMapper.convertValue(institutionDisputeDicomTagsItem,
@@ -189,9 +179,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		if (resultInstitutionDisputeDicomTagsCheck == null) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 
 			InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper
@@ -219,9 +207,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		if (resultInstitutionDisputeDicomTagsCheck == null) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTagsCheck,
 					InstitutionDisputeDicomTagsResponseDTO.class);

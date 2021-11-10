@@ -1,26 +1,27 @@
 package com.vetris.apimanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.apimanagement.v1.dto.request.InstitutionsRegRequestDTO;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.apimanagement.v1.repository.InstitutionsRegRepository;
 import com.vetris.apimanagement.v1.service.InstitutionsRegService;
 import com.vetris.entity.InstitutionsReg;
@@ -37,16 +38,16 @@ class InstitutionsRegServiceImplTest {
 	@InjectMocks
 	InstitutionsRegServiceImpl institutionsRegService;
 
-	@MockBean
+	@Mock
 	InstitutionsRegRepository institutionsRegRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionsRegRequestDTO institutionsRegRequestDTO;
@@ -80,12 +81,6 @@ class InstitutionsRegServiceImplTest {
 		institutionsRegRequestDTO.setZip("688555");
 		mapper = new ObjectMapper();
 		institutionsReg = mapper.convertValue(institutionsRegRequestDTO, InstitutionsReg.class);
-	}
-
-	@SuppressWarnings("deprecation")
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
@@ -129,6 +124,38 @@ class InstitutionsRegServiceImplTest {
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
 
+	@Test
+	public void testGetByIdResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionsRegService.getInstitutionsRegById("09a35919-8e5b-416b-8c7d-3de3fd834629");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+
+	@Test
+	public void testGetAllResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionsRegService.getAllInstitutionsReg();
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testUpdateResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionsRegService.updateInstitutionsReg(institutionsRegRequestDTO, "abc");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testDeleteResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionsRegService.deleteInstitutionsReg("abc");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
 	@Test
 	public void testUpdateInstitutionsReg() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();

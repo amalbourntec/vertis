@@ -42,9 +42,7 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		List<InstitutionUserLink> institutionUserLink = institutionUserLinkRepository.findAll();
 		List<InstitutionUserLinkResponseDTO> responseDTO = new ArrayList<>();
 		if (institutionUserLink.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionUserLink.stream().forEach(institutionUserLinkItem -> responseDTO
 					.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
@@ -85,6 +83,26 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		resultDto.setPayload(institutionUserLinkResponseDTO);
 		resultDto.setMessage("Fetched successfully");
 
+		return resultDto;
+	}
+
+	@Override
+	public CommonResponseDTO fetchInstitutionUserLinkByAll(String institutionId, String userId) throws Exception {
+		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
+				.findByInstitutionIdANDUserId(institutionId, userId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		if (resultInstitutionUserLinkCheck == null) {
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
+		} else {
+			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLinkCheck,
+					InstitutionUserLinkResponseDTO.class);
+			resultDto.setStatus(StatusType.SUCCESS.toString());
+			resultDto.setPayload(institutionUserLinkResponseDTO);
+			resultDto.setMessage("Fetched successfully");
+		}
+	
 		return resultDto;
 	}
 
@@ -130,9 +148,7 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 				.findByInstitutionIdANDUserId(institutionId, userId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		if (resultInstitutionUserLinkCheck == null) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 
 			InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
@@ -151,28 +167,6 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 	}
 
 	@Override
-	public CommonResponseDTO fetchInstitutionUserLinkByAll(String institutionId, String userId) throws Exception {
-		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
-		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink resultInstitutionUserLinkCheck = institutionUserLinkRepository
-				.findByInstitutionIdANDUserId(institutionId, userId)
-				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (resultInstitutionUserLinkCheck == null) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
-		} else {
-			institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLinkCheck,
-					InstitutionUserLinkResponseDTO.class);
-			resultDto.setStatus(StatusType.SUCCESS.toString());
-			resultDto.setPayload(institutionUserLinkResponseDTO);
-			resultDto.setMessage("Fetched successfully");
-		}
-
-		return resultDto;
-	}
-
-	@Override
 	public CommonResponseDTO getByInstitutionIdORUserId(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO = new ArrayList<InstitutionUserLinkResponseDTO>();
@@ -180,9 +174,7 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 				.findByInstitutionIdORUserId(id);
 
 		if (existingInstitutionUserLink.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.toString());
-			resultDto.setPayload("");
-			resultDto.setMessage("Not found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> {
 				institutionUserLinkResponseDTO

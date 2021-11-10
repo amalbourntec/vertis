@@ -1,26 +1,27 @@
 package com.vetris.apimanagement.v1.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.apimanagement.v1.dto.request.InstitutionDisputeDicomTagsRequestDTO;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.apimanagement.v1.repository.InstitutionDisputeDicomTagsRepository;
 import com.vetris.apimanagement.v1.service.InstitutionDisputeDicomTagsService;
 import com.vetris.entity.InstitutionDisputeDicomTags;
@@ -37,16 +38,16 @@ class InstitutionDisputeDicomTagsServiceImplTest {
 	@InjectMocks
 	InstitutionDisputeDicomTagsServiceImpl institutionDisputeDicomTagsService;
 
-	@MockBean
+	@Mock
 	InstitutionDisputeDicomTagsRepository institutionDisputeDicomTagsRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequestDTO;
@@ -68,12 +69,6 @@ class InstitutionDisputeDicomTagsServiceImplTest {
 				InstitutionDisputeDicomTags.class);
 	}
 
-	@SuppressWarnings("deprecation")
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
 	public void testaddInstitutionDisputeDicomTags() throws Exception {
 		System.out.println("test1");
@@ -87,6 +82,70 @@ class InstitutionDisputeDicomTagsServiceImplTest {
 		assertEquals("SUCCESS", commonResponse.getStatus());
 	}
 
+	@Test
+	public void testGetByIdResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.getInstitutionDisputeDicomTagsByElementId("one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+
+	@Test
+	public void testGetByIdResourceNotFoundException1() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.getInstitutionDisputeDicomTagsByGroupId("one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+
+	@Test
+	public void testGetByIdResourceNotFoundException2() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.getInstitutionDisputeDicomTagsByInstitutionId("one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+
+	@Test
+	public void testGetAllResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.getAllInstitutionDisputeDicomTags();
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testGetByIdOrResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.getByInstitutionIdORGroupIdORElementId("one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testUpdateResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.updateInstitutionDisputeDicomTags(institutionDisputeDicomTagsRequestDTO, "abc","ccc","one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testFetchAlleResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.fetchInstitutionDisputeDicomTagsByAll("abc","ccc","one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
+	@Test
+	public void testDeleteResourceNotFoundException() {
+		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			institutionDisputeDicomTagsService.deleteInstitutionDisputeDicomTags("abc","ccc","one");
+		});
+		assertFalse(exception.getMessage().equalsIgnoreCase("not found"));
+	}
+	
 	@Test
 	public void testgetAllInstitutionDisputeDicomTags() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
