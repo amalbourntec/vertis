@@ -89,7 +89,7 @@ public class InstitutionCategoryLinkController {
 	 * @return string
 	 * @throws Exception
 	 */
-	@DeleteMapping("{category_id}")
+	@DeleteMapping("/{category_id}")
 	public ResponseEntity<CommonResponseDTO> deleteInstitutionCategoryLink(
 			@PathVariable(value = "category_id") Integer categoryId) throws Exception {
 		CommonResponseDTO resultDto = institutionCategoryLinkService.deleteInstitutionCategoryLink(categoryId);

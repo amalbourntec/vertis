@@ -45,8 +45,7 @@ public class CaseNotificationRuleRadiologistDtlsServiceImpl implements CaseNotif
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
 		if (caseNotificationRuleRadiologistDtlsList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No Case Notification Rule Radiologist Dtls found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			caseNotificationRuleRadiologistDtlsList.stream()
 					.forEach(ruleRadiologistDtls -> caseNotificationRuleRadiologistDtlsRespDTO.add(objectMapper

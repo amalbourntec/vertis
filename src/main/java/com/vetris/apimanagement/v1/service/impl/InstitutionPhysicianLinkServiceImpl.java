@@ -51,8 +51,7 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
 		if (institutionPhysicianLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No Institution Physician Link found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionPhysicianLinkList.stream().forEach(physician -> institutionPhysicianLinkRespDTO
 					.add(objectMapper.convertValue(physician, InstitutionPhysicianLinkResponseDTO.class)));

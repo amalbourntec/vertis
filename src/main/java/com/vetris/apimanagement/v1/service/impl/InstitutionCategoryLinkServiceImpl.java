@@ -94,8 +94,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
 		if (institutionCategoryLinkList.isEmpty()) {
-			resultDto.setStatus(StatusType.FAILURE.getMessage());
-			resultDto.setMessage("No institution Category Link found");
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
 			institutionCategoryLinkList.stream().forEach(category -> institutionCategoryLinkRespDTO
 					.add(objectMapper.convertValue(category, InstitutionCategoryLinkResponseDTO.class)));
@@ -140,8 +139,8 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 	public CommonResponseDTO deleteInstitutionCategoryLink(Integer categoryId) throws Exception {
 
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionCategoryLinkRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(
-				"Institution Category Link" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		institutionCategoryLinkRepository.findById(categoryId)
+				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		institutionCategoryLinkRepository.deleteById(categoryId);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
