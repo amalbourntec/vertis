@@ -25,13 +25,20 @@ import com.vetris.apimanagement.ApiManagementApplication;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * Test class for InstitutionPhysicianLinkController
+ * 
+ * @author Jini
+ *
+ */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @NoArgsConstructor
-public class InstitutionCategoryLinkTest {
+public class InstitutionPhysicianLinkControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -48,24 +55,42 @@ public class InstitutionCategoryLinkTest {
 	}
 
 	@Test
-	public void testGetAllInstitutionCategoryLink() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institution_category_link").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllInstitutionPhysicianLink() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institution_physician_link").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetByIdInstitutionCategoryLinkNotFound() throws Exception {
+	public void testUpdateInstitutionPhysicianLink() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.get("/v1/institution_category_link/123").accept(MediaType.APPLICATION_JSON))
+				MockMvcRequestBuilders.put("/v1/institution_physician_link/pid02").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void testGetByIdInstitutionPhysicianLinkNotFound() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.get("/v1/institution_physician_link/pid01").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void testPostInstitutionCategoryLinkNotFound() throws Exception {
+	public void testPostInstitutionPhysicianLinkNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/institution_category_link").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/v1/institution_physician_link").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteInstitutionPhysicianLinkNotFound() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/v1/institution_physician_link/pid03").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound()).andExpect(MockMvcResultMatchers
+						.jsonPath("$.responseMessage").value(" not found"));
 	}
 }

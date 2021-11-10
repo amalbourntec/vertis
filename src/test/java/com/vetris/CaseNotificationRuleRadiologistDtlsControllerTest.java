@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -24,6 +25,13 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * Test class for CaseNotificationRuleRadiologistDtlsController
+ * 
+ * @author Jini
+ *
+ */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
@@ -32,8 +40,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CaseNotificationRuleRadiologistDtlsControllerTest {
 
-
-	int port = 8976;
+	@Value("${server.port}")
+	int port;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -48,24 +56,40 @@ public class CaseNotificationRuleRadiologistDtlsControllerTest {
 
 	@Test
 	public void testGetAllCaseNotificationRuleRadiologistDtls() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk())
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetByIdInstitutionCategoryLinkNotFound() throws Exception {
+	public void testUpdateCaseNotificationRuleRadiologistDtls() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound());
+				MockMvcRequestBuilders.put("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void testGetByIdCaseNotificationRuleRadiologistDtlsNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls/123")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void testPostInstitutionCategoryLinkNotFound() throws Exception {
+	public void testPostCaseNotificationRuleRadiologistDtlsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/case_notification_rule_radiologist_dtls").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/case_notification_rule_radiologist_dtls")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void testDeleteCaseNotificationRuleRadiologistDtlsNotFound() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound()).andExpect(MockMvcResultMatchers
+						.jsonPath("$.responseMessage").value("Case Notification Rule Radiologist Dtls  not found"));
 	}
 
 }
