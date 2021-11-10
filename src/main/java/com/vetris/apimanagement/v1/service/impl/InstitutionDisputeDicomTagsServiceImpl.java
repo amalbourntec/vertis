@@ -175,7 +175,7 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 			String groupId, String elementId) throws Exception {
 		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTagsCheck = institutionDisputeDicomTagsRepository
+		institutionDisputeDicomTagsRepository
 				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
