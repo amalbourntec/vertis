@@ -1,22 +1,21 @@
 package com.vetris.apimanagement.v1.service.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +29,13 @@ import com.vetris.utils.JWTSecurityContextUtil;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * Test class for InstitutionPhysicianLinkServiceImpl
+ * 
+ * @author Jini
+ *
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionPhysicianLinkService.class })
 @NoArgsConstructor
@@ -38,16 +44,16 @@ public class InstitutionPhysicianLinkServiceImplTest {
 	@InjectMocks
 	InstitutionPhysicianLinkServiceImpl institutionPhysicianLinkServiceImpl;
 
-	@MockBean
+	@Mock
 	InstitutionPhysicianLinkRepository institutionPhysicianLinkRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDTO;
@@ -74,11 +80,7 @@ public class InstitutionPhysicianLinkServiceImplTest {
 		institutionPhysicianLink = mapper.convertValue(institutionPhysicianLinkReqDTO, InstitutionPhysicianLink.class);
 	}
 
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-	}
-
+	
 	@Test
 	public void testAddInstitutionPhysicianLink() throws Exception {
 		when(objectMapper.convertValue(institutionPhysicianLinkReqDTO, InstitutionPhysicianLink.class))

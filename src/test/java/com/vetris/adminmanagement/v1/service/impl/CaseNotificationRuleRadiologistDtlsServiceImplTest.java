@@ -8,28 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRuleRadiologistDtlsRequestDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.CaseNotificationRuleRadiologistDtlsRepository;
 import com.vetris.adminmanagement.v1.service.CaseNotificationRuleRadiologistDtlsService;
-import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
-import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.entity.CaseNotificationRuleRadiologistDtls;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 import lombok.NoArgsConstructor;
+
+/**
+ * Test class for CaseNotificationRuleRadiologistDtlsServiceImpl
+ * 
+ * @author Jini
+ *
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { CaseNotificationRuleRadiologistDtlsService.class })
@@ -39,16 +44,16 @@ public class CaseNotificationRuleRadiologistDtlsServiceImplTest {
 	@InjectMocks
 	CaseNotificationRuleRadiologistDtlsServiceImpl caseNotifiRuleRadiologistDtlsServiceImpl;
 
-	@MockBean
+	@Mock
 	CaseNotificationRuleRadiologistDtlsRepository caseNotifiRuleRadiologistDtlsRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static CaseNotificationRuleRadiologistDtlsRequestDTO caseNotifiRuleRadiologistDtlsReqDTO;
@@ -66,11 +71,6 @@ public class CaseNotificationRuleRadiologistDtlsServiceImplTest {
 		mapper = new ObjectMapper();
 		caseNotifiRuleRadiologistDtls = mapper.convertValue(caseNotifiRuleRadiologistDtlsReqDTO,
 				CaseNotificationRuleRadiologistDtls.class);
-	}
-
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test

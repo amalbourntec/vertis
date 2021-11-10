@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +29,13 @@ import com.vetris.utils.JWTSecurityContextUtil;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * Test class for InstitutionCategoryLinkServiceImpl
+ * 
+ * @author Jini
+ *
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InstitutionCategoryLinkService.class })
 @NoArgsConstructor
@@ -39,16 +44,16 @@ public class InstitutionCategoryLinkServiceImplTest {
 	@InjectMocks
 	InstitutionCategoryLinkServiceImpl institutionCategoryLinkServiceImpl;
 
-	@MockBean
+	@Mock
 	InstitutionCategoryLinkRepository institutionCategoryLinkRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionCategoryLinkRequestDTO institutionCategoryLinkReqDTO;
@@ -62,11 +67,6 @@ public class InstitutionCategoryLinkServiceImplTest {
 		institutionCategoryLinkReqDTO.setInstitutionId("inid32");
 		mapper = new ObjectMapper();
 		institutionCategoryLink = mapper.convertValue(institutionCategoryLinkReqDTO, InstitutionCategoryLink.class);
-	}
-
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
