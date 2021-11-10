@@ -1,10 +1,10 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,21 +21,18 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.adminmanagement.AdminManagementApplication;
-import com.vetris.adminmanagement.v1.contoller.SpeciesController;
+import com.vetris.apimanagement.ApiManagementApplication;
 
-/**
- * Test class for SpeciesControllerTest
- * 
- * @author Jose Eldhose
- *
- */
+import lombok.NoArgsConstructor;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AdminManagementApplication.class)
+@ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = SpeciesController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
-public class SpeciesControllerTest {
+@NoArgsConstructor
+public class InstitutionPhysicianLinkTest {
+
 	@Value("${server.port}")
 	int port;
 
@@ -44,46 +41,33 @@ public class SpeciesControllerTest {
 
 	protected MockMvc mockMvc;
 
-	@BeforeEach
+	@Before
 	public void setup() {
+		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void testGetAllSpecies() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllInstitutionPhysicianLink() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institution_physician_link").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetSpeciesNotFound() throws Exception {
+	public void testGetByIdInstitutionPhysicianLinkNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/species/").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(
+				MockMvcRequestBuilders.get("/v1/institution_physician_link/pid01").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void testPutSpecies() throws Exception {
+	public void testPostInstitutionPhysicianLinkNotFound() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.put("/mastermanagement/v1/species/123").accept(MediaType.APPLICATION_JSON))
+				MockMvcRequestBuilders.post("/v1/institution_physician_link").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
-	@Test
-	public void testPostSpeciesNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/species").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void testDeleteSpeciesNotFound() throws Exception {
-
-		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/mastermanagement/v1/species/70").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Species not found"));
-	}
 }

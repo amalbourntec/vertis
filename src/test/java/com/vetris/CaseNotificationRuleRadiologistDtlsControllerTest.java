@@ -1,13 +1,12 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -22,68 +21,51 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
-import com.vetris.adminmanagement.v1.contoller.UserRoleMenuRightsController;
 
-/**
- * Test class for UserRoleMenuRightsController
- * 
- * @author Jose Eldhose
- *
- */
+import lombok.NoArgsConstructor;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRoleMenuRightsController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
-public class UserRoleMenuRightsControllerTest {
+@NoArgsConstructor
+public class CaseNotificationRuleRadiologistDtlsControllerTest {
 
-	@Value("${server.port}")
-	int port;
+
+	int port = 8976;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
 	protected MockMvc mockMvc;
 
-	@BeforeEach
+	@Before
 	public void setup() {
+		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void testGetAllUserRoleMenuRights() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllCaseNotificationRuleRadiologistDtls() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetUserRoleMenuRightsNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights/").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk());
-	}
-
-	@Test
-	public void testPutUserRoleMenuRights() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void testPostUserRoleMenuRightsNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void testDeleteUserRoleMenuRightsNotFound() throws Exception {
+	public void testGetByIdInstitutionCategoryLinkNotFound() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("user menu rights  not found"));
+				MockMvcRequestBuilders.get("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound());
 	}
+
+	@Test
+	public void testPostInstitutionCategoryLinkNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/case_notification_rule_radiologist_dtls").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
 }

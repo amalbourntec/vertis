@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,21 +21,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.adminmanagement.AdminManagementApplication;
-import com.vetris.adminmanagement.v1.contoller.UserRolesController;
+import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionRegPhysicianLinkController;
 
 /**
- * Test class for UserRoles
+ * Test class for InstitutionRegPhysicianController
  * 
  * @author Jose Eldhose
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AdminManagementApplication.class)
+@ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRolesController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = InstitutionRegPhysicianLinkController.class)
 @AutoConfigureMockMvc
-public class UserRolesControllerTest {
+public class InstitutionRegPhysicianControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -51,37 +51,37 @@ public class UserRolesControllerTest {
 	}
 
 	@Test
-	public void testGetAllUserRoles() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
+	public void testGetAllInstitutionsRegPhysicianPhysician() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetUserRolesNotFound() throws Exception {
+	public void testGetInstitutionsRegPhysicianNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles/").accept(MediaType.APPLICATION_JSON)).andDo(print())
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/physician/").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void testPutUserRoles() throws Exception {
+	public void testPostInstitutionsRegPhysicianNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
-	}
-
-	@Test
-	public void testPostUserRolesNotFound() throws Exception {
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testDeleteUserRolesNotFound() throws Exception {
+	public void testPutInstitutionsRegPhysician() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/physician/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteSalesPersonNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Physician not found"));
 	}
 }

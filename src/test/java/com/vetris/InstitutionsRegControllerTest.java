@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +25,7 @@ import com.vetris.apimanagement.ApiManagementApplication;
 
 /*
  * @author Dhanesh C P
- * Test class for InstitutionUserLinkController
+ * Test class for InstitutionsRegController
  * */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,7 +33,7 @@ import com.vetris.apimanagement.ApiManagementApplication;
 @TestPropertySource(value = { "classpath:application.properties" })
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
-class InstitutionUserLinkControllerTest {
+class InstitutionsRegControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -50,31 +50,31 @@ class InstitutionUserLinkControllerTest {
 	}
 
 	@Test
-	public void getAllInstitutionUserLink() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/institutionUserLink")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
+	public void getAllInstitutionsReg() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institutionsRegController").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getInstitutionUserLinkNotFound() throws Exception {
+	public void getInstitutionsRegNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/institutionUserLink/id/10")
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institutionsRegController/5b96d01b-a3ec-41aa-bb17-e08b190f7c30")
 				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void postInstitutionUserLinkNotFound() throws Exception {
+	public void postInstitutionsRegNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/institutionUserLink")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/institutionsRegController").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putInstitutionUserLink() throws Exception {
+	public void putInstitutionsReg() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/mastermanagement/v1/institutionUserLink/update/1/1")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
+		mockMvc.perform(
+				MockMvcRequestBuilders.put("/v1/institutionsRegController/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
 	}
-
 }

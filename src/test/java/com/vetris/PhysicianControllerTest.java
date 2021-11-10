@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -21,15 +22,22 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.PhysicianController;
 
+/**
+ * Test class for Physicians
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT,classes =PhysicianController.class )
 @AutoConfigureMockMvc
-class SalesPersonControllerTest {
-
-	int port = 8976;
+public class PhysicianControllerTest {
+	@Value("${server.port}")
+	int port;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -38,42 +46,43 @@ class SalesPersonControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
-
 	@Test
-	public void putSalesPerson() throws Exception {
-
-		mockMvc.perform(
-				MockMvcRequestBuilders.put("/apiManagement/v1/salesPerson/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
+	public void testGetAllPhysicians() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getSalesPersonNotFound() throws Exception {
+	public void testGetPhysiciansNotFound() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.get("/apiManagement/v1/salesPerson/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("SalesPerson not found"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/mastermanagement/v1/physician/").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void postSalesPersonNotFound() throws Exception {
+	public void testPostPhysiciansNotFound() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/apiManagement/v1/salesPerson").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/mastermanagement/v1/physician").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testPutPhysicians() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/mastermanagement/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 	
 	@Test
-	public void deleteSalesPersonNotFound() throws Exception {
+	public void testDeletePhysicianNotFound() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/apiManagement/v1/salesPerson/1234").accept(MediaType.APPLICATION_JSON))
+				MockMvcRequestBuilders.delete("/mastermanagement/v1/physician/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("SalesPerson not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("Physician not found"));
     }
 }
+

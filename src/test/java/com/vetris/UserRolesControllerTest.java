@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,19 +21,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserRolesController;
 
-/*
- * @author Dhanesh C P
- * Test class for InstitutionDisputeDicomTagsController
- * */
-
+/**
+ * Test class for UserRoles
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApiManagementApplication.class)
+@ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRolesController.class)
 @AutoConfigureMockMvc
-class InstitutionDisputeDicomTagsControllerTest {
+public class UserRolesControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -45,38 +47,41 @@ class InstitutionDisputeDicomTagsControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllInstitutionDisputeDicomTags() throws Exception {
-		mockMvc.perform(
-				MockMvcRequestBuilders.get("/v1/institutionDisputeDicomTags").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
+	public void testGetAllUserRoles() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getInstitutionDisputeDicomTagsNotFound() throws Exception {
+	public void testGetUserRolesNotFound() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.get("/v1/institutionDisputeDicomTags/id/10").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_roles/").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void postInstitutionDisputeDicomTagsNotFound() throws Exception {
+	public void testPutUserRoles() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/v1/institutionDisputeDicomTags").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putInstitutionDisputeDicomTags() throws Exception {
+	public void testPostUserRolesNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/institutionDisputeDicomTags/update/1/1/1")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_roles").accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteUserRolesNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_roles/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
 	}
 }

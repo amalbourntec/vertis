@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,21 +21,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.adminmanagement.AdminManagementApplication;
-import com.vetris.adminmanagement.v1.contoller.UserMenuRightsController;
+import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionRegModalityLinkController;
 
 /**
- * Test class for UserMenuRightsController
+ * Test class for InstitutionRegModalityController
  * 
  * @author Jose Eldhose
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AdminManagementApplication.class)
+@ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserMenuRightsController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = InstitutionRegModalityLinkController.class)
 @AutoConfigureMockMvc
-public class UserMenuRightsControllerTest {
+class InstitutionRegModalityController {
 
 	@Value("${server.port}")
 	int port;
@@ -47,42 +47,45 @@ public class UserMenuRightsControllerTest {
 
 	@BeforeEach
 	public void setup() {
+		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void testGetAllUserMenuRights() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllModality() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetUserMenuRightsNotFound() throws Exception {
+	public void testGetModalityNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights/").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality/55b51e98-07dc-4c51-ad85-f0a7148270f9")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+
 	}
 
 	@Test
-	public void testPostUserMenuRightsNotFound() throws Exception {
+	public void testPutInstitutionsRegModality() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testPutUserMenuRights() throws Exception {
+	public void testPostModalityNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testDeleteUserMenuRightsNotFound() throws Exception {
+	public void testDeleteSalesPersonNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("user menu rights  not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
 	}
+
 }

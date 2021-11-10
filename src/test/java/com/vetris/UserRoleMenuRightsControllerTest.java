@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,21 +21,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.apimanagement.ApiManagementApplication;
-import com.vetris.apimanagement.v1.controller.InstitutionRegModalityLinkController;
+import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserRoleMenuRightsController;
 
 /**
- * Test class for InstitutionRegModalityController
+ * Test class for UserRoleMenuRightsController
  * 
  * @author Jose Eldhose
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApiManagementApplication.class)
+@ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = InstitutionRegModalityLinkController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserRoleMenuRightsController.class)
 @AutoConfigureMockMvc
-class InstitutionRegModalityController {
+public class UserRoleMenuRightsControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -47,45 +47,43 @@ class InstitutionRegModalityController {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void testGetAllModality() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllUserRoleMenuRights() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetModalityNotFound() throws Exception {
+	public void testGetUserRoleMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/reg_modality/55b51e98-07dc-4c51-ad85-f0a7148270f9")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_role_menu_rights/").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void testPutInstitutionsRegModality() throws Exception {
+	public void testPutUserRoleMenuRights() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testPostModalityNotFound() throws Exception {
+	public void testPostUserRoleMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/reg_modality").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_role_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testDeleteSalesPersonNotFound() throws Exception {
+	public void testDeleteUserRoleMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/reg_modality/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/v1/user_role_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isNotFound())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("user menu rights  not found"));
 	}
-
 }

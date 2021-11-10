@@ -1,4 +1,4 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,19 +21,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.UserMenuRightsController;
 
-/*
- * @author Dhanesh C P
- * Test class for InstitutionsRegController
- * */
-
+/**
+ * Test class for UserMenuRightsController
+ * 
+ * @author Jose Eldhose
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApiManagementApplication.class)
+@ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = UserMenuRightsController.class)
 @AutoConfigureMockMvc
-class InstitutionsRegControllerTest {
+public class UserMenuRightsControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -45,36 +47,42 @@ class InstitutionsRegControllerTest {
 
 	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void getAllInstitutionsReg() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institutionsRegController").accept(MediaType.APPLICATION_JSON))
+	public void testGetAllUserMenuRights() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void getInstitutionsRegNotFound() throws Exception {
+	public void testGetUserMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institutionsRegController/5b96d01b-a3ec-41aa-bb17-e08b190f7c30")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/user_menu_rights/").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void postInstitutionsRegNotFound() throws Exception {
+	public void testPostUserMenuRightsNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/institutionsRegController").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/user_menu_rights").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void putInstitutionsReg() throws Exception {
+	public void testPutUserMenuRights() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.put("/v1/institutionsRegController/123").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testDeleteUserMenuRightsNotFound() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user_menu_rights/123").accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value("user menu rights  not found"));
 	}
 }

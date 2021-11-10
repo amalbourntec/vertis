@@ -1,10 +1,10 @@
-package com.bourntec.vetris;
+package com.vetris;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,17 +21,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.vetris.apimanagement.ApiManagementApplication;
-
-import lombok.NoArgsConstructor;
+import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.CaseNotificationRulesController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApiManagementApplication.class)
+@ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = CaseNotificationRulesController.class)
 @AutoConfigureMockMvc
-@NoArgsConstructor
-public class InstitutionCategoryLinkTest {
+public class CaseNotificationRulesControllerTest {
 
 	@Value("${server.port}")
 	int port;
@@ -41,31 +39,44 @@ public class InstitutionCategoryLinkTest {
 
 	protected MockMvc mockMvc;
 
-	@Before
+	@BeforeEach
 	public void setup() {
-		// build mockMvc
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
+//Composite keys input required.
 	@Test
-	public void testGetAllInstitutionCategoryLink() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/institution_category_link").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk())
+	public void getAllCaseNotiRules() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+				.get("/v1/case_notification_rules/get_all/?priorityId=100&ruleNo=2&pacsStatusId=1")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
 	}
 
 	@Test
-	public void testGetByIdInstitutionCategoryLinkNotFound() throws Exception {
+	public void putCaseNotiRules() throws Exception {
 
 		mockMvc.perform(
-				MockMvcRequestBuilders.get("/v1/institution_category_link/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound());
+				MockMvcRequestBuilders.put("/v1/case_notification_rules/?priorityId=100&ruleNo=2&pacsStatusId=1")
+						.accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
-	public void testPostInstitutionCategoryLinkNotFound() throws Exception {
+	public void postCaseNotiRulesNotFound() throws Exception {
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/institution_category_link").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/case_notification_rules").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
+
+	@Test
+	public void deleteCaseNotiRuleNotFound() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/v1/case_notification_rules/?priorityId=100&ruleNo=1&pacsStatusId=1")
+						.accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isNotFound()).andExpect(
+						MockMvcResultMatchers.jsonPath("$.responseMessage").value("Case notification rules not found"));
+	}
+
 }
