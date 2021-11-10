@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionCategoryLinkController;
 
 import lombok.NoArgsConstructor;
 
@@ -35,7 +36,7 @@ import lombok.NoArgsConstructor;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = { InstitutionCategoryLinkController.class })
 @AutoConfigureMockMvc
 @NoArgsConstructor
 public class InstitutionCategoryLinkControllerTest {
@@ -88,7 +89,7 @@ public class InstitutionCategoryLinkControllerTest {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/v1/institution_category_link/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound()).andExpect(MockMvcResultMatchers
-						.jsonPath("$.responseMessage").value(" not found"));
+				.andDo(print()).andExpect(status().isNotFound())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
 	}
 }

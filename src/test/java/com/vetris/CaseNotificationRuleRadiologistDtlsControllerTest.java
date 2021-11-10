@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.CaseNotificationRuleRadiologistDtlsController;
 
 import lombok.NoArgsConstructor;
 
@@ -35,7 +36,8 @@ import lombok.NoArgsConstructor;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AdminManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = {
+		CaseNotificationRuleRadiologistDtlsController.class })
 @AutoConfigureMockMvc
 @NoArgsConstructor
 public class CaseNotificationRuleRadiologistDtlsControllerTest {
@@ -64,11 +66,10 @@ public class CaseNotificationRuleRadiologistDtlsControllerTest {
 	@Test
 	public void testUpdateCaseNotificationRuleRadiologistDtls() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.put("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isBadRequest());
+		mockMvc.perform(MockMvcRequestBuilders.put("/v1/case_notification_rule_radiologist_dtls/123")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testGetByIdCaseNotificationRuleRadiologistDtlsNotFound() throws Exception {
 
@@ -82,14 +83,14 @@ public class CaseNotificationRuleRadiologistDtlsControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/case_notification_rule_radiologist_dtls")
 				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testDeleteCaseNotificationRuleRadiologistDtlsNotFound() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/case_notification_rule_radiologist_dtls/123").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound()).andExpect(MockMvcResultMatchers
-						.jsonPath("$.responseMessage").value("Case Notification Rule Radiologist Dtls  not found"));
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/case_notification_rule_radiologist_dtls/123")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isNotFound())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage")
+						.value("Case Notification Rule Radiologist Dtls  not found"));
 	}
 
 }

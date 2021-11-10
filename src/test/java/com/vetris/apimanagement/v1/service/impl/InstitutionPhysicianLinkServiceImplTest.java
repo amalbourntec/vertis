@@ -15,7 +15,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,9 +39,12 @@ import lombok.NoArgsConstructor;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { InstitutionPhysicianLinkService.class })
+@SpringBootTest(classes = { InstitutionPhysicianLinkService.class }, webEnvironment = WebEnvironment.DEFINED_PORT)
 @NoArgsConstructor
 public class InstitutionPhysicianLinkServiceImplTest {
+
+	@Value("${server.port}")
+	int port;
 
 	@InjectMocks
 	InstitutionPhysicianLinkServiceImpl institutionPhysicianLinkServiceImpl;
@@ -80,7 +85,6 @@ public class InstitutionPhysicianLinkServiceImplTest {
 		institutionPhysicianLink = mapper.convertValue(institutionPhysicianLinkReqDTO, InstitutionPhysicianLink.class);
 	}
 
-	
 	@Test
 	public void testAddInstitutionPhysicianLink() throws Exception {
 		when(objectMapper.convertValue(institutionPhysicianLinkReqDTO, InstitutionPhysicianLink.class))

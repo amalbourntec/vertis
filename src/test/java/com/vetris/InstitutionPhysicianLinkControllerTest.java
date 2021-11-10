@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionPhysicianLinkController;
 
 import lombok.NoArgsConstructor;
 
@@ -35,7 +36,7 @@ import lombok.NoArgsConstructor;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApiManagementApplication.class)
 @TestPropertySource(value = { "classpath:application.properties" })
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes = { InstitutionPhysicianLinkController.class })
 @AutoConfigureMockMvc
 @NoArgsConstructor
 public class InstitutionPhysicianLinkControllerTest {
@@ -68,7 +69,7 @@ public class InstitutionPhysicianLinkControllerTest {
 				MockMvcRequestBuilders.put("/v1/institution_physician_link/pid02").accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testGetByIdInstitutionPhysicianLinkNotFound() throws Exception {
 
@@ -88,9 +89,8 @@ public class InstitutionPhysicianLinkControllerTest {
 	@Test
 	public void testDeleteInstitutionPhysicianLinkNotFound() throws Exception {
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.delete("/v1/institution_physician_link/pid03").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNotFound()).andExpect(MockMvcResultMatchers
-						.jsonPath("$.responseMessage").value(" not found"));
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/institution_physician_link/pid03")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isNotFound())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.responseMessage").value(" not found"));
 	}
 }
