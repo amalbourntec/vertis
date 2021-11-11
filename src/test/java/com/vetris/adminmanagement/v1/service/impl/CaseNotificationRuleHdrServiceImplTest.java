@@ -18,8 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRuleHdrRequestDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.repository.CaseNotificationRuleHdrRepository;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+
 import com.vetris.entity.CaseNotificationRuleHdr;
 import com.vetris.utils.JWTSecurityContextUtil;
 
