@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRuleHdrRequestDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
 import com.vetris.adminmanagement.v1.service.CaseNotificationRuleHdrService;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+
 
 /**
  * Controller for CaseNotificationRuleHdr

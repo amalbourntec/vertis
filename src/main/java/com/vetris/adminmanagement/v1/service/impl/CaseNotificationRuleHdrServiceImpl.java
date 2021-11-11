@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRuleHdrRequestDTO;
 import com.vetris.adminmanagement.v1.dto.response.CaseNotificationRuleHdrResponseDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.CaseNotificationRuleHdrRepository;
 import com.vetris.adminmanagement.v1.service.CaseNotificationRuleHdrService;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
-import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
+
 import com.vetris.entity.CaseNotificationRuleHdr;
 import com.vetris.enums.ErrorCodes;
 import com.vetris.enums.StatusType;

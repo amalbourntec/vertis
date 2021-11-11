@@ -1,7 +1,8 @@
 package com.vetris.adminmanagement.v1.service;
 
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRuleHdrRequestDTO;
-import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
+
 
 /**
  * Service for CaseNotificationRuleHdr
