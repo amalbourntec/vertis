@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.adminmanagement.AdminManagementApplication;
+import com.vetris.adminmanagement.v1.contoller.CaseNotificationRuleHdrController;
 /**
  * @author Aldrin Sunny
  * 
@@ -30,7 +31,7 @@ import com.vetris.adminmanagement.AdminManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(classes = AdminManagementApplication.class) 
 @TestPropertySource(value={"classpath:application.properties"})
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes=CaseNotificationRuleHdrController.class)
 @AutoConfigureMockMvc
 class CaseNotificationRuleHdrControllerTest {
 

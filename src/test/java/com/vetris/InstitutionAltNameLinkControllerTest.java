@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vetris.apimanagement.ApiManagementApplication;
+import com.vetris.apimanagement.v1.controller.InstitutionAltNameLinkController;
+
 /**
  * @author Aldrin Sunny
  * 
@@ -30,7 +32,7 @@ import com.vetris.apimanagement.ApiManagementApplication;
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(classes = ApiManagementApplication.class) 
 @TestPropertySource(value={"classpath:application.properties"})
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT,classes=InstitutionAltNameLinkController.class)
 @AutoConfigureMockMvc
 class InstitutionAltNameLinkControllerTest {
 
