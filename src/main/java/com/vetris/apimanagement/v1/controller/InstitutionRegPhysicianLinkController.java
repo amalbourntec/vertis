@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,7 +59,7 @@ public class InstitutionRegPhysicianLinkController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createPhysician(
+	public ResponseEntity<CommonResponseDTO> createPhysician(@Valid
 			@RequestBody InstitutionRegPhysicianLinkRequestDTO physicianRequest) throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.addPhysician(physicianRequest);
 		return ResponseEntity.ok(resultDto);
@@ -70,7 +72,7 @@ public class InstitutionRegPhysicianLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> updatePhysician(
+	public ResponseEntity<CommonResponseDTO> updatePhysician(@Valid
 			@RequestBody InstitutionRegPhysicianLinkRequestDTO physician, @PathVariable("id") String id)
 			throws Throwable {
 		CommonResponseDTO resultDto = institutionRegPhysicianLinkService.updatePhysician(physician, id);

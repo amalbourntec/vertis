@@ -1,10 +1,11 @@
 package com.vetris.apimanagement.v1.dto.request;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
-
-import com.sun.istack.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Validated
 public class InstitutionRegPhysicianLinkRequestDTO {
 
-	@NotNull
+	@NotBlank(message = "InstirutionId must not be empty")
 	private String institutionId;
 
 	@Size(max = 200, message = "physicianName  must be atmost 200 characters")
@@ -35,9 +36,11 @@ public class InstitutionRegPhysicianLinkRequestDTO {
 	@Size(max = 30, message = "physicianCredentilas   must be atmost 30 characters")
 	private String physicianCredentials;
 
+	@Email(message = "Invalid Email Id")
 	@Size(max = 500, message = "physicianEmail  must be atmost 500 characters")
 	private String physicianEmail;
 
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid mob Number")
 	@Size(max = 500, message = "physicianMobile  must be atmost 500 characters")
 	private String physicianMobile;
 

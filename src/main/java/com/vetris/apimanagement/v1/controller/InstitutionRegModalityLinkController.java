@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -56,7 +58,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createRegModality(
+	public ResponseEntity<CommonResponseDTO> createRegModality(@Valid
 			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest) throws Throwable {
 		CommonResponseDTO regModalityRespDTO = institutionRegModalityLinkService.addRegModality(regModalityRequest);
 		return ResponseEntity.ok(regModalityRespDTO);
@@ -69,7 +71,7 @@ public class InstitutionRegModalityLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateRegModality(
+	public ResponseEntity<CommonResponseDTO> updateRegModality(@Valid
 			@RequestBody InstitutionRegModalityLinkRequestDTO regModalityRequest, @PathVariable("id") String id)
 			throws Throwable {
 		CommonResponseDTO regModalityRespDTO = institutionRegModalityLinkService

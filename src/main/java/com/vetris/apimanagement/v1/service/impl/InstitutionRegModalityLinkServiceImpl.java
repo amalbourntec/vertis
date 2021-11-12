@@ -112,8 +112,6 @@ public class InstitutionRegModalityLinkServiceImpl implements InstitutionRegModa
 			resultModality = institutionRegModalityLinkRepository.save(resultModality);
 			InstitutionRegModalityLinkResponseDTO modalityRespDTO = objectMapper.convertValue(resultModality,
 					InstitutionRegModalityLinkResponseDTO.class);
-//			InstitutionRegModalityLinkResponseDTO modalityRespDTO =new InstitutionRegModalityLinkResponseDTO();
-//			BeanUtils.copyProperties(resultModality, modalityRespDTO);
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(modalityRespDTO);
 			resultDto.setMessage("Fetched modality successfully");

@@ -1,5 +1,7 @@
 package com.vetris.adminmanagement.v1.contoller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -96,7 +98,7 @@ public class CaseNotificationRulesController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createCaseNotificationRules(
+	public ResponseEntity<CommonResponseDTO> createCaseNotificationRules(@Valid
 			@RequestBody CaseNotificationRulesRequestDTO caseNotificationRulesRequest) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService
 				.addCaseNotificationRules(caseNotificationRulesRequest);
@@ -110,7 +112,7 @@ public class CaseNotificationRulesController {
 	 * @throws Exception
 	 */
 	@PutMapping("")
-	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRules(
+	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRules(@Valid
 			@RequestBody CaseNotificationRulesRequestDTO caseNotificationRules, @RequestParam Integer ruleNo,
 			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Throwable {
 		CommonResponseDTO resultDto = caseNotificationRulesService.updateCaseNotificationRules(caseNotificationRules,
