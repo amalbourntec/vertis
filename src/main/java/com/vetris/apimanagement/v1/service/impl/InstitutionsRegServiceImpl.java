@@ -100,7 +100,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 		institutionsRegRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		try {
+		
 			InstitutionsReg resultInstitutionsReg = objectMapper.convertValue(institutionReg, InstitutionsReg.class);
 			resultInstitutionsReg.setId(id);
 			resultInstitutionsReg.setUpdateBy(jwtSecurityContextUtil.getId());
@@ -110,10 +110,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionsRegResponseDTO);
 			resultDto.setMessage("Fetched successfully");
-		} catch (Exception e) {
-
-			throw new Exception(e);
-		}
+	
 
 		return resultDto;
 	}

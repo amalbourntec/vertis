@@ -203,15 +203,13 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTagsCheck = institutionDisputeDicomTagsRepository
 				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (resultInstitutionDisputeDicomTagsCheck == null) {
-			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
-		} else {
+		
 			institutionDisputeDicomTagsResponseDTO = objectMapper.convertValue(resultInstitutionDisputeDicomTagsCheck,
 					InstitutionDisputeDicomTagsResponseDTO.class);
 			resultDto.setStatus(StatusType.SUCCESS.toString());
 			resultDto.setPayload(institutionDisputeDicomTagsResponseDTO);
 			resultDto.setMessage("Fetched successfully");
-		}
+		
 
 		return resultDto;
 	}
