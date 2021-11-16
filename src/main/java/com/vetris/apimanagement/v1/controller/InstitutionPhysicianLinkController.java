@@ -1,5 +1,9 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +32,8 @@ import com.vetris.apimanagement.v1.service.InstitutionPhysicianLinkService;
 @CrossOrigin(origins = "*")
 public class InstitutionPhysicianLinkController {
 
+	Logger logger = LoggerFactory.getLogger(InstitutionPhysicianLinkController.class);
+
 	@Autowired
 	InstitutionPhysicianLinkService institutionPhysicianLinkService;
 
@@ -38,6 +44,7 @@ public class InstitutionPhysicianLinkController {
 	 */
 	@GetMapping("")
 	public CommonResponseDTO fetchAllInstitutionPhysicianLink() throws Exception {
+		logger.info("[fetchAllInstitutionPhysicianLink] InstitutionPhysicianLinkController called");
 		return institutionPhysicianLinkService.getAllInstitutionPhysicianLink();
 	}
 
@@ -49,6 +56,7 @@ public class InstitutionPhysicianLinkController {
 	@GetMapping("{physician_id}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionPhysicianLinkById(
 			@PathVariable("physician_id") String physicianId) throws Exception {
+		logger.info("[fetchInstitutionPhysicianLinkById] InstitutionPhysicianLinkController called by physicianId");
 		CommonResponseDTO resultDto = institutionPhysicianLinkService.getInstitutionPhysicianLinkById(physicianId);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -61,7 +69,8 @@ public class InstitutionPhysicianLinkController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionPhysicianLink(
-			@RequestBody InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkRequest) throws Exception {
+			@Valid @RequestBody InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkRequest) throws Exception {
+		logger.info("[createInstitutionPhysicianLink] InstitutionPhysicianLinkController called");
 		CommonResponseDTO resultDto = institutionPhysicianLinkService
 				.addInstitutionPhysicianLink(institutionPhysicianLinkRequest);
 		return ResponseEntity.ok(resultDto);
@@ -76,8 +85,9 @@ public class InstitutionPhysicianLinkController {
 	 */
 	@PutMapping("/{physician_id}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionPhysicianLink(
-			@RequestBody InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDto,
+			@Valid @RequestBody InstitutionPhysicianLinkRequestDTO institutionPhysicianLinkReqDto,
 			@PathVariable(value = "physician_id") String physicianId) throws Exception {
+		logger.info("[updateInstitutionPhysicianLink] InstitutionPhysicianLinkController called by physicianId");
 		CommonResponseDTO resultDto = institutionPhysicianLinkService
 				.updateInstitutionPhysicianLink(institutionPhysicianLinkReqDto, physicianId);
 		return ResponseEntity.ok(resultDto);
@@ -91,6 +101,7 @@ public class InstitutionPhysicianLinkController {
 	@DeleteMapping("/{physician_id}")
 	public ResponseEntity<CommonResponseDTO> deleteInstitutionPhysicianLink(
 			@PathVariable(value = "physician_id") String physicianId) throws Exception {
+		logger.info("[deleteInstitutionPhysicianLink] InstitutionPhysicianLinkController called by physicianId");
 		CommonResponseDTO resultDto = institutionPhysicianLinkService.deleteInstitutionPhysicianLink(physicianId);
 		return ResponseEntity.ok(resultDto);
 	}

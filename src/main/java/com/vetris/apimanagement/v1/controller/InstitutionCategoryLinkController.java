@@ -1,5 +1,9 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +32,8 @@ import com.vetris.apimanagement.v1.service.InstitutionCategoryLinkService;
 @CrossOrigin(origins = "*")
 public class InstitutionCategoryLinkController {
 
+	Logger logger = LoggerFactory.getLogger(InstitutionCategoryLinkController.class);
+
 	@Autowired
 	InstitutionCategoryLinkService institutionCategoryLinkService;
 
@@ -39,7 +45,8 @@ public class InstitutionCategoryLinkController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionCategoryLink(
-			@RequestBody InstitutionCategoryLinkRequestDTO institutionCategoryLinkRequest) throws Exception {
+			@Valid @RequestBody InstitutionCategoryLinkRequestDTO institutionCategoryLinkRequest) throws Exception {
+		logger.info("[createInstitutionCategoryLink] InstitutionCategoryLinkController called");
 		CommonResponseDTO resultDto = institutionCategoryLinkService
 				.addInstitutionCategoryLink(institutionCategoryLinkRequest);
 		return ResponseEntity.ok(resultDto);
@@ -53,6 +60,7 @@ public class InstitutionCategoryLinkController {
 	@GetMapping("/{category_id}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionCategoryLinkById(
 			@PathVariable(value = "category_id") Integer categoryId) throws Exception {
+		logger.info("[fetchInstitutionCategoryLinkById] InstitutionCategoryLinkController called By categoryId");
 		CommonResponseDTO institutionCategoryLinkRespDto = institutionCategoryLinkService
 				.getInstitutionCategoryLinkById(categoryId);
 		return ResponseEntity.ok(institutionCategoryLinkRespDto);
@@ -65,6 +73,7 @@ public class InstitutionCategoryLinkController {
 	 */
 	@GetMapping("")
 	public CommonResponseDTO fetchAllInstitutionCategoryLink() throws Exception {
+		logger.info("[fetchAllInstitutionCategoryLink] InstitutionCategoryLinkController called");
 		return institutionCategoryLinkService.getAllInstitutionCategoryLink();
 	}
 
@@ -77,8 +86,9 @@ public class InstitutionCategoryLinkController {
 	 */
 	@PutMapping("/{category_id}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionCategoryLink(
-			@RequestBody InstitutionCategoryLinkRequestDTO institutionCategoryLinkReqDto,
+			@Valid @RequestBody InstitutionCategoryLinkRequestDTO institutionCategoryLinkReqDto,
 			@PathVariable(value = "category_id") Integer categoryId) throws Exception {
+		logger.info("[updateInstitutionCategoryLink] InstitutionCategoryLinkController called By categoryId");
 		CommonResponseDTO resultDto = institutionCategoryLinkService
 				.updateInstitutionCategoryLink(institutionCategoryLinkReqDto, categoryId);
 		return ResponseEntity.ok(resultDto);
@@ -92,6 +102,7 @@ public class InstitutionCategoryLinkController {
 	@DeleteMapping("/{category_id}")
 	public ResponseEntity<CommonResponseDTO> deleteInstitutionCategoryLink(
 			@PathVariable(value = "category_id") Integer categoryId) throws Exception {
+		logger.info("[deleteInstitutionCategoryLink] InstitutionCategoryLinkController called By categoryId");
 		CommonResponseDTO resultDto = institutionCategoryLinkService.deleteInstitutionCategoryLink(categoryId);
 		return ResponseEntity.ok(resultDto);
 	}

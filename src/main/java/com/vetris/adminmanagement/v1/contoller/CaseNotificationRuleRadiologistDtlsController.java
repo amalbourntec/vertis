@@ -1,5 +1,9 @@
 package com.vetris.adminmanagement.v1.contoller;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +32,8 @@ import com.vetris.adminmanagement.v1.service.CaseNotificationRuleRadiologistDtls
 @CrossOrigin(origins = "*")
 public class CaseNotificationRuleRadiologistDtlsController {
 
+	Logger logger = LoggerFactory.getLogger(CaseNotificationRuleRadiologistDtlsController.class);
+
 	@Autowired
 	CaseNotificationRuleRadiologistDtlsService caseNotificationRuleRadiologistDtlsService;
 
@@ -38,6 +44,8 @@ public class CaseNotificationRuleRadiologistDtlsController {
 	 */
 	@GetMapping("")
 	public CommonResponseDTO fetchAllCaseNotificationRuleRadiologistDtls() throws Exception {
+		logger.info(
+				"[fetchAllCaseNotificationRuleRadiologistDtls] CaseNotificationRuleRadiologistDtlsController called");
 		return caseNotificationRuleRadiologistDtlsService.getAllCaseNotificationRuleRadiologistDtls();
 	}
 
@@ -49,6 +57,8 @@ public class CaseNotificationRuleRadiologistDtlsController {
 	@GetMapping("/{rule_no}")
 	public ResponseEntity<CommonResponseDTO> fetchCaseNotificationRuleRadiologistDtlsById(
 			@PathVariable(value = "rule_no") Integer ruleNo) throws Exception {
+		logger.info(
+				"[fetchCaseNotificationRuleRadiologistDtlsById] CaseNotificationRuleRadiologistDtlsController called by ruleNo");
 		CommonResponseDTO caseNotificationRuleRadiologistDtlsRespDto = caseNotificationRuleRadiologistDtlsService
 				.getCaseNotificationRuleRadiologistDtlsById(ruleNo);
 		return ResponseEntity.ok(caseNotificationRuleRadiologistDtlsRespDto);
@@ -62,8 +72,9 @@ public class CaseNotificationRuleRadiologistDtlsController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createCaseNotificationRuleRadiologistDtls(
-			@RequestBody CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO)
+			@Valid @RequestBody CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO)
 			throws Exception {
+		logger.info("[createCaseNotificationRuleRadiologistDtls] CaseNotificationRuleRadiologistDtlsController called");
 		CommonResponseDTO resultDto = caseNotificationRuleRadiologistDtlsService
 				.addCaseNotificationRuleRadiologistDtls(caseNotificationRuleRadiologistDtlsRequestDTO);
 		return ResponseEntity.ok(resultDto);
@@ -78,8 +89,10 @@ public class CaseNotificationRuleRadiologistDtlsController {
 	 */
 	@PutMapping("/{rule_no}")
 	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRuleRadiologistDtls(
-			@RequestBody CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO,
+			@Valid @RequestBody CaseNotificationRuleRadiologistDtlsRequestDTO caseNotificationRuleRadiologistDtlsRequestDTO,
 			@PathVariable(value = "rule_no") Integer ruleNo) throws Exception {
+		logger.info(
+				"[updateCaseNotificationRuleRadiologistDtls] CaseNotificationRuleRadiologistDtlsController called by ruleNo");
 		CommonResponseDTO resultDto = caseNotificationRuleRadiologistDtlsService
 				.updateCaseNotificationRuleRadiologistDtls(caseNotificationRuleRadiologistDtlsRequestDTO, ruleNo);
 		return ResponseEntity.ok(resultDto);
@@ -93,6 +106,7 @@ public class CaseNotificationRuleRadiologistDtlsController {
 	@DeleteMapping("/{rule_no}")
 	public ResponseEntity<CommonResponseDTO> deleteCaseNotificationRuleRadiologistDtls(
 			@PathVariable(value = "rule_no") Integer ruleNo) throws Exception {
+		logger.info("[deleteInstitutionPhysicianLink] CaseNotificationRuleRadiologistDtlsController called by ruleNo");
 		CommonResponseDTO resultDto = caseNotificationRuleRadiologistDtlsService
 				.deleteCaseNotificationRuleRadiologistDtls(ruleNo);
 		return ResponseEntity.ok(resultDto);

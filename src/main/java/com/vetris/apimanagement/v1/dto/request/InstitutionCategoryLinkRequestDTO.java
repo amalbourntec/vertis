@@ -1,8 +1,8 @@
 package com.vetris.apimanagement.v1.dto.request;
 
-import org.springframework.validation.annotation.Validated;
+import javax.validation.constraints.NotBlank;
 
-import com.sun.istack.NotNull;
+import org.springframework.validation.annotation.Validated;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Validated
 public class InstitutionCategoryLinkRequestDTO {
 
-	@NotNull
+	@NotBlank(message = "InstitutionId must not be empty")
 	private String institutionId;
 
 }
