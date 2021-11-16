@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,14 +49,14 @@ public class InstitutionsRegController {
 
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionsReg(
-			@RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO) throws Exception {
+			@Valid @RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO) throws Exception {
 		CommonResponseDTO resultDto = institutionsRegService.addInstitutionsReg(institutionsRegRequestDTO);
 		return ResponseEntity.ok(resultDto);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionsReg(
-			@RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO, @PathVariable("id") String id)
+			@Valid @RequestBody InstitutionsRegRequestDTO institutionsRegRequestDTO, @PathVariable("id") String id)
 			throws Exception {
 		CommonResponseDTO resultDto = institutionsRegService.updateInstitutionsReg(institutionsRegRequestDTO, id);
 		return ResponseEntity.ok(resultDto);

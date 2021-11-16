@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -79,7 +81,8 @@ public class InstitutionDisputeDicomTagsController {
 
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionDisputeDicomTags(
-			@RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest) throws Exception {
+			@Valid @RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest)
+			throws Exception {
 		CommonResponseDTO resultDto = institutionDisputeDicomTagsService
 				.addInstitutionDisputeDicomTags(institutionDisputeDicomTagsRequest);
 		return ResponseEntity.ok(resultDto);
@@ -87,7 +90,7 @@ public class InstitutionDisputeDicomTagsController {
 
 	@PutMapping("/update/{institutionId}/{groupId}/{elementId}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionDisputeDicomTags(
-			@RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest,
+			@Valid @RequestBody InstitutionDisputeDicomTagsRequestDTO institutionDisputeDicomTagsRequest,
 			@PathVariable("institutionId") String institutionId, @PathVariable("groupId") String groupId,
 			@PathVariable("elementId") String elementId) throws Exception {
 		CommonResponseDTO resultDto = institutionDisputeDicomTagsService.updateInstitutionDisputeDicomTags(
