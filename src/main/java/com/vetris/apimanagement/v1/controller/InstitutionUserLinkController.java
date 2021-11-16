@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,12 +33,21 @@ public class InstitutionUserLinkController {
 	@Autowired
 	InstitutionUserLinkService institutionUserLinkService;
 
+	/**
+	 * @return all institutionUserLink
+	 * @throws Exception
+	 */
 	@GetMapping()
 	ResponseEntity<CommonResponseDTO> findAllInstitutionUserLink() throws Exception {
 		CommonResponseDTO response = institutionUserLinkService.findAllInstitutionUserLink();
 		return ResponseEntity.ok(response);
 	}
 
+	/**
+	 * @param id
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@GetMapping("/id/{id}")
 	public ResponseEntity<CommonResponseDTO> fetchByInstitutionIdORUserID(@PathVariable("id") String id)
 			throws Exception {
@@ -45,6 +56,11 @@ public class InstitutionUserLinkController {
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param userId
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@GetMapping("/byuserid/{userId}")
 	public ResponseEntity<CommonResponseDTO> findInstitutionUserLinkByUserId(@PathVariable("userId") String userId)
 			throws Exception {
@@ -52,6 +68,11 @@ public class InstitutionUserLinkController {
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param institutionId
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@GetMapping("/byinstitutionid/{institutionId}")
 	public ResponseEntity<CommonResponseDTO> findInstitutionUserLinkByInstitutionId(
 			@PathVariable("institutionId") String institutionId) throws Exception {
@@ -59,6 +80,12 @@ public class InstitutionUserLinkController {
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param institutionId
+	 * @param userId
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@GetMapping("/getbyall/{institutionId}/{userId}")
 	public ResponseEntity<CommonResponseDTO> fetchInstitutionDisputeDicomTagsByAll(
 			@PathVariable("institutionId") String institutionId, @PathVariable("userId") String userId)
@@ -67,17 +94,29 @@ public class InstitutionUserLinkController {
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param institutionUserLinkRequest
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@PostMapping("")
 	public ResponseEntity<CommonResponseDTO> createInstitutionUserLink(
-			@RequestBody InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO) throws Exception {
+			@Valid @RequestBody InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO) throws Exception {
 		CommonResponseDTO resultDto = institutionUserLinkService
 				.saveInstitutionUserLinks(institutionUserLinkRequestDTO);
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param institutionUserLinkRequest
+	 * @param institutionId
+	 * @param userId
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@PutMapping("/update/{institutionId}/{userId}")
 	public ResponseEntity<CommonResponseDTO> updateInstitutionUserLink(
-			@RequestBody InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO,
+			@Valid @RequestBody InstitutionUserLinkRequestDTO institutionUserLinkRequestDTO,
 			@PathVariable("institutionId") String institutionId, @PathVariable("userId") String userId)
 			throws Exception {
 		CommonResponseDTO resultDto = institutionUserLinkService
@@ -85,6 +124,12 @@ public class InstitutionUserLinkController {
 		return ResponseEntity.ok(resultDto);
 	}
 
+	/**
+	 * @param institutionId
+	 * @param userId
+	 * @return institutionUserLink
+	 * @throws Exception
+	 */
 	@DeleteMapping("/delete/{institutionId}/{userId}")
 	public ResponseEntity<CommonResponseDTO> deleteInstitutionUserLink(
 			@PathVariable("institutionId") String institutionId, @PathVariable("userId") String userId)
