@@ -1,5 +1,7 @@
 package com.vetris.adminmanagement.v1.contoller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -60,7 +62,7 @@ public class CaseNotificationRuleHdrController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createCaseNotificationRuleHdr(
+	public ResponseEntity<CommonResponseDTO> createCaseNotificationRuleHdr(@Valid
 			@RequestBody CaseNotificationRuleHdrRequestDTO caseNotificationRuleHdrRequest) throws Exception {
 		CommonResponseDTO caseNotificationRuleHdrRespDTO = caseNotificationRuleHdrService
 				.addCaseNotificationRuleHdr(caseNotificationRuleHdrRequest);
@@ -74,7 +76,7 @@ public class CaseNotificationRuleHdrController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRuleHdr(
+	public ResponseEntity<CommonResponseDTO> updateCaseNotificationRuleHdr(@Valid
 			@RequestBody CaseNotificationRuleHdrRequestDTO caseNotificationRuleHdrRequest,
 			@PathVariable("id") Integer id) throws Exception {
 		CommonResponseDTO caseNotificationRuleHdrRespDTO = caseNotificationRuleHdrService

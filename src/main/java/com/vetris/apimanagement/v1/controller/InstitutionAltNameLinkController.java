@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -56,7 +58,7 @@ public class InstitutionAltNameLinkController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createAlternateName(
+	public ResponseEntity<CommonResponseDTO> createAlternateName(@Valid
 			@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest) throws Exception {
 		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService
 				.addInstitutionAltName(alternateNameRequest);
@@ -70,7 +72,7 @@ public class InstitutionAltNameLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateAlternateName(
+	public ResponseEntity<CommonResponseDTO> updateAlternateName(@Valid
 			@RequestBody InstitutionAltNameLinkRequestDTO alternateNameRequest, @PathVariable("id") String id)
 			throws Exception {
 		CommonResponseDTO alternateNameRespDTO = institutionAltNameLinkService

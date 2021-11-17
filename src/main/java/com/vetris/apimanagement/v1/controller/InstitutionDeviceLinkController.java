@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,7 +59,8 @@ public class InstitutionDeviceLinkController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest)
+	public ResponseEntity<CommonResponseDTO> createDevice(@Valid
+			@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest)
 			throws Exception {
 		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.addDevice(deviceRequest);
 		return ResponseEntity.ok(deviceRespDTO);
@@ -70,7 +73,8 @@ public class InstitutionDeviceLinkController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateDevice(@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest,
+	public ResponseEntity<CommonResponseDTO> updateDevice(@Valid
+			@RequestBody InstitutionDeviceLinkRequestDTO deviceRequest,
 			@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO deviceRespDTO = institutionDeviceLinkService.updateDevice(deviceRequest, id);
 		return ResponseEntity.ok(deviceRespDTO);

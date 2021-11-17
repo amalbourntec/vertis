@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,7 +59,8 @@ public class InstitutionRatesFeeScheduleController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createRateFee(@RequestBody InstitutionRatesFeeScheduleRequestDTO rateFeeRequest)
+	public ResponseEntity<CommonResponseDTO> createRateFee(@Valid
+			@RequestBody InstitutionRatesFeeScheduleRequestDTO rateFeeRequest)
 			throws Exception {
 		CommonResponseDTO rateFeeRespDTO = institutionRatesFeeScheduleService.addRateFee(rateFeeRequest);
 		return ResponseEntity.ok(rateFeeRespDTO);
@@ -70,7 +73,8 @@ public class InstitutionRatesFeeScheduleController {
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> updateRateFee(@RequestBody InstitutionRatesFeeScheduleRequestDTO rateFeeRequest,
+	public ResponseEntity<CommonResponseDTO> updateRateFee(@Valid
+			@RequestBody InstitutionRatesFeeScheduleRequestDTO rateFeeRequest,
 			@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO rateFeeRespDTO = institutionRatesFeeScheduleService.updateRateFee(rateFeeRequest, id);
 		return ResponseEntity.ok(rateFeeRespDTO);
