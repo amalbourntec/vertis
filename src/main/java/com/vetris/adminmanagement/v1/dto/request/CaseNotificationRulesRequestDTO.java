@@ -1,6 +1,7 @@
 package com.vetris.adminmanagement.v1.dto.request;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
@@ -19,17 +20,17 @@ import lombok.Setter;
 @Validated
 public class CaseNotificationRulesRequestDTO {
 
-	@NotBlank(message = "Rule No must not be empty")
+	@NotNull
 	private Integer ruleNo;
 
 	@NotBlank(message = "rule description must not be empty")
 	@Size(max = 500, message = "rule description must be atmost 500 characters")
 	private String ruleDesc;
 
-	@NotBlank(message = "Pacs StatusId must not be empty")
+	@NotNull
 	private Integer pacsStatusId;
 
-	@NotBlank
+	@NotNull
 	private Integer priorityId;
 
 	private Integer timeEllapsedMins;
