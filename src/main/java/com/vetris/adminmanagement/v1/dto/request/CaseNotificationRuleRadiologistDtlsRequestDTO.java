@@ -20,7 +20,7 @@ import lombok.Setter;
 @Validated
 public class CaseNotificationRuleRadiologistDtlsRequestDTO {
 
-	@NotBlank(message = "RadiologistId must not be empty")
+	@NotBlank(message = "radiologistId must not be empty")
 	private String radiologistId;
 
 	private String userId;

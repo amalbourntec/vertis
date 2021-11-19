@@ -3,6 +3,8 @@ package com.vetris.apimanagement.v1.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ import com.vetris.utils.JWTSecurityContextUtil;
 
 @Service
 public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLinkService {
+
+	Logger logger = LoggerFactory.getLogger(InstitutionCategoryLinkServiceImpl.class);
 
 	@Autowired
 	InstitutionCategoryLinkRepository institutionCategoryLinkRepository;
@@ -55,6 +59,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 		resultInstitutionCategoryLink = institutionCategoryLinkRepository.save(resultInstitutionCategoryLink);
 
 		BeanUtils.copyProperties(resultInstitutionCategoryLink, institutionCategoryLinkResponseDTO);
+		logger.info("Saved institution Category Link successfully");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkResponseDTO);
 		resultDto.setMessage("Saved institution Category Link successfully");
@@ -76,6 +81,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 				.orElseThrow(() -> new ResourceNotFoundException(
 						"Institution Category Link " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		BeanUtils.copyProperties(institutionCategoryLink, institutionCategoryLinkResponseDTO);
+		logger.info("Fetched institution Category Link successfully by categoryId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkResponseDTO);
 		resultDto.setMessage("Fetched institution Category Link successfully");
@@ -96,6 +102,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 		if (institutionCategoryLinkList.isEmpty()) {
 			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
+			logger.info("Fetched All institution Category Link successfully");
 			institutionCategoryLinkList.stream().forEach(category -> institutionCategoryLinkRespDTO
 					.add(objectMapper.convertValue(category, InstitutionCategoryLinkResponseDTO.class)));
 		}
@@ -123,6 +130,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 		institutionCategoryLink = institutionCategoryLinkRepository.save(institutionCategoryLink);
 		InstitutionCategoryLinkResponseDTO institutionCategoryLinkResponseDTO = objectMapper
 				.convertValue(institutionCategoryLink, InstitutionCategoryLinkResponseDTO.class);
+		logger.info("Updated institution Category Link successfully by categoryId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionCategoryLinkResponseDTO);
 		resultDto.setMessage("Fetched user successfully");
@@ -143,6 +151,7 @@ public class InstitutionCategoryLinkServiceImpl implements InstitutionCategoryLi
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		institutionCategoryLinkRepository.deleteById(categoryId);
+		logger.info("Deleted institution Category Link successfully by categoryId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Deleted Institution Category Link successfully");
 

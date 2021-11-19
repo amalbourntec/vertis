@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,8 @@ import com.vetris.utils.JWTSecurityContextUtil;
 @Service
 public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysicianLinkService {
 
+	Logger logger = LoggerFactory.getLogger(InstitutionPhysicianLinkServiceImpl.class);
+
 	@Autowired
 	InstitutionPhysicianLinkRepository institutionPhysicianLinkRepository;
 
@@ -53,6 +57,7 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 		if (institutionPhysicianLinkList.isEmpty()) {
 			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
 		} else {
+			logger.info("Fetched All Institution Physician Link successfully");
 			institutionPhysicianLinkList.stream().forEach(physician -> institutionPhysicianLinkRespDTO
 					.add(objectMapper.convertValue(physician, InstitutionPhysicianLinkResponseDTO.class)));
 		}
@@ -74,6 +79,7 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 
 		InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper
 				.convertValue(existingInstitutionPhysicianLink, InstitutionPhysicianLinkResponseDTO.class);
+		logger.info("Fetched Institution Physician Link successfully by physicianId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkResponseDTO);
 		resultDto.setMessage("Fetched institution Physician Link successfully");
@@ -103,6 +109,7 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 		institutionPhysician = institutionPhysicianLinkRepository.save(institutionPhysician);
 
 		BeanUtils.copyProperties(institutionPhysician, institutionPhysicianLinkResponseDTO);
+		logger.info("Saved Institution Physician Link successfully");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkResponseDTO);
 		resultDto.setMessage("Saved institution Physician Link successfully");
@@ -130,9 +137,10 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 		institutionPhysician = institutionPhysicianLinkRepository.save(institutionPhysician);
 		InstitutionPhysicianLinkResponseDTO institutionPhysicianLinkResponseDTO = objectMapper
 				.convertValue(institutionPhysician, InstitutionPhysicianLinkResponseDTO.class);
+		logger.info("Updated Institution Physician Link successfully by physicianId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionPhysicianLinkResponseDTO);
-		resultDto.setMessage("Fetched user successfully");
+		resultDto.setMessage("Updated Institution Physician Link successfully");
 
 		return resultDto;
 
@@ -149,6 +157,7 @@ public class InstitutionPhysicianLinkServiceImpl implements InstitutionPhysician
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
 		institutionPhysicianLinkRepository.deleteById(physicianId);
+		logger.info("Deleted Institution Physician Link successfully by physicianId");
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Institution Physician Link deleted successfully");
 
