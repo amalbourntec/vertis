@@ -3,6 +3,7 @@ package com.vetris.apimanagement.v1.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -175,12 +176,12 @@ public class InstitutionDisputeDicomTagsServiceImpl implements InstitutionDisput
 			String groupId, String elementId) throws Exception {
 		InstitutionDisputeDicomTagsResponseDTO institutionDisputeDicomTagsResponseDTO = new InstitutionDisputeDicomTagsResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionDisputeDicomTagsRepository
+		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags =institutionDisputeDicomTagsRepository
 				.findByInstitutionIdANDGroupIdANDElementId(institutionId, groupId, elementId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-
-		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper
-				.convertValue(institutionDisputeDicomTagsRequest, InstitutionDisputeDicomTags.class);
+		BeanUtils.copyProperties(institutionDisputeDicomTagsRequest, resultInstitutionDisputeDicomTags);
+//		InstitutionDisputeDicomTags resultInstitutionDisputeDicomTags = objectMapper
+//				.convertValue(institutionDisputeDicomTagsRequest, InstitutionDisputeDicomTags.class);
 		resultInstitutionDisputeDicomTags.setUpdateBy(jwtSecurityContextUtil.getId());
 
 		resultInstitutionDisputeDicomTags = institutionDisputeDicomTagsRepository

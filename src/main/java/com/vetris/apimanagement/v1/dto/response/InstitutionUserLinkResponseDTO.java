@@ -29,7 +29,7 @@ public class InstitutionUserLinkResponseDTO {
 
 	private String grantedRightsPacs;
 
-	private Character updatedInPacs;
+	private String updatedInPacs;
 
 	private Date dateUpdatedInPacs;
 

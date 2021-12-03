@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,6 +114,8 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(requestDto,
 				InstitutionUserLink.class);
 		resultInstitutionUserLink.setCreatedBy(jwtSecurityContextUtil.getId());
+		resultInstitutionUserLink.setUserPwd(encodePassword(requestDto.getUserPwd()));
+		resultInstitutionUserLink.setUserPacsPassword(encodePassword(requestDto.getUserPacsPassword()));
 		resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
 		institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
 				InstitutionUserLinkResponseDTO.class);
@@ -147,7 +151,8 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
 				InstitutionUserLink.class);
 		resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
-
+		resultInstitutionUserLink.setUserPwd(encodePassword(institutionUserLinkRequestDTO.getUserPwd()));
+		resultInstitutionUserLink.setUserPacsPassword(encodePassword(institutionUserLinkRequestDTO.getUserPacsPassword()));
 		resultInstitutionUserLink = institutionUserLinkRepository.save(resultInstitutionUserLink);
 
 		institutionUserLinkResponseDTO = objectMapper.convertValue(resultInstitutionUserLink,
@@ -182,4 +187,30 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 		return resultDto;
 	}
 
+	/**
+	 * This method used to encode password TODO needs to be changed according
+	 * real application
+	 * 
+	 * @param password
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
+
+	private String encodePassword(String physicianPacsPassword) throws NoSuchAlgorithmException {
+		String encryptedpassword = null;
+
+		MessageDigest m = MessageDigest.getInstance("MD5");
+
+		m.update(physicianPacsPassword.getBytes());
+
+		byte[] bytes = m.digest();
+
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < bytes.length; i++) {
+			s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		encryptedpassword = s.toString();
+
+		return encryptedpassword;
+	}
 }

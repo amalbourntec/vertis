@@ -40,10 +40,10 @@ public class InstitutionsReg extends AuditEntityModel {
 	@Column(name = "city", length = 100, nullable = true)
 	private String city;
 
-	@Column(name = "state_id", length = 10, nullable = true)
+	@Column(name = "state_id", length = 100, nullable = true)
 	private Integer stateId;
 
-	@Column(name = "country_id", length = 10, nullable = true)
+	@Column(name = "country_id", length = 100, nullable = true)
 	private Integer countryId;
 
 	@Column(name = "zip", length = 20, nullable = true)

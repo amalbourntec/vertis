@@ -49,9 +49,9 @@ public class InstitutionsRegResponseDTO {
 
 	private String loginMobileNumber;
 
-	private Character isEmailVerified;
+	private String isEmailVerified;
 
-	private Character isMobileVerified;
+	private String isMobileVerified;
 
 	private String preferredPmtMethod;
 

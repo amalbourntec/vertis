@@ -51,7 +51,7 @@ public class InstitutionUserLink extends AuditEntityModel {
 	private String grantedRightsPacs;
 
 	@Column(name = "updated_in_pacs", length = 1, nullable = true)
-	private Character updatedInPacs;
+	private String updatedInPacs;
 
 	@Column(name = "date_updated_in_pacs", nullable = true)
 	private Date dateUpdatedInPacs;

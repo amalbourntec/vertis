@@ -40,18 +40,18 @@ public class InstitutionUserLinkRequestDTO {
 	private String userPacsPassword;
 
 	@Size(max = 50, message = "userEmail  must be atmost 50 characters")
-	@Email(message = "Invalid PhysicianLoginEmail")
+	@Email(message = "Invalid LoginEmail")
 	private String userEmail;
 
 	@Size(max = 30, message = "grantedRightsPacs  must be atmost 30 characters")
 	private String grantedRightsPacs;
 
 	@Size(max = 1, message = "updatedInPacs  must be atmost 1 characters")
-	private Character updatedInPacs;
+	private String updatedInPacs;
 
 	private Date dateUpdatedInPacs;
 
 	@Size(max = 20, message = "userContactNo  must be atmost 20 characters")
-	@Pattern(regexp = "^\\+\\d*$", message = "Invalid PhysicianMobile Number")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid userContactNo Number")
 	private String userContactNo;
 }
