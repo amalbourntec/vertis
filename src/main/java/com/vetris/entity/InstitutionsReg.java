@@ -77,10 +77,10 @@ public class InstitutionsReg extends AuditEntityModel {
 	private String loginMobileNumber;
 
 	@Column(name = "is_email_verified", length = 1, nullable = true)
-	private Character isEmailVerified;
+	private String isEmailVerified;
 
 	@Column(name = "is_mobile_verified", length = 1, nullable = true)
-	private Character isMobileVerified;
+	private String isMobileVerified;
 
 	@Column(name = "preferred_pmt_method", length = 5, nullable = true)
 	private String preferredPmtMethod;
