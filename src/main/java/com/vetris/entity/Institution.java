@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,16 +61,16 @@ public class Institution extends AuditEntityModel {
 	@Column(name = "email_id", length = 50, nullable = true)
 	private String emailId;
 
-	@Column(name = "phone_no", length = 30, nullable = true)
+	@Column(name = "phone_no", length = 13, nullable = true)
 	private String phoneNo;
 
-	@Column(name = "mobile_no", length = 20, nullable = true)
+	@Column(name = "mobile_no", length = 13, nullable = true)
 	private String mobileNo;
 
 	@Column(name = "contact_person_name", length = 100, nullable = true)
 	private String contactPersonName;
 
-	@Column(name = "contact_person_mobile", length = 20, nullable = true)
+	@Column(name = "contact_person_mobile", length = 13, nullable = true)
 	private String contactPersonMobile;
 
 	@Column(name = "is_active", length = 1, nullable = true)

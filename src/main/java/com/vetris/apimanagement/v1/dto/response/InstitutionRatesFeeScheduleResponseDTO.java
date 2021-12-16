@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 public class InstitutionRatesFeeScheduleResponseDTO {
 
+	private String rateId;
 	private String institutionId;
 
 	private Double feeAmount;

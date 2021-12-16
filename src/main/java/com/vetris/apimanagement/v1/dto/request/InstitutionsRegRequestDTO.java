@@ -23,10 +23,10 @@ import lombok.Setter;
 @Validated
 public class InstitutionsRegRequestDTO {
 
-	@Size(max = 200, message = "id  must be atmost 200 characters")
-	@NotBlank(message = "id must not be empty")
-	private String id;
-	
+//	@Size(max = 200, message = "id  must be atmost 200 characters")
+//	@NotBlank(message = "id must not be empty")
+//	private String id;
+//	
 	@Size(max = 5, message = "code  must be atmost 5 characters")
 	private String code;
 
@@ -55,18 +55,18 @@ public class InstitutionsRegRequestDTO {
 	@Email(message = "Invalid LoginEmail")
 	private String emailId;
 
-	@Size(max = 30, message = "phoneNo  must be atmost 30 characters")
+	@Size(max = 13, message = "phoneNo  must be atmost 13 characters")
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid phoneNo Number")
 	private String phoneNo;
 
-	@Size(max = 20, message = "mobileNo  must be atmost 20 characters")
+	@Size(max = 13, message = "mobileNo  must be atmost 13 characters")
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid mobileNo Number")
 	private String mobileNo;
 
 	@Size(max = 100, message = "contactPersonName  must be atmost 100 characters")
 	private String contactPersonName;
 
-	@Size(max = 20, message = "contactPersonMobile  must be atmost 20 characters")
+	@Size(max = 13, message = "contactPersonMobile  must be atmost 13 characters")
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid contactPersonMobile Number")
 	private String contactPersonMobile;
 
@@ -80,7 +80,7 @@ public class InstitutionsRegRequestDTO {
 	@Email(message = "Invalid LoginEmail")
 	private String loginEmailId;
 
-	@Size(max = 20, message = "loginMobileNumber  must be atmost 20 characters")
+	@Size(max = 13, message = "loginMobileNumber  must be atmost 13 characters")
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid Mobile Number")
 	private String loginMobileNumber;
 

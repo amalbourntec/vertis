@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 public class InstitutionCategoryLinkResponseDTO {
 
+	
 	private Integer categoryId;
 	private String institutionId;
 	private String createdBy;

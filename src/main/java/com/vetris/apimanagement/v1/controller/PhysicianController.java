@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +23,7 @@ import com.vetris.apimanagement.v1.service.PhysicianService;
  *
  */
 @RestController(value="PhysicianController")
-@RequestMapping("/mastermanagement/v1/physician")
+@RequestMapping("/apimanagement/v1/physician")
 @CrossOrigin(origins = "*")
 public class PhysicianController {
 	
@@ -57,7 +59,7 @@ public class PhysicianController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createPhysician(@RequestBody PhysicianRequestDTO request)throws Exception{
+	public ResponseEntity<CommonResponseDTO> createPhysician(@Valid @RequestBody PhysicianRequestDTO request)throws Exception{
 		CommonResponseDTO resultDto= physicianService.addPhysician(request);
 		return ResponseEntity.ok(resultDto);
 	}

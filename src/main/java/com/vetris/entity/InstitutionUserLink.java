@@ -56,6 +56,6 @@ public class InstitutionUserLink extends AuditEntityModel {
 	@Column(name = "date_updated_in_pacs", nullable = true)
 	private Date dateUpdatedInPacs;
 
-	@Column(name = "user_contact_no", length = 20, nullable = true)
+	@Column(name = "user_contact_no", length = 13, nullable = true)
 	private String userContactNo;
 }

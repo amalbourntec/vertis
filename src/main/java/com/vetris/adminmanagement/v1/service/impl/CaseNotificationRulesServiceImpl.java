@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.adminmanagement.v1.dto.request.CaseNotificationRulesRequestDTO;
 import com.vetris.adminmanagement.v1.dto.response.CaseNotificationRulesResponseDTO;
 import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.adminmanagement.v1.dto.response.UserResponseDTO;
 import com.vetris.adminmanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.adminmanagement.v1.repository.CaseNotificationRulesRepository;
 import com.vetris.adminmanagement.v1.service.CaseNotificationRulesService;
@@ -66,21 +67,20 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 	 */
 
 	// @Override
-	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId, Integer priorityId)
+	public CommonResponseDTO getAllCaseNotificationRules()
 			throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		CaseNotificationRulesResponseDTO caseNotificationRulesResponseDTO = new CaseNotificationRulesResponseDTO();
-		CaseNotificationRules notificationRules = caseNotificationRulesRepo
-				.findByRuleNoANDPacsStatusIdANDPriorityId(ruleNo, pacsStatusId, priorityId)
-				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		if (notificationRules==null) {
+		List<CaseNotificationRulesResponseDTO> caseNotificationRulesResponseDTO = new ArrayList<CaseNotificationRulesResponseDTO>();
+		List<CaseNotificationRules> notificationRules = caseNotificationRulesRepo
+				.findAll();
+		if (notificationRules.isEmpty()) {
 			resultDto.setStatus(StatusType.FAILURE.getMessage());
 			resultDto.setPayload("");
 			resultDto.setMessage("No notification rule found");
 		} else {
-			caseNotificationRulesResponseDTO = objectMapper.convertValue(notificationRules,
-					CaseNotificationRulesResponseDTO.class);
-
+			notificationRules.stream().forEach(notificationRulesList -> {
+				caseNotificationRulesResponseDTO.add(objectMapper.convertValue(notificationRulesList, CaseNotificationRulesResponseDTO.class));
+			});
 			resultDto.setStatus(StatusType.SUCCESS.getMessage());
 			resultDto.setPayload(caseNotificationRulesResponseDTO);
 			resultDto.setMessage("Fetched case notification rules successfully");
@@ -199,6 +199,11 @@ public class CaseNotificationRulesServiceImpl implements CaseNotificationRulesSe
 		}
 
 		return resultDto;
+	}
+
+	public CommonResponseDTO getAllCaseNotificationRules(int i, int j, int k) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

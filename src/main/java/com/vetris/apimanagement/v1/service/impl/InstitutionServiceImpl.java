@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +50,21 @@ public class InstitutionServiceImpl implements InstitutionService {
 
 		UUID uuid = UUID.randomUUID();
 		Institution resultInstitution = objectMapper.convertValue(institution, Institution.class);
+		if(!(resultInstitution.getIsActive().equalsIgnoreCase("y")|| resultInstitution.getIsActive().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isActive must be Y or N");	
+		}
+		if(!(resultInstitution.getIsOnline().equalsIgnoreCase("y")|| resultInstitution.getIsOnline().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isOnline must be Y or N");
+		}
+		if(!(resultInstitution.getIsEmailVerified().equalsIgnoreCase("y")|| resultInstitution.getIsEmailVerified().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isEmailVerified must be Y or N");
+		}
+		if(!(resultInstitution.getIsMobileVerified().equalsIgnoreCase("y")|| resultInstitution.getIsMobileVerified().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isMobiledVerified must be Y or N");	
+		}
+		if(!(resultInstitution.getIsNew().equalsIgnoreCase("y")|| resultInstitution.getIsNew().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isNew must be Y or N");
+		}
 		resultInstitution.setId(uuid.toString());
 		resultInstitution.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultInstitution = institutionRepository.save(resultInstitution);

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +48,9 @@ public class PhysicianServiceImpl implements PhysicianService {
 
 		UUID uuid = UUID.randomUUID();
 		Physicians resultPhysician = objectMapper.convertValue(physicianDto, Physicians.class);
+		if(!(resultPhysician.getIsActive().equalsIgnoreCase("y")|| resultPhysician.getIsActive().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isActive must be Y or N");
+		}
 		resultPhysician.setId(uuid.toString());
 		resultPhysician.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultPhysician = physicianRepository.save(resultPhysician);

@@ -50,10 +50,8 @@ public class CaseNotificationRulesController {
 	 * @throws Exception
 	 */
 	@GetMapping("/get_all")
-	public ResponseEntity<CommonResponseDTO> fetchAllCaseNotificationRules(@RequestParam Integer ruleNo,
-			@RequestParam Integer pacsStatusId, @RequestParam Integer priorityId) throws Throwable {
-		CommonResponseDTO resultDto = caseNotificationRulesService.getAllCaseNotificationRules(ruleNo, pacsStatusId,
-				priorityId);
+	public ResponseEntity<CommonResponseDTO> fetchAllCaseNotificationRules() throws Throwable {
+		CommonResponseDTO resultDto = caseNotificationRulesService.getAllCaseNotificationRules();
 		return ResponseEntity.ok(resultDto);
 	}
 

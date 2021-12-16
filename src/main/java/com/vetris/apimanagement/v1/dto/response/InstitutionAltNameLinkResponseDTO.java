@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class InstitutionAltNameLinkResponseDTO {
 
+	
 	private String institutionId;
 
 	private String alternateName;

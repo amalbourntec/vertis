@@ -35,6 +35,7 @@ public class ExceptionControllAdvice extends ResponseEntityExceptionHandler {
 	public ResponseEntity<?> handleRunTimeException(Exception ex, final HttpServletRequest request) {
 		ExceptionResponse response = new ExceptionResponse(); //
 		response.setResponseMessage(ex.getMessage());
+		ex.printStackTrace();
 		response.setRequestURL(request.getRequestURI());
 		response.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 		response.setTimestamp(new Date());

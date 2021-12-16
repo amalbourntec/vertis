@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,16 +37,16 @@ class IntitutionSeviceImplTest {
 	@InjectMocks
 	InstitutionServiceImpl institutionService;
 
-	@MockBean
+	@Mock
 	InstitutionRepository institutionRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static InstitutionRequestDTO institutionDto;
@@ -76,7 +77,7 @@ class IntitutionSeviceImplTest {
 		institutionDto.setBusinessSourceID(11);
 		institutionDto.setOldCode("r");
 		institutionDto.setAccountantName("s");
-		institutionDto.setPatientIdSrl("3");
+		institutionDto.setPatientIdSrl(3);
 		institutionDto.setIsOnline("y");
 		institutionDto.setIsEmailVerified("u");
 		institutionDto.setIsMobileVerified("v");
@@ -98,10 +99,10 @@ class IntitutionSeviceImplTest {
 		institution = mapper.convertValue(institutionDto, Institution.class);
 	}
 
-	@BeforeEach
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-	}
+//	@BeforeEach
+//	public void init() {
+//		MockitoAnnotations.initMocks(this);
+//  }
 
 	@Test
 	public void testaddInstitutionTest() throws Exception {

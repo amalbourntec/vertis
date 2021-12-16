@@ -121,7 +121,7 @@ public class InstitutionSalespersonLinkServiceImpl implements InstitutionSalespe
 
 		institutionSalespersonLinkRepository.deleteById(id);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
-		resultDto.setMessage("Salesperson deleated successfully");
+		resultDto.setMessage("Salesperson deleted successfully");
 
 		return resultDto;
 	}

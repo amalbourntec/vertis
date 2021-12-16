@@ -15,7 +15,7 @@ public class SpeciesResponseDTO {
 	String isActive;
 	String createdBy;
 	Date dateCreated;
-	String updatedBy;
-	Date dateupdated;
+	String updateBy;
+	Date dateUpdated;
 
 }

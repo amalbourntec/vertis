@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 public class CaseNotificationRuleHdrResponseDTO {
 
+	private String id;
 	private Integer ruleNo;
 
 	private String ruleDesc;

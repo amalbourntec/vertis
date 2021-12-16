@@ -15,6 +15,8 @@ import lombok.Setter;
 @Setter
 public class InstitutionResponseDTO {
 	
+	private String id;
+	
 	private String code;
 	private String name;
 	private String address1;
@@ -38,7 +40,7 @@ public class InstitutionResponseDTO {
 	private Integer businessSourceID;
 	private String oldCode;
 	private String accountantName;
-	private String patientIdSrl;
+	private Integer patientIdSrl;
 	private String isOnline;
 	private String isEmailVerified;
 	private String isMobileVerified;
@@ -54,7 +56,7 @@ public class InstitutionResponseDTO {
 	private String storageApplicable;
 	private String xferFilesCompress;
 	private String submittedBy;
-	private String imageSoftwareName;
+	private String imgSoftwareName;
 	private String faxRpt;
 	private String faxNo;
 	private String rptFormat;

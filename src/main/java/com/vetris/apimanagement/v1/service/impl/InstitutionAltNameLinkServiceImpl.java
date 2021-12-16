@@ -134,7 +134,7 @@ public class InstitutionAltNameLinkServiceImpl implements InstitutionAltNameLink
 
 		institutionAltNameLinkRepo.deleteById(id);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
-		resultDto.setMessage("Institution alternate name deleated successfully");
+		resultDto.setMessage("Institution alternate name deleted successfully");
 
 		return resultDto;
 	}

@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,8 +49,15 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 		UUID uuid = UUID.randomUUID();
 
 		InstitutionsReg institutionsReg = objectMapper.convertValue(institutionRegRequest, InstitutionsReg.class);
+      if(!(institutionsReg.getIsEmailVerified().equalsIgnoreCase("y")||	institutionsReg.getIsEmailVerified().equalsIgnoreCase("n"))) {
+    	  throw new DataIntegrityViolationException("isEmailverified must be Y or N");
+      }
+      if(!(institutionsReg.getIsMobileVerified().equalsIgnoreCase("y")|| institutionsReg.getIsMobileVerified().equalsIgnoreCase("n"))) {
+    	  throw new DataIntegrityViolationException("isMobileVerified must be Y or N");
+      }
 		institutionsReg.setId(uuid.toString());
 		institutionsReg.setLoginPassword(encodePassword(institutionRegRequest.getLoginPassword()));
+		institutionsReg.setCreatedBy(jwtSecurityContextUtil.getId());
 		institutionsReg = institutionsRegRepository.save(institutionsReg);
 		BeanUtils.copyProperties(institutionsReg, institutionsRegResponseDTO);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
@@ -104,7 +112,7 @@ public class InstitutionsRegServiceImpl implements InstitutionsRegService {
 			InstitutionsReg resultInstitutionsReg = objectMapper.convertValue(institutionReg, InstitutionsReg.class);
 			resultInstitutionsReg.setId(id);
 			resultInstitutionsReg.setUpdateBy(jwtSecurityContextUtil.getId());
-			institutionsRegRepository.save(resultInstitutionsReg);
+			resultInstitutionsReg = institutionsRegRepository.save(resultInstitutionsReg);
 			InstitutionsRegResponseDTO institutionsRegResponseDTO = objectMapper.convertValue(resultInstitutionsReg,
 					InstitutionsRegResponseDTO.class);
 			resultDto.setStatus(StatusType.SUCCESS.toString());

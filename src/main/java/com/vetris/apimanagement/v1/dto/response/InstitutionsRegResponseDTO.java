@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 
 public class InstitutionsRegResponseDTO {
-
+    
 	private String id;
 
 	private String code;

@@ -16,8 +16,8 @@ import com.vetris.adminmanagement.v1.dto.request.SpeciesRequestDTO;
 import com.vetris.adminmanagement.v1.service.SpeciesService;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
 
-@RestController(value = "MasterManagementController")
-@RequestMapping("/mastermanagement/v1/species")
+@RestController(value = "adminmanagementController")
+@RequestMapping("/adminmanagement/v1/species")
 @CrossOrigin(origins = "*")
 public class SpeciesController {
 	

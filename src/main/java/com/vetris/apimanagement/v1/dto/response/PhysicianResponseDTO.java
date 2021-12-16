@@ -19,7 +19,7 @@ public class PhysicianResponseDTO {
 	String isActive;
 	String createdBy;
 	Date dateCreated;
-	String updatedBy;
+	String updateBy;
 	Date dateupdated;
 	 String fname;
 	 String lname;

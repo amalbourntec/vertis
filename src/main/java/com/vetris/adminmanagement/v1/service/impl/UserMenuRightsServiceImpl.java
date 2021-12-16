@@ -89,7 +89,7 @@ public class UserMenuRightsServiceImpl implements UserMenuRightsService{
 	 * returns the user menu rights of one user
 	 */
 	@Override
-	public CommonResponseDTO getUserMenuRightsByUserId(String id) throws Exception {
+	public CommonResponseDTO getUserMenuRightsByUserId(Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		UserMenuRights existingUserMenu = userMenuRightsRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user menu rights " + ErrorCodes.DATA_NOT_FOUND.getMessage()));
@@ -106,7 +106,7 @@ public class UserMenuRightsServiceImpl implements UserMenuRightsService{
 	 * update the menu rights of existing user
 	 */
 	@Override
-	public CommonResponseDTO updateUserMenuRights(UserMenuRightsRequestDTO userMenuRequestDto, String id) throws Exception {
+	public CommonResponseDTO updateUserMenuRights(UserMenuRightsRequestDTO userMenuRequestDto, Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		UserMenuRights resultUserMenu =userMenuRightsRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user menu rights" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
@@ -125,7 +125,7 @@ public class UserMenuRightsServiceImpl implements UserMenuRightsService{
 	 * 
 	 */
 	@Override
-	public CommonResponseDTO deleteUserMenuRights(String id) throws Exception {
+	public CommonResponseDTO deleteUserMenuRights(Integer id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 		userMenuRightsRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user menu rights " + ErrorCodes.DATA_NOT_FOUND.getMessage()));

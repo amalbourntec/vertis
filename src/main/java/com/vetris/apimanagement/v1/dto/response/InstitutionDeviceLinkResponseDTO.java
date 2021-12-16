@@ -14,7 +14,8 @@ import lombok.Setter;
 @Setter
 public class InstitutionDeviceLinkResponseDTO {
 
-
+ 
+	private String deviceId;
 	private String institutionId;
 
 	private String manufacturer;

@@ -36,7 +36,7 @@ public class UserMenuRightsController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<CommonResponseDTO> fetchUserMenuRightsById(@PathVariable(value="id") String id)throws Exception {	
+	public ResponseEntity<CommonResponseDTO> fetchUserMenuRightsById(@PathVariable(value="id") Integer id)throws Exception {	
 		CommonResponseDTO userMenuRespDto=userMenuRightsService.getUserMenuRightsByUserId(id);
 		return ResponseEntity.ok(userMenuRespDto); 
 	}
@@ -47,16 +47,16 @@ public class UserMenuRightsController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> updateUserMenuRights(@RequestBody UserMenuRightsRequestDTO roleMenuReqDto, @PathVariable(value="id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> updateUserMenuRights(@RequestBody UserMenuRightsRequestDTO roleMenuReqDto, @PathVariable(value="id") Integer id) throws Exception {
 		CommonResponseDTO userMenuRespDto=userMenuRightsService.updateUserMenuRights(roleMenuReqDto,id);
 		return ResponseEntity.ok(userMenuRespDto);
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> deleteUserMenuRights(@PathVariable(value="id") String id) throws Exception {
+	public ResponseEntity<CommonResponseDTO> deleteUserMenuRights(@PathVariable(value="id") Integer id) throws Exception {
 		CommonResponseDTO userMenuRespDto=userMenuRightsService.deleteUserMenuRights(id);
 		return ResponseEntity.ok(userMenuRespDto);
 	}
-	
-	
 }
+	
+

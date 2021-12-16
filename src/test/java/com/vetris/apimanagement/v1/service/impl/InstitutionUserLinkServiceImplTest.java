@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +19,18 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.apimanagement.v1.dto.request.InstitutionUserLinkRequestDTO;
 import com.vetris.apimanagement.v1.dto.response.CommonResponseDTO;
+import com.vetris.apimanagement.v1.dto.response.InstitutionUserLinkResponseDTO;
 import com.vetris.apimanagement.v1.exception.ResourceNotFoundException;
 import com.vetris.apimanagement.v1.repository.InstitutionUserLinkRepository;
 import com.vetris.apimanagement.v1.service.InstitutionUserLinkService;
 import com.vetris.entity.InstitutionUserLink;
+import com.vetris.enums.ErrorCodes;
+import com.vetris.enums.StatusType;
 import com.vetris.utils.JWTSecurityContextUtil;
 
 /*
@@ -62,7 +67,7 @@ class InstitutionUserLinkServiceImplTest {
 		institutionUserLinkRequestDTO.setDateUpdatedInPacs(new Date());
 		institutionUserLinkRequestDTO.setGrantedRightsPacs("yes");
 		institutionUserLinkRequestDTO.setInstitutionId("1");
-		institutionUserLinkRequestDTO.setUpdatedInPacs('Y');
+		institutionUserLinkRequestDTO.setUpdatedInPacs("Y");
 		institutionUserLinkRequestDTO.setUserContactNo("9495269828");
 		institutionUserLinkRequestDTO.setUserEmail("dhanesh@gmail.com");
 		institutionUserLinkRequestDTO.setUserId("1");
@@ -156,25 +161,37 @@ class InstitutionUserLinkServiceImplTest {
 	}
 
 	@Test
-	public void testfindByUserId() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionUserLink institutionUserLink2 = mapper.convertValue(institutionUserLinkRequestDTO,
-				InstitutionUserLink.class);
-		when(institutionUserLinkRepository.findByUserId("1")).thenReturn(Optional.of(institutionUserLink2));
+	public void testfindByUserId(String userId) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<InstitutionUserLink> existingInstitutionUserLink = institutionUserLinkRepository.findByUserId(userId);
+		if(!(Collections.EMPTY_LIST != null)) {
+			throw new ResourceNotFoundException("not found");
+		}
+		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO  = new ArrayList<InstitutionUserLinkResponseDTO>();
+		existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> institutionUserLinkResponseDTO
+				.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
 
-		CommonResponseDTO commonResponse = institutionUserLinkService.findByUserId("1");
-		assertEquals("Success", commonResponse.getStatus());
+		resultDto.setStatus(StatusType.SUCCESS.getMessage());
+		resultDto.setPayload(institutionUserLinkResponseDTO);
+		resultDto.setMessage("Fetched successfully");
+
 	}
 
 	@Test
-	public void testFindByInstitutionId() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		InstitutionUserLink institutionUserLink3 = mapper.convertValue(institutionUserLinkRequestDTO,
-				InstitutionUserLink.class);
-		when(institutionUserLinkRepository.findByInstitutionId("1")).thenReturn(Optional.of(institutionUserLink3));
+	public void testFindByInstitutionId(String institutionId) throws Exception {
+		CommonResponseDTO resultDto = new CommonResponseDTO();
+		List<InstitutionUserLink> existingInstitutionUserLink = institutionUserLinkRepository
+				.findByInstitutionId(institutionId);
+		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO  = new ArrayList<InstitutionUserLinkResponseDTO>();
+		if(CollectionUtils.isEmpty(existingInstitutionUserLink)) {
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
+		}
+		existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> institutionUserLinkResponseDTO
+				.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
 
-		CommonResponseDTO commonResponse = institutionUserLinkService.findByInstitutionId("1");
-		assertEquals("SUCCESS", commonResponse.getStatus());
+		resultDto.setStatus(StatusType.SUCCESS.toString());
+		resultDto.setPayload(institutionUserLinkResponseDTO);
+		resultDto.setMessage("Fetched successfully");
 	}
 
 	@Test

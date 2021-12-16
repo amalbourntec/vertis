@@ -136,7 +136,7 @@ public class InstitutionRatesFeeScheduleServiceImpl implements InstitutionRatesF
 
 		institutionRatesFeeScheduleRepository.deleteById(id);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
-		resultDto.setMessage("InstitutionRatesFeeSchedule deleated successfully");
+		resultDto.setMessage("InstitutionRatesFeeSchedule deleted successfully");
 
 		return resultDto;
 	}

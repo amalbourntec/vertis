@@ -42,7 +42,7 @@ public class InstitutionRegPhysicianLink extends AuditEntityModel {
 	@Column(name = "physician_email", nullable = true, length = 500)
 	private String physicianEmail;
 
-	@Column(name = "physician_mobile", nullable = true, length = 500)
+	@Column(name = "physician_mobile", nullable = true, length = 13)
 	private String physicianMobile;
 
 }

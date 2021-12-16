@@ -63,10 +63,10 @@ public class SalesPerson extends AuditEntityModel {
 	@Column(name = "email_id", length = 50, nullable = true)
 	private String emailId;
 
-	@Column(name = "phone_no", length = 30, nullable = true)
+	@Column(name = "phone_no", length = 13, nullable = true)
 	private String phoneNo;
 
-	@Column(name = "mobile_no", length = 20, nullable = true)
+	@Column(name = "mobile_no", length = 13, nullable = true)
 	private String mobileNo;
 
 	@Column(name = "pacs_user_id", length = 10, nullable = true)

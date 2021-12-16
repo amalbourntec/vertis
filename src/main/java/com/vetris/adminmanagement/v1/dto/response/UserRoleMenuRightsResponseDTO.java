@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 public class UserRoleMenuRightsResponseDTO {
 
+//	private String id;
 	private Integer userRoleId;
 	private Integer menuId;
 	private String createdBy;

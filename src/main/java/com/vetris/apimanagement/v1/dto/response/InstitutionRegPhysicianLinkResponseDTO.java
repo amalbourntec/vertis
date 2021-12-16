@@ -14,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InstitutionRegPhysicianLinkResponseDTO {
+//	private String id;
 	private String physicianId;
 	private String institutionId;
 	private String physicianName;

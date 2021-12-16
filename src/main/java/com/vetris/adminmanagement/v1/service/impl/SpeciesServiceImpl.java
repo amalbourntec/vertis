@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +73,9 @@ public class SpeciesServiceImpl implements SpeciesService {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
 
 		Species resultSpecies = objectMapper.convertValue(requestDto, Species.class);
+		if(!(resultSpecies.getIsActive().equalsIgnoreCase("y")|| resultSpecies.getIsActive().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isActive must be Y or N");
+		}
 		resultSpecies.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultSpecies = speciesRepository.save(resultSpecies);
 		BeanUtils.copyProperties(resultSpecies, speciesRespDTO);
@@ -90,6 +94,7 @@ public class SpeciesServiceImpl implements SpeciesService {
 		BeanUtils.copyProperties(requestDto, species);
 		species.setUpdateBy(jwtSecurityContextUtil.getId());
 		species = speciesRepository.save(species);
+		System.out.println(species.getUpdateBy());
 		SpeciesResponseDTO speciesResponseDTO = objectMapper.convertValue(species, SpeciesResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(speciesResponseDTO);

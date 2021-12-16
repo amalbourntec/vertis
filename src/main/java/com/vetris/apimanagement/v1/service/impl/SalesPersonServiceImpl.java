@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,10 +66,13 @@ public class SalesPersonServiceImpl implements SalesPersonService {
 		
 		UUID uuid = UUID.randomUUID();
 		SalesPerson resultSalesPerson = objectMapper.convertValue(requestDto, SalesPerson.class);
+		if(!(resultSalesPerson.getIsActive().equalsIgnoreCase("y")|| resultSalesPerson.getIsActive().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isActive must be Y or N");
+		}
 		resultSalesPerson.setId(uuid.toString());
 		resultSalesPerson.setCreatedBy(jwtSecurityContextUtil.getId());
 		System.out.println(resultSalesPerson.getAddress1());
-		System.out.println(resultSalesPerson.getName());
+		System.out.println(resultSalesPerson.getFName());
 		resultSalesPerson = salespersonRepository.save(resultSalesPerson);
 		BeanUtils.copyProperties(resultSalesPerson, salespersonRespDTO);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());

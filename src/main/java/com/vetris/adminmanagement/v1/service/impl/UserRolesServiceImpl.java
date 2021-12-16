@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,14 +91,22 @@ public class UserRolesServiceImpl implements UserRolesService {
 	@Override
 	public CommonResponseDTO addUserRoles(UserRolesRequestDTO userRoleDto) throws Exception {
 		UserRoles resultUserRoles = userRoleDto.toUserRolesRequestModel(userRoleDto);
+		
 		CommonResponseDTO resultDto = new CommonResponseDTO();
+		if(!(resultUserRoles.getIsActive().equalsIgnoreCase("y")|| resultUserRoles.getIsActive().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("isActive must be Y or N");
+		}
+		if(!(resultUserRoles.getIsVisible().equalsIgnoreCase("y")|| resultUserRoles.getIsVisible().equalsIgnoreCase("n"))) {
+				throw new DataIntegrityViolationException("isVisible must be Y or N");
+		}
 		resultUserRoles.setCreatedBy(jwtSecurityContextUtil.getId());
-		resultUserRoles.setUpdateBy(jwtSecurityContextUtil.getId());
+//		resultUserRoles.setUpdateBy(jwtSecurityContextUtil.getId());
 		resultUserRoles = userRoleRepository.save(resultUserRoles);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRoles, UserRolesResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDto);
 		resultDto.setMessage("Saved User Role successfully");
+		
 		return resultDto;
 	}
 
@@ -107,13 +116,16 @@ public class UserRolesServiceImpl implements UserRolesService {
 	@Override
 	public CommonResponseDTO updateUserRoles(UserRolesRequestDTO userRoleDto, int id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		userRoleRepository.findById(id)
+		UserRoles resultUserRole1 = userRoleRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 		UserRoles resultUserRole = userRoleDto.toUserRolesRequestModel(userRoleDto);
 		resultUserRole.setId(id);
 		resultUserRole.setUpdateBy(jwtSecurityContextUtil.getId());
+		
 		resultUserRole = userRoleRepository.save(resultUserRole);
 		UserRolesResponseDTO userRoleRespDto = objectMapper.convertValue(resultUserRole, UserRolesResponseDTO.class);
+		userRoleRespDto.setCreatedBy(resultUserRole1.getCreatedBy());
+		userRoleRespDto.setDateCreated(resultUserRole1.getDateCreated());
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(userRoleRespDto);
 		resultDto.setMessage("Updated User Role Succesfully");

@@ -85,9 +85,9 @@ public class SpeciesServiceImplTest {
 		SpeciesResponseDTO speciesRespDto = new SpeciesResponseDTO();
 		speciesRespDto.setIsActive("Y");
 		speciesRespDto.setCreatedBy("test");
-		speciesRespDto.setUpdatedBy("test");
+		speciesRespDto.setUpdateBy("test");
 		speciesRespDto.setDateCreated(new Date());
-		speciesRespDto.setDateupdated(new Date());
+		speciesRespDto.setDateUpdated(new Date());
 		speciesRespDto.setCode("abc");
 		speciesRespDto.setId(1);
 		when(speciesRepo.findById(1)).thenReturn(Optional.of(species1));

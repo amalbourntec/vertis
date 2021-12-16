@@ -51,7 +51,8 @@ public class InstitutionUserLinkRequestDTO {
 
 	private Date dateUpdatedInPacs;
 
-	@Size(max = 20, message = "userContactNo  must be atmost 20 characters")
+	@Size(max = 13, message = "userContactNo  must be atmost 13 characters")
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid userContactNo Number")
 	private String userContactNo;
+	
 }

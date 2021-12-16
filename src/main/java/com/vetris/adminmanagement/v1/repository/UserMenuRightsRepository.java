@@ -10,6 +10,6 @@ import com.vetris.entity.UserMenuRights;
  *
  */
 @Repository
-public interface UserMenuRightsRepository extends JpaRepository<UserMenuRights, String>{
+public interface UserMenuRightsRepository extends JpaRepository<UserMenuRights, Integer>{
 
 }

@@ -108,7 +108,7 @@ public class PhysicianServiceImplTest {
 		Physicians physicians1 = mapper.convertValue(physicianDto, Physicians.class);
 		PhysicianResponseDTO physicianRespDto = new PhysicianResponseDTO();
 		physicianRespDto.setCreatedBy("test");
-		physicianRespDto.setUpdatedBy("test");
+		physicianRespDto.setUpdateBy("test");
 		physicianRespDto.setDateCreated(new Date());
 		physicianRespDto.setDateupdated(new Date());
 		physicianRespDto.setCode("abc");

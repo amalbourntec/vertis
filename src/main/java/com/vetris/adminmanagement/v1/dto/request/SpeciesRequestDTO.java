@@ -4,8 +4,10 @@ import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
+import lombok.CustomLog;
 import lombok.Getter;
 import lombok.Setter;
 

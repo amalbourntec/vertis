@@ -66,9 +66,8 @@ class InstitutionsRegServiceImplTest {
 		institutionsRegRequestDTO.setContactPersonName("dhanesh");
 		institutionsRegRequestDTO.setCountryId(2);
 		institutionsRegRequestDTO.setEmailId("dhaneshcp@gmail.com");
-		institutionsRegRequestDTO.setIsEmailVerified('y');
-		institutionsRegRequestDTO.setId("abc");
-		institutionsRegRequestDTO.setIsMobileVerified('y');
+		institutionsRegRequestDTO.setIsEmailVerified("y");
+		institutionsRegRequestDTO.setIsMobileVerified("y");
 		institutionsRegRequestDTO.setLoginEmailId("dcp@gmail.com");
 		institutionsRegRequestDTO.setLoginId("l1");
 		institutionsRegRequestDTO.setLoginMobileNumber("9495269828");

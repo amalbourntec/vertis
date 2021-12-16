@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.vetris.entity.AuditEntityModel;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,10 +58,10 @@ public class Physicians extends AuditEntityModel{
 	@Column(name = "email_id" ,nullable = true , length = 500)
 	private String emailId;
 	
-	@Column(name = "phone_no" ,nullable = true , length = 30)
+	@Column(name = "phone_no" ,nullable = true , length = 13)
 	private String phoneNo;
 	
-	@Column(name = "mobile_no" ,nullable = true , length = 500)
+	@Column(name = "mobile_no" ,nullable = true , length = 13)
 	private String mobileNo;
 	
 	@Column(name = "is_active" ,nullable = true , length = 1)

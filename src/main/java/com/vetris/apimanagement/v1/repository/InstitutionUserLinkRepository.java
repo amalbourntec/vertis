@@ -18,10 +18,10 @@ import com.vetris.entity.InstitutionUserLink;
 public interface InstitutionUserLinkRepository extends JpaRepository<InstitutionUserLink, String> {
 
 	@Query(value = "select * from institution_user_link where institution_id=?1", nativeQuery = true)
-	Optional<InstitutionUserLink> findByInstitutionId(String institutionId);
+	List<InstitutionUserLink> findByInstitutionId(String institutionId);
 
 	@Query(value = "select * from institution_user_link where user_id=?1", nativeQuery = true)
-	Optional<InstitutionUserLink> findByUserId(String userId);
+	List<InstitutionUserLink> findByUserId(String userId);
 
 	@Query(value = "select * from institution_user_link where institution_id=?1", nativeQuery = true)
 	List<InstitutionUserLink> findAllInstitutionId(String institutionId);

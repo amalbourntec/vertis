@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -50,14 +52,14 @@ public class SalesPersonController {
 	}
 
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> addNewSalesPerson(@RequestBody SalesPersonRequestDTO requestDto)
+	public ResponseEntity<CommonResponseDTO> addNewSalesPerson(@Valid @RequestBody SalesPersonRequestDTO requestDto)
 			throws Exception {
 		CommonResponseDTO response = service.saveSalesPerson(requestDto);
 		return ResponseEntity.ok(response);
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> editSalesPerson(@RequestBody SalesPersonRequestDTO requestDto,
+	public ResponseEntity<CommonResponseDTO> editSalesPerson(@Valid @RequestBody SalesPersonRequestDTO requestDto,
 			@PathVariable String id) throws Exception {
 		CommonResponseDTO response = service.updateSalesPerson(requestDto, id);
 		return ResponseEntity.ok(response);

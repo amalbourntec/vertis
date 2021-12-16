@@ -89,10 +89,10 @@ public class UserMenuRightsServiceImplTest {
 		UserMenuRights userMenuRights1 = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
 		UserMenuRightsResponseDTO UserMenuRightsRespDto = mapper.convertValue(userMenuRights1,
 				UserMenuRightsResponseDTO.class);
-		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(userMenuRights1));
+		when(userMenuRightsRepo.findById(123)).thenReturn(Optional.of(userMenuRights1));
 		when(objectMapper.convertValue(userMenuRights1, UserMenuRightsResponseDTO.class))
 				.thenReturn(UserMenuRightsRespDto);
-		CommonResponseDTO commonResponse = userMenuRightsService.getUserMenuRightsByUserId("123");
+		CommonResponseDTO commonResponse = userMenuRightsService.getUserMenuRightsByUserId(123);
 		assertEquals("Success", commonResponse.getStatus());
 	}
 
@@ -110,7 +110,7 @@ public class UserMenuRightsServiceImplTest {
 	@Test
 	public void testGetByIdResourceNotFoundException() {
 		ResourceNotFoundException exception = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			userMenuRightsService.getUserMenuRightsByUserId("123");
+			userMenuRightsService.getUserMenuRightsByUserId(123);
 		});
 		assertTrue(exception.getMessage().equalsIgnoreCase("user menu rights  not found"));
 	}
@@ -119,8 +119,8 @@ public class UserMenuRightsServiceImplTest {
 	public void testdeleteUserMenuRights() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		UserMenuRights UserMenuRights = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
-		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(UserMenuRights));
-		CommonResponseDTO commonResponse = userMenuRightsService.deleteUserMenuRights("123");
+		when(userMenuRightsRepo.findById(123)).thenReturn(Optional.of(UserMenuRights));
+		CommonResponseDTO commonResponse = userMenuRightsService.deleteUserMenuRights(123);
 		assertEquals("Success", commonResponse.getStatus());
 	}
 
@@ -128,11 +128,11 @@ public class UserMenuRightsServiceImplTest {
 	public void testupdateUserMenuRights() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		UserMenuRights UserMenuRights3 = mapper.convertValue(userMenuRightsDto, UserMenuRights.class);
-		when(userMenuRightsRepo.findById("123")).thenReturn(Optional.of(UserMenuRights3));
+		when(userMenuRightsRepo.findById(123)).thenReturn(Optional.of(UserMenuRights3));
 		when(objectMapper.convertValue(userMenuRightsDto, UserMenuRights.class)).thenReturn(UserMenuRights3);
 		when(jwtSecurityContextUtil.getId()).thenReturn("test");
 		when(userMenuRightsRepo.save(UserMenuRights3)).thenReturn(userMenuRights);
-		CommonResponseDTO commonResponse = userMenuRightsService.updateUserMenuRights(userMenuRightsDto, "123");
+		CommonResponseDTO commonResponse = userMenuRightsService.updateUserMenuRights(userMenuRightsDto, 123);
 		assertEquals("Success", commonResponse.getStatus());
 	}
 }

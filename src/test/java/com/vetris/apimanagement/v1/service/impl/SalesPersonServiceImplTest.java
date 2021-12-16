@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,16 +39,16 @@ class SalesPersonServiceImplTest {
 	@InjectMocks
 	SalesPersonServiceImpl salesPersonService;
 
-	@MockBean
+	@Mock
 	SalesPersonRepository salesPersonRepository;
 
-	@MockBean
+	@Mock
 	ObjectMapper objectMapper;
 
 	@Autowired
 	static ObjectMapper mapper;
 
-	@MockBean
+	@Mock
 	private JWTSecurityContextUtil jwtSecurityContextUtil;
 
 	static SalesPersonRequestDTO salesPersonDto;
@@ -81,10 +82,10 @@ class SalesPersonServiceImplTest {
 		salesPerson = mapper.convertValue(salesPersonDto, SalesPerson.class);
 	}
 
-	@BeforeEach
-	void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
+//	@BeforeEach
+//	void setup() {
+//		MockitoAnnotations.initMocks(this);
+//	}
 
 	@Test
 	public void TestSaveSalesPersonTest() throws Exception {
@@ -94,7 +95,7 @@ class SalesPersonServiceImplTest {
 		CommonResponseDTO commonResponse = salesPersonService.saveSalesPerson(salesPersonDto);
 		assertEquals("Success", commonResponse.getStatus());
 	}
-	
+
 	@Test
 	public void testgetallsalesPersonTest() throws Exception {
 		List<SalesPerson> salesPersonList = new ArrayList<SalesPerson>();
@@ -103,7 +104,7 @@ class SalesPersonServiceImplTest {
 		when(salesPersonRepository.findAll()).thenReturn(salesPersonList);
 		CommonResponseDTO commonResponse = salesPersonService.getAllSalesPerson();
 		assertEquals("Success", commonResponse.getStatus());
-		
+
 	}
 
 	@Test

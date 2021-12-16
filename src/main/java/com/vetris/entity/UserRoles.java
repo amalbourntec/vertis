@@ -12,6 +12,7 @@ import org.hibernate.annotations.Where;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Entity for UserRoles
@@ -23,8 +24,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="user_roles")
-@SQLDelete(sql = "UPDATE user_roles SET is_active = 'N' WHERE id=?")
-@Where(clause = "is_active='Y'")
+
+@ToString
 public class UserRoles extends AuditEntityModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -52,16 +52,16 @@ public class InstitutionsReg extends AuditEntityModel {
 	@Column(name = "email_id", length = 50, nullable = true)
 	private String emailId;
 
-	@Column(name = "phone_no", length = 30, nullable = true)
+	@Column(name = "phone_no", length = 13, nullable = true)
 	private String phoneNo;
 
-	@Column(name = "mobile_no", length = 20, nullable = true)
+	@Column(name = "mobile_no", length = 13, nullable = true)
 	private String mobileNo;
 
 	@Column(name = "contact_person_name", length = 100, nullable = true)
 	private String contactPersonName;
 
-	@Column(name = "contact_person_mobile", length = 20, nullable = true)
+	@Column(name = "contact_person_mobile", length = 13, nullable = true)
 	private String contactPersonMobile;
 
 	@Column(name = "login_id", length = 20, nullable = true)
@@ -73,7 +73,7 @@ public class InstitutionsReg extends AuditEntityModel {
 	@Column(name = "login_email_id", length = 100, nullable = true)
 	private String loginEmailId;
 
-	@Column(name = "login_mobile_no", length = 20, nullable = true)
+	@Column(name = "login_mobile_no", length = 13, nullable = true)
 	private String loginMobileNumber;
 
 	@Column(name = "is_email_verified", length = 1, nullable = true)

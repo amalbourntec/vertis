@@ -13,6 +13,7 @@ import lombok.Setter;
 
 public class InstitutionDisputeDicomTagsResponseDTO {
 
+	
 	private String institutionId;
 
 	private String groupId;

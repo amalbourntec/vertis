@@ -13,10 +13,10 @@ public interface UserMenuRightsService {
 
 	public CommonResponseDTO getAllUserMenuRights() throws Exception;
 
-	public CommonResponseDTO getUserMenuRightsByUserId(String id) throws Exception;
+	public CommonResponseDTO getUserMenuRightsByUserId(Integer id) throws Exception;
 
-	public CommonResponseDTO updateUserMenuRights(UserMenuRightsRequestDTO userMenuRequestDto, String id) throws Exception;
+	public CommonResponseDTO updateUserMenuRights(UserMenuRightsRequestDTO userMenuRequestDto, Integer id) throws Exception;
 
-	public CommonResponseDTO deleteUserMenuRights(String id) throws Exception;
+	public CommonResponseDTO deleteUserMenuRights(Integer id) throws Exception;
 	
 }

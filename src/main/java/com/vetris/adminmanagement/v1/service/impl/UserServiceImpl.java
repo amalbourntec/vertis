@@ -118,9 +118,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public CommonResponseDTO deleteUser(String id) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		userRepository.findById(id)
+		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User" + ErrorCodes.DATA_NOT_FOUND.getMessage()));
-		userRepository.deleteById(id);
+		System.out.println(user.getEmailId());
+		userRepository.delete(user);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setMessage("Deleted user successfully");
 		return resultDto;

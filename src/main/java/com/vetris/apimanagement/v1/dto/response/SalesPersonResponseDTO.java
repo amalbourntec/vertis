@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SalesPersonResponseDTO {
-
+	private String id;
 	private String code;
 	private String fName;
 	private String iName;

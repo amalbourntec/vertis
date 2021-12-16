@@ -1,6 +1,8 @@
 package com.vetris.apimanagement.v1.dto.request;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
@@ -50,14 +52,17 @@ public class SalesPersonRequestDTO {
 	@Size(max = 20, message = "zip must be atmost 20 characters")
 	private String zip;
 
+	@Email(message = "Invalid emailId")
 	@Size(max = 50, message = "email_id must be atmost 50 characters")
 	@NotNull
 	private String emailId;
 
-	@Size(max = 30, message = "phone_no must be atmost 30 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid phone Number")
+	@Size(max = 13, message = "phone_no must be atmost 13 characters")
 	private String phoneNo;
 
-	@Size(max = 20, message = "mobile_no must be atmost 20 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid mobile Number")
+	@Size(max = 13, message = "mobile_no must be atmost 13 characters")
 	private String mobileNo;
 
 	@Size(max = 10, message = "pacs_user_id must be atmost 10 characters")

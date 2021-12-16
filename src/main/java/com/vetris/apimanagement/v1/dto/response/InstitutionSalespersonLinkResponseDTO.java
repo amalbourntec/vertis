@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InstitutionSalespersonLinkResponseDTO {
-
+	
 	private String salespersonId;
 	
 	private String institutionId;

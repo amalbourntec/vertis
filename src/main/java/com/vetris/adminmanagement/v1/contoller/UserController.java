@@ -1,5 +1,7 @@
 package com.vetris.adminmanagement.v1.contoller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,8 +26,8 @@ import com.vetris.adminmanagement.v1.service.UserService;
  *
  */
 
-@RestController(value="UserManagementController")
-@RequestMapping("/usermanagement/v1/user")
+@RestController(value="Adminmanagement")
+@RequestMapping("adminmanagement/v1/user")
 @CrossOrigin(origins = "*")
 public class UserController {
 	
@@ -60,7 +62,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createUser(@RequestBody UserRequestDTO userRequest)throws Exception{
+	public ResponseEntity<CommonResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequest)throws Exception{
 		CommonResponseDTO resultDto= userService.addUser(userRequest);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -73,7 +75,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> updateUser(@RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
+	public ResponseEntity<CommonResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO user , @PathVariable("id")String id)throws Exception{
 		CommonResponseDTO resultDto = userService.updateUser(user, id);
 		return ResponseEntity.ok(resultDto);	
 	}

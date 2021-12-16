@@ -3,10 +3,13 @@ package com.vetris.apimanagement.v1.service.impl;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vetris.apimanagement.v1.dto.request.InstitutionUserLinkRequestDTO;
@@ -59,11 +62,16 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 	@Override
 	public CommonResponseDTO findByUserId(String userId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository.findByUserId(userId)
-				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		List<InstitutionUserLink> existingInstitutionUserLink = institutionUserLinkRepository.findByUserId(userId);
+		if(!(Collections.EMPTY_LIST != null)) {
+			throw new ResourceNotFoundException("not found");
+		}
+		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO  = new ArrayList<InstitutionUserLinkResponseDTO>();
+		existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> institutionUserLinkResponseDTO
+				.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
 
-		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = objectMapper
-				.convertValue(existingInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
+//		 = objectMapper
+//				.convertValue(existingInstitutionUserLink, InstitutionUserLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.getMessage());
 		resultDto.setPayload(institutionUserLinkResponseDTO);
 		resultDto.setMessage("Fetched successfully");
@@ -74,13 +82,15 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 	@Override
 	public CommonResponseDTO findByInstitutionId(String institutionId) throws Exception {
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
-		InstitutionUserLink existingInstitutionUserLink = institutionUserLinkRepository
-				.findByInstitutionId(institutionId)
-				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
+		List<InstitutionUserLink> existingInstitutionUserLink = institutionUserLinkRepository
+				.findByInstitutionId(institutionId);
+		List<InstitutionUserLinkResponseDTO> institutionUserLinkResponseDTO  = new ArrayList<InstitutionUserLinkResponseDTO>();
+		if(CollectionUtils.isEmpty(existingInstitutionUserLink)) {
+			throw new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage());
+		}
+		existingInstitutionUserLink.stream().forEach(institutionUserLinkItem -> institutionUserLinkResponseDTO
+				.add(objectMapper.convertValue(institutionUserLinkItem, InstitutionUserLinkResponseDTO.class)));
 
-		institutionUserLinkResponseDTO = objectMapper.convertValue(existingInstitutionUserLink,
-				InstitutionUserLinkResponseDTO.class);
 		resultDto.setStatus(StatusType.SUCCESS.toString());
 		resultDto.setPayload(institutionUserLinkResponseDTO);
 		resultDto.setMessage("Fetched successfully");
@@ -113,6 +123,12 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 
 		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(requestDto,
 				InstitutionUserLink.class);
+		if(!(resultInstitutionUserLink.getGrantedRightsPacs().equalsIgnoreCase("y")|| resultInstitutionUserLink.getGrantedRightsPacs().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("grantedrightPacs must be Y or N");
+		}
+		if(!(resultInstitutionUserLink.getUpdatedInPacs().equalsIgnoreCase("y")|| resultInstitutionUserLink.getUpdatedInPacs().equalsIgnoreCase("n"))) {
+			throw new DataIntegrityViolationException("updatedPacs must be Y or N");
+		}
 		resultInstitutionUserLink.setCreatedBy(jwtSecurityContextUtil.getId());
 		resultInstitutionUserLink.setUserPwd(encodePassword(requestDto.getUserPwd()));
 		resultInstitutionUserLink.setUserPacsPassword(encodePassword(requestDto.getUserPacsPassword()));
@@ -145,10 +161,10 @@ public class InstitutionUserLinkServiceImpl implements InstitutionUserLinkServic
 			String institutionId, String userId) throws Exception {
 		InstitutionUserLinkResponseDTO institutionUserLinkResponseDTO = new InstitutionUserLinkResponseDTO();
 		CommonResponseDTO resultDto = new CommonResponseDTO();
-		institutionUserLinkRepository.findByInstitutionIdANDUserId(institutionId, userId)
+		InstitutionUserLink resultInstitutionUserLink = institutionUserLinkRepository.findByInstitutionIdANDUserId(institutionId, userId)
 				.orElseThrow(() -> new ResourceNotFoundException(ErrorCodes.DATA_NOT_FOUND.getMessage()));
 
-		InstitutionUserLink resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
+		 resultInstitutionUserLink = objectMapper.convertValue(institutionUserLinkRequestDTO,
 				InstitutionUserLink.class);
 		resultInstitutionUserLink.setUpdateBy(jwtSecurityContextUtil.getId());
 		resultInstitutionUserLink.setUserPwd(encodePassword(institutionUserLinkRequestDTO.getUserPwd()));

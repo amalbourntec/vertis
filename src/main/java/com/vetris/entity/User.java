@@ -21,7 +21,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
-@SQLDelete(sql = "UPDATE users SET is_active = 'N' WHERE id=?")
 public class User extends AuditEntityModel{
 	
 	@Id
@@ -40,7 +39,7 @@ public class User extends AuditEntityModel{
 	@Column(name = "email_id",length = 100,nullable=true)
 	private String emailId;
 
-	@Column(name = "contact_no",length = 20,nullable=true)
+	@Column(name = "contact_no",length = 13,nullable=true)
 	private String contactNo;
 	
 	@Column(name = "user_role_id",nullable=false)

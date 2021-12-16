@@ -1,5 +1,7 @@
 package com.vetris.apimanagement.v1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,8 +61,9 @@ public class InstitutionController {
 	 * @throws Exception
 	 */
 	@PostMapping("")
-	public ResponseEntity<CommonResponseDTO> createInstitution(@RequestBody InstitutionRequestDTO institutionRequest)
-			throws Exception {
+	public ResponseEntity<CommonResponseDTO> createInstitution(
+			@Valid
+			@RequestBody InstitutionRequestDTO institutionRequest) throws Exception {
 		CommonResponseDTO resultDto = institutionService.addInstitution(institutionRequest);
 		return ResponseEntity.ok(resultDto);
 	}
@@ -72,7 +75,7 @@ public class InstitutionController {
 	 * @throws Exception
 	 */
 	@PutMapping("{id}")
-	public ResponseEntity<CommonResponseDTO> updateInstitution(@RequestBody InstitutionRequestDTO institution,
+	public ResponseEntity<CommonResponseDTO> updateInstitution(@Valid @RequestBody InstitutionRequestDTO institution,
 			@PathVariable("id") String id) throws Exception {
 		CommonResponseDTO resultDto = institutionService.updateInstitution(institution, id);
 		return ResponseEntity.ok(resultDto);

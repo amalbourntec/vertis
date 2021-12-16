@@ -3,7 +3,9 @@ package com.vetris.apimanagement.v1.dto.request;
 import java.io.File;
 import java.util.Date;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
@@ -46,19 +48,24 @@ public class InstitutionRequestDTO {
 	@Size(max = 20, message = "zip must be atmost 20 characters")
 	private String zip;
 
+	@Email(message = "Invalid EmailId")
+    @NotNull
 	@Size(max = 50, message = "email_id must be atmost 50 characters")
 	private String emailId;
 
-	@Size(max = 30, message = "phone_no must be atmost 30 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid Phone Number")
+	@Size(max = 13, message = "phone_no must be atmost 13 characters")
 	private String phoneNo;
 
-	@Size(max = 20, message = "mobile_no must be atmost 20 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid Mobile Number")
+	@Size(max = 13, message = "mobile_no must be atmost 13 characters")
 	private String mobileNo;
 
 	@Size(max = 100, message = "contact_person_name must be atmost 100 characters")
 	private String contactPersonName;
 
-	@Size(max = 20, message = "contact_person_mobile must be atmost 20 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid contactPersonMobile Number")
+	@Size(max = 20, message = "contact_person_mobile must be atmost 13 characters")
 	private String contactPersonMobile;
 
 	@Size(max = 1, message = "is_active must be atmost 1 characters")
@@ -87,7 +94,7 @@ public class InstitutionRequestDTO {
 	@Size(max = 250, message = "accountant_name must be atmost 250 characters")
 	private String accountantName;
 
-	private String patientIdSrl;
+	private Integer patientIdSrl;
 
 	@Size(max = 1, message = "is_online must be atmost 1 characters")
 	private String isOnline;
@@ -129,7 +136,7 @@ public class InstitutionRequestDTO {
 	@Size(max = 1, message = "xfer_files_compress must be atmost 1 characters")
 	private String xferFilesCompress;
 
-	@Size(max = 1, message = "submitted_by must be atmost 100 characters")
+	@Size(max = 100, message = "submitted_by must be atmost 100 characters")
 	private String submittedBy;
 
 	@Size(max = 100, message = "img_software_name must be atmost 100 characters")

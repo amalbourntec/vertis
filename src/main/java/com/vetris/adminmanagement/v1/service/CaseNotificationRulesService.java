@@ -11,7 +11,7 @@ import com.vetris.adminmanagement.v1.dto.response.CommonResponseDTO;
  */
 public interface CaseNotificationRulesService {
 
-	public CommonResponseDTO getAllCaseNotificationRules(Integer ruleNo, Integer pacsStatusId,Integer priorityId) throws Throwable;
+	public CommonResponseDTO getAllCaseNotificationRules() throws Throwable;
 
 	public CommonResponseDTO addCaseNotificationRules(CaseNotificationRulesRequestDTO caseNotificationRulesRequest)
 			throws Throwable;

@@ -26,7 +26,7 @@ import com.vetris.apimanagement.v1.service.InstitutionUserLinkService;
  */
 
 @RestController(value = "InstitutionUserLinkController")
-@RequestMapping("/mastermanagement/v1/institutionUserLink")
+@RequestMapping("/apimanagement/v1/institutionUserLink")
 @CrossOrigin(origins = "*")
 public class InstitutionUserLinkController {
 

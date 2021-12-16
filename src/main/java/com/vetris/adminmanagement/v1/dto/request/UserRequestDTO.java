@@ -1,6 +1,8 @@
 package com.vetris.adminmanagement.v1.dto.request;
 
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
@@ -30,10 +32,12 @@ public class UserRequestDTO {
 	@NotNull
 	private String password;
 
+	@Email(message = "Invalid emailId")
 	@Size( max = 100, message = "email id  must be atmost 100 characters")
 	private String emailId;
 
-	@Size( max = 20, message = "contact no  must be atmost 20 characters")
+	@Pattern(regexp = "^\\+\\d*$", message = "Invalid contact Number")
+	@Size( max = 13, message = "contact no  must be atmost 13 characters")
 	private String contactNo;
 	
 	@NotNull

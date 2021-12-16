@@ -41,7 +41,7 @@ public class InstitutionRegPhysicianLinkRequestDTO {
 	private String physicianEmail;
 
 	@Pattern(regexp = "^\\+\\d*$", message = "Invalid mob Number")
-	@Size(max = 500, message = "physicianMobile  must be atmost 500 characters")
+	@Size(max = 13, message = "physicianMobile  must be atmost 13 characters")
 	private String physicianMobile;
 
 }
